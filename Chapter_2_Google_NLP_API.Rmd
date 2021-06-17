@@ -83,81 +83,61 @@ library(tidyverse)
 library(googleLanguageR)
 library(tidytext)
 library(ggwordcloud)
+library(quanteda.corpora)
 
 # Authentication (through your service account's JSON key file)
-gl_auth("./keys/paul-css-seminar-2021-a1e75382ae2c.json")
+gl_auth("./api keys/paul-css-seminar-2021-a1e75382ae2c.json")
 
 # Load data
-load("./data/data_tweets.RData")
-```
+guardian_corpus <- quanteda.corpora::download("data_corpus_guardian")
 
+texts <- guardian_corpus[["documents"]][["texts"]]
+texts <- texts[1:20]
 
-We will translate the text (see translation API) and store it in `text_en` and use the English translations below:
-
-```{r}
-data_tweets <- 
-  bind_cols(data_tweets,
-            text_en = gl_translate(data_tweets$text,
-             target ="en")$translatedText)
+df <- as.data.frame(texts)
+df <- tibble::rowid_to_column(df, "ID")
 ```
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Call the API via the function 'gl_nlp()' and specify your quantity of interest (here: analyzeSyntax)
-data_syntax <- gl_nlp(data_tweets$text_en, nlp_type = "analyzeSyntax")
+data_syntax <- gl_nlp(df$texts, nlp_type = "analyzeSyntax")
 ```
 
 Depending on what specific argument you used (here: analyzeSyntax) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags (noun, verb, etc.)
 And the output of "analyzeSyntax" most importantly stores two results: "content" (contains the token) and "tag" (contains the tag, e.g., verb or noun)
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Wordcloud of nouns found within tweets"}
+```{r echo=TRUE, message=FALSE, warning=FALSE, fig.cap = "Wordcloud of nouns found within guardian articles"}
 # Have a look
 #head(data_syntax[["tokens"]][[1]][,1:5])
 
 # Add dataframe with tokens syntax to original dataframe
-data_tweets$syntax_tokens <- data_syntax[["tokens"]]
-
-# If you no longer need your original data (or put differently, if you are only interested in the single tokens and their respective tag), consider this alternative:
-# Bind class of words with respective words in sentence
-
-#syntax_short_df <- cbind(data_syntax[["tokens"]][[1]][["tag"]], 
-                #data_syntax[["tokens"]][[1]][["value"]])
-
-# Transform to a dataframe
-#syntax_short_df <- as.data.frame(nlp_df)
+df$syntax_tokens <- data_syntax[["tokens"]]
 
 # Now we are only interested in tokens that are marked as "nouns" 
 # Filter out nouns only
-data_tweets <- data_tweets %>% 
+df <- df %>% 
   mutate(tokens_nouns = map(syntax_tokens, 
                             ~ filter(., tag == "NOUN"))) 
 
 # Create the data for the plot
-data_plot <- data_tweets %>% 
+data_plot <- df %>% 
   # only keep content variable
   mutate(tokens_nouns = map(tokens_nouns, 
                             ~ select(., content))) %>% 
   # Write tokens in all rows into a single string
   unnest(tokens_nouns) %>% # unnest tokens
-  # delete hashtags from strings
-  mutate(content = gsub("# ", "", content)) %>%
   # Unnest tokens
-  select(screen_name, content) %>%
   unnest_tokens(output = word, input = content) %>% # generate a wordcloud
   anti_join(stop_words) %>%
-  group_by(screen_name) %>%
   dplyr::count(word) %>%
-  filter(word!="https") %>%
-  filter(word!="t.co") %>%
-  arrange(desc(n), screen_name) %>%
-  filter(n > 3)
+  filter(n > 10) #only plot words that appear more than 10 times
 
 # Visualize in a word cloud
 data_plot %>%
   ggplot(aes(label = word, 
-             size = n,
-             color = screen_name)) +
+             size = n)) +
   geom_text_wordcloud() +
-  scale_size_area(max_size = 20) +
+  scale_size_area(max_size = 10) +
   theme_minimal()
 ```
 
