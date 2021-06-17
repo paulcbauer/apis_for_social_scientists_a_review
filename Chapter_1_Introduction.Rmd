@@ -1,0 +1,14 @@
+
+# Introduction
+
+Application programming interfaces (APIs) are an increasingly relevant tool for researchers to access data or services of various private or governmental platforms. Below we review different data- and service-APIs that may be useful to social scientists. We provide an overview over different APIs (see the APIs listed in the TOC below) following a systematic set of questions: 
+
+* What data/service is provided by the API? 
+* What are the prerequisites to access the API (authentication)? 
+* What does a simple API call look like? 
+* How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?
+
+The project *APIs for Social Scientists: A Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim during which we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our ressource will be helpful future students that start to dive into CSS. The chapters below always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started.
+
+* Data vs. machine learning APIS
+* Problem of replicability for ML APIs

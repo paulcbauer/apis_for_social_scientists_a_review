@@ -1,0 +1,26 @@
+---
+title: "<center>APIs for Social Scientists:<br>A Review</center>"
+date: ""
+author: "<p style='font-size:13px'><center>Version: `r format(Sys.time(), '%d %B, %Y')`</center></p><br><p style='font-size:14px'>Authors:<br>Paul C. Bauer, Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle, Dean Lajic, Tymoteusz Ogłaza</p><br><br><p style='font-size:12px'>If this document is useful for you please cite the whole document or single chapters as follows: ...<br><br>We also happy about any feedback or contributions to the repository: https://github.com/paulcbauer/apis_for_social_scientists_a_review.<br><br>If you would like to contribute further chapters please contact us under mail@paulcbauer.eu.</p>"
+output:
+  pagedown::html_paged:
+    toc: true
+    toc_depth: 3
+    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
+    self_contained: TRUE
+    css: ['default.css', 'default-fonts.css', 'default-page.css']
+paged-footnotes: true
+links-to-footnotes: false
+toc-title: Contents
+lot: true
+lot-title: "Tables"
+lof: true
+lof-title: "Figures"
+knit: pagedown::chrome_print
+---
+
+```{r child = 'Chapter_1_Introduction.Rmd'}
+```
+
+```{r child = 'Chapter_2_Google_NLP_API.Rmd'}
+```
