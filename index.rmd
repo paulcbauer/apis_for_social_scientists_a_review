@@ -24,3 +24,16 @@ knit: pagedown::chrome_print
 
 ```{r child = 'Chapter_2_Google_NLP_API.Rmd'}
 ```
+
+
+```{r child = 'Chapter_3_Google_Translation_API.Rmd'}
+```
+
+```{r child = 'Chapter_4_CrowdTangle_API.Rmd'}
+```
+
+
+```{r child = 'Chapter_5_Google_Places_API.Rmd'}
+```
+
+
