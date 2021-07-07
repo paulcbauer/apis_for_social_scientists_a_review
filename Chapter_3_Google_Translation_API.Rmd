@@ -80,7 +80,7 @@ library(tidyverse)
 library(googleLanguageR)
 
 # Authentication (through your service account's JSON key file)
-gl_auth("U:/Documents/key/trustme-312210-41f50915e801.json")
+gl_auth("./keys/trustme-312210-41f50915e801.json")
 ```
 
 We will translate the text (see translation API) and store it in `text_en` and use the English translations below:

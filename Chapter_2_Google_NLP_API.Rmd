@@ -86,7 +86,7 @@ library(ggwordcloud)
 library(quanteda.corpora)
 
 # Authentication (through your service account's JSON key file)
-gl_auth("./api keys/paul-css-seminar-2021-a1e75382ae2c.json")
+gl_auth("./keys/paul-css-seminar-2021-a1e75382ae2c.json")
 
 # Load data
 guardian_corpus <- quanteda.corpora::download("data_corpus_guardian")

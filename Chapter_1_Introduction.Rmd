@@ -1,7 +1,7 @@
 
 # Introduction
 
-Application programming interfaces (APIs) are an increasingly relevant tool for researchers to access data or services of various private or governmental platforms. Below we review different data- and service-APIs that may be useful to social scientists. We provide an overview over different APIs (see the APIs listed in the TOC below) following a systematic set of questions: 
+Application programming interfaces (APIs) are an increasingly relevant tool for researchers to access data or services of various private or governmental platforms. Below we review different data- and service-APIs that may be useful to social scientists. Each chapter follows a systematic set of questions: 
 
 * What data/service is provided by the API? 
 * What are the prerequisites to access the API (authentication)? 
