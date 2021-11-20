@@ -17,6 +17,8 @@ lot-title: "Tables"
 lof: true
 lof-title: "Figures"
 knit: pagedown::chrome_print
+mainfont: cochineal
+sansfont: Linux Biolinum O
 ---
 
 ```{r setup, include=FALSE} 
