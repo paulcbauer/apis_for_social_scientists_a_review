@@ -93,7 +93,7 @@ library(tidyverse)
 library(googleLanguageR)
 
 # Authentication (through your service account's JSON key file)
-gl_auth("U:/Documents/key/trustme-312210-41f50915e801.json")
+gl_auth("./keys/trustme-312210-41f50915e801.json")
 ```
 
 We will now get a sample source file which comes along with the `googleLanuageR` package. The transcript of this file is: “To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so”.

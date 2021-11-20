@@ -3,7 +3,6 @@
   size: 6in 9in; /* var(--pagedjs-width) doesn't work in browser when printing */
 }
 @page :blank {
-
 }
 
 /* store some string variables */
@@ -27,7 +26,9 @@
 }
 
 @page chapter:left {
-  @top-left {
+  text-align: justify;  /* Camille */
+  text-align-last: left; /* Camille */
+  @bottom-right {
     content: counter(page);
   }
   @top-right {
@@ -35,6 +36,7 @@
     white-space: nowrap !important;
   }
 }
+
 
 /* right page */
 .running-h2-title {
@@ -50,28 +52,29 @@
   content: string(h2-text);
 }
 @page chapter:right {
-  @top-right {
+  text-align: justify;  /* Camille */
+  text-align-last: left; /* Camille */
+  @bottom-right {
     content: counter(page);
   }
-  @top-left {
-    content: element(runningH2Title);
+  @top-right {
+    content: element(runningH1Title);
     white-space: nowrap !important;
   }
 }
 
 /* New chapter page */
 @page chapter:first {
-  @top-left {
-    content: none;
+  text-align: justify;  /* Camille */
+  @bottom-right {
+    content: counter(page);
   }
   @top-right {
     content: none;
   }
-  @bottom-right {
-    content: counter(page);
-  }
 }
 @page :first {
+  text-align: justify;  /* Camille */
   @top-left {
     content: none;
   }
@@ -89,16 +92,20 @@
 
 /* Front cover */
 .front-cover {
+  text-align: justify;  /* Camille */
   break-after: recto;
 }
 
 /* Front page or title page */
 .front-page {
+  text-align: justify;  /* Camille */
   counter-reset: page;
+  break-after: page; /* Camille */
 }
 
 /* Front matter*/
 @page frontmatter:left {
+  text-align: justify;  /* Camille */
   @top-left {
     content: counter(page, lower-roman);
   }
@@ -108,6 +115,7 @@
   }
 }
 @page frontmatter:right {
+  text-align: justify;  /* Camille */
   @top-right {
     content: counter(page, lower-roman);
   }
@@ -117,6 +125,7 @@
   }
 }
 @page frontmatter:first {
+  text-align: justify;  /* Camille */
   @top-left {
     content: none;
   }
@@ -141,33 +150,40 @@
 
 /* page breaks; aka CSS fragmentation */
 .level1 {
-  break-before: recto;
-  page: chapter;
+  text-align: justify;  /* Camille */
+  text-align-last: left; /* Camille */
+  break-after: page; /* Camille */
+  page: chapter;  /* Paul */
 }
 .front-matter-container .level1 {
   page: frontmatter;
+  text-align: left;  /* Camille */
 }
 .section > h1, .section > h2, .section > h3, .section > h4, .section > h5, .section > h6 {
   break-after: avoid;
+  text-align: left;  /* Camille */
 }
 .footenotes {
   break-before: always;
   break-after: always;
 }
 .figure {
-  break-inside: avoid;
+  font-weight: bold; /* Camille */
+  font-size: 9px; /* Camille */
+  word-spacing: normal;
 }
 
 /* reset page numbering for main content */
 .main .level1:first-child h1 {
   counter-reset: page;
+  text-align: left;  /* Camille */
 }
+
 
 /* do not break captions */
 caption {
-  break-inside: avoid;
-  break-after: avoid;
+  font-weight: bold; /* Camille */
+  font-size: 9px; /* Camille */
+  word-spacing: normal;
+  text-align: center; /* Camille */
 }
-
-
-
