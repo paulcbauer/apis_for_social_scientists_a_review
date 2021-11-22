@@ -152,7 +152,7 @@ df$tokens <- syntax_analysis[["tokens"]]
 
 # Keep nouns only
 df <- df %>% 
-  mutate(nouns = map(tokens, 
+  dplyr::mutate(nouns = map(tokens, 
                             ~ filter(., tag == "NOUN"))) 
 ```
 

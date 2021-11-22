@@ -2,6 +2,12 @@
 # Google Places API
 Lukas Isermann and Clara Husson
 
+```{r cache-ch5, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+
 
 ## Provided services/data
 
@@ -54,8 +60,7 @@ Instead of typing the API request into our browser, we can use the httr package�
 
 # Option 1: Accessing the API with base "httr" commands
 library(httr)
- 
-library(httr)
+
 key <- "YOURAPIKEY"
 
 res<-GET("https://maps.googleapis.com/maps/api/place/textsearch/json?", query = list(
@@ -68,17 +73,29 @@ res<-GET("https://maps.googleapis.com/maps/api/place/textsearch/json?", query = 
 
 ```
 
-Alternatively, we can use a wrapper function for R provided by the R-Package googleway.  
+Alternatively, we can use a wrapper function for R provided by the R-Package googleway.
 
-```{r echo=TRUE, eval=FALSE}
+*Authentication*
 
+```{r eval=F}
+key <- "YOURAPIKEY"
+set_key(key)
+```
+
+```{r echo=F, eval=T}
+key<-readtext::readtext(paste0("./keys/google_places_key.txt"))
+library(googleway)
+set_key(key$text)
+```
+
+*API call*
+
+```{r }
 # Option 2: Accessing the API with googleway
 
 library(ggplot2)
 library(tidyverse)
 library(googleway)
-key <- "YOURAPIKEY"
-set_key(key)
 
 # Request 'Mannheim' to get latitude and longitude information
 location <- google_places("Mannheim")
@@ -96,30 +113,26 @@ pizza$results %>%
   geom_col(aes(x = reorder(name, rating), y = rating)) +
   geom_text(aes(x = reorder(name, rating), y = rating,
                 label = paste0(user_ratings_total, " ratings",
-                angle = 90, hjust = 0), size = 3) +
+                angle = 90, hjust = 0), size = 3)) +
   ylab("Average Rating")+
   xlab("") +
   ggtitle("Pizza Places in Mannheim by Rating") +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 90, size = 8, hjust=0.95,vjust=0.2)
-  ) 
+    axis.text.x = element_text(angle = 90, size = 8, hjust=0.95,vjust=0.2))
 
 # Plot places to google map
-map <- google_map(location = location)
-add_markers(map, data = pizza$results$geometry$location)
+map<-googleway::google_map(location = location)
+googleway::add_markers(map, data = pizza$results$geometry$location)
+
 
 ```
+
 
 
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-In his study “Using Google places data to analyze changes in mobility during the COVID-19 pandemic”, Markus Konrad looked at the “popular times” data provided by Google Places to measure the effect of social distancing effort on mobility. 
-
-Markus Konrad on the Wissenschaftszentrum Berlin für Sozialforschung (WZB) Data Science Blog in 2020: “Using Google places data to analyze changes in mobility during the COVID-19 pandemic”
-
-[https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/](https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/)
-
+In his study “Using Google places data to analyze changes in mobility during the COVID-19 pandemic”, @Konrad2020-rl looked at the “popular times” data provided by Google Places to measure the effect of social distancing effort on mobility.
 
 
