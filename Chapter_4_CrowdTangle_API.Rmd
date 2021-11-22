@@ -67,7 +67,7 @@ GET /links | Retrieve a set of posts matching a certain link.
 GET /lists | Retrieve the lists, saved searches and saved post lists of the dashboard associated with the token sent in.
 
 
-* A simple example
+*A simple example*
 
 Which party or parties posted the 10 most successful Facebook posts this year?
 On the user interface, I created a list of the pages of all parties currently in the German Bundestag. We want to find out which party or parties posted the 10 most successful posts (i.e. the posts with the most interactions) this year.

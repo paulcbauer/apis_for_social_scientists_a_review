@@ -10,7 +10,7 @@ Below we review different data- and service-APIs that may be useful to social sc
 * How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?
 
 ## Authentication
-A lot of the APIs require that you authenticate with the API provider. The underlying script of this Review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding [repository]("https://github.com/paulcbauer/apis_for_social_scientists_a_review") of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual key.
+A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding [repository]("https://github.com/paulcbauer/apis_for_social_scientists_a_review") of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.
 
 <!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
 
@@ -23,7 +23,9 @@ The code examples rely on different packages. It's probably easiest if you insta
 ```{r eval=FALSE, include=TRUE}
 library(pacman)
 pacman::p_load(
-  dplyr
+  tidyverse, # needed for almost any chapter in this review
+  tidytext, # comes in handy whenever text data is being pre-processed (CH2)
+  googleLanguageR # allows different API calls for languga processing (CH2, CH3)
 )
 devtools::install_github("quanteda/quanteda.corpora")
 ```
