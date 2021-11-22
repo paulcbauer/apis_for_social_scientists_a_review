@@ -23,7 +23,7 @@ sansfont: Linux Biolinum O
 ---
 
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE) 
 ```
 
 

@@ -2,6 +2,12 @@
 # Google Natural Language API
 Paul C. Bauer, Camille Landesvatter, Malte Söhren
 
+```{r cache, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here might allows that the API call (e.g., line 140) has to be run only once and after that the chunk can be set to eval=F so that the API is not used each single time knitting index.rmd -> doesnt work up until now
+```
+
+
 
 
 ## Provided services/data
@@ -94,7 +100,7 @@ library(tidytext)
 
 ```{r echo=FALSE}
 # Authentication (through your service account's JSON key file)
-gl_auth("./keys/paul-css-seminar-2021-a1e75382ae2c.json")
+gl_auth("./keys/trustme-312210-41f50915e801.json")
 ```
 
 ```{r eval=FALSE}
@@ -131,18 +137,17 @@ df <- tibble::rowid_to_column(df, "ID")
 
 After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function 'gl_nlp()'. Here you will have to specify the quantity of interest (here: analyzeSyntax). Depending on what specific argument you make use of (e.g., analyzeSyntax, analyzeSentiment, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax")
+```{r message=FALSE, warning=FALSE, eval=F}
+syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax") # taucht in cache nicht auf
 ```
 
 ```{r include=F, echo=F, eval=F}
-save(syntax_analysis, file="Chapter_2_df.RData")
+save(syntax_analysis, file="./Chapter_2/Chapter_2_df.RData") # could be removed if cache works
 ```
 
 ```{r echo=F}
-load("Chapter_2_df.RData")
+load("./Chapter_2/Chapter_2_df.RData") # could be removed if cache works
 ```
-
 
 
 Importantly, find the list "tokens" inherit to the large list "syntax_analysis". This list stores two variables: "content" (contains the token) and "tag" (contains the tag, e.g., verb or noun). Let's have a look at the first document.
