@@ -188,11 +188,11 @@ data_plot %>%
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-Text-as-data has become quite a common approach in the social sciences (see e.g., @Grimmer for an overview). For the usage of Google’s Natural Language API we however have the impression that it is relatively unknown in NLP and among social scientists. Hence, we want to emphasize the usefulness and importance the usage of Google’s NLP API could have in many research projects. 
+Text-as-data has become quite a common approach in the social sciences (see e.g., @Grimmer2013-xe for an overview). For the usage of Google’s Natural Language API we however have the impression that it is relatively unknown in NLP and among social scientists. Hence, we want to emphasize the usefulness and importance the usage of Google’s NLP API could have in many research projects. 
 
 However, if you are considering making use of it, keep two things in mind:
 
-* some might interpret using the API as a "blackbox" approach potentially standing in way of transparency and replication (two important criteria of good research?). However it is always possible to perform robustness and sensitivity analysis and to add the version of the API one was using.
+* some might interpret using the API as a "blackbox" approach (see @Dobbrick2021-iz for very recent developments of "glass-box machine learning appraoches" for text analysis) potentially standing in way of transparency and replication (two important criteria of good research?). However it is always possible to perform robustness and sensitivity analysis and to add the version of the API one was using.
 
 * depending on how large your corpus of text data, Google might charges you some money. However for up to 5,000 units (i.e., terms) the different variants of sentiment and syntax analysis are free. Check this overview by Google to learn about prices for more units [here]("https://cloud.google.com/natural-language/pricing"). Generally, also consider that if you are pursuing a CSS-related project in which the GCP Products would come in useful, there is the possibility to achieve Google Cloud Research credits (see [here]("https://edu.google.com/programs/credits/research/?modal_active=none")).
 

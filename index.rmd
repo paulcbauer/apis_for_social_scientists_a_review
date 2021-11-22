@@ -9,6 +9,7 @@ output:
     # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
     self_contained: TRUE
     css: ['default.css', 'default-fonts.css', 'default-page.css']
+bibliography: [references_overall.bib]
 paged-footnotes: true
 links-to-footnotes: false
 toc-title: Contents
