@@ -131,9 +131,19 @@ df <- tibble::rowid_to_column(df, "ID")
 
 After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function 'gl_nlp()'. Here you will have to specify the quantity of interest (here: analyzeSyntax). Depending on what specific argument you make use of (e.g., analyzeSyntax, analyzeSentiment, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax")
 ```
+
+```{r include=F, echo=F, eval=F}
+save(syntax_analysis, file="Chapter_2_df.RData")
+```
+
+```{r echo=F}
+load("Chapter_2_df.RData")
+```
+
+
 
 Importantly, find the list "tokens" inherit to the large list "syntax_analysis". This list stores two variables: "content" (contains the token) and "tag" (contains the tag, e.g., verb or noun). Let's have a look at the first document.
 
