@@ -93,7 +93,6 @@ library(tidyverse)
 library(tm)#stopwords
 ```
 
-
 *Step 2: Authentication*
 
 ```{r echo=FALSE}

@@ -110,10 +110,11 @@ This API call eventually provides reuslts in a dataframe with three columns: tra
 
 Let's check the translation.
 
-```{r message=FALSE, warning=FALSE, out.width="60%"}
+```{r message=FALSE, warning=FALSE, eval=F}
 df_translate$translatedText
 ```
 
+*`r (paste(df_translate$translatedText))`*
 
 <!-- ```{r echo=TRUE, message=FALSE, warning=FALSE} -->
 <!-- # Add translation to your original data -->

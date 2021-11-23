@@ -122,8 +122,13 @@ dimnames(audio_data$transcript)
 
 The `timings` dataframe stores timestamps telling us when each specific term was recognised. The `transcript` dataframe importantly provides the transcript as well as a confidence score. We can see that the transcript misses one term ("a") and indicates its confidence with a score close to 1.0.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE}
 audio_data$transcript$transcript
+```
+
+*`r (paste(audio_data$transcript$transcript))`*
+
+```{r}
 audio_data$transcript$confidence #0.92
 ```
 
