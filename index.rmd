@@ -1,21 +1,20 @@
 ---
 title: "<center>APIs for Social Scientists:<br>A Review (V1.0)</center>"
 date: ""
-author: "<p style='font-size:13px'><center>`r format(Sys.time(), '%d %B, %Y')`</center></p><br><p style='font-size:14px'>Authors:<br>Paul C. Bauer, Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle, Dean Lajic, Tymoteusz Ogłaza</p><br><br><p style='font-size:14px'>Edited by:<br>Paul C. Bauer/Camille Landesvatter<br><br><p style='font-size:12px'><br><br>We are happy about feedback or contributions to the repository: https://github.com/paulcbauer/apis_for_social_scientists_a_review.<br><br>If you would like to contribute further chapters please contact us under mail@paulcbauer.eu.</p>"
+author: "<p style='font-size:13px'><center>`r format(Sys.time(), '%d %B, %Y')`</center></p><br><p style='font-size:14px'>Authors:<br>Paul C. Bauer, Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle, Dean Lajic</p><br><br><p style='font-size:14px'>Edited by:<br>Paul C. Bauer/Camille Landesvatter<br><br><p style='font-size:12px'><br><br>We are happy about feedback or contributions to the repository: https://github.com/paulcbauer/apis_for_social_scientists_a_review.<br><br>If you would like to contribute further chapters please contact us under mail@paulcbauer.eu.</p>"
 output:
   pagedown::html_paged:
     toc: true
-    toc_depth: 3
-    # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
-    self_contained: TRUE
+    toc_depth: 3 #levels of sections to include
+    self_contained: TRUE # change to true for a self-contained document, but it'll be a litte slower for Pandoc to render
     css: ['default.css', 'default-fonts.css', 'default-page.css']
 bibliography: [references_overall.bib]
 paged-footnotes: true
 links-to-footnotes: false
-toc-title: Contents
-lot: true
-lot-title: "Tables"
-lof: true
+toc-title: Contents #table of contents
+lot: false #list of tables and figures
+lot-title: "Tables" 
+lof: false #list of tables and figures
 lof-title: "Figures"
 knit: pagedown::chrome_print
 mainfont: cochineal

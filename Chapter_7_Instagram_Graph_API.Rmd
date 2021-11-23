@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
 
 # Instagram Graph API
 Philipp Kadel
@@ -12,9 +7,9 @@ Philipp Kadel
 
 * *What data/service is provided by the API?*
 
-The Instagram Graph API is provided by Facebook. There are two main APIs for Instagram, the Instagram Basic Display API and the Instagram Graph API. The latter is described in the following.
+The Instagram Graph API is provided by Facebook. There are two main APIs for Instagram, the Instagram Basic Display API and the [Instagram Graph API]("https://developers.facebook.com/docs/instagram-api?locale=en_US"). The latter is described in the following.
 
-The API can be used to get and manage published photos, videos, and stories as well as getting basic data about other Instagram Business users and Creators. It is also possible to moderate comments and their replies and to measure media and profile interaction. Photos and videos can be published directly from the API. It can also be used to discover hashtagged media and @mentions.
+The API can be used to get and manage published photos, videos, and stories as well as getting basic data about other Instagram Business users and Creators. It is also possible to moderate comments and their replies and to measure media and profile interaction. Photos and videos can be published directly from the API. It can also be used to discover hashtagged media and mentions.
 
 For photos and videos different metrics can be obtained:
 
@@ -32,22 +27,16 @@ Likewise, there are several metrics about stories that are provided by the API:
 * Replies	 – Total number of replies to the story.
 * Taps_forward – Total number of taps to see this story’s next photo or video.
 
-Sources:
-
-https://developers.facebook.com/docs/instagram-api?locale=en_US
-
-https://jamiemaguire.net/index.php/2019/06/22/instagram-graph-api-part-2-fetching-data-with-the-insights-api/
-
 ## Prerequesites
 * *What are the prerequisites to access the API (authentication)? *
 
-For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here](https://developers.facebook.com/docs/instagram-api/getting-started).
+For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here]("https://developers.facebook.com/docs/instagram-api/getting-started").
 
 
 ## Simple API call
 * *What does a simple API call look like?*
 
-Below you can find expamples of simple API calls for the Instagram Graph API
+Below you can find expamples of simple API calls for the Instagram Graph API.
 
 Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comments_count”, “like_count”, or “timestamp”.
 
@@ -56,7 +45,9 @@ Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comme
 Example:
 
 ```{r echo=TRUE, eval=FALSE}
-GET (“https://graph.facebook.com/v10.0/17895695668004550?fields=id,media_type,media_url,owner,timestamp&access_token=IGQVJ...”)
+GET (“https://graph.facebook.com/v10.0/17895695668004550
+      ?fields=id,media_type,media_url,owner,
+      timestamp&access_token=IGQVJ...”)
 ```
 
 Response:
@@ -101,7 +92,8 @@ Get fields and edges on an Instagram Business or Creator Account. Fields can be 
 Example:
 
 ```{r echo=TRUE, eval=FALSE}
-GET (“https://graph.facebook.com/v3.2/17841405822304914?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...”)
+GET (“https://graph.facebook.com/v3.2/17841405822304914
+      ?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...”)
 ```
 
 Response:
@@ -113,27 +105,17 @@ Response:
   "website": "http://www.metricsaurus.com/" }
 ```
 
-Source: https://developers.facebook.com/docs/instagram-api/reference
-
 ## API access
 * *How can we access the API from R (httr + other packages)?* 
 
-The httr package can be used to access the Instagram Graph API. There used to be a instaR package but it was made for the old Instagram API and can not be used anymore. The FBinsightsR package provides access to the Insights API. Its fbins_insta function can be used to collect Instagram insights. Detailed information can be found here:
+The `httr` package can be used to access the Instagram Graph API. There used to be a `instaR` package but it was made for the old Instagram API and can not be used anymore. The [`FBinsightsR`]("https://rdrr.io/github/Deducive/FBinsightsR/") package provides access to the Insights API. Its `fbins_insta` function can be used to collect Instagram insights. Detailed information on the packages' functions can be found [here]("https://github.com/Deducive/FBinsightsR/blob/master/R/functions.R") and more information on the deprecated `instaR` package [here]("https://stackoverflow.com/questions/54488186/instagram-api-in-r-deprecated-need-to-use-graph-facebook-com").
 
-https://github.com/Deducive/FBinsightsR/blob/master/R/functions.R
-
-https://stackoverflow.com/questions/54488186/instagram-api-in-r-deprecated-need-to-use-graph-facebook-com
 
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-In their study, Ferwerda, Schedl, and Tkalcic (2015) tried to infer personality traits from the way users take pictures and apply filters to them. The authors found distinct picture features (e.g., hue, brightness, saturation) that are related to personality traits. Brown, Bendig, Fischer, Goldwich, Baumeister, and Plener (2019) investigated the link between acute suicidality and language use as well as activity on Instagram. Differences in activity and language use on Instagram were not associated with acute suicidality. The goal of a study by Hosseinmardi, Mattson, Rafiq, Han, Lv, and Mishr (2015) was to automatically detect and predict incidents of cyberbullying on Instagram. Based on a sample data set consisting of Instagram images and their associated comments, media sessions were labeled for cyberbullying. Associations are investigated between cyberbullying and a host of features such as cyber aggression, profanity, social graph features, temporal commenting behavior, linguistic content, and image content.
+In their study, @Ferwerda2015-db tried to infer personality traits from the way users take pictures and apply filters to them. The authors found distinct picture features (e.g., hue, brightness, saturation) that are related to personality traits. @Brown2019-jp investigated the link between acute suicidality and language use as well as activity on Instagram. Differences in activity and language use on Instagram were not associated with acute suicidality. The goal of a study by @Hosseinmardi2015-yc was to automatically detect and predict incidents of cyberbullying on Instagram. Based on a sample data set consisting of Instagram images and their associated comments, media sessions were labeled for cyberbullying. Associations are investigated between cyberbullying and a host of features such as cyber aggression, profanity, social graph features, temporal commenting behavior, linguistic content, and image content.
 
-Brown, R. C., Bendig, E., Fischer, T., Goldwich, A. D., Baumeister, H., & Plener, P. L. (2019). Can acute suicidality be predicted by Instagram data? Results from qualitative and quantitative language analyses. PloS one, 14(9), e0220623.
-https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0220623
+\newpage
 
-Ferwerda, B., Schedl, M., & Tkalcic, M. (2015, September). Predicting personality traits with instagram pictures. In Proceedings of the 3rd Workshop on Emotions and Personality in Personalized Systems 2015 (pp. 7-10).
-https://dl.acm.org/doi/abs/10.1145/2809643.2809644?casa_token=AmeFxOkVYT8AAAAA:9jFd40K-ZPgpAS2s6vo1Gn_02SIlQeEvsRlgF750zBKz_5LSqqgornnDc2eAObmy2H5y4a8nm1-bwQ
-
-Hosseinmardi, H., Mattson, S. A., Rafiq, R. I., Han, R., Lv, Q., & Mishr, S. (2015). Prediction of cyberbullying incidents on the Instagram social network. arXiv preprint arXiv:1508.06257.
-https://arxiv.org/abs/1508.06257
+# Bibliography
