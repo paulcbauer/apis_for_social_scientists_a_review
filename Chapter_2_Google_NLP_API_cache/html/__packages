@@ -1,4 +1,6 @@
 base
+googleLanguageR
+quanteda.corpora
 tidyverse
 ggplot2
 tibble
@@ -8,7 +10,6 @@ purrr
 dplyr
 stringr
 forcats
-googleLanguageR
-tidytext
-quanteda.corpora
 ggwordcloud
+NLP
+tm

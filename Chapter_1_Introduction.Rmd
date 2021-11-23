@@ -23,7 +23,7 @@ The code examples rely on different packages. It's probably easiest if you insta
 ```{r eval=FALSE, include=TRUE}
 library(pacman)
 pacman::p_load(
-  tidyverse, # needed for almost any chapter in this review
+  dplyr, # needed for almost any chapter in this review
   ggplot2, # e.g. CH5
   tidytext, # comes in handy whenever text data is being pre-processed (CH2)
   devtools, # to download any package from github (e.g., RCrowdTangle in CH4)

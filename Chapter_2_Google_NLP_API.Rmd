@@ -89,6 +89,8 @@ beforehand also translated to english)
 
 ```{r message=FALSE, warning=FALSE}
 library(googleLanguageR)
+library(tidyverse)
+library(tm)#stopwords
 ```
 
 
@@ -151,9 +153,8 @@ Now imagine you are interested in all the nouns that were used in the Guardian A
 df$tokens <- syntax_analysis[["tokens"]]
 
 # Keep nouns only
-df <- df %>% 
-  dplyr::mutate(nouns = map(tokens, 
-                            ~ filter(., tag == "NOUN"))) 
+df <- df %>% dplyr::mutate(nouns = map(tokens, 
+                            ~ dplyr::filter(., tag == "NOUN"))) 
 ```
 
 *Step 4: Visualization*
@@ -174,8 +175,8 @@ data_plot <- df %>%
   # Write tokens in all rows into a single string
   unnest(nouns) %>% # unnest tokens
   # Unnest tokens
-  unnest_tokens(output = word, input = content) %>% # generate a wordcloud
-  anti_join(stop_words) %>%
+  tidytext::unnest_tokens(output = word, input = content) %>% # generate a wordcloud
+  anti_join(tidytext::stop_words) %>%
   dplyr::count(word) %>%
   filter(n > 10) #only plot words that appear more than 10 times
 

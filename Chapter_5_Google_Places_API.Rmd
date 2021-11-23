@@ -2,12 +2,6 @@
 # Google Places API
 Lukas Isermann and Clara Husson
 
-```{r cache-ch5, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
-# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
-```
-
-
 
 ## Provided services/data
 
@@ -121,13 +115,15 @@ pizza$results %>%
   theme(
     axis.text.x = element_text(angle = 90, size = 8, hjust=0.95,vjust=0.2))
 
-# Plot places to google map
-map<-googleway::google_map(location = location)
-googleway::add_markers(map, data = pizza$results$geometry$location)
-
-
 ```
 
+```{r }
+# Plot places to google map
+#important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
+
+map<-googleway::google_map(location = location)
+googleway::add_markers(map, data = pizza$results$geometry$location)
+```
 
 
 ## Social science examples

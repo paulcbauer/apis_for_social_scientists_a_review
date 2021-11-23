@@ -125,7 +125,7 @@ df_translate$translatedText
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-Searching on literature using Google Translation Services we found a study by @Prates2018-fx ([Assessing gender bias in machine translation: a case study with Google Translate](https://arxiv.org/abs/1809.02208)). 
+Searching on literature using Google Translation Services we found a study by @Prates2018-fx ([Assessing gender bias in machine translation: a case study with Google Translate]("https://arxiv.org/abs/1809.02208")). 
 
 We are not aware of any further research / publications that made explicit usage of Google's Translation API. However, we assume that the API (or at least Google's Free Translation Service) is involved in many research projects. Generally, we are convinced that making use of automated translation (as well as converting speech to text ( &#8594; example  also in this review) eventually in combination with translation) can be of great advantage for all kinds of qualitative or mixed-methods research projects. For instance, automated translation could be very useful for easily and very reliably translating data from qualitative interviews or other (field) experiments or observational data (where data might be collected in a foreign language). Also consider the other way around where data is available in the principal language of the research project but some of the textual data has to be communicated and presented in (for instance) english language.
 

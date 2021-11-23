@@ -1,3 +1,16 @@
 base
 googleLanguageR
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+NLP
+tm
 quanteda.corpora
+ggwordcloud
+googleway
