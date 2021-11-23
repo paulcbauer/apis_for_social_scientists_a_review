@@ -121,6 +121,9 @@ pizza$results %>%
 # Plot places to google map
 #important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
 
+# install.packages("webshot")
+# webshot::install_phantomjs()
+
 map<-googleway::google_map(location = location)
 googleway::add_markers(map, data = pizza$results$geometry$location)
 ```

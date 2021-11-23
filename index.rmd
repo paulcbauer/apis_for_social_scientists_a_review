@@ -37,7 +37,7 @@ always_allow_html: yes
 ``` 
 
 
-```{r child = 'Chapter_5_Google_Places_API.Rmd'}
+```{r child = 'Chapter_5_Google_Places_API.Rmd', screenshot.force = TRUE}
 ```
 
 ```{r child = 'Chapter_6_Google_Speech-to-Text_API.Rmd'}
