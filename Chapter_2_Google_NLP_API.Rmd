@@ -133,14 +133,14 @@ df <- tibble::rowid_to_column(df, "ID")
 
 *Note*: Whenever you choose to work with textual data, a very common procedure is to pre-process the data via a set of certain transformations. For instance, you will convert all letters to lower case, remove numbers and punctuation, trim words to their word stem and eventually remove so-called stopwords. There are many tutorials (for example [here]("https://datamathstat.wordpress.com/2019/10/25/text-preprocessing-for-nlp-and-machine-learning-using-r/") or [here]("http://rstudio-pubs-static.s3.amazonaws.com/256588_57b585da6c054349825cba46685d8464.html")).
 
-After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function 'gl_nlp()'. Here you will have to specify the quantity of interest (here: analyzeSyntax). Depending on what specific argument you make use of (e.g., analyzeSyntax, analyzeSentiment, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.
+After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function `gl_nlp()`. Here you will have to specify the quantity of interest (here: `analyzeSyntax`). Depending on what specific argument you make use of (e.g., `analyzeSyntax`, `analyzeSentiment`, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.
 
 ```{r message=FALSE, warning=FALSE}
 syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax")
 ```
 
 
-Importantly, find the list "tokens" inherit to the large list "syntax_analysis". This list stores two variables: "content" (contains the token) and "tag" (contains the tag, e.g., verb or noun). Let's have a look at the first document.
+Importantly, find the list `tokens` inherit to the large list `syntax_analysis`. This list stores two variables: `content` (contains the token) and `tag` (contains the tag, e.g., verb or noun). Let's have a look at the first document.
 
 ```{r message=FALSE, warning=FALSE}
 head(syntax_analysis[["tokens"]][[1]][,1:3])
