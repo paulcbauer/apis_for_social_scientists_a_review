@@ -105,15 +105,15 @@ pizza <- google_places("Pizza", location = location, radius = 5000, place_type =
 pizza$results %>%
   ggplot() +
   geom_col(aes(x = reorder(name, rating), y = rating)) +
-  geom_text(aes(x = reorder(name, rating), y = rating,
-                label = paste0(user_ratings_total, " ratings",
-                angle = 90, hjust = 0), size = 3)) +
+  geom_text(aes(x = reorder(name, rating), y = rating),
+                label = paste0(pizza$results$user_ratings_total, " \n ratings"), size = 2) +
   ylab("Average Rating")+
   xlab("") +
   ggtitle("Pizza Places in Mannheim by Rating") +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 90, size = 8, hjust=0.95,vjust=0.2))
+
 
 ```
 
