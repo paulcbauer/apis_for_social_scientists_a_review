@@ -1,0 +1,134 @@
+
+# Google Translation API
+<chauthors>Paul C. Bauer, Camille Landesvatter</chauthors>
+<br><br>
+
+```{r cache-ch2, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The API is provided by Google. 
+
+Google's Translation API translates texts into more than one hundred [languages]("https://cloud.google.com/translate/docs/languages"). Note that the approach via the API is a lot more refined than the [free version]("https://translate.google.com/?hl=de") on Googles' translation website and of course comes in very useful if text in large scale needs to be translated (possibly with longer and more complex content or syntax). For instance, you can choose to specify a certain model to further improve the translation ([Neural Machine Translation vs. Phrase-Based Machine Translation]("https://cloud.google.com/translate/docs/basic/translating-text#translate_translate_text-python")).
+
+
+The API limits in three ways: characters per day, characters per 100 seconds, and API requests per 100 seconds. All can be set in the [API manager]("https://console.developers.google.com/apis/api/translate.googleapis.com/quotas") of your Google Cloud Project.
+
+
+Consider that additionally to the Translation API which we demonstrate in this review, Google provides us with two further APIs for translation: AutoML Translation and the Advanced Translation API (see [here]("https://cloud.google.com/translate/?utm_source=google&utm_medium=cpc&utm_campaign=emea-de-all-de-dr-bkws-all-all-trial-e-gcp-1010042&utm_content=text-ad-none-any-DEV_c-CRE_170514365277-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20AI%20%26%20ML%20~%20Cloud%20Translation%23v3-KWID_43700053282385063-kwd-74703397964-userloc_9042003&utm_term=KW_google%20translator%20api-NET_g-PLAC_&gclid=CjwKCAjw_JuGBhBkEiwA1xmbRZOxg7QzGmhTHWseHFN_V0Al_Xlf8wZVBfX9EURtitWDbe2dLcTWIxoCjj0QAvD_BwE&gclsrc=aw.ds#section-4") for a short comparison).
+
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+To access and to use the API the following steps are necessary:
+
+- Create a [google account]("https://www.google.com/account/about/") (if you do not already have one).
+
+- Using this google account login to the [google cloud platform]("https://cloud.google.com/") and create a Google Cloud Project.
+
+- Within this Google Cloud Project enable the Google Translation API.
+
+- For authentication you will need to create an API key (which you additionally should restrict to the Translation API). If however, you are planning to request the Natural Language API from outside a Google Cloud environment (e.g., R) you will be required to use a private (service account) key. This can be achieved by creating a service account which in turn will allow you to download your private key as a JSON file (we show an example below). 
+
+
+## Simple API call
+* *What does a simple API call look like?*
+
+Here we describe how a simple API call can be made from within the Google Cloud Platform environment via the Google Cloud Shell:
+
+
+* To activate your Cloud Shell, inspect the upper right-hand corner of your Google Cloud Platform Console and click the icon called “Activate Shell”. [Google Cloud Shell]("https://cloud.google.com/shell/#how_do_i_get_started") is a command line environment running in the cloud.
+
+* Via the built-in Editor in Cloud Shell create a JSON file (call it for instance ‘request.json’) with the text that you would like to perform analysis on. Consider that text can be uploaded in the request (shown below) or integrated with Cloud Storage. Supported types of your text are PLAIN_TEXT (shown below) or HTML.  
+
+```{r echo=TRUE, eval=FALSE}
+{
+ "q": ["To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so"], 
+"target": "de"
+}
+```
+
+* For sending your data, pass a curl command to your Cloud Shell command line where you refer (via @) to your request.json file from the previous step.
+
+* Don’t forget to insert your individual API key in the curl command (alternatively, you could define it beforehand via adding a global variable to your environment &#8594; see example in the API call for Googles' NLP API earlier in this document).
+
+```{r echo=TRUE, eval=FALSE}
+curl "https://translation.googleapis.com/language/translate/v2?key=APIKEY" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
+```
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+The following example makes use of the [‘googleLanguageR’]("https://cran.r-project.org/web/packages/googleLanguageR/index.html") package from R which among other options (e.g., syntax analysis &#8594; see Chapter 2 of this review) allows calling the Cloud Translation API.
+
+In this small example we demonstrate how to...
+
+* ... authenticate with your Google Cloud Account within R
+
+* ... translate an exemplary sentence
+
+*Step 1: Load package*
+
+```{r message=FALSE, warning=FALSE}
+library(googleLanguageR)
+```
+
+*Step 2: Authentication*
+
+```{r echo=FALSE}
+# Authentication (through your service account's JSON key file)
+gl_auth("./keys/trustme-312210-41f50915e801.json")
+```
+
+```{r eval=FALSE}
+gl_auth("./your-key.json")
+```
+
+
+*Step 3: Analysis - API call and Translation*
+
+First, we create exemplary data. For demonstration purposes, we here again make use of the sentence from above. Of course, for your own project use a complete vector containing text data from within your data.
+
+```{r message=FALSE, warning=FALSE}
+df_original <- data.frame(text = "To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so")
+
+df_original$text <- as.character(df_original$text)
+```
+
+Next, using this data, call the API via the function 'gl_translate()' and importantly specify the target language (german in this example) within the 'target' argument.
+
+```{r message=FALSE, warning=FALSE}
+df_translate <- gl_translate(df_original$text, target = "de")
+```
+
+This API call eventually provides reuslts in a dataframe with three columns: translatedText ( &#8594; contains the translation), detectedSourceLangauge ( &#8594; contains a label for the original language being detected) and text ( &#8594; contains the original text). 
+
+Let's check the translation.
+
+```{r message=FALSE, warning=FALSE, eval=F}
+df_translate$translatedText
+```
+
+*`r (paste(df_translate$translatedText))`*
+
+<!-- ```{r echo=TRUE, message=FALSE, warning=FALSE} -->
+<!-- # Add translation to your original data -->
+<!-- df_orginal <- bind_cols(df_original,  -->
+<!--                          df_translate %>% select(translatedText)) -->
+
+<!-- ``` -->
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+Searching on literature using Google Translation Services we found a study by @Prates2018-fx ([Assessing gender bias in machine translation: a case study with Google Translate]("https://arxiv.org/abs/1809.02208")). 
+
+We are not aware of any further research / publications that made explicit usage of Google's Translation API. However, we assume that the API (or at least Google's Free Translation Service) is involved in many research projects. Generally, we are convinced that making use of automated translation (as well as converting speech to text ( &#8594; example  also in this review) eventually in combination with translation) can be of great advantage for all kinds of qualitative or mixed-methods research projects. For instance, automated translation could be very useful for easily and very reliably translating data from qualitative interviews or other (field) experiments or observational data (where data might be collected in a foreign language). Also consider the other way around where data is available in the principal language of the research project but some of the textual data has to be communicated and presented in (for instance) english language.
+
+

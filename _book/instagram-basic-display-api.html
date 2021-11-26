@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Instagram Basic Display API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Instagram Basic Display API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Instagram Basic Display API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="instagram-graph-api.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequesits-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequesits: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequesits-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequesits: Software &amp; packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>2</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>2.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="2.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequesites"><i class="fa fa-check"></i><b>2.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="2.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call"><i class="fa fa-check"></i><b>2.3</b> Simple API call</a></li>
+<li class="chapter" data-level="2.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access"><i class="fa fa-check"></i><b>2.4</b> API access</a></li>
+<li class="chapter" data-level="2.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples"><i class="fa fa-check"></i><b>2.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>3</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequesites-1"><i class="fa fa-check"></i><b>3.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="3.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-1"><i class="fa fa-check"></i><b>3.4</b> API access</a></li>
+<li class="chapter" data-level="3.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequesites-2"><i class="fa fa-check"></i><b>4.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-2"><i class="fa fa-check"></i><b>4.4</b> API access</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>5</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequesites-3"><i class="fa fa-check"></i><b>5.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="5.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-3"><i class="fa fa-check"></i><b>5.4</b> API access</a></li>
+<li class="chapter" data-level="5.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>6</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequesites-4"><i class="fa fa-check"></i><b>6.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="6.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-4"><i class="fa fa-check"></i><b>6.4</b> API access</a></li>
+<li class="chapter" data-level="6.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>7</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequesites-5"><i class="fa fa-check"></i><b>7.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="7.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-5"><i class="fa fa-check"></i><b>7.4</b> API access</a></li>
+<li class="chapter" data-level="7.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>8</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>8.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="8.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequesites-6"><i class="fa fa-check"></i><b>8.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="8.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>8.3</b> Simple API call</a></li>
+<li class="chapter" data-level="8.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-6"><i class="fa fa-check"></i><b>8.4</b> API access</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center>
+APIs for social scientists:<br>A collaborative review
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="instagram-basic-display-api" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Instagram Basic Display API</h1>
+<p><chauthors>Madleen Meier-Barthold</chauthors>
+<br><br></p>
+<p>Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (Tankovska, 2021). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (Aslam, 2021). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers.</p>
+<div id="provided-servicesdata-6" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Provided services/data</h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>Instagram offers two types of APIs that allow an application to access data on the platform: the Instagram Graph API and the Instagram Basic Display API.</p>
+<p>Previously, other APIs were available which allowed developers and researchers a less restricted access to data collection (Instagram, 2021). These older APIs are now depreciated.</p>
+<p>The Instagram Basic Display API gives read-access to basic profile information, photos and videos on authenticated users’ accounts (Facebook for Developers, 2021). Particularly, it is possible to fetch a user’s profile, including fields like account type and account name, as well as a user’s media (images, videos and albums), including fields like media type, caption, URL and timestamp. The API does not allow to modify data like publishing media or moderating comments (see Instagram Graph API).</p>
+<p>It is a RESTful API, meaning that queries are made for static information at the current moment. Queries are subject to rate limits. Responses are in the form of JSON-formatted objects containing the default and requested fields and edges.</p>
+</div>
+<div id="prerequesites-6" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>In order to access the Instagram Basic Display API, developers are required to first register as a Facebook developer on developers.facebook.com, create a Facebook App on <a href="https://developers.facebook.com/docs/instagram-basic-display-api/getting-started" class="uri">https://developers.facebook.com/docs/instagram-basic-display-api/getting-started</a> and submit the application for review.</p>
+<p>Another prerequisite to access the API is to get authentication. API authentication is handled through Instagram User Access Tokens that conform to the OAuth 2.0 protocol. The process of getting an access token includes two parts. First, each application user must grant an application permission to read the user node and/or the media node. These permissions are controlled via an Authorization Window.</p>
+<p><a href="https://api.instagram.com/oauth/authorize" class="uri">https://api.instagram.com/oauth/authorize</a>
+?client_id={appId}
+&amp;redirect_uri={redirectURI}
+&amp;scope=user_profile,user_media
+&amp;response_type=code</p>
+<p>Give this URL to the application users. The next steps have to be completed by each user.
+1. Open a new browser window and load the Authorization Window URL.
+2. Authenticate your Instagram test user by signing into the Authorization Window
+3. Click Authorize to grant your app access to your profile data.
+4. Upon success, the page will redirect you to the redirect URI you included in the previous step and append an Authorization Code. For example: <a href="https://mmeierba.github.io/?code=AQD" class="uri">https://mmeierba.github.io/?code=AQD</a>…#<em>
+5. Copy the code except for the #</em> portion in the end. Send this Authorization Code to researcher.</p>
+<p>When a user successfully grants the application permission to access their data, the user is redirected to a redirect URI which appended with an Authorization Code. Second, the Authorization Code can be exchanged for a short-lived access token (i.e., valid for 1 hour).</p>
+<pre><code>## Response [https://api.instagram.com/oauth/access_token]
+##   Date: 2021-11-26 18:44
+##   Status: 400
+##   Content-Type: application/json; charset=utf-8
+##   Size: 98 B</code></pre>
+<p>Response [<a href="https://api.instagram.com/oauth/access_token" class="uri">https://api.instagram.com/oauth/access_token</a>]
+Date: 2021-04-20 11:20
+Status: 200
+Content-Type: application/json; charset=utf-8
+Size: 220 B</p>
+<p>Then, the API can be queried.</p>
+</div>
+<div id="simple-api-call-6" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>The Instagram Basic Display API is http-based. To query a node or edge, a GET call can be used. The base URLs are api.instagram.com and graph.instagram.com.</p>
+<pre><code>## Response [https://graph.instagram.com/userId?fields=id,username&amp;access_token=accessToken]
+##   Date: 2021-11-26 18:44
+##   Status: 400
+##   Content-Type: application/json; charset=UTF-8
+##   Size: 45 B</code></pre>
+<pre><code>## Response [https://graph.instagram.com/me?fields=id,username&amp;access_token=accessToken]
+##   Date: 2021-11-26 18:44
+##   Status: 400
+##   Content-Type: application/json; charset=UTF-8
+##   Size: 45 B</code></pre>
+<pre><code>## Response [https://graph.instagram.com/me/media?fields=id,caption&amp;access_token=accessToken]
+##   Date: 2021-11-26 18:44
+##   Status: 400
+##   Content-Type: application/json; charset=UTF-8
+##   Size: 45 B</code></pre>
+<pre><code>## Response [https://graph.instagram.com/mediaId?fields=id,media_type,media_url,username,timestamp&amp;access_token=accessToken]
+##   Date: 2021-11-26 18:44
+##   Status: 400
+##   Content-Type: application/json; charset=UTF-8
+##   Size: 45 B</code></pre>
+</div>
+<div id="api-access-6" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>The Instagram Graphic Display API can be accessed from R using the httr package.</p>
+<p>Current R packages specific to APIs from Instagram (e.g., instaR) are related to deprecated versions of Instagram APIs and are therefore no longer useful in the current version (Instagram, 2021). To the knowledge of the authors, there are no R packages specific to the Instagram Basic Display API.</p>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>There are a couple of examples of studies in the field of social science that have used an Instagram API. However, the presented examples use older, depreciated versions of the Instagram API.</p>
+<p>In 2014, Hu et al. collected 50 user profiles and their most recent photos, as well as users’ lists of friends and followers using the Instagram API. Analyzing the data, the authors identified a range of photo categories and types of Instagram users.</p>
+<p>Ferwerda et al. (2015) used the Instagram API to extract Instagram pictures from survey participants, who had previously filled in a personality questionnaire. 113 survey participants granted the researchers access to their Instagram accounts through the API. The authors found that distinct features of the Instagram pictures (i.e., hue, brightness, saturation) associated with users’ personality traits.</p>
+<p>These examples show the potential that extracting data using the Instagram Basic Display API has for social science researchers. Yet, a lot of data are not yet being leveraged (e.g., captions).</p>
+<ul>
+<li><em>References</em></li>
+</ul>
+<p>Ferwerda, B., Schedl, M., &amp; Tkalcic, M. (2015, September). Predicting personality traits with instagram pictures. In Proceedings of the 3rd Workshop on Emotions and Personality in Personalized Systems 2015 (pp. 7-10).</p>
+<p>Hu, Y., Manikonda, L., &amp; Kambhampati, S. (2014, May). What we instagram: A first analysis of instagram photo content and user types. In Proceedings of the International AAAI Conference on Web and Social Media (Vol. 8, No. 1).</p>
+<p>Instagram (2021). Update on Instagram Legacy API permission. Instagram Developer Documentation. <a href="https://www.instagram.com/developer/" class="uri">https://www.instagram.com/developer/</a></p>
+<p>Aslam, S. (2021, January 6). Instagram by the Numbers: Stats, Demographics &amp; Fun Facts. Omnicore Agency. <a href="https://www.omnicoreagency.com/instagram-statistics/" class="uri">https://www.omnicoreagency.com/instagram-statistics/</a></p>
+<p>Facebook for Developers (2021). Instagram Basic Display API. Instagram Platform. <a href="https://developers.facebook.com/docs/instagram-basic-display-api" class="uri">https://developers.facebook.com/docs/instagram-basic-display-api</a></p>
+<p>Tankovska, H. (2021, February 25). Instagram – Statistics &amp; Facts. Statista. <a href="https://www.statista.com/topics/1882/instagram/" class="uri">https://www.statista.com/topics/1882/instagram/</a></p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Berriche, Manon, and Sacha Altay. 2020. <span>“Internet Users Engage More with Phatic Posts Than with Health Misinformation on Facebook.”</span> <em>Palgrave Communications</em> 6 (1): 1–9.
+</div>
+<div class="csl-entry">
+Broniatowski, David A, Amelia M Jamison, Neil F Johnson, Nicolás Velasquez, Rhys Leahy, Nicholas Johnson Restrepo, Mark Dredze, and Sandra C Quinn. 2020. <span>“Facebook Pages, the <span>‘Disneyland’</span> Measles Outbreak, and Promotion of Vaccine Refusal as a Civil Right, 2009-2019.”</span> <em>Am. J. Public Health</em> 110 (S3): S312–18.
+</div>
+<div class="csl-entry">
+Brown, Rebecca C, Eileen Bendig, Tin Fischer, A David Goldwich, Harald Baumeister, and Paul L Plener. 2019. <span>“Can Acute Suicidality Be Predicted by Instagram Data? Results from Qualitative and Quantitative Language Analyses.”</span> <em>PLoS One</em> 14 (9): e0220623.
+</div>
+<div class="csl-entry">
+Bruns, Axel, Stephen Harrington, and Edward Hurcombe. 2020. <span>“<span>‘Corona? 5g? Or Both?’</span>: The Dynamics of <span>COVID-19/5g</span> Conspiracy Theories on Facebook.”</span> <em>Media International Australia</em> 177 (1): 12–29.
+</div>
+<div class="csl-entry">
+Dobbrick, Timo, Julia Jakob, Chung-Hong Chan, and Hartmut Wessler. 2021. <span>“Enhancing <span>Theory-Informed</span> Dictionary Approaches with <span>‘Glass-Box’</span> Machine Learning: The Case of Integrative Complexity in Social Media Comments.”</span> <em>Commun. Methods Meas.</em>, November, 1–18.
+</div>
+<div class="csl-entry">
+Edmondson, Mark. 2017. <span>“Google Cloud Speech <span>API</span>.”</span> <a href="https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html">https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html</a>.
+</div>
+<div class="csl-entry">
+Ferwerda, Bruce, Markus Schedl, and Marko Tkalcic. 2015. <span>“Predicting Personality Traits with Instagram Pictures.”</span> In <em>Proceedings of the 3rd Workshop on Emotions and Personality in Personalized Systems 2015</em>, 7–10. EMPIRE ’15. New York, NY, USA: Association for Computing Machinery.
+</div>
+<div class="csl-entry">
+Grimmer, Justin, and Brandon M Stewart. 2013. <span>“Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.”</span> <em>Polit. Anal.</em> 21 (3): 267–97.
+</div>
+<div class="csl-entry">
+Hosseinmardi, Homa, Sabrina Arredondo Mattson, Rahat Ibn Rafiq, Richard Han, Qin Lv, and Shivakant Mishr. 2015. <span>“Prediction of Cyberbullying Incidents on the Instagram Social Network,”</span> August. <a href="http://arxiv.org/abs/1508.06257">http://arxiv.org/abs/1508.06257</a>.
+</div>
+<div class="csl-entry">
+Konrad, Markus. 2020. <span>“Using Google Places Data to Analyze Changes in Mobility During the <span>COVID-19</span> Pandemic.”</span> <a href="https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/">https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/</a>.
+</div>
+<div class="csl-entry">
+Larsson, Anders Olof. 2020. <span>“Right-Wingers on the Rise Online: Insights from the 2018 Swedish Elections.”</span> <em>New Media &amp; Society</em> 22 (12): 2108–27.
+</div>
+<div class="csl-entry">
+Prates, Marcelo O R, Pedro H C Avelar, and Luis Lamb. 2018. <span>“Assessing Gender Bias in Machine Translation – a Case Study with Google Translate,”</span> September. <a href="http://arxiv.org/abs/1809.02208">http://arxiv.org/abs/1809.02208</a>.
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="instagram-graph-api.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

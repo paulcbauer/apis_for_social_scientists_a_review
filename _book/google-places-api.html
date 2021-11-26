@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Google Places API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Google Places API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Google Places API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="crowdtangle-api.html"/>
+<link rel="next" href="google-speech-to-text-api.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequesits-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequesits: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequesits-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequesits: Software &amp; packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>2</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>2.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="2.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequesites"><i class="fa fa-check"></i><b>2.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="2.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call"><i class="fa fa-check"></i><b>2.3</b> Simple API call</a></li>
+<li class="chapter" data-level="2.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access"><i class="fa fa-check"></i><b>2.4</b> API access</a></li>
+<li class="chapter" data-level="2.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples"><i class="fa fa-check"></i><b>2.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>3</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequesites-1"><i class="fa fa-check"></i><b>3.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="3.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-1"><i class="fa fa-check"></i><b>3.4</b> API access</a></li>
+<li class="chapter" data-level="3.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequesites-2"><i class="fa fa-check"></i><b>4.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-2"><i class="fa fa-check"></i><b>4.4</b> API access</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>5</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequesites-3"><i class="fa fa-check"></i><b>5.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="5.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-3"><i class="fa fa-check"></i><b>5.4</b> API access</a></li>
+<li class="chapter" data-level="5.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>6</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequesites-4"><i class="fa fa-check"></i><b>6.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="6.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-4"><i class="fa fa-check"></i><b>6.4</b> API access</a></li>
+<li class="chapter" data-level="6.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>7</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequesites-5"><i class="fa fa-check"></i><b>7.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="7.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-5"><i class="fa fa-check"></i><b>7.4</b> API access</a></li>
+<li class="chapter" data-level="7.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>8</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>8.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="8.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequesites-6"><i class="fa fa-check"></i><b>8.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="8.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>8.3</b> Simple API call</a></li>
+<li class="chapter" data-level="8.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-6"><i class="fa fa-check"></i><b>8.4</b> API access</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center>
+APIs for social scientists:<br>A collaborative review
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="google-places-api" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Google Places API</h1>
+<p><chauthors>Lukas Isermann and Clara Husson</chauthors>
+<br><br></p>
+<div id="provided-servicesdata-3" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Provided services/data</h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>The following five requests are available: Place Search, Place Details, Place Photos, Place Autocomplete and Query Autocomplete. Place Search returns a list of places along with summary information about each place based on a user’s location (by proximity) or search string. Once you find a place_id from a Place Search, you can request more details about a particular place by doing a Place Details request. A Place Details request returns more detailed information about the indicated place such as its complete address, phone number, user rating and reviews. Place Photos provides access to the millions of place-related photos stored in Google’s Place database. When you get place information using a Place Details request, photo references will be returned for relevant photographic content. Find Place, Nearby Search, and Text Search requests also return a single photo reference per place, when relevant. Place Autocomplete automatically fills in the name and/or address of a place as users type. Query Autocomplete service provides a query prediction for text-based geographic searches, by returning suggested queries as you type.</p>
+<p><strong>Note:</strong> You can display Places API results on a Google Map, or without a map but it is prohibited to use Places API data on a map that is not a Google map.</p>
+</div>
+<div id="prerequesites-3" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>The prerequisites to access Google Places API are a Google Cloud project (to create it you need a Google account to log into the Google Cloud Platform) and an API Key. Before creating your API Key, don’t forget to enable Places API! To create your API key, go the APIs &amp; Services &gt; Credentials &gt; API key page.</p>
+</div>
+<div id="simple-api-call-3" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>The API provides different searches and services that can be accessed via HTTP Urls. These Urls requests all take the same general form and pattern:</p>
+<p><a href="https://maps.googleapis.com/maps/api/place/service/output?parameters" class="uri">https://maps.googleapis.com/maps/api/place/service/output?parameters</a></p>
+<p>Here, service can take the inputs findplacefromtext for find place requests, nearbysearch to look for nearby places, details for a request of place details and more. output may take the value json or xml, dependent on the requested output format.</p>
+<p>Furthermore, certain parameters are required for all requests. Most importantly, every request must entail a key parameter, indicating the API key. Second, all search places requests take an input parameter that identifies the search target and an inputtype parameter that identifies the type of input given in the input parameter. For place requests, the inputtype parameter can take the values textquery and phonenumber.</p>
+<p>Nearby requests take a location parameter setting longitude and latitude of the requested place as well as a radius parameter. Detail request, however, take a mandatory parameter place_id, which indicates the place for which the details are requested.</p>
+<p>Additionally, different optional parameters can be used. These entail a language parameter, a fields parameter indicating the types of place data to return and more.</p>
+<p>An examples for an API request for pizza places in Mannheim can look like this:</p>
+<p><a href="https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&amp;location=49.487459,8.466039&amp;radius=5000&amp;key=YOUR_API_KEY" class="uri">https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&amp;location=49.487459,8.466039&amp;radius=5000&amp;key=YOUR_API_KEY</a></p>
+</div>
+<div id="api-access-3" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="google-places-api.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Accessing the API with base &quot;httr&quot; commands</span></span>
+<span id="cb23-2"><a href="google-places-api.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb23-3"><a href="google-places-api.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="google-places-api.html#cb23-4" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="st">&quot;YOURAPIKEY&quot;</span></span>
+<span id="cb23-5"><a href="google-places-api.html#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="google-places-api.html#cb23-6" aria-hidden="true" tabindex="-1"></a>res<span class="ot">&lt;-</span><span class="fu">GET</span>(<span class="st">&quot;https://maps.googleapis.com/maps/api/place/textsearch/json?&quot;</span>, <span class="at">query =</span> <span class="fu">list</span>(</span>
+<span id="cb23-7"><a href="google-places-api.html#cb23-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">query =</span> <span class="st">&quot;pizza&quot;</span>,</span>
+<span id="cb23-8"><a href="google-places-api.html#cb23-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">location =</span> <span class="st">&quot;49.487459,8.466039&quot;</span>,</span>
+<span id="cb23-9"><a href="google-places-api.html#cb23-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">radius =</span> <span class="dv">5000</span>,</span>
+<span id="cb23-10"><a href="google-places-api.html#cb23-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">key =</span> key</span>
+<span id="cb23-11"><a href="google-places-api.html#cb23-11" aria-hidden="true" tabindex="-1"></a>         ))</span></code></pre></div>
+<p>Alternatively, we can use a wrapper function for R provided by the R-Package googleway.</p>
+<p><em>Authentication</em></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="google-places-api.html#cb24-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="st">&quot;YOURAPIKEY&quot;</span></span>
+<span id="cb24-2"><a href="google-places-api.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set_key</span>(key)</span></code></pre></div>
+<p><em>API call</em></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="google-places-api.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Accessing the API with googleway</span></span>
+<span id="cb25-2"><a href="google-places-api.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="google-places-api.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-4"><a href="google-places-api.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-5"><a href="google-places-api.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleway)</span>
+<span id="cb25-6"><a href="google-places-api.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="google-places-api.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Request &#39;Mannheim&#39; to get latitude and longitude information</span></span>
+<span id="cb25-8"><a href="google-places-api.html#cb25-8" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> googleway<span class="sc">::</span><span class="fu">google_places</span>(<span class="st">&quot;Mannheim&quot;</span>)</span>
+<span id="cb25-9"><a href="google-places-api.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="google-places-api.html#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="google-places-api.html#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Save latitude and longitude information in vector</span></span>
+<span id="cb25-12"><a href="google-places-api.html#cb25-12" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> location<span class="sc">$</span>results<span class="sc">$</span>geometry</span>
+<span id="cb25-13"><a href="google-places-api.html#cb25-13" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> <span class="fu">c</span>(location<span class="sc">$</span>location<span class="sc">$</span>lat, location<span class="sc">$</span>location<span class="sc">$</span>lng)</span>
+<span id="cb25-14"><a href="google-places-api.html#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="google-places-api.html#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="google-places-api.html#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot places to google map</span></span>
+<span id="cb25-17"><a href="google-places-api.html#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsapi)</span>
+<span id="cb25-18"><a href="google-places-api.html#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># for this you will also need to activate the &quot;maps static API&quot;</span></span>
+<span id="cb25-19"><a href="google-places-api.html#cb25-19" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> mapsapi<span class="sc">::</span><span class="fu">mp_map</span>(<span class="at">center =</span> (<span class="st">&quot;49.48746,8.466039&quot;</span>), <span class="at">zoom =</span> <span class="dv">14</span>, <span class="at">key =</span> key, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-20"><a href="google-places-api.html#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stars)</span>
+<span id="cb25-21"><a href="google-places-api.html#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r)</span></code></pre></div>
+<p><img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="google-places-api.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Google places request with googleway</span></span>
+<span id="cb26-2"><a href="google-places-api.html#cb26-2" aria-hidden="true" tabindex="-1"></a>pizza <span class="ot">&lt;-</span> <span class="fu">google_places</span>(<span class="st">&quot;Pizza&quot;</span>, <span class="at">location =</span> location, <span class="at">radius =</span> <span class="dv">5000</span>, <span class="at">place_type =</span> <span class="st">&quot;food&quot;</span>)</span>
+<span id="cb26-3"><a href="google-places-api.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="google-places-api.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot rankings as barplot</span></span>
+<span id="cb26-5"><a href="google-places-api.html#cb26-5" aria-hidden="true" tabindex="-1"></a>pizza<span class="sc">$</span>results <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="google-places-api.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-7"><a href="google-places-api.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(name, rating), <span class="at">y =</span> rating)) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="google-places-api.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(name, rating), <span class="at">y =</span> rating),</span>
+<span id="cb26-9"><a href="google-places-api.html#cb26-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(pizza<span class="sc">$</span>results<span class="sc">$</span>user_ratings_total, <span class="st">&quot; </span><span class="sc">\n</span><span class="st"> ratings&quot;</span>), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="google-places-api.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Average Rating&quot;</span>)<span class="sc">+</span></span>
+<span id="cb26-11"><a href="google-places-api.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="google-places-api.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Pizza Places in Mannheim by Rating&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="google-places-api.html#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb26-14"><a href="google-places-api.html#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb26-15"><a href="google-places-api.html#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">hjust=</span><span class="fl">0.95</span>,<span class="at">vjust=</span><span class="fl">0.2</span>))</span></code></pre></div>
+<p><img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="google-places-api.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot pizza places to google map</span></span>
+<span id="cb27-2"><a href="google-places-api.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP</span></span>
+<span id="cb27-3"><a href="google-places-api.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file! </span></span>
+<span id="cb27-4"><a href="google-places-api.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="google-places-api.html#cb27-5" aria-hidden="true" tabindex="-1"></a>map<span class="ot">&lt;-</span>googleway<span class="sc">::</span><span class="fu">google_map</span>(<span class="at">location =</span> location)</span>
+<span id="cb27-6"><a href="google-places-api.html#cb27-6" aria-hidden="true" tabindex="-1"></a>googleway<span class="sc">::</span><span class="fu">add_markers</span>(map, <span class="at">data =</span> pizza<span class="sc">$</span>results<span class="sc">$</span>geometry<span class="sc">$</span>location)</span></code></pre></div>
+</div>
+<div id="social-science-examples-3" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Social science examples</h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>In his study “Using Google places data to analyze changes in mobility during the COVID-19 pandemic,” <span class="citation"><a href="#ref-Konrad2020-rl" role="doc-biblioref">Konrad</a> (<a href="#ref-Konrad2020-rl" role="doc-biblioref">2020</a>)</span> looked at the “popular times” data provided by Google Places to measure the effect of social distancing effort on mobility.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Konrad2020-rl" class="csl-entry">
+Konrad, Markus. 2020. <span>“Using Google Places Data to Analyze Changes in Mobility During the <span>COVID-19</span> Pandemic.”</span> <a href="https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/">https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="crowdtangle-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="google-speech-to-text-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
