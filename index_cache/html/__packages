@@ -14,3 +14,7 @@ tm
 quanteda.corpora
 ggwordcloud
 googleway
+mapsapi
+abind
+sf
+stars

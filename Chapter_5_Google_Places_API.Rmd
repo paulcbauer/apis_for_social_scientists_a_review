@@ -71,12 +71,12 @@ Alternatively, we can use a wrapper function for R provided by the R-Package goo
 
 *Authentication*
 
-```{r eval=F}
+```{r echo=TRUE, eval=F}
 key <- "YOURAPIKEY"
 set_key(key)
 ```
 
-```{r echo=F, eval=T}
+```{r echo=F, eval=T, warning=F, message=F}
 key<-readtext::readtext(paste0("./keys/google_places_key.txt"))
 library(googleway)
 set_key(key$text)
@@ -84,7 +84,7 @@ set_key(key$text)
 
 *API call*
 
-```{r }
+```{r echo=T, eval=T, warning=F, message=F}
 # Option 2: Accessing the API with googleway
 
 library(ggplot2)
@@ -92,12 +92,25 @@ library(tidyverse)
 library(googleway)
 
 # Request 'Mannheim' to get latitude and longitude information
-location <- google_places("Mannheim")
+location <- googleway::google_places("Mannheim")
+
 
 # Save latitude and longitude information in vector
 location <- location$results$geometry
 location <- c(location$location$lat, location$location$lng)
 
+
+# Plot places to google map
+library(mapsapi)
+# for this you will also need to activate the "maps static API"
+r = mapsapi::mp_map(center = ("49.48746,8.466039"), zoom = 14, key = key, quiet = TRUE)
+library(stars)
+plot(r)
+
+
+```
+
+```{r echo=T, eval=T, warning=F, message=F}
 # Google places request with googleway
 pizza <- google_places("Pizza", location = location, radius = 5000, place_type = "food")
 
@@ -117,12 +130,10 @@ pizza$results %>%
 
 ```
 
-```{r }
-# Plot places to google map
+```{r echo=T, eval=F, warning=F, message=F}
+# Plot pizza places to google map
 #important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
-
-# install.packages("webshot")
-# webshot::install_phantomjs()
+# unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file! 
 
 map<-googleway::google_map(location = location)
 googleway::add_markers(map, data = pizza$results$geometry$location)
