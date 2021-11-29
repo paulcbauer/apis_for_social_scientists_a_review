@@ -14,9 +14,9 @@ Paul C. Bauer (Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel
 ## Why to contribute
 * *First of all*: learn about a variety of different APIs and gain useful knowledge about what applications are out there :bulb:
 * *Second*, put your own work out there :eye_speech_bubble: 
-      * Generally, this review provides an easily accessible way to show others what you have been up to
-      * Your name will appear as one of the contributors and of course as the main author for the corresponding chapter
-      * Add references of your own or your colleagues' work to the "social science examples" section each chapter contains
+    * Generally, this review provides an easily accessible way to show others what you have been up to
+    * Your name will appear as one of the contributors and of course as the main author for the corresponding chapter
+    * Add references of your own or your colleagues' work to the "social science examples" section each chapter contains
 
 
 ## How to contribute
