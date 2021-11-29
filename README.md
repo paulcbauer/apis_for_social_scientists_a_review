@@ -7,7 +7,9 @@ A collaborative review](https://bookdown.org/paul/apis_for_social_scientists/)
 ## Authors & contributors
 Paul C. Bauer (Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Camille Landesvatter (Editor), Madleen Meier-Barthold, Pirmin Stöckle, Dean Lajic
 
-*Interested in contributing?* &#8594; [Let us know!](mailto:mail@paulcbauer.eu) :email:  
+## *Interested in contributing?* &#8594; 
+
+[Let us know!](mailto:mail@paulcbauer.eu) :email:  
 
 ## Why to contribute
 * First of all: learn about a variety of different APIs and gain useful knowledge about what applications are out there :bulb:
