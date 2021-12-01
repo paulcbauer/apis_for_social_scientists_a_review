@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 12 MediaWiki Action API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 12 MediaWiki Action API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 12 MediaWiki Action API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="google-natural-language-api.html"/>
+<link rel="prev" href="crowdtangle-api-2.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -283,49 +283,71 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>The project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
-<p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
+<div id="mediawiki-action-api" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> MediaWiki Action API</h1>
+<p><chauthors>Noam Himmelrath, Jacopo Gambato</chauthors>
+<br><br></p>
+<div id="provided-servicesdata-10" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Provided services/data</h2>
 <ul>
-<li>What data/service is provided by the API? (+ who provides it?)</li>
-<li>What are the prerequisites to access the API (e.g., authentication)?</li>
-<li>What does a simple API call look like?</li>
-<li>How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?</li>
+<li><em>What data/service is provided by the API?</em>
+To access <em>Wikipedia</em>, <em>MediaWiki</em> provides the MediaWiki Action API.</li>
 </ul>
-<div id="prerequesits-authentication" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Prerequesits: Authentication</h2>
-<p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
-<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
+<p>The API can be used for multiple things, such as accessing wiki features, interacting with a wiki and obtaining meta-information about wikis and public users. Additionally, the web service can provide access data and post changes of <em>Wikipedia</em>-webpages.</p>
 </div>
-<div id="prerequesits-software-packages" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Prerequesits: Software &amp; packages</h2>
-<p>The code examples rely R and different packages thereof. It’s probably easiest if you install all of them in one go. The <code>p_load()</code> function (<code>pacman</code> package) checks whether packages are installed. If not they are installed and loaded.</p>
-<!-- add all used packages -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-2"><a href="introduction.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb1-3"><a href="introduction.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  dplyr, <span class="co"># needed for almost any chapter in this review</span></span>
-<span id="cb1-4"><a href="introduction.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  ggplot2, <span class="co"># e.g. CH5</span></span>
-<span id="cb1-5"><a href="introduction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidytext, <span class="co"># comes in handy whenever text data is being pre-processed (CH2)</span></span>
-<span id="cb1-6"><a href="introduction.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  devtools, <span class="co"># to download any package from github (e.g., RCrowdTangle in CH4)</span></span>
-<span id="cb1-7"><a href="introduction.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  jsonlite, <span class="co"># import of JSON formats (e.g., CH4)</span></span>
-<span id="cb1-8"><a href="introduction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  httr, <span class="co"># Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)</span></span>
-<span id="cb1-9"><a href="introduction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  googleLanguageR, <span class="co"># allows different API calls for languga processing (CH2, CH3)</span></span>
-<span id="cb1-10"><a href="introduction.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  RCrowdTangle, <span class="co">#CH4</span></span>
-<span id="cb1-11"><a href="introduction.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  googleway, <span class="co">#CH5</span></span>
-<span id="cb1-12"><a href="introduction.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  mapsapi, <span class="co">#CH5</span></span>
-<span id="cb1-13"><a href="introduction.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  stars, <span class="co">#CH5</span></span>
-<span id="cb1-14"><a href="introduction.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  httr</span>
-<span id="cb1-15"><a href="introduction.html#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="introduction.html#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="introduction.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Move these installations before pacman?</span></span>
-<span id="cb1-18"><a href="introduction.html#cb1-18" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;quanteda/quanteda.corpora&quot;</span>)</span>
-<span id="cb1-19"><a href="introduction.html#cb1-19" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;cbpuschmann/RCrowdTangle&quot;</span>)</span></code></pre></div>
-<!--
-* Data vs. machine learning APIS
-* Problem of replicability for ML APIs
--->
+<div id="prerequesites-10" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header.</p>
+</div>
+<div id="simple-api-call-10" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need.</p>
+<p>We include a basic API call to obtain information about the Albert Einstein Wikipedia page</p>
+<p><code>https://en.wikipedia.org/w/api.php?action=query&amp;format=json&amp;prop=info&amp;titles=Albert%20Einstein</code></p>
+<p>to be plugged into the search bar of a browser to obtain the basic information on the page.</p>
+<p>Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.</p>
+</div>
+<div id="api-access-10" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>The most common tool is <code>WikipediR</code>, a wrapper around the Wikipedia API. It allows <code>R</code> to access information and “directions” for the relevant page or pages of Wikipedia and the content or metadata therein. Importantly, the wrapper only allows to gather information, which implies that the instrument needs to be accompanied by other packages such as <code>rvest</code> for scraping and <code>XML</code> or <code>jsonlite</code> for parsing.</p>
+<p>We report here the code to obtain the same information as in the previous example through <code>R</code>:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="mediawiki-action-api.html#cb57-1" aria-hidden="true" tabindex="-1"></a>WikipediR<span class="sc">::</span><span class="fu">page_info</span>(</span>
+<span id="cb57-2"><a href="mediawiki-action-api.html#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">language =</span> <span class="st">&quot;en&quot;</span>, </span>
+<span id="cb57-3"><a href="mediawiki-action-api.html#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">project =</span> <span class="st">&quot;wikipedia&quot;</span>, </span>
+<span id="cb57-4"><a href="mediawiki-action-api.html#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">page =</span> <span class="st">&quot;Albert Einstein&quot;</span>, </span>
+<span id="cb57-5"><a href="mediawiki-action-api.html#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">properties =</span> <span class="st">&quot;url&quot;</span>)</span></code></pre></div>
+</div>
+<div id="social-science-examples-9" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> Social science examples</h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>Some papers using Wikipedia-information rely on the API to access the data. These papers cover a wide range of social and economical sciences. Political science papers are, for example, concerned with political elections, more specifically election prediction <span class="citation">(<a href="#ref-margolin2016wiki" role="doc-biblioref">Margolin et al. 2016</a>; <a href="#ref-salem2021wikipedia" role="doc-biblioref">Salem and Stephany 2021</a>)</span>. Other papers use the data accessed through the API to analyze media coverage of the COVID-19 pandemic <span class="citation">(<a href="#ref-gozzi2020collective" role="doc-biblioref">Gozzi et al. 2020</a>)</span> or the interplay between online information and investment markets <span class="citation">(<a href="#ref-elbahrawy2019wikipedia" role="doc-biblioref">ElBahrawy, Alessandretti, and Baronchelli 2019</a>)</span>.</p>
 
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-elbahrawy2019wikipedia" class="csl-entry">
+ElBahrawy, Abeer, Laura Alessandretti, and Andrea Baronchelli. 2019. <span>“Wikipedia and Cryptocurrencies: Interplay Between Collective Attention and Market Performance.”</span> <em>Frontiers in Blockchain</em> 2: 12.
+</div>
+<div id="ref-gozzi2020collective" class="csl-entry">
+Gozzi, Nicolò, Michele Tizzani, Michele Starnini, Fabio Ciulla, Daniela Paolotti, André Panisson, and Nicola Perra. 2020. <span>“Collective Response to Media Coverage of the COVID-19 Pandemic on Reddit and Wikipedia: Mixed-Methods Analysis.”</span> <em>Journal of Medical Internet Research</em> 22 (10): e21597.
+</div>
+<div id="ref-margolin2016wiki" class="csl-entry">
+Margolin, Drew B, Sasha Goodman, Brian Keegan, Yu-Ru Lin, and David Lazer. 2016. <span>“Wiki-Worthy: Collective Judgment of Candidate Notability.”</span> <em>Information, Communication &amp; Society</em> 19 (8): 1029–45.
+</div>
+<div id="ref-salem2021wikipedia" class="csl-entry">
+Salem, Hamza, and Fabian Stephany. 2021. <span>“Wikipedia: A Challenger’s Best Friend? Utilizing Information-Seeking Behaviour Patterns to Predict US Congressional Elections.”</span> <em>Information, Communication &amp; Society</em>, 1–27.
 </div>
 </div>
             </section>
@@ -333,8 +355,8 @@ APIs for social scientists:<br>A collaborative review
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="google-natural-language-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="crowdtangle-api-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

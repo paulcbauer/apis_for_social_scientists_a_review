@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 13 References &amp; Appendix | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 13 References &amp; Appendix | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 13 References &amp; Appendix | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="google-natural-language-api.html"/>
+<link rel="prev" href="mediawiki-action-api.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -260,7 +260,7 @@ div.csl-indent {
 <li class="chapter" data-level="12.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-10"><i class="fa fa-check"></i><b>12.4</b> API access</a></li>
 <li class="chapter" data-level="12.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>13</b> References</a></li>
+<li class="chapter" data-level="13" data-path="references-appendix.html"><a href="references-appendix.html"><i class="fa fa-check"></i><b>13</b> References &amp; Appendix</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
 
@@ -283,49 +283,103 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>The project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
-<p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
-<ul>
-<li>What data/service is provided by the API? (+ who provides it?)</li>
-<li>What are the prerequisites to access the API (e.g., authentication)?</li>
-<li>What does a simple API call look like?</li>
-<li>How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?</li>
-</ul>
-<div id="prerequesits-authentication" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Prerequesits: Authentication</h2>
-<p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
-<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
-</div>
-<div id="prerequesits-software-packages" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Prerequesits: Software &amp; packages</h2>
-<p>The code examples rely R and different packages thereof. It’s probably easiest if you install all of them in one go. The <code>p_load()</code> function (<code>pacman</code> package) checks whether packages are installed. If not they are installed and loaded.</p>
-<!-- add all used packages -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-2"><a href="introduction.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb1-3"><a href="introduction.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  dplyr, <span class="co"># needed for almost any chapter in this review</span></span>
-<span id="cb1-4"><a href="introduction.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  ggplot2, <span class="co"># e.g. CH5</span></span>
-<span id="cb1-5"><a href="introduction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidytext, <span class="co"># comes in handy whenever text data is being pre-processed (CH2)</span></span>
-<span id="cb1-6"><a href="introduction.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  devtools, <span class="co"># to download any package from github (e.g., RCrowdTangle in CH4)</span></span>
-<span id="cb1-7"><a href="introduction.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  jsonlite, <span class="co"># import of JSON formats (e.g., CH4)</span></span>
-<span id="cb1-8"><a href="introduction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  httr, <span class="co"># Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)</span></span>
-<span id="cb1-9"><a href="introduction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  googleLanguageR, <span class="co"># allows different API calls for languga processing (CH2, CH3)</span></span>
-<span id="cb1-10"><a href="introduction.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  RCrowdTangle, <span class="co">#CH4</span></span>
-<span id="cb1-11"><a href="introduction.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  googleway, <span class="co">#CH5</span></span>
-<span id="cb1-12"><a href="introduction.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  mapsapi, <span class="co">#CH5</span></span>
-<span id="cb1-13"><a href="introduction.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  stars, <span class="co">#CH5</span></span>
-<span id="cb1-14"><a href="introduction.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  httr</span>
-<span id="cb1-15"><a href="introduction.html#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="introduction.html#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="introduction.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Move these installations before pacman?</span></span>
-<span id="cb1-18"><a href="introduction.html#cb1-18" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;quanteda/quanteda.corpora&quot;</span>)</span>
-<span id="cb1-19"><a href="introduction.html#cb1-19" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;cbpuschmann/RCrowdTangle&quot;</span>)</span></code></pre></div>
-<!--
-* Data vs. machine learning APIS
-* Problem of replicability for ML APIs
--->
+<div id="references-appendix" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> References &amp; Appendix</h1>
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Aslam, Salman. 2021. <span>“• Instagram by the Numbers (2021): Stats, Demographics &amp; Fun Facts.”</span> <a href="https://www.omnicoreagency.com/instagram-statistics/">https://www.omnicoreagency.com/instagram-statistics/</a>.
+</div>
+<div class="csl-entry">
+Baertl, M. 2018. <span>“YouTube Channels, Uploads and Views: A Statistical Analysis of the Past 10 Years.”</span> <em>Convergence</em>.
+</div>
+<div class="csl-entry">
+Bedini, Farazi, I. 2014. <span>“Open Government Data: Fostering Innovation. EJournal of EDemocracy and Open Government.”</span> <em>EJournal of EDemocracy and Open Government</em>.
+</div>
+<div class="csl-entry">
+Berriche, Manon, and Sacha Altay. 2020. <span>“Internet Users Engage More with Phatic Posts Than with Health Misinformation on Facebook.”</span> <em>Palgrave Communications</em> 6 (1): 1–9.
+</div>
+<div class="csl-entry">
+Brodeur, Clark, A. 2021. <span>“COVID-19, Lockdowns and Well-Being: Evidence from Google Trends.”</span> <em>Journal of Public Economics</em>.
+</div>
+<div class="csl-entry">
+Broniatowski, David A, Amelia M Jamison, Neil F Johnson, Nicolás Velasquez, Rhys Leahy, Nicholas Johnson Restrepo, Mark Dredze, and Sandra C Quinn. 2020. <span>“Facebook Pages, the <span>‘Disneyland’</span> Measles Outbreak, and Promotion of Vaccine Refusal as a Civil Right, 2009-2019.”</span> <em>Am. J. Public Health</em> 110 (S3): S312–18.
+</div>
+<div class="csl-entry">
+Brown, Rebecca C, Eileen Bendig, Tin Fischer, A David Goldwich, Harald Baumeister, and Paul L Plener. 2019. <span>“Can Acute Suicidality Be Predicted by Instagram Data? Results from Qualitative and Quantitative Language Analyses.”</span> <em>PLoS One</em> 14 (9): e0220623.
+</div>
+<div class="csl-entry">
+Bruns, Axel, Stephen Harrington, and Edward Hurcombe. 2020. <span>“<span>‘Corona? 5g? Or Both?’</span>: The Dynamics of <span>COVID-19/5g</span> Conspiracy Theories on Facebook.”</span> <em>Media International Australia</em> 177 (1): 12–29.
+</div>
+<div class="csl-entry">
+Corrêa, Corrêa, A. S. 2015. <span>“A Collaborative-Oriented Middleware for Structuring Information to Open Government Data.”</span> <em>Proceedings of the 16th Annual International Conference on Digital Government Research</em>.
+</div>
+<div class="csl-entry">
+Dobbrick, Timo, Julia Jakob, Chung-Hong Chan, and Hartmut Wessler. 2021. <span>“Enhancing <span>Theory-Informed</span> Dictionary Approaches with <span>‘Glass-Box’</span> Machine Learning: The Case of Integrative Complexity in Social Media Comments.”</span> <em>Commun. Methods Meas.</em>, November, 1–18.
+</div>
+<div class="csl-entry">
+Edmondson, Mark. 2017. <span>“Google Cloud Speech <span>API</span>.”</span> <a href="https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html">https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html</a>.
+</div>
+<div class="csl-entry">
+ElBahrawy, Abeer, Laura Alessandretti, and Andrea Baronchelli. 2019. <span>“Wikipedia and Cryptocurrencies: Interplay Between Collective Attention and Market Performance.”</span> <em>Frontiers in Blockchain</em> 2: 12.
+</div>
+<div class="csl-entry">
+Facebook for Developers. 2021. <span>“Instagram Basic Display <span>API</span>.”</span> <a href="https://developers.facebook.com/docs/instagram-basic-display-api/">https://developers.facebook.com/docs/instagram-basic-display-api/</a>.
+</div>
+<div class="csl-entry">
+Ferwerda, Bruce, Markus Schedl, and Marko Tkalcic. 2015. <span>“Predicting Personality Traits with Instagram Pictures.”</span> In <em>Proceedings of the 3rd Workshop on Emotions and Personality in Personalized Systems 2015</em>, 7–10. EMPIRE ’15. New York, NY, USA: Association for Computing Machinery.
+</div>
+<div class="csl-entry">
+Gozzi, Nicolò, Michele Tizzani, Michele Starnini, Fabio Ciulla, Daniela Paolotti, André Panisson, and Nicola Perra. 2020. <span>“Collective Response to Media Coverage of the COVID-19 Pandemic on Reddit and Wikipedia: Mixed-Methods Analysis.”</span> <em>Journal of Medical Internet Research</em> 22 (10): e21597.
+</div>
+<div class="csl-entry">
+Grimmer, Justin, and Brandon M Stewart. 2013. <span>“Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.”</span> <em>Polit. Anal.</em> 21 (3): 267–97.
+</div>
+<div class="csl-entry">
+Hosseinmardi, Homa, Sabrina Arredondo Mattson, Rahat Ibn Rafiq, Richard Han, Qin Lv, and Shivakant Mishr. 2015. <span>“Prediction of Cyberbullying Incidents on the Instagram Social Network,”</span> August. <a href="https://arxiv.org/abs/1508.06257">https://arxiv.org/abs/1508.06257</a>.
+</div>
+<div class="csl-entry">
+Hu, Yuheng, L Manikonda, and S Kambhampati. 2014. <span>“What We Instagram: A First Analysis of Instagram Photo Content and User Types.”</span> <em>ICWSM</em>.
+</div>
+<div class="csl-entry">
+Instagram. 2021. <span>“Instagram Developer Documentation.”</span> <a href="https://www.instagram.com/developer/">https://www.instagram.com/developer/</a>.
+</div>
+<div class="csl-entry">
+Konrad, Markus. 2020. <span>“Using Google Places Data to Analyze Changes in Mobility During the <span>COVID-19</span> Pandemic.”</span> <a href="https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/">https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/</a>.
+</div>
+<div class="csl-entry">
+Larsson, Anders Olof. 2020. <span>“Right-Wingers on the Rise Online: Insights from the 2018 Swedish Elections.”</span> <em>New Media &amp; Society</em> 22 (12): 2108–27.
+</div>
+<div class="csl-entry">
+Liu, Liu, C. 2018. <span>“Open Government Data: The German Government Is Moving.”</span> <em>Asia-Pacific Social Science and Modern Education Conference (SSME 2018)</em>.
+</div>
+<div class="csl-entry">
+Margolin, Drew B, Sasha Goodman, Brian Keegan, Yu-Ru Lin, and David Lazer. 2016. <span>“Wiki-Worthy: Collective Judgment of Candidate Notability.”</span> <em>Information, Communication &amp; Society</em> 19 (8): 1029–45.
+</div>
+<div class="csl-entry">
+Marienfeld, Schieferdecker, F. 2013. <span>“Metadata Aggregation at GovData.de: An Experience Report.”</span> <em>Proceedings of the 9th International Symposium on Open Collaboration</em>.
+</div>
+<div class="csl-entry">
+Mavragani, Tsagarakis, A. 2019. <span>“Predicting Referendum Results in the Big Data Era.”</span> <em>J Big Data</em>.
+</div>
+<div class="csl-entry">
+Obadimu, Mead, A. 2019. <span>“Identifying Toxicity Within Youtube Video Comment.”</span> <em>In International Conference on Social Computing, Behavioral-Cultural Modeling and Prediction and Behavior Representation in Modeling and Simulation</em>.
+</div>
+<div class="csl-entry">
+Prado-Román C, Orden-Cruz C., Gómez-Martínez R. 2021. <span>“Google Trends as a Predictor of Presidential Elections: The United States Versus Canada.”</span> <em>American Behavioral Scientist</em>.
+</div>
+<div class="csl-entry">
+Prates, Marcelo O R, Pedro H C Avelar, and Luis Lamb. 2018. <span>“Assessing Gender Bias in Machine Translation – a Case Study with Google Translate,”</span> September. <a href="https://arxiv.org/abs/1809.02208">https://arxiv.org/abs/1809.02208</a>.
+</div>
+<div class="csl-entry">
+Rieder, Matamoros-Fernández, B. 2018. <span>“From Ranking Algorithms to <span>‘Ranking Cultures’</span>: Investigating the Modulation of Visibility in YouTube Search Results.”</span> <em>Convergence</em>.
+</div>
+<div class="csl-entry">
+Salem, Hamza, and Fabian Stephany. 2021. <span>“Wikipedia: A Challenger’s Best Friend? Utilizing Information-Seeking Behaviour Patterns to Predict US Congressional Elections.”</span> <em>Information, Communication &amp; Society</em>, 1–27.
+</div>
+<div class="csl-entry">
+Tankovska, H. n.d. <span>“Topic: Instagram.”</span> <a href="https://www.statista.com/topics/1882/instagram/">https://www.statista.com/topics/1882/instagram/</a>.
+</div>
 </div>
 </div>
             </section>
@@ -333,8 +387,8 @@ APIs for social scientists:<br>A collaborative review
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="google-natural-language-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mediawiki-action-api.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

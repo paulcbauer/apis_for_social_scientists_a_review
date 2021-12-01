@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 9 CrowdTangle API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 9 CrowdTangle API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 9 CrowdTangle API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="google-natural-language-api.html"/>
+<link rel="prev" href="instagram-basic-display-api.html"/>
+<link rel="next" href="youtube-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -283,49 +283,127 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>The project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
-<p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
+<div id="crowdtangle-api-1" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> CrowdTangle API</h1>
+<p><chauthors>Jan Behnert, Dean Lajic</chauthors>
+<br><br></p>
+<div id="provided-servicesdata-7" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Provided services/data</h2>
 <ul>
-<li>What data/service is provided by the API? (+ who provides it?)</li>
-<li>What are the prerequisites to access the API (e.g., authentication)?</li>
-<li>What does a simple API call look like?</li>
-<li>How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?</li>
+<li><em>What data/service is provided by the API?</em></li>
 </ul>
-<div id="prerequesits-authentication" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Prerequesits: Authentication</h2>
-<p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
-<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
+<p>The API is provided by Google.</p>
+<p>With Google Trends, one gets access to a largely unfiltered sample of actual search topics (up to 36h before your search) and a filtered and representative sample for search topics older than 36 hours starting from the year 2004. The data is anonymized, can be obtained from different Google products like “Web search,” “News,” “Images,” “Shopping” and “Youtube,” can be filtered by different categories to get the data for the correct meaning of the word, and is aggregated, which means that the searches of all cities/regions are aggregated to the federal state level, country level or world level. The results you get are a standardized measure of search volume for single search terms, a combination of search terms using operators (see table below), or comparisons (one input in relation to the other inputs) over a selected time period. Google calculates how much search volume in each region a search term or query had, relative to all searches in that region. Using this information, Google assigns a measure of popularity to search terms (scale of 0 - 100), leaving out repeated searches from the same person over a short period of time and searches with apostrophes and other special characters.</p>
+<p><br /></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>No quotation marks (e.g. Corona symptoms)</td>
+<td>You get results for each word in your query</td>
+</tr>
+<tr class="even">
+<td>Quotation marks (e.g. “Corona symptoms”)</td>
+<td>You get results for the coherent search phrase</td>
+</tr>
+<tr class="odd">
+<td>Plus sign (e.g. corona +covid)</td>
+<td>Serves as function of an OR-operator</td>
+</tr>
+<tr class="even">
+<td>Minus sign (e.g. corona -symptoms)</td>
+<td>Excludes word after the operator</td>
+</tr>
+</tbody>
+</table>
+<p><br /></p>
 </div>
-<div id="prerequesits-software-packages" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Prerequesits: Software &amp; packages</h2>
-<p>The code examples rely R and different packages thereof. It’s probably easiest if you install all of them in one go. The <code>p_load()</code> function (<code>pacman</code> package) checks whether packages are installed. If not they are installed and loaded.</p>
-<!-- add all used packages -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-2"><a href="introduction.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb1-3"><a href="introduction.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  dplyr, <span class="co"># needed for almost any chapter in this review</span></span>
-<span id="cb1-4"><a href="introduction.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  ggplot2, <span class="co"># e.g. CH5</span></span>
-<span id="cb1-5"><a href="introduction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidytext, <span class="co"># comes in handy whenever text data is being pre-processed (CH2)</span></span>
-<span id="cb1-6"><a href="introduction.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  devtools, <span class="co"># to download any package from github (e.g., RCrowdTangle in CH4)</span></span>
-<span id="cb1-7"><a href="introduction.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  jsonlite, <span class="co"># import of JSON formats (e.g., CH4)</span></span>
-<span id="cb1-8"><a href="introduction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  httr, <span class="co"># Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)</span></span>
-<span id="cb1-9"><a href="introduction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  googleLanguageR, <span class="co"># allows different API calls for languga processing (CH2, CH3)</span></span>
-<span id="cb1-10"><a href="introduction.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  RCrowdTangle, <span class="co">#CH4</span></span>
-<span id="cb1-11"><a href="introduction.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  googleway, <span class="co">#CH5</span></span>
-<span id="cb1-12"><a href="introduction.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  mapsapi, <span class="co">#CH5</span></span>
-<span id="cb1-13"><a href="introduction.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  stars, <span class="co">#CH5</span></span>
-<span id="cb1-14"><a href="introduction.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  httr</span>
-<span id="cb1-15"><a href="introduction.html#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="introduction.html#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="introduction.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Move these installations before pacman?</span></span>
-<span id="cb1-18"><a href="introduction.html#cb1-18" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;quanteda/quanteda.corpora&quot;</span>)</span>
-<span id="cb1-19"><a href="introduction.html#cb1-19" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;cbpuschmann/RCrowdTangle&quot;</span>)</span></code></pre></div>
-<!--
-* Data vs. machine learning APIS
-* Problem of replicability for ML APIs
--->
+<div id="prerequesites-7" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>It can be used without an API key by anyone for free directly in the internet browser (no sign up needed).</p>
+</div>
+<div id="simple-api-call-7" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>Just click <a href="https://trends.google.com/trends">here</a>.</p>
+</div>
+<div id="api-access-7" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Example using <a href="https://cran.r-project.org/web/packages/httr/httr.pdf">“httr” package</a>:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="crowdtangle-api-1.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb48-2"><a href="crowdtangle-api-1.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">GET</span>(<span class="st">&quot;https://trends.google.com/trends/explore&quot;</span>,</span>
+<span id="cb48-3"><a href="crowdtangle-api-1.html#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">query=</span><span class="fu">list</span>(<span class="at">q =</span> <span class="st">&quot;Covid&quot;</span>,<span class="at">geo =</span> <span class="st">&quot;US&quot;</span>))</span></code></pre></div>
+<ul>
+<li>but just html-output, we recommend to use the gtrendsR package
+<br /></li>
+</ul>
+<p>Example using <a href="https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf">“gtrendsR” package</a>:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="crowdtangle-api-1.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizing google searches for the word &quot;corona symptoms&quot; in </span></span>
+<span id="cb49-2"><a href="crowdtangle-api-1.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Germany and Austria in the period 01/01/2020 - 27/04/2021</span></span>
+<span id="cb49-3"><a href="crowdtangle-api-1.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtrendsR)</span>
+<span id="cb49-4"><a href="crowdtangle-api-1.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb49-5"><a href="crowdtangle-api-1.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb49-6"><a href="crowdtangle-api-1.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="crowdtangle-api-1.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;countries&quot;</span>) <span class="co"># get abbreviations of all countries to filter data </span></span>
+<span id="cb49-8"><a href="crowdtangle-api-1.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;categories&quot;</span>) <span class="co"># get numbers of all categories to filter data </span></span>
+<span id="cb49-9"><a href="crowdtangle-api-1.html#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="crowdtangle-api-1.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple call</span></span>
+<span id="cb49-11"><a href="crowdtangle-api-1.html#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="crowdtangle-api-1.html#cb49-12" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">gtrends</span>(<span class="st">&quot;corona symptome&quot;</span>,<span class="at">geo=</span><span class="fu">c</span>(<span class="st">&quot;DE&quot;</span>, <span class="st">&quot;AT&quot;</span>))</span>
+<span id="cb49-13"><a href="crowdtangle-api-1.html#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
+<p><img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<ul>
+<li>Note (1): the use of c() in the keyword argument of the gtrends function allows comparisons of up to 5 searches (separator = comma).<br />
+</li>
+<li>Note (2): the use of the pattern ‘“xyz”’ in the keyword argument of the gtrends function corresponds to the inverted commas in the table above, all other punctuation methods in the table above can be used as indicated in the table.</li>
+</ul>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="crowdtangle-api-1.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Combination using dplyr and ggplot</span></span>
+<span id="cb50-2"><a href="crowdtangle-api-1.html#cb50-2" aria-hidden="true" tabindex="-1"></a>trend <span class="ot">=</span> <span class="fu">gtrends</span>(<span class="at">keyword=</span><span class="st">&quot;corona symptome&quot;</span>, <span class="at">geo=</span><span class="fu">c</span>(<span class="st">&quot;DE&quot;</span>, <span class="st">&quot;AT&quot;</span>), <span class="at">time =</span> <span class="st">&quot;2020-01-01 2021-04-27&quot;</span>, <span class="at">gprop=</span><span class="st">&quot;web&quot;</span>) </span>
+<span id="cb50-3"><a href="crowdtangle-api-1.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="crowdtangle-api-1.html#cb50-4" aria-hidden="true" tabindex="-1"></a>trend_df <span class="ot">&lt;-</span> trend<span class="sc">$</span>interest_over_time</span>
+<span id="cb50-5"><a href="crowdtangle-api-1.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="crowdtangle-api-1.html#cb50-6" aria-hidden="true" tabindex="-1"></a>trend_df <span class="ot">&lt;-</span> trend_df <span class="sc">%&gt;%</span></span>
+<span id="cb50-7"><a href="crowdtangle-api-1.html#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">hits =</span> <span class="fu">as.numeric</span>(hits), <span class="at">date =</span> <span class="fu">as.Date</span>(date)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-8"><a href="crowdtangle-api-1.html#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>)</span>
+<span id="cb50-9"><a href="crowdtangle-api-1.html#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="crowdtangle-api-1.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trend_df, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>hits, <span class="at">group=</span>geo, <span class="at">col=</span>geo)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb50-11"><a href="crowdtangle-api-1.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;2 months&quot;</span> , <span class="at">date_labels =</span> <span class="st">&quot;%b-%y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-12"><a href="crowdtangle-api-1.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">color=</span> <span class="st">&quot;Countries&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-13"><a href="crowdtangle-api-1.html#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtitle</span>(<span class="st">&quot;Frequencies for the query -corona symptoms- in the period: 01/01/2020 - 27/04/2021&quot;</span>)</span></code></pre></div>
+<p><img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+<div id="social-science-examples-6" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Social science examples</h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>Google Trends can be used to predict the outcomes of elections. For example a study by (<span class="citation"><a href="#ref-Prado-Roman2021" role="doc-biblioref">Prado-Román C</a> (<a href="#ref-Prado-Roman2021" role="doc-biblioref">2021</a>)</span>) uses Google Trends data to predict the past four elections in the United States and the past five in Canada, since Google first published its search statistics in 2004. They analysed which candidate had the most Google searches in the months leading up to election day and show, that with the help of this data, all actual winners in all the elections held since 2004 could be predicted.<br />
+Another example is a study by <span class="citation"><a href="#ref-Mavragani2019" role="doc-biblioref">Mavragani</a> (<a href="#ref-Mavragani2019" role="doc-biblioref">2019</a>)</span> which uses Google Trends data to predict the results of referendums (Scottish referendum 2014, Greek referendum 2015, British referendum 2016, Hungarian referendum 2016, Italian referendum 2016 and the Turkish referendum 2017). It can be shown that the results from Google Trends data are quite similar to the actual referendum results and in some cases are even more accurate than official polls. It is argued that with the help of Google Trends data revealed preferences instead of users’ stated preferences can be analyzed and this data source could be a helpful source to analyze and predict human behavior (given areas where the Internet is widely accessible and not restricted).<br />
+Furthermore, Google Trends data can also be utilized in other fields, for example to examine whether COVID-19 and the associated lockdowns initiated in Europe and America led to changes in well-being related topic search-terms. The study by <span class="citation"><a href="#ref-Brodeur2021" role="doc-biblioref">Brodeur</a> (<a href="#ref-Brodeur2021" role="doc-biblioref">2021</a>)</span> finds an increase in queries addressing boredom, loneliness, worry and sadness, and a decrease for search terms like stress, suicide and divorce. Indicating that the people’s mental health could have been strongly affected by the pandemic and the lockdowns.</p>
 
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Brodeur2021" class="csl-entry">
+Brodeur, Clark, A. 2021. <span>“COVID-19, Lockdowns and Well-Being: Evidence from Google Trends.”</span> <em>Journal of Public Economics</em>.
+</div>
+<div id="ref-Mavragani2019" class="csl-entry">
+Mavragani, Tsagarakis, A. 2019. <span>“Predicting Referendum Results in the Big Data Era.”</span> <em>J Big Data</em>.
+</div>
+<div id="ref-Prado-Roman2021" class="csl-entry">
+Prado-Román C, Orden-Cruz C., Gómez-Martínez R. 2021. <span>“Google Trends as a Predictor of Presidential Elections: The United States Versus Canada.”</span> <em>American Behavioral Scientist</em>.
 </div>
 </div>
             </section>
@@ -333,8 +411,8 @@ APIs for social scientists:<br>A collaborative review
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="google-natural-language-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="instagram-basic-display-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="youtube-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
