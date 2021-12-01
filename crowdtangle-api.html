@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 CrowdTangle API | 09_GoogleTrends_API.knit</title>
+  <title>Chapter 1 CrowdTangle API | 11_CKAN_API.knit</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.24.4 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 CrowdTangle API | 09_GoogleTrends_API.knit" />
+  <meta property="og:title" content="Chapter 1 CrowdTangle API | 11_CKAN_API.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 CrowdTangle API | 09_GoogleTrends_API.knit" />
+  <meta name="twitter:title" content="Chapter 1 CrowdTangle API | 11_CKAN_API.knit" />
   
   
   
@@ -177,112 +177,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--bookdown:title:start-->
 <div id="crowdtangle-api" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> CrowdTangle API</h1>
-<p><chauthors>Jan Behnert, Dean Lajic</chauthors>
+<p><chauthors>Barbara K. Kreis</chauthors>
 <br><br></p>
+<p>The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation, n.d.-d). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.<br />
+This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Swiss and many more.</p>
 <div id="provided-servicesdata" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Provided services/data</h2>
 <ul>
 <li><em>What data/service is provided by the API?</em></li>
 </ul>
-<p>The API is provided by Google.</p>
-<p>With Google Trends, one gets access to a largely unfiltered sample of actual search topics (up to 36h before your search) and a filtered and representative sample for search topics older than 36 hours starting from the year 2004. The data is anonymized, can be obtained from different Google products like “Web search”, “News”, “Images”, “Shopping” and “Youtube,” can be filtered by different categories to get the data for the correct meaning of the word, and is aggregated, which means that the searches of all cities/regions are aggregated to the federal state level, country level or world level. The results you get are a standardized measure of search volume for single search terms, a combination of search terms using operators (see table below), or comparisons (one input in relation to the other inputs) over a selected time period. Google calculates how much search volume in each region a search term or query had, relative to all searches in that region. Using this information, Google assigns a measure of popularity to search terms (scale of 0 - 100), leaving out repeated searches from the same person over a short period of time and searches with apostrophes and other special characters.</p>
-<p><br /></p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>No quotation marks (e.g. Corona symptoms)</td>
-<td>You get results for each word in your query</td>
-</tr>
-<tr class="even">
-<td>Quotation marks (e.g. “Corona symptoms”)</td>
-<td>You get results for the coherent search phrase</td>
-</tr>
-<tr class="odd">
-<td>Plus sign (e.g. corona +covid)</td>
-<td>Serves as function of an OR-operator</td>
-</tr>
-<tr class="even">
-<td>Minus sign (e.g. corona -symptoms)</td>
-<td>Excludes word after the operator</td>
-</tr>
-</tbody>
-</table>
-<p><br /></p>
+<p>All of CKAN’s core features can be accessed via the CKAN API (Open Knowledge Foundation, n.d.-b)<br />
+With the CKAN API, you can</p>
+<ul>
+<li>Get a JSON-formatted list of a site’s objects, datasets or groups.</li>
+<li>Get a full JSON representation of an object, e.g. a dataset.</li>
+<li>Search for any packages (datasets) or resources that match a query.</li>
+<li>Get an activity stream of recently changed datasets on a site.</li>
+</ul>
+<p>Please see the following <a href="https://docs.ckan.org/en/2.8/api/index.html">link</a> for more information on the services provided by the CKAN API and some specific examples.<br />
+When it comes to the specific datasets on the government sites, there are two types that can be accessed: specific datasets and meta data sets.<br />
+For example, the German and the US Government have a website each, where you can get access to metadata that include descriptions and URLs about the specific open datasets that can be accessed (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-b; U.S. General Services Administration, Technology Transformation Service, 2020). These meta datasets can be a starting point for research on a specific topic.<br />
+The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal govdata.de for example serves as a collection point for all those data from various institutions (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-a). Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.</p>
 </div>
 <div id="prerequesites" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Prerequesites</h2>
 <ul>
 <li><em>What are the prerequisites to access the API (authentication)? </em></li>
 </ul>
-<p>It can be used without an API key by anyone for free directly in the internet browser (no sign up needed).</p>
+<p>There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN (Open Knowledge Foundation, n.d.-a; U.S. General Services Administration, Technology Transformation Service, n.d.).</p>
 </div>
 <div id="simple-api-call" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Simple API call</h2>
 <ul>
 <li><em>What does a simple API call look like?</em></li>
 </ul>
-<p>Just click <a href="https://trends.google.com/trends">here</a>.</p>
+<p>When a user wants to make an API call, two use cases have to be distinguished: Calling meta-data and calling specific datasets.</p>
+<p><em>Meta-datasets (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-b)</em></p>
+<p>When calling the meta data, the DCAT catalog has to be queried. DCAT-AP.de is a German metadata model to exchange open government data (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-c). For more information and information on the meta data structure, see this <a href="https://www.dcat-ap.de/">website</a><br />
+The API call for the DCAT catalog can deliver three formats: RDF, Turtle and JSON-LD. The type of format can be specified at the end of the request (e.g. “format=jsonld”).<br />
+The following API call is an example for the search term “Kinder”.
+<a href="https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&amp;format=jsonld" class="uri">https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&amp;format=jsonld</a></p>
+<p><em>Specific datasets from GovData (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-a)</em></p>
+<p>To look for specific datasets, not the meta data, only little has to be changed in the URL. In the case of querying specific datasets, the response format is JSON.
+The following API call is an example when looking for the first 5 packages (datasets) that contain the search term “Kinder” (=children).<br />
+<a href="https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder" class="uri">https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder</a></p>
 </div>
 <div id="api-access" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> API access</h2>
 <ul>
 <li><em>How can we access the API from R (httr + other packages)?</em></li>
 </ul>
-<p>Example using <a href="https://cran.r-project.org/web/packages/httr/httr.pdf">“httr” package</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">GET</span>(<span class="st">&quot;https://trends.google.com/trends/explore&quot;</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">query=</span><span class="fu">list</span>(<span class="at">q =</span> <span class="st">&quot;Covid&quot;</span>,<span class="at">geo =</span> <span class="st">&quot;US&quot;</span>))</span></code></pre></div>
-<ul>
-<li>but just html-output, we recommend to use the gtrendsR package
-<br /></li>
-</ul>
-<p>Example using <a href="https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf">“gtrendsR” package</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizing google searches for the word &quot;corona symptoms&quot; in </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Germany and Austria in the period 01/01/2020 - 27/04/2021</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtrendsR)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;countries&quot;</span>) <span class="co"># get abbreviations of all countries to filter data </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;categories&quot;</span>) <span class="co"># get numbers of all categories to filter data </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple call</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">gtrends</span>(<span class="st">&quot;corona symptome&quot;</span>,<span class="at">geo=</span><span class="fu">c</span>(<span class="st">&quot;DE&quot;</span>, <span class="st">&quot;AT&quot;</span>))</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
-<p><img src="09_GoogleTrends_API_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<ul>
-<li>Note (1): the use of c() in the keyword argument of the gtrends function allows comparisons of up to 5 searches (separator = comma).<br />
-</li>
-<li>Note (2): the use of the pattern ‘“xyz”’ in the keyword argument of the gtrends function corresponds to the inverted commas in the table above, all other punctuation methods in the table above can be used as indicated in the table.</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Combination using dplyr and ggplot</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>trend <span class="ot">=</span> <span class="fu">gtrends</span>(<span class="at">keyword=</span><span class="st">&quot;corona symptome&quot;</span>, <span class="at">geo=</span><span class="fu">c</span>(<span class="st">&quot;DE&quot;</span>, <span class="st">&quot;AT&quot;</span>), <span class="at">time =</span> <span class="st">&quot;2020-01-01 2021-04-27&quot;</span>, <span class="at">gprop=</span><span class="st">&quot;web&quot;</span>) </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>trend_df <span class="ot">&lt;-</span> trend<span class="sc">$</span>interest_over_time</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>trend_df <span class="ot">&lt;-</span> trend_df <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">hits =</span> <span class="fu">as.numeric</span>(hits), <span class="at">date =</span> <span class="fu">as.Date</span>(date)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trend_df, <span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y=</span>hits, <span class="at">group=</span>geo, <span class="at">col=</span>geo)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;2 months&quot;</span> , <span class="at">date_labels =</span> <span class="st">&quot;%b-%y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">color=</span> <span class="st">&quot;Countries&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtitle</span>(<span class="st">&quot;Frequencies for the query -corona symptoms- in the period: 01/01/2020 - 27/04/2021&quot;</span>)</span></code></pre></div>
-<p><img src="09_GoogleTrends_API_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The CKAN API can be accessed from R with the <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html">httr package</a> or the <a href="https://cran.r-project.org/web/packages/ckanr/ckanr.pdf">ckanr package</a>.<br />
+Please note that as a scientist you can only use GET requests. All kinds of POST requests are restricted to government employees that work at the institutions which provide the data sets.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CKAN API #</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Use the httr package to access the API</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr) <span class="co"># required to work with the API</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># With the following query we get the same information as described in the paragraph above</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.govdata.de/ckan/api/3/action/resource_show&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>berlin <span class="ot">&lt;-</span> <span class="fu">GET</span>(base_url, <span class="at">query=</span><span class="fu">list</span>(<span class="at">q=</span><span class="st">&quot;kinder&quot;</span>,<span class="at">rows=</span><span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Use the ckanr package to access the API</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load relevant packages</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ckanr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#connect to the website</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>url_site <span class="ot">&lt;-</span> <span class="st">&quot;https://www.govdata.de/ckan&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ckanr_setup</span>(<span class="at">url =</span> url_site)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># first, let&#39;s see which groups are on this site</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">group_list</span>(<span class="at">as =</span> <span class="st">&quot;table&quot;</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#you can see there are different groups</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#now we want to look at them in more detail</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">group_list</span>(<span class="at">limit =</span> <span class="dv">2</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># now you can look for the specific packages</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">package_list</span>(<span class="at">as =</span> <span class="st">&quot;table&quot;</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># now, let&#39;s look at a specific package more closely, to get some more information</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">package_show</span>(<span class="st">&quot;100-jahre-stadtgrun-stadtpark-und-volkspark&quot;</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># now, let&#39;s do a more specific search for specific resources (we look at Kinder = kids/ children)</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">resource_search</span>(<span class="at">q =</span> <span class="st">&quot;name:Kinder&quot;</span>, <span class="at">limit =</span> <span class="dv">3</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>results</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># here you get the name, the Description (not always filled out) and the data format</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># now we want to have a closer look at the second resource (day care for children)</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to get the url, by using the resource number</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>url<span class="ot">&lt;-</span><span class="fu">resource_show</span>(<span class="at">id =</span><span class="st">&quot;a8413550-bf4d-40f3-921a-941da3fce132&quot;</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>url<span class="sc">$</span>url</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># with the url, we can now import the data</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> (<span class="st">&quot;https://geo.sv.rostock.de/download/opendata/kindertagespflegeeinrichtungen/kindertagespflegeeinrichtungen.csv&quot;</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> (<span class="st">&quot;kindertagespflegeeinrichtungen.csv&quot;</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>curl<span class="sc">::</span><span class="fu">curl_download</span>(url, destfile)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>kindertagespflegeeinrichtungen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(destfile)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(kindertagespflegeeinrichtungen)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># in this file, you can now for example look at the opening hours of the day cares in Rostock (a German city)</span></span></code></pre></div>
 </div>
 <div id="social-science-examples" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Social science examples</h2>
 <ul>
 <li><em>Are there social science research examples using the API?</em></li>
 </ul>
-<p>Google Trends can be used to predict the outcomes of elections. For example a study by (<span class="citation">@Prado-Roman2021</span>) uses Google Trends data to predict the past four elections in the United States and the past five in Canada, since Google first published its search statistics in 2004. They analysed which candidate had the most Google searches in the months leading up to election day and show, that with the help of this data, all actual winners in all the elections held since 2004 could be predicted.<br />
-Another example is a study by (<span class="citation">@Mavragani2019</span>) which uses Google Trends data to predict the results of referendums (Scottish referendum 2014, Greek referendum 2015, British referendum 2016, Hungarian referendum 2016, Italian referendum 2016 and the Turkish referendum 2017). It can be shown that the results from Google Trends data are quite similar to the actual referendum results and in some cases are even more accurate than official polls. It is argued that with the help of Google Trends data revealed preferences instead of users’ stated preferences can be analyzed and this data source could be a helpful source to analyze and predict human behavior (given areas where the Internet is widely accessible and not restricted).<br />
-Furthermore, Google Trends data can also be utilized in other fields, for example to examine whether COVID-19 and the associated lockdowns initiated in Europe and America led to changes in well-being related topic search-terms. They study by (<span class="citation">@Brodeur2021</span>) finds an increase in queries addressing boredom, loneliness, worry and sadness, and a decrease for search terms like stress, suicide and divorce. Indicating that the people’s mental health could have been strongly affected by the pandemic and the lockdowns.</p>
+<p>When looking for social science research that used the CKAN API and Open Government data (OGD), it seems that there is more papers and research on the usage of those data, than on the data themselves (<span class="citation">@Bedini2014</span>, <span class="citation">@Correa2015</span>).
+In a recent paper that examines the use of OGD (<span class="citation">@Quarati2019</span>), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.<br />
+For example, regarding the German OGD portal “GovData.de”, I did not find any social science papers that specifically used data from GovData.de. However, there are a few papers available that describe the German open data initiative (<span class="citation">@Liu2018</span>) and the metadata (<span class="citation">@Marienfeld2013</span>) that can be found on GovData.de.</p>
+<p>Bedini, I., Farazi, M. F., Leoni, D., Pane, J., Tankoyeu, I., &amp; Leucci, S. (2014). Open Government Data: Fostering Innovation. EJournal of EDemocracy and Open Government, 6(1), 69–79.</p>
+<p>Corrêa, A. S., Corrêa, P. L. P., &amp; da Silva, F. S. C. (2015). A collaborative-oriented middleware for structuring information to open government data. Proceedings of the 16th Annual International Conference on Digital Government Research, 43–50. <a href="https://doi.org/10.1145/2757401.2757409" class="uri">https://doi.org/10.1145/2757401.2757409</a></p>
+<p>Quarati, A., &amp; De Martino, M. (2019). Open government data usage: A brief overview. Proceedings of the 23rd International Database Applications &amp; Engineering Symposium, 1–8. <a href="https://doi.org/10.1145/3331076.3331115" class="uri">https://doi.org/10.1145/3331076.3331115</a></p>
+<p>Liu, C., Liu, X., Li, X., Liu, W., Yan, C., &amp; Li, Q. (2018). Open Government Data: The German Government is Moving. 115–119. <a href="https://doi.org/10.2991/ssme-18.2018.22" class="uri">https://doi.org/10.2991/ssme-18.2018.22</a></p>
+<p>Marienfeld, F., Schieferdecker, I., Lapi, E., &amp; Tcholtchev, N. (2013). Metadata aggregation at GovData.de: An experience report. Proceedings of the 9th International Symposium on Open Collaboration, 1–5. <a href="https://doi.org/10.1145/2491055.2491077" class="uri">https://doi.org/10.1145/2491055.2491077</a></p>
 </div>
 </div>
             </section>

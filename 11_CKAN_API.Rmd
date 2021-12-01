@@ -8,14 +8,14 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
-The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation, n.d.-d). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.  
+The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.  
 This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Swiss and many more.
 
 ## Provided services/data
 
 * *What data/service is provided by the API?*
 
-All of CKAN’s core features can be accessed via the CKAN API (Open Knowledge Foundation, n.d.-b)  
+All of CKAN’s core features can be accessed via the CKAN API (Open Knowledge Foundation)  
 With the CKAN API, you can  
 
 * Get a JSON-formatted list of a site’s objects, datasets or groups.
@@ -25,28 +25,28 @@ With the CKAN API, you can
 
 Please see the following [link](https://docs.ckan.org/en/2.8/api/index.html) for more information on the services provided by the CKAN API and some specific examples.  
 When it comes to the specific datasets on the government sites, there are two types that can be accessed: specific datasets and meta data sets.  
-For example, the German and the US Government have a website each, where you can get access to metadata that include descriptions and URLs about the specific open datasets that can be accessed (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-b; U.S. General Services Administration, Technology Transformation Service, 2020). These meta datasets can be a starting point for research on a specific topic.  
-The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal govdata.de for example serves as a collection point for all those data from various institutions (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-a). Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.
+For example, the [German]("https://www.govdata.de/impressum") and the [US Government]("https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services") have a website each, where you can get access to metadata that include descriptions and URLs about the specific open datasets that can be accessed. These meta datasets can be a starting point for research on a specific topic.  
+The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal [govdata.de]("https://www.govdata.de/impressum") for example serves as a collection point for all those data from various institutions. Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.
 
 
 ## Prerequesites
 * *What are the prerequisites to access the API (authentication)? *
 
-There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN (Open Knowledge Foundation, n.d.-a; U.S. General Services Administration, Technology Transformation Service, n.d.).
+There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN.
 
 ## Simple API call
 * *What does a simple API call look like?*
 
 When a user wants to make an API call, two use cases have to be distinguished: Calling meta-data and calling specific datasets. 
 
-*Meta-datasets (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-b)* 
+*Meta-datasets* 
 
-When calling the meta data, the DCAT catalog has to be queried. DCAT-AP.de is a German metadata model to exchange open government data (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-c). For more information and information on the meta data structure, see this [website](https://www.dcat-ap.de/)  
+When calling the meta data, the DCAT catalog has to be queried. DCAT-AP.de is a German metadata model to exchange open government data. For more information and information on the meta data structure, see this [website](https://www.dcat-ap.de/).  
 The API call for the DCAT catalog can deliver three formats: RDF, Turtle and JSON-LD. The type of format can be specified at the end of the request (e.g. “format=jsonld”).  
 The following API call is an example for the search term “Kinder”.
 https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&format=jsonld  
 
-*Specific datasets from GovData (Senatskanzlei, Geschäfts- und Koordinierungsstelle GovData, n.d.-a)*  
+*Specific datasets from GovData*  
 
 To look for specific datasets, not the meta data, only little has to be changed in the URL. In the case of querying specific datasets, the response format is JSON.
 The following API call is an example when looking for the first 5 packages (datasets) that contain the search term “Kinder” (=children).  
@@ -131,13 +131,3 @@ View(kindertagespflegeeinrichtungen)
 When looking for social science research that used the CKAN API and Open Government data (OGD), it seems that there is more papers and research on the usage of those data, than on the data themselves (@Bedini2014, @Correa2015).
 In a recent paper that examines the use of OGD (@Quarati2019), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.  
 For example, regarding the German OGD portal “GovData.de”, I did not find any social science papers that specifically used data from GovData.de. However, there are a few papers available that describe the German open data initiative (@Liu2018) and the metadata (@Marienfeld2013) that can be found on GovData.de.
-
-Bedini, I., Farazi, M. F., Leoni, D., Pane, J., Tankoyeu, I., & Leucci, S. (2014). Open Government Data: Fostering Innovation. EJournal of EDemocracy and Open Government, 6(1), 69–79.
-
-Corrêa, A. S., Corrêa, P. L. P., & da Silva, F. S. C. (2015). A collaborative-oriented middleware for structuring information to open government data. Proceedings of the 16th Annual International Conference on Digital Government Research, 43–50. https://doi.org/10.1145/2757401.2757409
-
-Quarati, A., & De Martino, M. (2019). Open government data usage: A brief overview. Proceedings of the 23rd International Database Applications & Engineering Symposium, 1–8. https://doi.org/10.1145/3331076.3331115
-
-Liu, C., Liu, X., Li, X., Liu, W., Yan, C., & Li, Q. (2018). Open Government Data: The German Government is Moving. 115–119. https://doi.org/10.2991/ssme-18.2018.22
-
-Marienfeld, F., Schieferdecker, I., Lapi, E., & Tcholtchev, N. (2013). Metadata aggregation at GovData.de: An experience report. Proceedings of the 9th International Symposium on Open Collaboration, 1–5. https://doi.org/10.1145/2491055.2491077
