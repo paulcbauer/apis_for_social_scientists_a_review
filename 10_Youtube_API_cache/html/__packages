@@ -1,0 +1,15 @@
+base
+httr
+jsonlite
+here
+dplyr
+ggplot2
+tuber
+magrittr
+tidyverse
+tibble
+tidyr
+readr
+purrr
+stringr
+forcats

@@ -15,8 +15,8 @@ The API is provided by Google, Youtube’s parent company.
 
 There are different types of Youtube APIs that serve different purposes:
 
-1. **YouTube Analytics API:** Retrieves your YouTube Analytics data.
-2. **YouTube Data API v3:** The YouTube Data API v3 is an API that provides access to YouTube data, such as videos, playlists, and channels.
+1. **YouTube Analytics API:** retrieves your YouTube Analytics data.
+2. **YouTube Data API v3:** provides access to YouTube data, such as videos, playlists, and channels.
 3. **YouTube oEmbed API:** [oEmbed](https://oembed.com/) is an elegant way to embed multimedia for a link.
 4. **YouTube Reporting API:** Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
 
@@ -41,14 +41,10 @@ Your key is created! It is important to restrict the key!
 ## Simple API call
 * *What does a simple API call look like?*
 
-LEAVE OUT ?!
-
 The base URL is https://www.googleapis.com/youtube/v3/.
 With the following API call we tried to get the channel statistics from the SWR youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.
 https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCy4_zQ59zmS7zO4Dc6vbT_w&key=[Your_API_Key]
 However, this call did not work for us, we got an error code 400 that said that our API key is not valid.
-
-LEAVE OUT ?!
 
 
 ## API access
@@ -73,7 +69,7 @@ key<-"Your_API_Key"
 ZDF_Magazin_Royle<-"UCNNEMxGKV1LsKZRt4vaIbvw" #channel id
 Boilerroom <- "brtvofficial" #user id
 
-##save the base URL in the object base
+#save the base URL in the object base
 base<- "https://www.googleapis.com/youtube/v3/"
 
 #get channel info with channel id
