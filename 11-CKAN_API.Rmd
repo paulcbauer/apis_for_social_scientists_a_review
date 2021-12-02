@@ -129,5 +129,5 @@ View(kindertagespflegeeinrichtungen)
 * *Are there social science research examples using the API?*
 
 When looking for social science research that used the CKAN API and Open Government data (OGD), it seems that there is more papers and research on the usage of those data, than on the data themselves (@Bedini2014, @Correa2015).
-In a recent paper that examines the use of OGD (@Quarati2019), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.  
+In a recent paper that examines the use of OGD (@Quarati2019-jf), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.  
 For example, regarding the German OGD portal “GovData.de”, I did not find any social science papers that specifically used data from GovData.de. However, there are a few papers available that describe the German open data initiative (@Liu2018) and the metadata (@Marienfeld2013) that can be found on GovData.de.
