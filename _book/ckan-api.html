@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 11 CKAN API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 11 CKAN API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 11 CKAN API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="google-natural-language-api.html"/>
+<link rel="prev" href="youtube-api.html"/>
+<link rel="next" href="mediawiki-action-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -283,50 +283,143 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>The project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
-<p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
+<div id="ckan-api" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> CKAN API</h1>
+<p><chauthors>Barbara K. Kreis</chauthors>
+<br><br></p>
+<p>The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.<br />
+This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Swiss and many more.</p>
+<div id="provided-servicesdata-9" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Provided services/data</h2>
 <ul>
-<li>What data/service is provided by the API? (+ who provides it?)</li>
-<li>What are the prerequisites to access the API (e.g., authentication)?</li>
-<li>What does a simple API call look like?</li>
-<li>How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?</li>
+<li><em>What data/service is provided by the API?</em></li>
 </ul>
-<div id="prerequesits-authentication" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Prerequesits: Authentication</h2>
-<p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
-<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
+<p>All of CKAN’s core features can be accessed via the CKAN API (Open Knowledge Foundation)<br />
+With the CKAN API, you can</p>
+<ul>
+<li>Get a JSON-formatted list of a site’s objects, datasets or groups.</li>
+<li>Get a full JSON representation of an object, e.g. a dataset.</li>
+<li>Search for any packages (datasets) or resources that match a query.</li>
+<li>Get an activity stream of recently changed datasets on a site.</li>
+</ul>
+<p>Please see the following <a href="https://docs.ckan.org/en/2.8/api/index.html">link</a> for more information on the services provided by the CKAN API and some specific examples.<br />
+When it comes to the specific datasets on the government sites, there are two types that can be accessed: specific datasets and meta data sets.<br />
+For example, the <a href="%22https://www.govdata.de/impressum%22">German</a> and the <a href="%22https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services%22">US Government</a> have a website each, where you can get access to metadata that include descriptions and URLs about the specific open datasets that can be accessed. These meta datasets can be a starting point for research on a specific topic.<br />
+The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal <a href="%22https://www.govdata.de/impressum%22">govdata.de</a> for example serves as a collection point for all those data from various institutions. Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.</p>
 </div>
-<div id="prerequesits-software-packages" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Prerequesits: Software &amp; packages</h2>
-<p>The code examples rely R and different packages thereof. It’s probably easiest if you install all of them in one go. The <code>p_load()</code> function (<code>pacman</code> package) checks whether packages are installed. If not they are installed and loaded.</p>
-<!-- add all used packages -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-2"><a href="introduction.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb1-3"><a href="introduction.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  dplyr, <span class="co"># needed for almost any chapter in this review</span></span>
-<span id="cb1-4"><a href="introduction.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  ggplot2, <span class="co"># e.g. CH5</span></span>
-<span id="cb1-5"><a href="introduction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidytext, <span class="co"># comes in handy whenever text data is being pre-processed (CH2)</span></span>
-<span id="cb1-6"><a href="introduction.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  devtools, <span class="co"># to download any package from github (e.g., RCrowdTangle in CH4)</span></span>
-<span id="cb1-7"><a href="introduction.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  jsonlite, <span class="co"># import of JSON formats (e.g., CH4)</span></span>
-<span id="cb1-8"><a href="introduction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  httr, <span class="co"># Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)</span></span>
-<span id="cb1-9"><a href="introduction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  googleLanguageR, <span class="co"># allows different API calls for languga processing (CH2, CH3)</span></span>
-<span id="cb1-10"><a href="introduction.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  RCrowdTangle, <span class="co">#CH4</span></span>
-<span id="cb1-11"><a href="introduction.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  googleway, <span class="co">#CH5</span></span>
-<span id="cb1-12"><a href="introduction.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  mapsapi, <span class="co">#CH5</span></span>
-<span id="cb1-13"><a href="introduction.html#cb1-13" aria-hidden="true" tabindex="-1"></a>  stars, <span class="co">#CH5</span></span>
-<span id="cb1-14"><a href="introduction.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  httr,</span>
-<span id="cb1-15"><a href="introduction.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  WikipediR <span class="co"># CH12</span></span>
-<span id="cb1-16"><a href="introduction.html#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-17"><a href="introduction.html#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="introduction.html#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Move these installations before pacman?</span></span>
-<span id="cb1-19"><a href="introduction.html#cb1-19" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;quanteda/quanteda.corpora&quot;</span>)</span>
-<span id="cb1-20"><a href="introduction.html#cb1-20" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;cbpuschmann/RCrowdTangle&quot;</span>)</span></code></pre></div>
-<!--
-* Data vs. machine learning APIS
-* Problem of replicability for ML APIs
--->
+<div id="prerequesites-9" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN.</p>
+</div>
+<div id="simple-api-call-9" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>When a user wants to make an API call, two use cases have to be distinguished: Calling meta-data and calling specific datasets.</p>
+<p><em>Meta-datasets</em></p>
+<p>When calling the meta data, the DCAT catalog has to be queried. DCAT-AP.de is a German metadata model to exchange open government data. For more information and information on the meta data structure, see this <a href="https://www.dcat-ap.de/">website</a>.<br />
+The API call for the DCAT catalog can deliver three formats: RDF, Turtle and JSON-LD. The type of format can be specified at the end of the request (e.g. “format=jsonld”).<br />
+The following API call is an example for the search term “Kinder.”
+<a href="https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&amp;format=jsonld" class="uri">https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&amp;format=jsonld</a></p>
+<p><em>Specific datasets from GovData</em></p>
+<p>To look for specific datasets, not the meta data, only little has to be changed in the URL. In the case of querying specific datasets, the response format is JSON.
+The following API call is an example when looking for the first 5 packages (datasets) that contain the search term “Kinder” (=children).<br />
+<a href="https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder" class="uri">https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder</a></p>
+</div>
+<div id="api-access-9" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>The CKAN API can be accessed from R with the <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html">httr package</a> or the <a href="https://cran.r-project.org/web/packages/ckanr/ckanr.pdf">ckanr package</a>.<br />
+Please note that as a scientist you can only use GET requests. All kinds of POST requests are restricted to government employees that work at the institutions which provide the data sets.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="ckan-api.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CKAN API #</span></span>
+<span id="cb55-2"><a href="ckan-api.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Use the httr package to access the API</span></span>
+<span id="cb55-3"><a href="ckan-api.html#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="ckan-api.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr) <span class="co"># required to work with the API</span></span>
+<span id="cb55-5"><a href="ckan-api.html#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="ckan-api.html#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co"># With the following query we get the same information as described in the paragraph above</span></span>
+<span id="cb55-7"><a href="ckan-api.html#cb55-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="ckan-api.html#cb55-8" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">&quot;https://www.govdata.de/ckan/api/3/action/resource_show&quot;</span></span>
+<span id="cb55-9"><a href="ckan-api.html#cb55-9" aria-hidden="true" tabindex="-1"></a>berlin <span class="ot">&lt;-</span> <span class="fu">GET</span>(base_url, <span class="at">query=</span><span class="fu">list</span>(<span class="at">q=</span><span class="st">&quot;kinder&quot;</span>,<span class="at">rows=</span><span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ckan-api.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Use the ckanr package to access the API</span></span>
+<span id="cb56-2"><a href="ckan-api.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="ckan-api.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load relevant packages</span></span>
+<span id="cb56-4"><a href="ckan-api.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb56-5"><a href="ckan-api.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ckanr)</span>
+<span id="cb56-6"><a href="ckan-api.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb56-7"><a href="ckan-api.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb56-8"><a href="ckan-api.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span>
+<span id="cb56-9"><a href="ckan-api.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb56-10"><a href="ckan-api.html#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-11"><a href="ckan-api.html#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="co">#connect to the website</span></span>
+<span id="cb56-12"><a href="ckan-api.html#cb56-12" aria-hidden="true" tabindex="-1"></a>url_site <span class="ot">&lt;-</span> <span class="st">&quot;https://www.govdata.de/ckan&quot;</span></span>
+<span id="cb56-13"><a href="ckan-api.html#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ckanr_setup</span>(<span class="at">url =</span> url_site)</span>
+<span id="cb56-14"><a href="ckan-api.html#cb56-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-15"><a href="ckan-api.html#cb56-15" aria-hidden="true" tabindex="-1"></a><span class="co"># first, let&#39;s see which groups are on this site</span></span>
+<span id="cb56-16"><a href="ckan-api.html#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="fu">group_list</span>(<span class="at">as =</span> <span class="st">&quot;table&quot;</span>)</span>
+<span id="cb56-17"><a href="ckan-api.html#cb56-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-18"><a href="ckan-api.html#cb56-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-19"><a href="ckan-api.html#cb56-19" aria-hidden="true" tabindex="-1"></a><span class="co">#you can see there are different groups</span></span>
+<span id="cb56-20"><a href="ckan-api.html#cb56-20" aria-hidden="true" tabindex="-1"></a><span class="co">#now we want to look at them in more detail</span></span>
+<span id="cb56-21"><a href="ckan-api.html#cb56-21" aria-hidden="true" tabindex="-1"></a><span class="fu">group_list</span>(<span class="at">limit =</span> <span class="dv">2</span>)</span>
+<span id="cb56-22"><a href="ckan-api.html#cb56-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-23"><a href="ckan-api.html#cb56-23" aria-hidden="true" tabindex="-1"></a><span class="co"># now you can look for the specific packages</span></span>
+<span id="cb56-24"><a href="ckan-api.html#cb56-24" aria-hidden="true" tabindex="-1"></a><span class="fu">package_list</span>(<span class="at">as =</span> <span class="st">&quot;table&quot;</span>)</span>
+<span id="cb56-25"><a href="ckan-api.html#cb56-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-26"><a href="ckan-api.html#cb56-26" aria-hidden="true" tabindex="-1"></a><span class="co"># now, let&#39;s look at a specific package more closely, to get some more information</span></span>
+<span id="cb56-27"><a href="ckan-api.html#cb56-27" aria-hidden="true" tabindex="-1"></a><span class="fu">package_show</span>(<span class="st">&quot;100-jahre-stadtgrun-stadtpark-und-volkspark&quot;</span>)</span>
+<span id="cb56-28"><a href="ckan-api.html#cb56-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-29"><a href="ckan-api.html#cb56-29" aria-hidden="true" tabindex="-1"></a><span class="co"># now, let&#39;s do a more specific search for specific resources (we look at Kinder = kids/ children)</span></span>
+<span id="cb56-30"><a href="ckan-api.html#cb56-30" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">resource_search</span>(<span class="at">q =</span> <span class="st">&quot;name:Kinder&quot;</span>, <span class="at">limit =</span> <span class="dv">3</span>)</span>
+<span id="cb56-31"><a href="ckan-api.html#cb56-31" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>results</span>
+<span id="cb56-32"><a href="ckan-api.html#cb56-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-33"><a href="ckan-api.html#cb56-33" aria-hidden="true" tabindex="-1"></a><span class="co"># here you get the name, the Description (not always filled out) and the data format</span></span>
+<span id="cb56-34"><a href="ckan-api.html#cb56-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-35"><a href="ckan-api.html#cb56-35" aria-hidden="true" tabindex="-1"></a><span class="co"># now we want to have a closer look at the second resource (day care for children)</span></span>
+<span id="cb56-36"><a href="ckan-api.html#cb56-36" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to get the url, by using the resource number</span></span>
+<span id="cb56-37"><a href="ckan-api.html#cb56-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-38"><a href="ckan-api.html#cb56-38" aria-hidden="true" tabindex="-1"></a>url<span class="ot">&lt;-</span><span class="fu">resource_show</span>(<span class="at">id =</span><span class="st">&quot;a8413550-bf4d-40f3-921a-941da3fce132&quot;</span>)</span>
+<span id="cb56-39"><a href="ckan-api.html#cb56-39" aria-hidden="true" tabindex="-1"></a>url<span class="sc">$</span>url</span>
+<span id="cb56-40"><a href="ckan-api.html#cb56-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-41"><a href="ckan-api.html#cb56-41" aria-hidden="true" tabindex="-1"></a><span class="co"># with the url, we can now import the data</span></span>
+<span id="cb56-42"><a href="ckan-api.html#cb56-42" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> (<span class="st">&quot;https://geo.sv.rostock.de/download/opendata/kindertagespflegeeinrichtungen/kindertagespflegeeinrichtungen.csv&quot;</span>)</span>
+<span id="cb56-43"><a href="ckan-api.html#cb56-43" aria-hidden="true" tabindex="-1"></a>destfile <span class="ot">&lt;-</span> (<span class="st">&quot;kindertagespflegeeinrichtungen.csv&quot;</span>)</span>
+<span id="cb56-44"><a href="ckan-api.html#cb56-44" aria-hidden="true" tabindex="-1"></a>curl<span class="sc">::</span><span class="fu">curl_download</span>(url, destfile)</span>
+<span id="cb56-45"><a href="ckan-api.html#cb56-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-46"><a href="ckan-api.html#cb56-46" aria-hidden="true" tabindex="-1"></a>kindertagespflegeeinrichtungen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(destfile)</span>
+<span id="cb56-47"><a href="ckan-api.html#cb56-47" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(kindertagespflegeeinrichtungen)</span>
+<span id="cb56-48"><a href="ckan-api.html#cb56-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-49"><a href="ckan-api.html#cb56-49" aria-hidden="true" tabindex="-1"></a><span class="co"># in this file, you can now for example look at the opening hours of the day cares in Rostock (a German city)</span></span></code></pre></div>
+</div>
+<div id="social-science-examples-8" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Social science examples</h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>When looking for social science research that used the CKAN API and Open Government data (OGD), it seems that there is more papers and research on the usage of those data, than on the data themselves (<span class="citation"><a href="#ref-Bedini2014" role="doc-biblioref">Bedini</a> (<a href="#ref-Bedini2014" role="doc-biblioref">2014</a>)</span>, <span class="citation"><a href="#ref-Correa2015" role="doc-biblioref">Corrêa</a> (<a href="#ref-Correa2015" role="doc-biblioref">2015</a>)</span>).
+In a recent paper that examines the use of OGD (<span class="citation">(<a href="#ref-Quarati2019" role="doc-biblioref"><strong>Quarati2019?</strong></a>)</span>), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.<br />
+For example, regarding the German OGD portal “GovData.de,” I did not find any social science papers that specifically used data from GovData.de. However, there are a few papers available that describe the German open data initiative (<span class="citation"><a href="#ref-Liu2018" role="doc-biblioref">Liu</a> (<a href="#ref-Liu2018" role="doc-biblioref">2018</a>)</span>) and the metadata (<span class="citation"><a href="#ref-Marienfeld2013" role="doc-biblioref">Marienfeld</a> (<a href="#ref-Marienfeld2013" role="doc-biblioref">2013</a>)</span>) that can be found on GovData.de.</p>
 
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Bedini2014" class="csl-entry">
+Bedini, Farazi, I. 2014. <span>“Open Government Data: Fostering Innovation. EJournal of EDemocracy and Open Government.”</span> <em>EJournal of EDemocracy and Open Government</em>.
+</div>
+<div id="ref-Correa2015" class="csl-entry">
+Corrêa, Corrêa, A. S. 2015. <span>“A Collaborative-Oriented Middleware for Structuring Information to Open Government Data.”</span> <em>Proceedings of the 16th Annual International Conference on Digital Government Research</em>.
+</div>
+<div id="ref-Liu2018" class="csl-entry">
+Liu, Liu, C. 2018. <span>“Open Government Data: The German Government Is Moving.”</span> <em>Asia-Pacific Social Science and Modern Education Conference (SSME 2018)</em>.
+</div>
+<div id="ref-Marienfeld2013" class="csl-entry">
+Marienfeld, Schieferdecker, F. 2013. <span>“Metadata Aggregation at GovData.de: An Experience Report.”</span> <em>Proceedings of the 9th International Symposium on Open Collaboration</em>.
 </div>
 </div>
             </section>
@@ -334,8 +427,8 @@ APIs for social scientists:<br>A collaborative review
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="google-natural-language-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="youtube-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mediawiki-action-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

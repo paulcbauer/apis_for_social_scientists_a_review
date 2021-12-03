@@ -43,7 +43,7 @@ provided-servicesdata-6
 prerequesites-6
 simple-api-call-6
 api-access-6
-crowdtangle-api-1
+googletrends-api
 provided-servicesdata-7
 prerequesites-7
 simple-api-call-7
@@ -55,7 +55,7 @@ prerequesites-8
 simple-api-call-8
 api-access-8
 social-science-examples-7
-crowdtangle-api-2
+ckan-api
 provided-servicesdata-9
 prerequesites-9
 simple-api-call-9
