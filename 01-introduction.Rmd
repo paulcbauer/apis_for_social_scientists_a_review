@@ -34,7 +34,8 @@ pacman::p_load(
   googleway, #CH5
   mapsapi, #CH5
   stars, #CH5
-  httr
+  httr,
+  WikipediR # CH12
 )
 
 # Move these installations before pacman?
