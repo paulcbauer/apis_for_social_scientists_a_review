@@ -1,6 +1,6 @@
 
 # Google Natural Language API
-<chauthors>Paul C. Bauer, Camille Landesvatter</chauthors>
+<chauthors>Paul C. Bauer, Camille Landesvatter, Malte Söhren</chauthors>
 <br><br>
 ```{r cache-ch1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
