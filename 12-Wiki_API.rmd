@@ -39,7 +39,7 @@ The most common tool is `WikipediR`, a wrapper around the Wikipedia API. It allo
 
 We report here the code to obtain the same information as in the previous example through `R`:
 
-```{r eval=FALSE} 
+```{r echo=TRUE}
 WikipediR::page_info(
     language = "en", 
     project = "wikipedia", 
