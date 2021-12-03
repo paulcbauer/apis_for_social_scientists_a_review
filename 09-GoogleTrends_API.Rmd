@@ -1,5 +1,5 @@
 
-# CrowdTangle API
+# GoogleTrends API
 <chauthors>Jan Behnert, Dean Lajic</chauthors>
 <br><br>
 
