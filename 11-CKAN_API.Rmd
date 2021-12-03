@@ -1,5 +1,5 @@
 
-# CrowdTangle API
+# CKAN API
 <chauthors>Barbara K. Kreis</chauthors>
 <br><br>
 
