@@ -94,7 +94,7 @@ library(googleLanguageR)
 
 ```{r echo=FALSE}
 # Authentication (through your service account's JSON key file)
-gl_auth("./keys/trustme-312210-41f50915e801.json")
+gl_auth("./keys/trustme-312210-b9734c074f6f.json")
 ```
 
 ```{r eval=FALSE}

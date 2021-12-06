@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 MediaWiki Action API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 MediaWiki Action API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
 <link rel="prev" href="ckan-api.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -353,13 +353,13 @@ To access <em>Wikipedia</em>, <em>MediaWiki</em> provides the MediaWiki Action A
 ## [1] &quot;ltr&quot;
 ## 
 ## $query$pages$`736`$touched
-## [1] &quot;2021-12-03T11:19:01Z&quot;
+## [1] &quot;2021-12-05T18:46:13Z&quot;
 ## 
 ## $query$pages$`736`$lastrevid
-## [1] 1058053385
+## [1] 1058773374
 ## 
 ## $query$pages$`736`$length
-## [1] 183187
+## [1] 183211
 ## 
 ## $query$pages$`736`$fullurl
 ## [1] &quot;https://en.wikipedia.org/wiki/Albert_Einstein&quot;
@@ -410,7 +410,6 @@ Salem, Hamza, and Fabian Stephany. 2021. <span>“Wikipedia: A Challenger’s Be
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -450,6 +449,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

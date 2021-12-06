@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> APIs for social scientists:A collaborative review  | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" APIs for social scientists:A collaborative review  | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
 
 <link rel="next" href="introduction.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -292,15 +292,15 @@ APIs for social scientists:<br>A collaborative review
 <blue>Editors (this version):</blue><br>Paul C. Bauer, Camille Landesvatter<br><br><blue>Authors &amp; contributors:</blue><br>Paul C. Bauer, Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle
 </h5>
 </center></em></p>
-<p class="date" style="margin-top: 1.5em;"><em><center>
+<p class="date"><em><center>
 <h5>
-<blue>First public version:</blue> 29 November, 2021<br><blue>This version:</blue> 03 December, 2021
+<blue>First public version:</blue> 29 November, 2021<br><blue>This version:</blue> 06 December, 2021
 </h5>
 </center></em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
-<p>The present online book provide a review of APIs that may be useful for social scientists. Please start by reading the <a href="introduction.html#introduction">Introduction</a>. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review">github repository</a>. If you are interested in contributing please check out the Section <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute">How to contribute</a> in the github README.</p>
+<p>The present online book provides a review of APIs that may be useful for social scientists. Please start by reading the <a href="introduction.html#introduction">Introduction</a>. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review">github repository</a>. If you are interested in contributing please check out the Section <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute">How to contribute</a> in the github README.</p>
 <p>The material is licensed under a <a href="https://en.wikipedia.org/wiki/Apache_License">Apache License 2.0</a> license. Where we draw on other authors material other licenses may apply. We are extremely grateful for feedback and if you find errors please let us know.</p>
 <p>This document was generated with <a href="https://www.r-project.org/">R</a>, <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> and <a href="https://bookdown.org/">Bookdown</a>.</p>
 
@@ -315,7 +315,6 @@ APIs for social scientists:<br>A collaborative review
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -355,6 +354,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

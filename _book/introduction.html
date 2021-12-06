@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
 <link rel="prev" href="index.html"/>
 <link rel="next" href="google-natural-language-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -285,7 +285,7 @@ APIs for social scientists:<br>A collaborative review
             <section class="normal" id="section-">
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>The project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
+<p>This project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.</p>
 <p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
 <ul>
 <li>What data/service is provided by the API? (+ who provides it?)</li>
@@ -293,7 +293,6 @@ APIs for social scientists:<br>A collaborative review
 <li>What does a simple API call look like?</li>
 <li>How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?</li>
 </ul>
-<p>You can find the underlying github repository here: <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" class="uri">https://github.com/paulcbauer/apis_for_social_scientists_a_review</a> and suggestions on how to contribute in the corresponding <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review#interested-in-contributing">README</a>.</p>
 <div id="prerequesits-authentication" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Prerequesits: Authentication</h2>
 <p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
@@ -340,7 +339,6 @@ APIs for social scientists:<br>A collaborative review
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -380,6 +378,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

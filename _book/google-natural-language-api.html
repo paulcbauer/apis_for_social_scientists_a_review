@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="google-translation-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -421,7 +421,7 @@ beforehand also translated to english)</p></li>
 <span id="cb13-18"><a href="google-natural-language-api.html#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
 <span id="cb13-19"><a href="google-natural-language-api.html#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb13-20"><a href="google-natural-language-api.html#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
 <img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-14-1.png" alt="Wordcloud of nouns found within guardian articles" width="672" />
 <p class="caption">
 Figure 2.1: Wordcloud of nouns found within guardian articles
@@ -461,7 +461,6 @@ Grimmer, Justin, and Brandon M Stewart. 2013. <span>“Text as Data: The Promise
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -501,6 +500,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

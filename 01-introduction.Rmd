@@ -1,5 +1,5 @@
 # Introduction
-The project *APIs for Social Scientists: A collaborative Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.
+This project *APIs for Social Scientists: A collaborative Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.
 
 Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions: 
 
@@ -7,8 +7,6 @@ Below we review different data- and service-APIs that may be useful to social sc
 * What are the prerequisites to access the API (e.g., authentication)? 
 * What does a simple API call look like? 
 * How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?
-
-You can find the underlying github repository here: https://github.com/paulcbauer/apis_for_social_scientists_a_review and suggestions on how to contribute in the corresponding [README](https://github.com/paulcbauer/apis_for_social_scientists_a_review#interested-in-contributing). 
 
 
 ## Prerequesits: Authentication
