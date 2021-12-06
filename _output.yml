@@ -8,6 +8,6 @@ bookdown::gitbook:
         <li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
       after: |
         <li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
   includes:
     in_header: Google_Analytics_Script.html
+ 

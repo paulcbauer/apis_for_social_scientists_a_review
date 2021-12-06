@@ -1,0 +1,13 @@
+name: bookdown-api-test2
+title: bookdown-API-test
+username: landesvatterc
+account: landesvatterc
+server: bookdown.org
+hostUrl: https://bookdown.org/__api__
+appId: 9222
+bundleId: 63884
+url: https://bookdown.org/landesvatterc/bookdown-api-test2/
+when: 1638794219.0997
+lastSyncTime: 1638794219.0997
+asMultiple: FALSE
+asStatic: FALSE
