@@ -1,0 +1,869 @@
+{
+    "sources": [
+        {
+            "author": [
+                {
+                    "family": "Dobbrick",
+                    "given": "Timo"
+                },
+                {
+                    "family": "Jakob",
+                    "given": "Julia"
+                },
+                {
+                    "family": "Chan",
+                    "given": "Chung-Hong"
+                },
+                {
+                    "family": "Wessler",
+                    "given": "Hartmut"
+                }
+            ],
+            "container-title": "Commun. Methods Meas.",
+            "id": "Dobbrick2021-iz",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        11
+                    ]
+                ]
+            },
+            "page": "1-18",
+            "publisher": "Routledge",
+            "title": "Enhancing Theory-Informed dictionary approaches with “glass-box” machine learning: The case of integrative complexity in social media comments",
+            "title-short": "Enhancing Theory-Informed dictionary approaches with “glass-box” machine learning",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Grimmer",
+                    "given": "Justin"
+                },
+                {
+                    "family": "Stewart",
+                    "given": "Brandon M"
+                }
+            ],
+            "container-title": "Polit. Anal.",
+            "id": "Grimmer2013-xe",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "page": "267-297",
+            "publisher": "Cambridge University Press",
+            "title": "Text as data: The promise and pitfalls of automatic content analysis methods for political texts",
+            "title-short": "Text as data",
+            "type": "article-journal",
+            "volume": "21"
+        },
+        {
+            "URL": "https://arxiv.org/abs/1809.02208",
+            "author": [
+                {
+                    "family": "Prates",
+                    "given": "Marcelo O R"
+                },
+                {
+                    "family": "Avelar",
+                    "given": "Pedro H C"
+                },
+                {
+                    "family": "Lamb",
+                    "given": "Luis"
+                }
+            ],
+            "id": "Prates2018-fx",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        9
+                    ]
+                ]
+            },
+            "title": "Assessing gender bias in machine translation – a case study with google translate",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Larsson",
+                    "given": "Anders Olof"
+                }
+            ],
+            "container-title": "New Media & Society",
+            "id": "Larsson2020-iu",
+            "issue": "12",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        12
+                    ]
+                ]
+            },
+            "page": "2108-2127",
+            "publisher": "SAGE Publications",
+            "title": "Right-wingers on the rise online: Insights from the 2018 swedish elections",
+            "title-short": "Right-wingers on the rise online",
+            "type": "article-journal",
+            "volume": "22"
+        },
+        {
+            "author": [
+                {
+                    "family": "Bruns",
+                    "given": "Axel"
+                },
+                {
+                    "family": "Harrington",
+                    "given": "Stephen"
+                },
+                {
+                    "family": "Hurcombe",
+                    "given": "Edward"
+                }
+            ],
+            "container-title": "Media International Australia",
+            "id": "Bruns2020-pl",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        11
+                    ]
+                ]
+            },
+            "page": "12-29",
+            "publisher": "SAGE Publications Ltd",
+            "title": "“Corona? 5G? Or both?”: The dynamics of COVID-19/5G conspiracy theories on facebook",
+            "title-short": "“Corona? 5G? Or both?”",
+            "type": "article-journal",
+            "volume": "177"
+        },
+        {
+            "author": [
+                {
+                    "family": "Broniatowski",
+                    "given": "David A"
+                },
+                {
+                    "family": "Jamison",
+                    "given": "Amelia M"
+                },
+                {
+                    "family": "Johnson",
+                    "given": "Neil F"
+                },
+                {
+                    "family": "Velasquez",
+                    "given": "Nicolás"
+                },
+                {
+                    "family": "Leahy",
+                    "given": "Rhys"
+                },
+                {
+                    "family": "Restrepo",
+                    "given": "Nicholas Johnson"
+                },
+                {
+                    "family": "Dredze",
+                    "given": "Mark"
+                },
+                {
+                    "family": "Quinn",
+                    "given": "Sandra C"
+                }
+            ],
+            "container-title": "Am. J. Public Health",
+            "id": "Broniatowski2020-rh",
+            "issue": "S3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        10
+                    ]
+                ]
+            },
+            "page": "S312-S318",
+            "title": "Facebook pages, the “disneyland” measles outbreak, and promotion of vaccine refusal as a civil right, 2009-2019",
+            "type": "article-journal",
+            "volume": "110"
+        },
+        {
+            "author": [
+                {
+                    "family": "Berriche",
+                    "given": "Manon"
+                },
+                {
+                    "family": "Altay",
+                    "given": "Sacha"
+                }
+            ],
+            "container-title": "Palgrave Communications",
+            "id": "Berriche2020-dt",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        4
+                    ]
+                ]
+            },
+            "page": "1-9",
+            "publisher": "Palgrave",
+            "title": "Internet users engage more with phatic posts than with health misinformation on facebook",
+            "type": "article-journal",
+            "volume": "6"
+        },
+        {
+            "author": [
+                {
+                    "family": "Konrad",
+                    "given": "Markus"
+                }
+            ],
+            "id": "Konrad2020-rl",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        5
+                    ]
+                ]
+            },
+            "note": "Accessed: 2021-11-22",
+            "publisher": "https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/",
+            "title": "Using google places data to analyze changes in mobility during the COVID-19 pandemic",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Edmondson",
+                    "given": "Mark"
+                }
+            ],
+            "id": "Edmondson2017-pv",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017,
+                        9
+                    ]
+                ]
+            },
+            "note": "Accessed: 2021-11-23",
+            "publisher": "https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html",
+            "title": "Google cloud speech API",
+            "type": ""
+        },
+        {
+            "URL": "https://arxiv.org/abs/1508.06257",
+            "author": [
+                {
+                    "family": "Hosseinmardi",
+                    "given": "Homa"
+                },
+                {
+                    "family": "Mattson",
+                    "given": "Sabrina Arredondo"
+                },
+                {
+                    "family": "Rafiq",
+                    "given": "Rahat Ibn"
+                },
+                {
+                    "family": "Han",
+                    "given": "Richard"
+                },
+                {
+                    "family": "Lv",
+                    "given": "Qin"
+                },
+                {
+                    "family": "Mishr",
+                    "given": "Shivakant"
+                }
+            ],
+            "id": "Hosseinmardi2015-yc",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        8
+                    ]
+                ]
+            },
+            "title": "Prediction of cyberbullying incidents on the instagram social network",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Brown",
+                    "given": "Rebecca C"
+                },
+                {
+                    "family": "Bendig",
+                    "given": "Eileen"
+                },
+                {
+                    "family": "Fischer",
+                    "given": "Tin"
+                },
+                {
+                    "family": "Goldwich",
+                    "given": "A David"
+                },
+                {
+                    "family": "Baumeister",
+                    "given": "Harald"
+                },
+                {
+                    "family": "Plener",
+                    "given": "Paul L"
+                }
+            ],
+            "container-title": "PLoS One",
+            "id": "Brown2019-jp",
+            "issue": "9",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        9
+                    ]
+                ]
+            },
+            "page": "e0220623",
+            "title": "Can acute suicidality be predicted by instagram data? Results from qualitative and quantitative language analyses",
+            "type": "article-journal",
+            "volume": "14"
+        },
+        {
+            "author": [
+                {
+                    "family": "Ferwerda",
+                    "given": "Bruce"
+                },
+                {
+                    "family": "Schedl",
+                    "given": "Markus"
+                },
+                {
+                    "family": "Tkalcic",
+                    "given": "Marko"
+                }
+            ],
+            "collection-title": "EMPIRE ’15",
+            "container-title": "Proceedings of the 3rd workshop on emotions and personality in personalized systems 2015",
+            "id": "Ferwerda2015-db",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        9
+                    ]
+                ]
+            },
+            "page": "7-10",
+            "publisher": "Association for Computing Machinery",
+            "publisher-place": "New York, NY, USA",
+            "title": "Predicting personality traits with instagram pictures",
+            "type": "paper-conference"
+        },
+        {
+            "author": [
+                {
+                    "family": "Tankovska",
+                    "given": "H"
+                }
+            ],
+            "id": "Tankovska_undated-ph",
+            "note": "Accessed: 2021-NA-NA",
+            "publisher": "https://www.statista.com/topics/1882/instagram/",
+            "title": "Topic: instagram",
+            "title-short": "Topic",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "literal": "Facebook for Developers"
+                }
+            ],
+            "id": "Facebook_for_Developers2021-mn",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "https://developers.facebook.com/docs/instagram-basic-display-api/",
+            "title": "Instagram basic display API",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Aslam",
+                    "given": "Salman"
+                }
+            ],
+            "id": "Aslam2021-fp",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        1
+                    ]
+                ]
+            },
+            "note": "Accessed: 2021-11-30",
+            "publisher": "https://www.omnicoreagency.com/instagram-statistics/",
+            "title": "• instagram by the numbers (2021): Stats, demographics & fun facts",
+            "title-short": "• instagram by the numbers (2021)",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "literal": "Instagram"
+                }
+            ],
+            "id": "Instagram2021-ii",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "https://www.instagram.com/developer/",
+            "title": "Instagram developer documentation",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Hu",
+                    "given": "Yuheng"
+                },
+                {
+                    "family": "Manikonda",
+                    "given": "L"
+                },
+                {
+                    "family": "Kambhampati",
+                    "given": "S"
+                }
+            ],
+            "container-title": "ICWSM",
+            "id": "Hu2014-br",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "title": "What we instagram: A first analysis of instagram photo content and user types",
+            "title-short": "What we instagram",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Baertl",
+                    "given": "M"
+                }
+            ],
+            "container-title": "Convergence",
+            "id": "Baertl2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "title": "YouTube channels, uploads and views: A statistical analysis of the past 10 years.",
+            "title-short": "YouTube channels, uploads and views",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Obadimu",
+                    "given": "Mead",
+                    "suffix": "A."
+                }
+            ],
+            "container-title": "In International Conference on Social Computing, Behavioral-Cultural Modeling and Prediction and Behavior Representation in Modeling and Simulation",
+            "id": "Obadimu2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "title": "Identifying toxicity within youtube video comment.",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Rieder",
+                    "given": "Matamoros-Fernández",
+                    "suffix": "B."
+                }
+            ],
+            "container-title": "Convergence",
+            "id": "Rieder2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "title": "From ranking algorithms to “ranking cultures”: Investigating the modulation of visibility in YouTube search results.",
+            "title-short": "From ranking algorithms to “ranking cultures”",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Prado-Román C",
+                    "given": "Orden-Cruz C.",
+                    "suffix": "Gómez-Martínez R"
+                }
+            ],
+            "container-title": "American Behavioral Scientist",
+            "id": "Prado-Roman2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "Google trends as a predictor of presidential elections: The united states versus canada.",
+            "title-short": "Google trends as a predictor of presidential elections",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Mavragani",
+                    "given": "Tsagarakis",
+                    "suffix": "A."
+                }
+            ],
+            "container-title": "J Big Data",
+            "id": "Mavragani2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "title": "Predicting referendum results in the big data era.",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Brodeur",
+                    "given": "Clark",
+                    "suffix": "A."
+                }
+            ],
+            "container-title": "Journal of public economics",
+            "id": "Brodeur2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "title": "COVID-19, lockdowns and well-being: Evidence from google trends",
+            "title-short": "COVID-19, lockdowns and well-being",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Bedini",
+                    "given": "Farazi",
+                    "suffix": "I."
+                }
+            ],
+            "container-title": "EJournal of EDemocracy and Open Government",
+            "id": "Bedini2014",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "title": "Open government data: Fostering innovation. EJournal of EDemocracy and open government",
+            "title-short": "Open government data",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Corrêa",
+                    "given": "Corrêa",
+                    "suffix": "A. S."
+                }
+            ],
+            "container-title": "Proceedings of the 16th Annual International Conference on Digital Government Research",
+            "id": "Correa2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "title": "A collaborative-oriented middleware for structuring information to open government data.",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Liu",
+                    "given": "Liu",
+                    "suffix": "C."
+                }
+            ],
+            "container-title": "Asia-Pacific Social Science and Modern Education Conference (SSME 2018)",
+            "id": "Liu2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "title": "Open government data: The german government is moving.",
+            "title-short": "Open government data",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Marienfeld",
+                    "given": "Schieferdecker",
+                    "suffix": "F."
+                }
+            ],
+            "container-title": "Proceedings of the 9th International Symposium on Open Collaboration",
+            "id": "Marienfeld2013",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "title": "Metadata aggregation at GovData.de: An experience report.",
+            "title-short": "Metadata aggregation at GovData.de",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "ElBahrawy",
+                    "given": "Abeer"
+                },
+                {
+                    "family": "Alessandretti",
+                    "given": "Laura"
+                },
+                {
+                    "family": "Baronchelli",
+                    "given": "Andrea"
+                }
+            ],
+            "container-title": "Frontiers in Blockchain",
+            "id": "elbahrawy2019wikipedia",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "page": "12",
+            "publisher": "Frontiers",
+            "title": "Wikipedia and cryptocurrencies: Interplay between collective attention and market performance",
+            "title-short": "Wikipedia and cryptocurrencies",
+            "type": "article-journal",
+            "volume": "2"
+        },
+        {
+            "author": [
+                {
+                    "family": "Gozzi",
+                    "given": "Nicolò"
+                },
+                {
+                    "family": "Tizzani",
+                    "given": "Michele"
+                },
+                {
+                    "family": "Starnini",
+                    "given": "Michele"
+                },
+                {
+                    "family": "Ciulla",
+                    "given": "Fabio"
+                },
+                {
+                    "family": "Paolotti",
+                    "given": "Daniela"
+                },
+                {
+                    "family": "Panisson",
+                    "given": "André"
+                },
+                {
+                    "family": "Perra",
+                    "given": "Nicola"
+                }
+            ],
+            "container-title": "Journal of medical Internet research",
+            "id": "gozzi2020collective",
+            "issue": "10",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "page": "e21597",
+            "publisher": "JMIR Publications Inc., Toronto, Canada",
+            "title": "Collective response to media coverage of the COVID-19 pandemic on reddit and wikipedia: Mixed-methods analysis",
+            "title-short": "Collective response to media coverage of the COVID-19 pandemic on reddit and wikipedia",
+            "type": "article-journal",
+            "volume": "22"
+        },
+        {
+            "author": [
+                {
+                    "family": "Margolin",
+                    "given": "Drew B"
+                },
+                {
+                    "family": "Goodman",
+                    "given": "Sasha"
+                },
+                {
+                    "family": "Keegan",
+                    "given": "Brian"
+                },
+                {
+                    "family": "Lin",
+                    "given": "Yu-Ru"
+                },
+                {
+                    "family": "Lazer",
+                    "given": "David"
+                }
+            ],
+            "container-title": "Information, Communication & Society",
+            "id": "margolin2016wiki",
+            "issue": "8",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "page": "1029-1045",
+            "publisher": "Taylor & Francis",
+            "title": "Wiki-worthy: Collective judgment of candidate notability",
+            "title-short": "Wiki-worthy",
+            "type": "article-journal",
+            "volume": "19"
+        },
+        {
+            "author": [
+                {
+                    "family": "Salem",
+                    "given": "Hamza"
+                },
+                {
+                    "family": "Stephany",
+                    "given": "Fabian"
+                }
+            ],
+            "container-title": "Information, Communication & Society",
+            "id": "salem2021wikipedia",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "page": "1-27",
+            "publisher": "Taylor & Francis",
+            "title": "Wikipedia: A challenger’s best friend? Utilizing information-seeking behaviour patterns to predict US congressional elections",
+            "title-short": "Wikipedia",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Quarati",
+                    "given": "Alfonso"
+                },
+                {
+                    "family": "De Martino",
+                    "given": "Monica"
+                }
+            ],
+            "container-title": "IDEAS 2019, 23rd international database engineering & applications symposium",
+            "id": "Quarati2019-jf",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        6
+                    ]
+                ]
+            },
+            "publisher": "unknown",
+            "title": "Open government data usage: A brief overview",
+            "title-short": "Open government data usage",
+            "type": "paper-conference"
+        }
+    ],
+    "project_biblios": [
+        "references_overall.bib"
+    ]
+}
