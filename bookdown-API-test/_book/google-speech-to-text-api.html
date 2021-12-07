@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Google Speech-to-Text API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Google Speech-to-Text API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Google Speech-to-Text API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="google-places-api.html"/>
+<link rel="next" href="instagram-graph-api.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequesits-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequesits: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequesits-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequesits: Software &amp; packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>2</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>2.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="2.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequesites"><i class="fa fa-check"></i><b>2.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="2.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call"><i class="fa fa-check"></i><b>2.3</b> Simple API call</a></li>
+<li class="chapter" data-level="2.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access"><i class="fa fa-check"></i><b>2.4</b> API access</a></li>
+<li class="chapter" data-level="2.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples"><i class="fa fa-check"></i><b>2.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>3</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequesites-1"><i class="fa fa-check"></i><b>3.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="3.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-1"><i class="fa fa-check"></i><b>3.4</b> API access</a></li>
+<li class="chapter" data-level="3.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequesites-2"><i class="fa fa-check"></i><b>4.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-2"><i class="fa fa-check"></i><b>4.4</b> API access</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>5</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequesites-3"><i class="fa fa-check"></i><b>5.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="5.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-3"><i class="fa fa-check"></i><b>5.4</b> API access</a></li>
+<li class="chapter" data-level="5.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>6</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequesites-4"><i class="fa fa-check"></i><b>6.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="6.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-4"><i class="fa fa-check"></i><b>6.4</b> API access</a></li>
+<li class="chapter" data-level="6.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>7</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequesites-5"><i class="fa fa-check"></i><b>7.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="7.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-5"><i class="fa fa-check"></i><b>7.4</b> API access</a></li>
+<li class="chapter" data-level="7.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>8</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>8.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="8.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequesites-6"><i class="fa fa-check"></i><b>8.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="8.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>8.3</b> Simple API call</a></li>
+<li class="chapter" data-level="8.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-6"><i class="fa fa-check"></i><b>8.4</b> API access</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>9</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequesites-7"><i class="fa fa-check"></i><b>9.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="9.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-7"><i class="fa fa-check"></i><b>9.4</b> API access</a></li>
+<li class="chapter" data-level="9.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>10</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequesites-8"><i class="fa fa-check"></i><b>10.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="10.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-8"><i class="fa fa-check"></i><b>10.4</b> API access</a></li>
+<li class="chapter" data-level="10.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>11</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequesites-9"><i class="fa fa-check"></i><b>11.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="11.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-9"><i class="fa fa-check"></i><b>11.4</b> API access</a></li>
+<li class="chapter" data-level="11.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>12</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequesites-10"><i class="fa fa-check"></i><b>12.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="12.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-10"><i class="fa fa-check"></i><b>12.4</b> API access</a></li>
+<li class="chapter" data-level="12.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>13</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center>
+APIs for social scientists:<br>A collaborative review
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="google-speech-to-text-api" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Google Speech-to-Text API</h1>
+<p><chauthors>Camille Landesvatter</chauthors>
+<br><br></p>
+<div id="provided-servicesdata-4" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Provided services/data</h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>Google’s Speech-to-Text API allows you to convert audio files to text by applying powerful neural network models. Audio content can be transcribed in real time and of course (and possibly of higher relevance for social science research) from stored files.</p>
+<p>The API currently recognizes more than 125 <a href="%22https://cloud.google.com/speech-to-text/docs/languages%22">languages</a>. It supports multiple audio formats, and audio files can either be transcribed directly (if the content does not exceed 60 seconds) or perform asynchronous requests for audio files longer than 60 seconds.</p>
+<p>A demo of the API that allows you to record text via your microphone (or to upload an audio file) and explore the transcript can be found <a href="%22https://cloud.google.com/speech-to-text#section-2%22">here</a>.</p>
+<p>Also consider that there is a <a href="%22https://cloud.google.com/text-to-speech%22">Text-to-Speech API</a> - simply performing operations the other way around - offered by Google.</p>
+</div>
+<div id="prerequesites-4" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Prerequesites</h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)? </em></li>
+</ul>
+<p>To access and to use the API the following steps are necessary:</p>
+<ul>
+<li><p>Create a <a href="%22https://www.google.com/account/about/%22">google account</a> (if you do not already have one).</p></li>
+<li><p>With this google account login to the <a href="%22https://cloud.google.com/%22">google cloud platform</a> and create a Google Cloud Project.</p></li>
+<li><p>Within this Google Cloud Project enable the Google Speech-to-text API.</p></li>
+<li><p>For authentication you will need to create an API key (which you additionally should restrict to the Translation API). If however, you are planning to request the Natural Language API from outside a Google Cloud environment (e.g., R) you will be required to use a private (service account) key. This can be achieved by creating a service account which in turn will allow you to download your private key as a JSON file (we show an example below).</p></li>
+</ul>
+</div>
+<div id="simple-api-call-4" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Simple API call</h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p><em>Note.</em> For both Google’s Translation API as well as Google’s Natural-Language API, in this review we demonstrate an example for a simple API call via the Google Cloud Shell. In principle (and in a very similar procedure) this can be achieved for the Speech-to-Text API. However, your audio file will need some pre-processing. Audio data (such as our exemplary file in wav-format) is binary data. To make your REST request (via the Google Cloud Shell) however JSON is used. JSON eventually does not support binary data which is why you will have to transform your binary audio file into text using <a href="%22https://en.wikipedia.org/wiki/Base64%22">Base64</a> encoding (also refer to this <a href="%22https://cloud.google.com/speech-to-text/docs/base64-encoding#linux%22">documentation</a> from the Google Website for more information). If you enter audio data which is not Base64 encoded, the Google Cloud Shell will give you an error 400 stating that Base64 decoding failed for your (wav-)file. Nevertheless, in the box below we will provide the basic structure of the request.</p>
+<ul>
+<li><p>To activate your Cloud Shell, inspect the upper right-hand corner of your Google Cloud Platform Console and click the icon called “Activate Shell.” <a href="%22https://cloud.google.com/shell/#how_do_i_get_started%22">Google Cloud Shell</a> is a command line environment running in the cloud.</p></li>
+<li><p>Via the built-in Editor in Cloud Shell create a JSON file (call it for instance ‘request.json’). You can either upload your audio file directly via the Google Cloud Shell (search for the three-dotted “More” menu in the Shell and select “Upload file”), alternatively audio content can be integrated with Cloud Storage.</p></li>
+<li><p>The wav.file we uploaded for this example is an exemplary wav.file that comes along with the <a href="%22https://cran.r-project.org/web/packages/googleLanguageR/index.html%22">‘googleLanguageR’ R package</a>.</p></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="google-speech-to-text-api.html#cb28-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb28-2"><a href="google-speech-to-text-api.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;audio&quot;</span><span class="sc">:</span> {</span>
+<span id="cb28-3"><a href="google-speech-to-text-api.html#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;content&quot;</span><span class="sc">:</span> <span class="st">&quot;woman1_wb&quot;</span></span>
+<span id="cb28-4"><a href="google-speech-to-text-api.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb28-5"><a href="google-speech-to-text-api.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;config&quot;</span><span class="sc">:</span> {</span>
+<span id="cb28-6"><a href="google-speech-to-text-api.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;enableAutomaticPunctuation&quot;</span><span class="sc">:</span> true,</span>
+<span id="cb28-7"><a href="google-speech-to-text-api.html#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;encoding&quot;</span><span class="sc">:</span> <span class="st">&quot;LINEAR16&quot;</span>,</span>
+<span id="cb28-8"><a href="google-speech-to-text-api.html#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;languageCode&quot;</span><span class="sc">:</span> <span class="st">&quot;en-US&quot;</span>,</span>
+<span id="cb28-9"><a href="google-speech-to-text-api.html#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;model&quot;</span><span class="sc">:</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb28-10"><a href="google-speech-to-text-api.html#cb28-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-11"><a href="google-speech-to-text-api.html#cb28-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><p>For sending your data, pass a curl command to your Cloud Shell command line where you refer (via @) to your request.json file from the previous step.</p></li>
+<li><p>Don’t forget to insert your individual API key (alternatively, you could define it beforehand via a variable in your environment -&gt; see example in the API call for Google’s NLP API later in this document).</p></li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="google-speech-to-text-api.html#cb29-1" aria-hidden="true" tabindex="-1"></a>curl <span class="st">&quot;https://speech.googleapis.com/v1p1beta1/speech:recognize?key=APIKEY&quot;</span> <span class="sc">-</span>s <span class="sc">-</span>X POST <span class="sc">-</span>H <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="sc">--</span>data<span class="sc">-</span>binary <span class="sc">@</span>request.json</span></code></pre></div>
+</div>
+<div id="api-access-4" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> API access</h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Example using R-Package <a href="%22https://cran.r-project.org/web/packages/googleLanguageR/index.html%22">‘googleLanguageR’</a></p>
+<p>In this small example we demonstrate how to..</p>
+<p>*.. authenticate with your Google Cloud Account within R</p>
+<p>*.. how to import an exemplary audiofile from the “GoogleLanguageR” package</p>
+<p>*.. how to transcribe this audio file and calculate a confidence score</p>
+<p>For the usage of further arguments, also read the <code>gl_speech()</code> <a href="%22https://cran.r-project.org/web/packages/googleLanguageR/googleLanguageR.pdf%22">documentation</a> and <a href="%22https://cran.r-project.org/web/packages/googleLanguageR/vignettes/speech.html%22">this</a> vignette.</p>
+<p><em>1. Load packages</em></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="google-speech-to-text-api.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb30-2"><a href="google-speech-to-text-api.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleLanguageR)</span></code></pre></div>
+<p><em>Step 2: Authentication</em></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="google-speech-to-text-api.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl_auth</span>(<span class="st">&quot;./your-key.json&quot;</span>)</span></code></pre></div>
+<p><em>Step 3: Analysis</em></p>
+<p>We will now get a sample source file which comes along with the <code>googleLanuageR</code> package. The transcript of this file is: “To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so” - which according to <span class="citation"><a href="#ref-Edmondson2017-pv" role="doc-biblioref">Edmondson</a> (<a href="#ref-Edmondson2017-pv" role="doc-biblioref">2017</a>)</span> (one of the authors of the <a href="%22https://cran.r-project.org/web/packages/googleLanguageR/index.html%22">‘googleLanguageR’ R package</a>) is a fairly difficult sentence for computers to parse.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="google-speech-to-text-api.html#cb32-1" aria-hidden="true" tabindex="-1"></a>test_audio <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;woman1_wb.wav&quot;</span>, <span class="at">package =</span> <span class="st">&quot;googleLanguageR&quot;</span>)</span></code></pre></div>
+<p>We can now call the API via the function <code>gl_speech()</code>. Here you will have to specify the quantity of interest, namely the <code>audio_source</code> (this can either be a local file or a Google Cloud Storage URI) as well as the <code>languageCode</code> (language spoken in your audio file).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="google-speech-to-text-api.html#cb33-1" aria-hidden="true" tabindex="-1"></a>audio_data <span class="ot">&lt;-</span> <span class="fu">gl_speech</span>(<span class="at">audio_source=</span>test_audio, <span class="at">languageCode =</span> <span class="st">&quot;en-GB&quot;</span>)</span></code></pre></div>
+<p>The result is a list containing two dataframes: <code>transcript</code> and <code>timings</code>.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="google-speech-to-text-api.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(audio_data<span class="sc">$</span>transcript)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;1&quot;
+## 
+## [[2]]
+## [1] &quot;transcript&quot;   &quot;confidence&quot;   &quot;languageCode&quot; &quot;channelTag&quot;</code></pre>
+<p>The <code>timings</code> dataframe stores timestamps telling us when each specific term was recognised. The <code>transcript</code> dataframe importantly provides the transcript as well as a confidence score. We can see that the transcript misses one term (“a”) and indicates its confidence with a score close to 1.0.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="google-speech-to-text-api.html#cb36-1" aria-hidden="true" tabindex="-1"></a>audio_data<span class="sc">$</span>transcript<span class="sc">$</span>transcript</span></code></pre></div>
+<p><em>to administer medicine to animals is frequently very difficult matter and yet sometimes it’s necessary to do so</em></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="google-speech-to-text-api.html#cb37-1" aria-hidden="true" tabindex="-1"></a>audio_data<span class="sc">$</span>transcript<span class="sc">$</span>confidence <span class="co">#0.92</span></span></code></pre></div>
+<pre><code>## [1] &quot;0.9151854&quot;</code></pre>
+</div>
+<div id="social-science-examples-4" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Social science examples</h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>Similar to our note on social science research examples for Google’s Translation API, we are not aware of research that made explicit usage of Google’s Speech-to-text API.
+However, and especially in combination with the Translation API, we are convinced that speech-to-text conversion can be of great advantage for all kinds of qualitative or mixed-methods research projects.</p>
+
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Edmondson2017-pv" class="csl-entry">
+Edmondson, Mark. 2017. <span>“Google Cloud Speech <span>API</span>.”</span> <a href="https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html">https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="google-places-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="instagram-graph-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

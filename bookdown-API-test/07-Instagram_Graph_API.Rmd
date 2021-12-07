@@ -1,0 +1,119 @@
+
+# Instagram Graph API
+<chauthors>Philipp Kadel</chauthors>
+<br><br>
+
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The Instagram Graph API is provided by Facebook. There are two main APIs for Instagram, the Instagram Basic Display API and the [Instagram Graph API]("https://developers.facebook.com/docs/instagram-api?locale=en_US"). The latter is described in the following.
+
+The API can be used to get and manage published photos, videos, and stories as well as getting basic data about other Instagram Business users and Creators. It is also possible to moderate comments and their replies and to measure media and profile interaction. Photos and videos can be published directly from the API. It can also be used to discover hashtagged media and mentions.
+
+For photos and videos different metrics can be obtained:
+
+* engagement	– Total number of likes and comments on the media object.
+* Impressions – Total number of times the media object has been seen.
+* Reach – Total number of unique accounts that have seen the media object.
+* Saved – Total number of unique accounts that have saved the media object.
+* Video_views – (Videos only) Total number of times the video has been seen. Returns 0 for videos in carousel albums.
+
+Likewise, there are several metrics about stories that are provided by the API:
+
+* Exits – Number of times someone exited the story.
+* Impressions – Total number of times the story has been seen.
+* Reach – Total number of unique accounts that have seen the story.
+* Replies	 – Total number of replies to the story.
+* Taps_forward – Total number of taps to see this story’s next photo or video.
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here]("https://developers.facebook.com/docs/instagram-api/getting-started").
+
+
+## Simple API call
+* *What does a simple API call look like?*
+
+Below you can find expamples of simple API calls for the Instagram Graph API.
+
+Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comments_count”, “like_count”, or “timestamp”.
+
+* GET (“https://graph.facebook.com/v10.0/{ig-media-id} ?fields={fields} &access_token={access-token}”)
+
+Example:
+
+```{r echo=TRUE, eval=FALSE}
+GET (“https://graph.facebook.com/v10.0/17895695668004550
+      ?fields=id,media_type,media_url,owner,
+      timestamp&access_token=IGQVJ...”)
+```
+
+Response:
+
+```{r echo=TRUE, eval=FALSE}
+{
+  "id": "17895695668004550",
+  "media_type": "IMAGE",
+  "media_url": "https://fb-s-b-a.akamaihd.net/h-ak-fbx/t51.2885-9/21227247_1640962412602631_3222510491855224832_n.jpg?_nc_log=1",
+  "owner": {
+    "id": "17841405822304914"
+  },
+  "timestamp": "2017-08-31T18:10:00+0000"
+```
+
+
+Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag without the “#” symbol or a hashtag ID. 
+
+* GET (“https://graph.instagram.com/{ig-hashtag-id}
+?fields={fields}
+&access_token={access-token}”)
+
+Example:
+
+```{r echo=TRUE, eval=FALSE}
+GET (“https://graph.facebook.com/17841593698074073
+?fields=id,name
+&access_token=EAADd...”)
+```
+
+Response:
+
+```{r echo=TRUE, eval=FALSE}
+{ "id": "17841593698074073",
+  "name": "coke" }
+```
+
+Get fields and edges on an Instagram Business or Creator Account. Fields can be e.g., “biography”, “id”, “followers_count”, or “media_count”.
+
+* GET (“https://graph.facebook.com/v10.0/{ig-user-id}?fields={fields} &access_token={access-token}”)
+
+Example:
+
+```{r echo=TRUE, eval=FALSE}
+GET (“https://graph.facebook.com/v3.2/17841405822304914
+      ?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...”)
+```
+
+Response:
+
+```{r echo=TRUE, eval=FALSE}
+{  "biography": "Dino data crunching app",
+  "id": "17841405822304914",
+  "username": "metricsaurus",
+  "website": "http://www.metricsaurus.com/" }
+```
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+The `httr` package can be used to access the Instagram Graph API. There used to be a `instaR` package but it was made for the old Instagram API and can not be used anymore. The [`FBinsightsR`]("https://rdrr.io/github/Deducive/FBinsightsR/") package provides access to the Insights API. Its `fbins_insta` function can be used to collect Instagram insights. Detailed information on the packages' functions can be found [here]("https://github.com/Deducive/FBinsightsR/blob/master/R/functions.R") and more information on the deprecated `instaR` package [here]("https://stackoverflow.com/questions/54488186/instagram-api-in-r-deprecated-need-to-use-graph-facebook-com").
+
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+In their study, @Ferwerda2015-db tried to infer personality traits from the way users take pictures and apply filters to them. The authors found distinct picture features (e.g., hue, brightness, saturation) that are related to personality traits. @Brown2019-jp investigated the link between acute suicidality and language use as well as activity on Instagram. Differences in activity and language use on Instagram were not associated with acute suicidality. The goal of a study by @Hosseinmardi2015-yc was to automatically detect and predict incidents of cyberbullying on Instagram. Based on a sample data set consisting of Instagram images and their associated comments, media sessions were labeled for cyberbullying. Associations are investigated between cyberbullying and a host of features such as cyber aggression, profanity, social graph features, temporal commenting behavior, linguistic content, and image content.
+

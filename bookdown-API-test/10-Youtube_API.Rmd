@@ -1,0 +1,168 @@
+
+# Youtube API
+<chauthors>Melike Kaplan, Jana Klein</chauthors>
+<br><br>
+```{r cache-ch10, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The API is provided by Google, Youtube’s parent company.
+
+There are different types of Youtube APIs that serve different purposes:
+
+1. **YouTube Analytics API:** retrieves your YouTube Analytics data.
+2. **YouTube Data API v3:** provides access to YouTube data, such as videos, playlists, and channels.
+3. **YouTube oEmbed API:** [oEmbed](https://oembed.com/) is an elegant way to embed multimedia for a link.
+4. **YouTube Reporting API:** Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
+
+The [google developer site](https://developers.google.com/youtube/v3/sample_requests) provides sample requests and a summary of the possible metrics that the API can give you data on. You can actually run your API requests there. All the possible calls you can make are provided on the page: Captions, ChannelBanners, Channels, ChannelSection, Comments, CommentThreads, i18nLanguages, i18nRegrions, Members, MembershipLevels, Playlistitems, Playlists, Search, Subscriptions, Thumbnails, VideoAbuseReportReasons, VideoCategories, and Videos.
+
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+
+First, you will need a Google account which you will use to log into the Google Cloud Platform. You will need to create a new project unless you already have one ([here you can find more information](https://cloud.google.com/resource-manager/docs/creating-managing-projects)). Then, you can search for the four Youtube APIs (YouTube Analytics API, YouTube Data API v3, YouTube oEmbed API, YouTube Reporting API) mentioned above and enable them ([here you can find more information](https://support.google.com/googleapi/answer/6158841?hl=en)).
+
+Then, continue to the “APIs and Services” Page from the sidebar and click on “Credentials.” Click on “+ Create Credentials” at the top of the page. You have three options here: API Key, OAuth client ID or Service account. An API Key will identify your project with a simple key to check quota and access but if you wish to use the YouTube API for your app, you should create an OAuth client ID which will request user consent so that your app can access the user’s data. This is also necessary when you want to use the tuber package.  A Service account enables server to server, app-level authentication using robot accounts. We will continue with the option of creating an API Key, and later we provide an example of using the OAuth Client ID with the tuber package.
+
+When you click on “API Key” in the “+Create Credentials” list, a screen will appear like below:
+
+![](figures/Image_Youtube_API.png)
+
+Your key is created! It is important to restrict the key!
+
+
+## Simple API call
+* *What does a simple API call look like?*
+
+The base URL is https://www.googleapis.com/youtube/v3/.
+With the following API call we tried to get the channel statistics from the SWR youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.
+https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCy4_zQ59zmS7zO4Dc6vbT_w&key=[Your_API_Key]
+However, this call did not work for us, we got an error code 400 that said that our API key is not valid.
+
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+Example to get channel statistics:
+
+```{r message=FALSE, warning=FALSE}
+library(httr)
+library(jsonlite)
+library(here)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r message=FALSE, warning=FALSE}
+
+#save your API key in the object key
+key<-"Your_API_Key"
+
+#YouTube channels either have a channel id or a user id
+ZDF_Magazin_Royle<-"UCNNEMxGKV1LsKZRt4vaIbvw" #channel id
+Boilerroom <- "brtvofficial" #user id
+
+#save the base URL in the object base
+base<- "https://www.googleapis.com/youtube/v3/"
+
+#get channel info with channel id
+api_params <- 
+  paste(paste0("key=", key), 
+        paste0("id=", ZDF_Magazin_Royle), 
+        "part=snippet,contentDetails,statistics",
+        sep = "&")
+api_call <- paste0(base, "channels", "?", api_params)
+api_result <- GET(api_call)
+json_result <- content(api_result, "text", encoding="UTF-8")
+
+#format json into dataframe
+channel.json <- fromJSON(json_result, flatten = T)
+channel.df <- as.data.frame(channel.json)
+
+#example with a username
+api_params2 <- 
+  paste(paste0("key=", key), 
+        paste0("forUsername=", Boilerroom), 
+        "part=snippet,contentDetails,statistics",
+        sep = "&")
+api_call2 <- paste0(base, "channels", "?", api_params2)
+api_result2 <- GET(api_call2)
+json_result2 <- content(api_result2, "text", encoding="UTF-8")
+
+#format json into dataframe
+channel.json2 <- fromJSON(json_result2, flatten = T)
+channel.df2 <- as.data.frame(channel.json2)
+
+
+```
+
+On CRAN we found the [“tuber” package](https://cran.r-project.org/web/packages/tuber/index.html). The package enables you to get the comments posted on YouTube videos, number of likes of a video, search for videos with specific content and much more. You can also scrape captions from a few videos. To be able to use the tuber package, not an API key but the authentication with OAuth is necessary. OAuth (Open Authorization) uses authorization tokens to prove an identity between consumers and service providers. You can get your client ID and secret on the Google Cloud Platform under Credentials.
+
+1) Setting up the “Consent Screen”  
+First we had to configure the so-called OAuth consent screen, where we put “external” and then had to put an app name. For scopes we did not specify anything and just clicked save & continued. To be able to use the API you have to set your own google mail address that you use for the Google cloud.
+
+2) Get OAuth credentials  
+After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the Yt_oauth function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
+
+[This page](https://www.storybench.org/how-to-download-youtube-data-in-r-using-tuber-and-purrr/) provides some example API calls you can make with the tuber package.
+
+```{r }
+library(tuber) # youtube API
+library(magrittr) # Pipes %>%, %T>% and equals(), extract().
+library(tidyverse) # all tidyverse packages
+library(purrr) # package for iterating/extracting data
+```
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+#save client id and secret in an object
+client_id<-"put client ID"
+client_secret<-"put client secret"
+
+# use the youtube oauth 
+yt_oauth(app_id = client_id,
+         app_secret = client_secret,
+         token = '')
+
+#Downloading playlist data
+#first get playlist ID
+go_psych_playlist_id <- stringr::str_split(
+  string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
+  pattern = "=", 
+  n = 2,
+  simplify = TRUE)[ , 2]
+go_psych_playlist_id
+
+#use the tuber function get_playlist_items to collect the videos into a data frame
+
+go_psych <- tuber::get_playlist_items(filter = 
+                                                c(playlist_id = "PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM"), 
+                                              part = "contentDetails",
+                                              # set this to the number of videos
+                                              max_results = 200) 
+
+# check the data for go Psych
+#now we have the video ids of all videos in that playlist
+go_psych %>% dplyr::glimpse(78)
+```
+
+Package information:  
+ * [CRAN - Package tuber](https://cran.r-project.org/web/packages/tuber/index.html)  
+ * [here](https://cran.r-project.org/web/packages/tuber/tuber.pdf) you can find all the functions that the tuber package provides
+
+
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+In the study “Identifying Toxicity Within YouTube Video Comment” (@Obadimu2019), the researchers utilized the YouTube Data API to collect the comments from eight YouTube channels that were either pro- or anti NATO. To the comments, five types of toxicity scores were assigned to analyze hateful comments. With word clouds the researchers were able to quantify the count of words from comments. The final dataset contained 1,424 pro-NATO videos with 8,276 comments, and 3,461 anti-NATO videos with 46,464 comments.  
+
+The aim of the study “YouTube channels, uploads and views: A statistical analysis of the past 10 years” (@Baertl2018) was to give an overview on how YouTube developed over the past 10 years in terms of consumption and production of videos. The study utilizes a random sample of channel and video data to answer the question. The data is retrieved with the YouTube API (did not specify which one) combined with a tool that generated random string searches to find a near-random sample of channels created between 01.01.2016 and 31.12.2016. Results are that channels, views and video uploads differ according to video genre. Furthermore, the analysis revealed that the majority of views are obtained by only a few channels. On average, older channels have a larger amount of viewers.   
+
+In the study “From ranking algorithms to ‘ranking cultures’: Investigating the modulation of visibility in YouTube search results” (@Rieder2018), YouTube is conceptualized as an influential source of information that uses a socio-algorithmic process in order to place search recommendations in a hierarchy. This process of ranking is considered to be a construction of relevance and knowledge in a very large pool of information. Therefore, the search function serves as a curator of recommended content. The information that is being transmitted in this content can also impose certain perspectives on users which is why how the algorithm works is especially important when it comes to controversial issues. In order to better understand how the algorithms that determine search rankings on YouTube work, the authors use a scraping approach and the YouTube API v3 to study the ranking of certain sociocultural issues over time. Examples of the keywords that they use are ‘gamergate,’ ‘trump,’ ‘refugees’ and ‘syria.’ They find three general types of morphologies of rank change.  

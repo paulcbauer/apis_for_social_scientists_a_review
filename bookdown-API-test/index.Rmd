@@ -1,0 +1,29 @@
+--- 
+title: "<center>APIs for social scientists:<br>A collaborative review</center>"
+author: "<center><h5><blue>Editors (this version):</blue><br>Paul C. Bauer, Camille Landesvatter<br><br><blue>Authors & contributors:</blue><br>Paul C. Bauer, Jan Behnert, Lion Behrens, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle, Malte Söhren</h5></center>"
+date: '<center><h5><blue>First public version:</blue> 29 November, 2021<br><blue>This version:</blue> `r format(Sys.time(), "%d %B, %Y")`</h5></center>'
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: ["references_overall.bib"]
+biblio-style: apalike
+link-citations: yes
+mainfont: cochineal
+sansfont: Linux Biolinum O
+description: "This book provides an introduction to different APIs that may be useful to social scientists."
+---
+
+# Preface {-}
+The present online book provide a review of APIs that may be useful for social scientists. Please start by reading the [Introduction]. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding [github repository](https://github.com/paulcbauer/apis_for_social_scientists_a_review). If you are interested in contributing please check out the Section [How to contribute](https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute) in the github README.
+
+The material is licensed under a [Apache License 2.0](https://en.wikipedia.org/wiki/Apache_License) license. Where we draw on other authors material other licenses may apply. We are extremely grateful for feedback and if you find errors please let us know.
+
+This document was generated with [R](https://www.r-project.org/), [RMarkdown](http://rmarkdown.rstudio.com/) and [Bookdown](https://bookdown.org/).
+
+
+
+
+
+
+
+

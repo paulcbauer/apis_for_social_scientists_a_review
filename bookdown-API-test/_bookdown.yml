@@ -1,0 +1,5 @@
+book_filename: "2021_apis_for_social_scientists_a_collaborative_review"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "

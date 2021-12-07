@@ -1,0 +1,53 @@
+# Introduction
+This project *APIs for Social Scientists: A collaborative Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will be help future students to start diving into different APIs.
+
+Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions: 
+
+* What data/service is provided by the API? (+ who provides it?)
+* What are the prerequisites to access the API (e.g., authentication)? 
+* What does a simple API call look like? 
+* How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?
+
+
+## Prerequesits: Authentication
+A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding [repository]("https://github.com/paulcbauer/apis_for_social_scientists_a_review") of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.
+
+<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
+
+
+## Prerequesits: Software & packages
+The code examples rely R and different packages thereof. It's probably easiest if you install all of them in one go. The `p_load()` function (`pacman` package) checks whether packages are installed. If not they are installed and loaded.
+
+<!-- add all used packages -->
+
+```{r eval=FALSE, include=TRUE}
+library(pacman)
+pacman::p_load(
+  dplyr, # needed for almost any chapter in this review
+  ggplot2, # e.g. CH5
+  tidytext, # comes in handy whenever text data is being pre-processed (CH2)
+  devtools, # to download any package from github (e.g., RCrowdTangle in CH4)
+  jsonlite, # import of JSON formats (e.g., CH4)
+  httr, # Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)
+  googleLanguageR, # allows different API calls for languga processing (CH2, CH3)
+  RCrowdTangle, #CH4
+  googleway, #CH5
+  mapsapi, #CH5
+  stars, #CH5
+  httr,
+  WikipediR # CH12
+)
+
+# Move these installations before pacman?
+devtools::install_github("quanteda/quanteda.corpora")
+devtools::install_github("cbpuschmann/RCrowdTangle")
+```
+
+
+
+<!--
+* Data vs. machine learning APIS
+* Problem of replicability for ML APIs
+-->
+
+

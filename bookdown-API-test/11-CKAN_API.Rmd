@@ -1,0 +1,133 @@
+
+# CKAN API
+<chauthors>Barbara K. Kreis</chauthors>
+<br><br>
+
+```{r cache-ch11, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.  
+This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Switzerland and many more.
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+All of CKAN’s core features can be accessed via the CKAN API (Open Knowledge Foundation)  
+With the CKAN API, you can  
+
+* Get a JSON-formatted list of a site’s objects, datasets or groups.
+* Get a full JSON representation of an object, e.g. a dataset.
+* Search for any packages (datasets) or resources that match a query.
+* Get an activity stream of recently changed datasets on a site.  
+
+Please see the following [link](https://docs.ckan.org/en/2.8/api/index.html) for more information on the services provided by the CKAN API and some specific examples.  
+When it comes to the specific datasets on the government sites, there are two types that can be accessed: specific datasets and meta data sets.  
+For example, the [German](https://www.govdata.de/impressum) and the [US Government](https://www.gsa.gov/about-us/organization/federal-acquisition-service/technology-transformation-services) have a website each, where you can get access to metadata that include descriptions and URLs about the specific open datasets that can be accessed. These meta datasets can be a starting point for research on a specific topic.  
+The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal [govdata.de](https://www.govdata.de/impressum) for example serves as a collection point for all those data from various institutions. Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.
+
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN.
+
+## Simple API call
+* *What does a simple API call look like?*
+
+When a user wants to make an API call, two use cases have to be distinguished: Calling meta-data and calling specific datasets. 
+
+*Meta-datasets* 
+
+When calling the meta data, the DCAT catalog has to be queried. DCAT-AP.de is a German metadata model to exchange open government data. For more information and information on the meta data structure, see this [website](https://www.dcat-ap.de/).  
+The API call for the DCAT catalog can deliver three formats: RDF, Turtle and JSON-LD. The type of format can be specified at the end of the request (e.g. “format=jsonld”).  
+The following API call is an example for the search term “Kinder”.
+https://ckan.govdata.de/api/3/action/dcat_catalog_search?q=kinder&format=jsonld  
+
+*Specific datasets from GovData*  
+
+To look for specific datasets, not the meta data, only little has to be changed in the URL. In the case of querying specific datasets, the response format is JSON.
+The following API call is an example when looking for the first 5 packages (datasets) that contain the search term “Kinder” (=children).  
+https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder
+
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+The CKAN API can be accessed from R with the [httr package](https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html) or the [ckanr package](https://cran.r-project.org/web/packages/ckanr/ckanr.pdf).  
+Please note that as a scientist you can only use GET requests. All kinds of POST requests are restricted to government employees that work at the institutions which provide the data sets.
+
+
+```{r echo=TRUE, eval=FALSE}
+# CKAN API #
+# Option 1: Use the httr package to access the API
+
+library(httr) # required to work with the API
+
+# With the following query we get the same information as described in the paragraph above
+
+base_url <- "https://www.govdata.de/ckan/api/3/action/resource_show"
+berlin <- GET(base_url, query=list(q="kinder",rows=5))
+``` 
+
+```{r warning=FALSE, eval=FALSE}
+# Option 2: Use the ckanr package to access the API
+
+# load relevant packages
+library(tidyverse)
+library(ckanr)
+library(jsonlite)
+library(readxl)
+library(curl)
+library(readxl)
+
+#connect to the website
+url_site <- "https://www.govdata.de/ckan"
+ckanr_setup(url = url_site)
+
+# first, let's see which groups are on this site
+group_list(as = "table")
+
+
+#you can see there are different groups
+#now we want to look at them in more detail
+group_list(limit = 2)
+
+# now you can look for the specific packages
+package_list(as = "table")
+
+# now, let's look at a specific package more closely, to get some more information
+package_show("100-jahre-stadtgrun-stadtpark-und-volkspark")
+
+# now, let's do a more specific search for specific resources (we look at Kinder = kids/ children)
+x <- resource_search(q = "name:Kinder", limit = 3)
+x$results
+
+# here you get the name, the Description (not always filled out) and the data format
+
+# now we want to have a closer look at the second resource (day care for children)
+# we need to get the url, by using the resource number
+
+url<-resource_show(id ="a8413550-bf4d-40f3-921a-941da3fce132")
+url$url
+
+# with the url, we can now import the data
+url <- ("https://geo.sv.rostock.de/download/opendata/kindertagespflegeeinrichtungen/kindertagespflegeeinrichtungen.csv")
+destfile <- ("kindertagespflegeeinrichtungen.csv")
+curl::curl_download(url, destfile)
+
+kindertagespflegeeinrichtungen <- read_csv(destfile)
+View(kindertagespflegeeinrichtungen)
+
+# in this file, you can now for example look at the opening hours of the day cares in Rostock (a German city)
+```
+
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+When looking for social science research that used the CKAN API and Open Government data (OGD), it seems that there is more papers and research on the usage of those data, than on the data themselves (@Bedini2014, @Correa2015).
+In a recent paper that examines the use of OGD (@Quarati2019-jf), the authors come to the conclusion, that on the one hand many OGD portals lack information about data usage, and on the other hand, where those information can be found, it becomes obvious that the data are only rarely used.  
+For example, regarding the German OGD portal “GovData.de”, I did not find any social science papers that specifically used data from GovData.de. However, there are a few papers available that describe the German open data initiative (@Liu2018) and the metadata (@Marienfeld2013) that can be found on GovData.de.

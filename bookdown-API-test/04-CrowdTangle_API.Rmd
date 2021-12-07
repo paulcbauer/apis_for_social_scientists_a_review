@@ -1,0 +1,175 @@
+
+# CrowdTangle API
+<chauthors>Lion Behrens and Pirmin Stöckle</chauthors>
+<br><br>
+
+```{r cache-ch4, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+CrowdTangle is a public insights tool, whose main intent was to monitor what content overperformed in terms of interactions (likes, shares, etc.) on Facebook and other social media platforms. In 2016, CrowdTangle was acquired by Facebook that now provides the service.
+
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+CrowdTangle allows users to systematically follow and analyze what is happening with public content on the social media platforms of Facebook, Twitter, Instagram and Reddit.
+The data that can be assessed through the CrowdTangle API consists of any post that was made by a public page, group or verified public person who has ever acquired more than 110,000 likes since the year 2014 or has ever been added to the list of tracked public accounts by any active API user. If a new public page or group is added, data is pulled back from day one.
+
+Data that is tracked:
+
+* Content (the content of a post, including text, included links, links to included images or videos)
+* Interactions (count of likes, shares, comments, emoji-reactions)
+* Page Followers
+* Facebook Video Views
+* Benchmark scores of all metrics from the middle 50% of posts in the same category (text, video) from the respective account
+
+Data that is not tracked:
+
+* Comments (while the number of comments is included, the content of the comments is not)
+* Demographical data
+* Page reach, traffic and clicks
+* Private posts and profiles
+* Ads only appear in the ad library (which is public), boosted content cannot differentiated from organic content
+
+CrowdTangle’s database is updated once every fifteen minutes and comes as time-series data which merges the content of a post on one of the included platforms (a text post, video, or image) alongside aggregate information on the post’s views, likes and interactions.
+
+When connecting to the user interface via the CrowdTangle website, the user can either manually set up a list of pages of interest whose data should be acquired. Alternatively, one can choose from an extensive number of pre-prepared lists covering a variety of topics, regions, or socially and politically relevant events such as inaugurations and elections. Data can be downloaded from the user interface as csv files or as json files via the API.
+
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+
+Full access to the CrowdTangle API is only given to Facebook partners who are in the business of publishing original content or fact-checkers as part of Facebook’s Third-Party Fact-Checking program.
+From 2019, the CrowdTangle API and user interface is also available for academics and researchers in specific fields. Currently, this prioritization includes research on one of the following fields: misinformation, elections, COVID-19 racial justice, well-being. To get access to CrowdTangle, a formal request has to be filed via an online form, asking for a short description of the research project and intended use of the data.
+
+As a further restriction, CrowdTangle currently only allows academic staff, faculty and registered PhD students permission to obtain a CrowdTangle account. This does not include individuals enrolled as students at a university unless they are employed as research assistants. Also, certain access policies differ between academics and the private sector. Usage of CrowdTangle for research purposes does currently not provide access to any content posted on Reddit given that data is retrieved via the Application Programming Interface. Content from Reddit is open to every registered user only when navigating through the company’s dynamic user interface that does not imply usage of any scripting language.
+Finally, the CrowdTangle API requires researchers to log in using an existing Facebook account.
+Overall, access to the API is quite restrictive, both because of the prioritization of certain research areas, and because the access request will be decided individually so that an immediate access is not possible. If access is granted, CrowdTangle provides quite extensive onboarding and training resources to use the API.
+
+*Replicability*
+
+Access to CrowdTangle is gated and Facebook does not allow data from CrowdTangle to be published. So researchers can publish aggregate results from analyses on the data, but not the original data, which might be problematic for the replicability of research conducted with the API. A possible workaround is that you can pull ID numbers of posts in your dataset, which can then be used by anyone with a CrowdTangle API access to recreate your dataset.
+CrowdTangle also provides some publicly available features such as a Link Checker Chrome Extension, allowing users to see how often a specific link has been shared on social media, and a curated public hub of Live displays, giving insight about specific topics on Facebook, Instagram and Reddit.
+
+
+
+## Simple API call
+* *What does a simple API call look like?*
+
+All requests to the CrowdTangle API are made via GET to https://api.crowdtangle.com/.
+
+In order to access data, users log in on the website with their Facebook account and acquire a personalized token. The CrowdTangle API expects the API token to be included in each query.
+With one of these available endpoints, each of which comes with a set of specific parameters:
+
+ |
+------------- | -------------
+GET /posts  | Retrieve a set of posts for the given parameters.
+GET /post | Retrieves a specific post.
+GET /posts/search | Retrieve a set of posts for the given parameters and search terms.
+GET /leaderboard | Retrieves leaderboard data for a certain list or set of accounts.
+GET /links | Retrieve a set of posts matching a certain link.
+GET /lists | Retrieve the lists, saved searches and saved post lists of the dashboard associated with the token sent in.
+
+
+*A simple example: Which party or parties posted the 10 most successful Facebook posts this year?*
+
+On the user interface, I created a list of the pages of all parties currently in the German Bundestag. We want to find out which party or parties posted the 10 most successful posts (i.e. the posts with the most interactions) this year.
+
+The respective API call looks like that:
+[https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10]("https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10"]), where token is the personal API key, and listIDs is the ID of the list created with the user interface. Here, we sortBy total interactions with the startDate at the beginning of this year and the output restricted to count 10 posts.
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
+
+```{r echo=TRUE, eval=FALSE}
+
+
+# Option 1: Accessing the API with base "httr" commands
+library(httr)
+ 
+ct_posts_resp <- GET("https://api.crowdtangle.com/posts",
+    query=list(token = token, # API key has to be included in every query
+               listIds = listIds, # ID of the created list of pages or groups
+               sortBy = "total_interactions",
+               startDate = "2021-01-01",
+               count = 10))
+ 
+ct_posts_list <- content(ct_posts_resp)
+class(ct_posts_list) # verify that the output is a list
+ 
+# List content
+str(ct_posts_list, max.level = 3) # show structure & limit levels
+ 
+# with some list operations we can get a dataframe with the account name and post date of the 10 posts with the most interactions in 2021 among the pages in the list
+list_part <- rlist::list.select(ct_posts_list$result$posts, account$name, date)
+rlist::list.stack(list_part)
+
+```
+
+Alternatively, we can use a wrapper function for R, which is provided by the RCrowdTangle package available on [github]("https://github.com/cbpuschmann/RCrowdTangle"). The package provides wrapper functions for the /posts, /posts/search, and /links endpoints. Conveniently, the wrapper function directly produces a dataframe as output, which is typically what we want to work with. As the example below shows, the wrapper function may not include the specific information we are looking for, however, as the example also shows, it is relatively straightforward to adapt the function on our own depending on the specific question at hand.
+To download the package from github, we need to load the devtools package, and to use the wrapper function, we need dplyr and jsonlite.
+
+```{r echo=TRUE, eval=FALSE}
+
+# Option 2: There is a wrapper function for R, which can be downloaded from github
+
+library(devtools) # to download from github
+ 
+install_github("cbpuschmann/RCrowdTangle")
+library(RCrowdTangle)
+ 
+# The R wrapper relies on jsonlite and dplyr
+library(dplyr)
+library(jsonlite)
+ 
+ct_posts_df <- ct_get_posts(listIds, startDate = "2021-01-01", token = token)
+ 
+#conveniently, the wrapper function directly produces a dataframe
+class(ct_posts_df)
+ 
+# to sort by total interactions we have to compute that figure because it is not part of the dataframe
+ct_posts_df %>%
+  mutate(total_interactions = statistics.actual.likeCount+statistics.actual.shareCount+ statistics.actual.commentCount+  statistics.actual.loveCount+ statistics.actual.wowCount+ statistics.actual.hahaCount+ statistics.actual.sadCount+
+           statistics.actual.angryCount+ statistics.actual.thankfulCount+ statistics.actual.careCount) %>%
+  arrange(desc(total_interactions)) %>%
+  select(account.name, date) %>%
+  head(n=10)
+ 
+# alternatively, we can adapt the wrapper function by ourselves to include the option to sort by total interactions
+ct_get_posts <- function(x = "", searchTerm = "", language = "", types= "", minInteractions = 0, sortBy = "", count = 100, startDate = "", endDate = "", token = "")
+{
+  endpoint.posts <- "https://api.crowdtangle.com/posts"
+  query.string <- paste0(endpoint.posts, "?listIds=", x, "&searchTerm=", searchTerm, "&language=", language, "&types=", types, "&minInteractions=", minInteractions, "&sortBy=", sortBy, "&count=", count, "&startDate=", startDate, "&endDate=", endDate, "&token=", token)
+  response.json <- try(fromJSON(query.string), silent = TRUE)
+  status <- response.json$status
+  nextpage <- response.json$result$pagination$nextPage
+  posts <- response.json$result$posts %>% select(-expandedLinks, -media) %>% flatten()
+  return(posts)
+}
+ 
+ct_posts_df <- ct_get_posts(listIds, sortBy = "total_interactions", startDate = "2021-01-01", token = token)
+ 
+ct_posts_df %>%
+  select(account.name, date) %>%
+  head(n=10)
+
+
+```
+
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+A common use case is to track the spread of specific links containing misinformation, e.g. conspiracy around the connection of COVID-19 and 5G (@Bruns2020-pl).
+@Berriche2020-dt provide an in-depth analysis of a specific page involved in online health misinformation and investigate factors driving interactions with the respective posts. They find that users mainly interact to foster social relations, not to spread misinformation.
+CrowdTangle has also been used to study changes in the framing of vaccine refusal by analyzing content of posts by pages opposing vaccinations over time (@Broniatowski2020-rh).
+Another approach is to monitor political communication of political actors, specifically in the run-up to elections. @Larsson2020-iu investigates a one-month period before the 2018 Swedish election and finds that right-wing political actors are more successful than mainstream actors in engaging their Facebook followers, often using sensational rhetoric and hate-mongering.
+
+
+
