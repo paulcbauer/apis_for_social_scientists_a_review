@@ -20,7 +20,7 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Phili
 ### How to contribute?
 * Provide feedback and let us know where you got stuck
 * Correct errors and provide corresponding commits
-* Write another review chapter of an API (contact us by [Email](mailto:mail@paulcbauer.eu) beforehand please)
+* Write another review chapter of an API (contact us by [Email](mailto:apireviews.editors@gmail.com) beforehand please)
 * Add references to (your) published research examples that use the corresponding APIs (see examples)
  
 ## How will we keep the reviews up to date?
