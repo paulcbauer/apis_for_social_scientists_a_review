@@ -9,7 +9,7 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Phili
 
 ## Interested in contributing?
 
- &#8594; [Let us know!](mailto:mail@paulcbauer.eu) :email:  
+ &#8594; [Let us know!](mailto:apireviews.editors@gmail.com) :email:  
 
 ### Why contribute?
 * You can learn about an API by writing about it :bulb:
