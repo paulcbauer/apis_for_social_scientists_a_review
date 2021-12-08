@@ -1,0 +1,127 @@
+# Best Practices
+<chauthors>Chung-hong Chan</chauthors>
+<br><br>
+
+When working with 3rd party APIs, please make sure you follow the best practices.
+
+## Read the Developer Agreement, Policy and API Documentation
+
+You must read the Developer Agreement, Policy and API documentation. It is still true even though you are going to use the R packages providing the wrapper functions (e.g. RCrowdTangle, tuber, academictwitteR etc.)
+
+First, the Developer Agreement and Policy provide information on what you can and cannot do with the data obtained through the API. It is important for both Open Science practices (e.g. sharing data publicly) and sharing data between individuals within the research group. Please make sure you understand the data redistribution policy. The [API provided by Twitter](https://developer.twitter.com/en/developer-terms/agreement-and-policy), for example, forbids the redistribution of Twitter Content to third parties. However, academic researchers are permitted to distribute an unlimited number of Tweet IDs and/or User IDs for peer review purposes. The [API provided](https://www.crowdtangle.com/eu-terms) by CrowdTangle basically forbids any data redistribution. This point is of paramount importance for social scientists because the Cambridge Analytica data scandal is [a case of API data abuse by an academic researcher](https://www.theguardian.com/news/2018/mar/17/cambridge-analytica-facebook-influence-us-election).
+
+Second, the API documentation provides information on what are the [expected API responses](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all) and [rate limits](https://developer.twitter.com/en/docs/twitter-api/rate-limits). Knowing the information is important because you know what to expect. Also, you won't offset the problems related to the API to the R package developers.
+
+## Don't Hardcode Authentication Information into your R Code
+
+You should not hardcode your authentication information (authentication keys, secrets, tokens) into your R code. But what do I mean by that? For example, the following is an example of hardcoding.
+
+```r
+require(tuber)
+client_id <- "998136489867-5t3tq1g7hbovoj46dreqd6k5kd35ctjn.apps.googleusercontent.com"
+client_secret <- "MbOSt6cQhhFkwETXKur-L9rN"
+
+yt_oauth(app_id = client_id,
+         app_secret = client_secret,
+         token = '')
+```
+
+This is not a good practice for two reasons. First, your `client_id` and `client_secret` are directly visible in your R code. It is super easy to accidentally leak these supposedly secret information while sharing your code. Even supposedly professional programmers [do that quite often](https://github.com/search?p=1&q=client_secret&type=Code). Also unlike a typical password system which renders these secret information as asterisks, it enables the so-called ["shoulder surfing attack"](https://en.wikipedia.org/wiki/Shoulder_surfing_(computer_security)): a malicious actor can obtain these information by simply looking (or videotaping through a tele lens) at your computer screen over your shoulder.
+
+Second, when you run your code, your `client_id` and `client_secret` are burnt into your command history. A malicious person can browse through your command history to obtain these information.
+
+You might wonder, well, they are just two pieces of string. No big deal. But please bare in mind these information is not simply for collecting data from YouTube. It could also be the credential for your Google Cloud access. Frequent access to some API endpoints that require money can incur financial loss. Other APIs such as Twitter v1 APIs allow [deletion of data](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id), [posting data](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update) or [reading all your direct messages](https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/api-features) on your behalf, simply with your API authentication information. So please: PROTECT YOUR AUTHENTICATION INFORMATION LIKE YOUR PASSWORDS!
+
+### Alternative: Use Environment Variables
+
+So, what is the alternative? A securer solution is to use store your authentication information as [environment variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) (envvars) instead. Specifically, you should store your authentication information as your *user-level* envvars.
+
+For a quick experimentation, run this:
+
+```r
+usethis::edit_r_environ(scope = "user")
+```
+
+If you are doing this in RStudio, a new file is now opened. That is your user-level `.Renviron` file. It is a hidden file (indicated by the ".") in your user directory [^1].
+
+For most people, it should be a blank file. For some, the file might already have something in it. Now, in the file, put this line into it:
+
+```
+MYSECRET=ROMANCE
+```
+
+This line says: I want to create a user-level envvar called "MYSECRET" with the value being "ROMANCE". Please note that this is not R and you must use the equal sign. As instructed, save the file and then restart R.
+
+In the fresh R session, you can now retrieve the value of the environment variable "MYSECRET". If you did that correctly, running this should give you the value of "MYSECRET", i.e. "ROMANCE".
+
+```r
+## You should get "ROMANCE"
+Sys.getenv("MYSECRET")
+```
+
+The practice is to setup envvars of your authentication information. For example, in your `.Renviron` set up the following envvars.
+
+```
+YT_CLIENTID=998136489867-5t3tq1g7hbovoj46dreqd6k5kd35ctjn.apps.googleusercontent.com
+YT_CLIENTSECRET=MbOSt6cQhhFkwETXKur-L9rN
+```
+
+And then in your R code, it should be:
+
+```r
+require(tuber)
+yt_oauth(app_id = Sys.getenv("YT_CLIENTID"),
+         app_secret = Sys.getenv("YT_CLIENTSECRET"),
+         token = '')
+```
+
+As long as your hidden `.Renviron` file is not leaked, you are safe. For reproducibility purposes, you should document all these envvars (the definitions, not the values) in the README file [^2].
+
+This method is not perfect, of course. For example, your `.Renviron` is a plain text file and it can still be leaked. If you want to know other alternatives, see the ["Managing secrets" vignette](https://httr.r-lib.org/articles/secrets.html) of httr.
+
+## Memoise your API Calls
+
+Many API documentation will tell you to [cache](https://developer.twitter.com/en/docs/twitter-api/rate-limits). Caching is to store a local copy of the response from the API. If you submit the exact same API request again, instead of making another API request to the server, the result is retrieved from the local copy. The technique is also called [memoisation](https://en.wikipedia.org/wiki/Memoization). This method is more useful for API responses that are not dynamically changed, e.g. [Google Natural Language API](#google-natural-language-api), [Google Places API](#google-places-api), or [CKAN API](#ckan-api). It is less useful for social media APIs because information such as number of likes changes frequently. If you are only interested in retrieving the content, you can also cache those social media APIs.
+
+Caching is good because it reduces unnecessary API requests. It is also helpful to prevent exceeding rate limit.
+
+### Implementation of memoisation in R
+
+As a quick experiment, we use an extremely simple API: [restful catAPI ](https://thatcopy.pw/catapi/rest/).
+
+```r
+library(httr)
+content(GET("https://thatcopy.pw/catapi/rest/"))
+```
+
+If you run the above code many times, you should get a different cat photo every time. However, you can create a memoised version of the `httr::GET` function called `mGET`. 
+
+```r
+library(memoise)
+mGET <- memoise(GET)
+```
+
+Similarly, you can create a memoised version of any API function, e.g.
+
+```r
+library(googleway)
+mgoogle_places <- memoise(google_places)
+```
+
+Back to the resetful catAPI example: If you run it the `mGET` instead of `GET` many times, you will get the same result over and over again.
+
+```r
+content(mGET("https://thatcopy.pw/catapi/rest/"))
+```
+
+It is because the response from the API is cached locally. All subsequent identical requests will not be made online. Instead they get fetched from the local cache. If you don't need the local cache anymore, delete it using the `forget` function.
+
+```r
+forget(mGET)
+```
+
+For more information information about memoisation, please refer to the [official website of memoise](https://memoise.r-lib.org/index.html).
+
+[^1]: For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden `.*rc` file (e.g. `.bashrc` or `.zshrc`, depending on your shell). The method is to set that up using `export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"`. The envvars defined in your `.*rc` file can also be retrieved by `Sys.getenv`. The section on [Google Translate API](#google-translate-api) actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your `.localrc` file instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.
+
+[^2]: For the people who need to use Github Actions to run or test your code, you can also store those envvars in your R code as [Github Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
