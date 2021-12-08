@@ -26,3 +26,6 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Phili
  
 ## How will we keep the reviews up to date?
 * Descriptions of and code examples for APIs are only useful when they are up to date. Our plan is to update chapters that are outdated, e.g., if an API version changes. Sometimes this might require adding new authors/contributors to a chapter if the original authors become inactive.
+
+## Useful links
+* A long list of public APIs: https://github.com/public-apis/public-apis
