@@ -21,7 +21,8 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Phili
 * Provide feedback and let us know where you got stuck
 * Correct errors and provide corresponding commits
 * Write another review chapter of an API (contact us by [Email](mailto:apireviews.editors@gmail.com) beforehand please)
-* Add references to (your) published research examples that use the corresponding APIs (see examples)
+* Add references to (your) published research examples that use the corresponding APIs
+    + To do so please check out the examples in the chapters. (1) Provide a short sentence indicating how/for what the API was used. (2) Provide the reference in bibtex format (see 'references_overall.bib') and the bibtex key you used (e.g., 'Dobbrick2021-iz').
  
 ## How will we keep the reviews up to date?
 * Descriptions of and code examples for APIs are only useful when they are up to date. Our plan is to update chapters that are outdated, e.g., if an API version changes. Sometimes this might require adding new authors/contributors to a chapter if the original authors become inactive.
