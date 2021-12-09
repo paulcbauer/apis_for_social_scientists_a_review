@@ -18,6 +18,7 @@ You should not hardcode your authentication information (authentication keys, se
 
 ```r
 require(tuber)
+## fake, taken from tuber's vignette
 client_id <- "998136489867-5t3tq1g7hbovoj46dreqd6k5kd35ctjn.apps.googleusercontent.com"
 client_secret <- "MbOSt6cQhhFkwETXKur-L9rN"
 
@@ -34,7 +35,7 @@ You might wonder, well, they are just two pieces of string. No big deal. But ple
 
 ### Alternative: Use Environment Variables
 
-So, what is the alternative? A securer solution is to use store your authentication information as [environment variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) (envvars) instead. Specifically, you should store your authentication information as your *user-level* envvars.
+So, what is the alternative? A securer solution is to store your authentication information as [environment variables](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) (envvars) instead. Specifically, you should store your authentication information as your *user-level* envvars.
 
 For a quick experimentation, run this:
 
@@ -108,7 +109,7 @@ library(googleway)
 mgoogle_places <- memoise(google_places)
 ```
 
-Back to the resetful catAPI example: If you run it the `mGET` instead of `GET` many times, you will get the same result over and over again.
+Back to the restful catAPI example: If you run it the `mGET` instead of `GET` many times, you will get the same result over and over again.
 
 ```r
 content(mGET("https://thatcopy.pw/catapi/rest/"))
@@ -120,8 +121,8 @@ It is because the response from the API is cached locally. All subsequent identi
 forget(mGET)
 ```
 
-For more information information about memoisation, please refer to the [official website of memoise](https://memoise.r-lib.org/index.html).
+For more information about memoisation, please refer to the [official website of memoise](https://memoise.r-lib.org/index.html).
 
-[^1]: For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden `.*rc` file (e.g. `.bashrc` or `.zshrc`, depending on your shell). The method is to set that up using `export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"`. The envvars defined in your `.*rc` file can also be retrieved by `Sys.getenv`. The section on [Google Translate API](#google-translate-api) actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your `.localrc` file instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.
+[^1]: For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden `.*rc` file (e.g. `.bashrc` or `.zshrc`, depending on your shell). The method is to set that up using `export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"`. The envvars defined in your `.*rc` file can also be retrieved by `Sys.getenv`. The section on [Google Natural Language API](#google-natural-language-api) actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your `.localrc` instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.
 
 [^2]: For the people who need to use Github Actions to run or test your code, you can also store those envvars in your R code as [Github Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
