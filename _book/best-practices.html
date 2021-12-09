@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> APIs for social scientists:A collaborative review  | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 2 Best Practices | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   <meta name="generator" content="bookdown 0.24.4 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" APIs for social scientists:A collaborative review  | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 2 Best Practices | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" APIs for social scientists:A collaborative review  | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 2 Best Practices | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="google-translation-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -295,35 +295,92 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><center>
-APIs for social scientists:<br>A collaborative review
-</center></h1>
-<p class="author"><em><center>
-<h5>
-<blue>Editors (this version):</blue><br>Paul C. Bauer, Camille Landesvatter<br><br><blue>Authors &amp; contributors:</blue><br>Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Pirmin Stöckle, Malte Söhren
-</h5>
-</center></em></p>
-<p class="date"><em><center>
-<h5>
-<blue>First public version:</blue> 29 November, 2021<br><blue>This version:</blue> 09 December, 2021
-</h5>
-</center></em></p>
+<div id="best-practices" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Best Practices</h1>
+<p><chauthors>Chung-hong Chan</chauthors>
+<br><br></p>
+<p>When working with 3rd party APIs, please make sure you follow the best practices.</p>
+<div id="read-the-developer-agreement-policy-and-api-documentation" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Read the Developer Agreement, Policy and API Documentation</h2>
+<p>You must read the Developer Agreement, Policy and API documentation. It is still true even though you are going to use the R packages providing the wrapper functions (e.g. RCrowdTangle, tuber, academictwitteR etc.)</p>
+<p>First, the Developer Agreement and Policy provide information on what you can and cannot do with the data obtained through the API. It is important for both Open Science practices (e.g. sharing data publicly) and sharing data between individuals within the research group. Please make sure you understand the data redistribution policy. The <a href="https://developer.twitter.com/en/developer-terms/agreement-and-policy">API provided by Twitter</a>, for example, forbids the redistribution of Twitter Content to third parties. However, academic researchers are permitted to distribute an unlimited number of Tweet IDs and/or User IDs for peer review purposes. The <a href="https://www.crowdtangle.com/eu-terms">API provided</a> by CrowdTangle basically forbids any data redistribution. This point is of paramount importance for social scientists because the Cambridge Analytica data scandal is <a href="https://www.theguardian.com/news/2018/mar/17/cambridge-analytica-facebook-influence-us-election">a case of API data abuse by an academic researcher</a>.</p>
+<p>Second, the API documentation provides information on what are the <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all">expected API responses</a> and <a href="https://developer.twitter.com/en/docs/twitter-api/rate-limits">rate limits</a>. Knowing the information is important because you know what to expect. Also, you won’t offset the problems related to the API to the R package developers.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The present online book provide a review of APIs that may be useful for social scientists. Please start by reading the <a href="introduction.html#introduction">Introduction</a>. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review">github repository</a>. If you are interested in contributing please check out the Section <a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute">How to contribute</a> in the github README.</p>
-<p>The material is licensed under a <a href="https://en.wikipedia.org/wiki/Apache_License">Apache License 2.0</a> license. Where we draw on other authors material other licenses may apply. We are extremely grateful for feedback and if you find errors please let us know.</p>
-<p>This document was generated with <a href="https://www.r-project.org/">R</a>, <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> and <a href="https://bookdown.org/">Bookdown</a>.</p>
+<div id="dont-hardcode-authentication-information-into-your-r-code" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Don’t Hardcode Authentication Information into your R Code</h2>
+<p>You should not hardcode your authentication information (authentication keys, secrets, tokens) into your R code. But what do I mean by that? For example, the following is an example of hardcoding.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="best-practices.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tuber)</span>
+<span id="cb2-2"><a href="best-practices.html#cb2-2" aria-hidden="true" tabindex="-1"></a>client_id <span class="ot">&lt;-</span> <span class="st">&quot;998136489867-5t3tq1g7hbovoj46dreqd6k5kd35ctjn.apps.googleusercontent.com&quot;</span></span>
+<span id="cb2-3"><a href="best-practices.html#cb2-3" aria-hidden="true" tabindex="-1"></a>client_secret <span class="ot">&lt;-</span> <span class="st">&quot;MbOSt6cQhhFkwETXKur-L9rN&quot;</span></span>
+<span id="cb2-4"><a href="best-practices.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="best-practices.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">yt_oauth</span>(<span class="at">app_id =</span> client_id,</span>
+<span id="cb2-6"><a href="best-practices.html#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">app_secret =</span> client_secret,</span>
+<span id="cb2-7"><a href="best-practices.html#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">token =</span> <span class="st">&#39;&#39;</span>)</span></code></pre></div>
+<p>This is not a good practice for two reasons. First, your <code>client_id</code> and <code>client_secret</code> are directly visible in your R code. It is super easy to accidentally leak these supposedly secret information while sharing your code. Even supposedly professional programmers <a href="https://github.com/search?p=1&amp;q=client_secret&amp;type=Code">do that quite often</a>. Also unlike a typical password system which renders these secret information as asterisks, it enables the so-called <a href="https://en.wikipedia.org/wiki/Shoulder_surfing_(computer_security)">“shoulder surfing attack”</a>: a malicious actor can obtain these information by simply looking (or videotaping through a tele lens) at your computer screen over your shoulder.</p>
+<p>Second, when you run your code, your <code>client_id</code> and <code>client_secret</code> are burnt into your command history. A malicious person can browse through your command history to obtain these information.</p>
+<p>You might wonder, well, they are just two pieces of string. No big deal. But please bare in mind these information is not simply for collecting data from YouTube. It could also be the credential for your Google Cloud access. Frequent access to some API endpoints that require money can incur financial loss. Other APIs such as Twitter v1 APIs allow <a href="https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id">deletion of data</a>, <a href="https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-update">posting data</a> or <a href="https://developer.twitter.com/en/docs/twitter-api/v1/direct-messages/api-features">reading all your direct messages</a> on your behalf, simply with your API authentication information. So please: PROTECT YOUR AUTHENTICATION INFORMATION LIKE YOUR PASSWORDS!</p>
+<div id="alternative-use-environment-variables" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Alternative: Use Environment Variables</h3>
+<p>So, what is the alternative? A securer solution is to use store your authentication information as <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">environment variables</a> (envvars) instead. Specifically, you should store your authentication information as your <em>user-level</em> envvars.</p>
+<p>For a quick experimentation, run this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="best-practices.html#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>(<span class="at">scope =</span> <span class="st">&quot;user&quot;</span>)</span></code></pre></div>
+<p>If you are doing this in RStudio, a new file is now opened. That is your user-level <code>.Renviron</code> file. It is a hidden file (indicated by the “.”) in your user directory.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>For most people, it should be a blank file. For some, the file might already have something in it. Now, in the file, put this line into it:</p>
+<pre><code>MYSECRET=ROMANCE</code></pre>
+<p>This line says: I want to create a user-level envvar called “MYSECRET” with the value being “ROMANCE.” Please note that this is not R and you must use the equal sign. As instructed, save the file and then restart R.</p>
+<p>In the fresh R session, you can now retrieve the value of the environment variable “MYSECRET.” If you did that correctly, running this should give you the value of “MYSECRET,” i.e. “ROMANCE.”</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="best-practices.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## You should get &quot;ROMANCE&quot;</span></span>
+<span id="cb5-2"><a href="best-practices.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">&quot;MYSECRET&quot;</span>)</span></code></pre></div>
+<p>The practice is to setup envvars of your authentication information. For example, in your <code>.Renviron</code> set up the following envvars.</p>
+<pre><code>YT_CLIENTID=998136489867-5t3tq1g7hbovoj46dreqd6k5kd35ctjn.apps.googleusercontent.com
+YT_CLIENTSECRET=MbOSt6cQhhFkwETXKur-L9rN</code></pre>
+<p>And then in your R code, it should be:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="best-practices.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tuber)</span>
+<span id="cb7-2"><a href="best-practices.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">yt_oauth</span>(<span class="at">app_id =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;YT_CLIENTID&quot;</span>),</span>
+<span id="cb7-3"><a href="best-practices.html#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">app_secret =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;YT_CLIENTSECRET&quot;</span>),</span>
+<span id="cb7-4"><a href="best-practices.html#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">token =</span> <span class="st">&#39;&#39;</span>)</span></code></pre></div>
+<p>As long as your hidden <code>.Renviron</code> file is not leaked, you are safe. For reproducibility purposes, you should document all these envvars (the definitions, not the values) in the README file.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>This method is not perfect, of course. For example, your <code>.Renviron</code> is a plain text file and it can still be leaked. If you want to know other alternatives, see the <a href="https://httr.r-lib.org/articles/secrets.html">“Managing secrets” vignette</a> of httr.</p>
+</div>
+</div>
+<div id="memoise-your-api-calls" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Memoise your API Calls</h2>
+<p>Many API documentation will tell you to <a href="https://developer.twitter.com/en/docs/twitter-api/rate-limits">cache</a>. Caching is to store a local copy of the response from the API. If you submit the exact same API request again, instead of making another API request to the server, the result is retrieved from the local copy. The technique is also called <a href="https://en.wikipedia.org/wiki/Memoization">memoisation</a>. This method is more useful for API responses that are not dynamically changed, e.g. <a href="google-natural-language-api.html#google-natural-language-api">Google Natural Language API</a>, <a href="google-places-api.html#google-places-api">Google Places API</a>, or <a href="ckan-api.html#ckan-api">CKAN API</a>. It is less useful for social media APIs because information such as number of likes changes frequently. If you are only interested in retrieving the content, you can also cache those social media APIs.</p>
+<p>Caching is good because it reduces unnecessary API requests. It is also helpful to prevent exceeding rate limit.</p>
+<div id="implementation-of-memoisation-in-r" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Implementation of memoisation in R</h3>
+<p>As a quick experiment, we use an extremely simple API: <a href="https://thatcopy.pw/catapi/rest/">restful catAPI</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="best-practices.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb8-2"><a href="best-practices.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">content</span>(<span class="fu">GET</span>(<span class="st">&quot;https://thatcopy.pw/catapi/rest/&quot;</span>))</span></code></pre></div>
+<p>If you run the above code many times, you should get a different cat photo every time. However, you can create a memoised version of the <code>httr::GET</code> function called <code>mGET</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="best-practices.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memoise)</span>
+<span id="cb9-2"><a href="best-practices.html#cb9-2" aria-hidden="true" tabindex="-1"></a>mGET <span class="ot">&lt;-</span> <span class="fu">memoise</span>(GET)</span></code></pre></div>
+<p>Similarly, you can create a memoised version of any API function, e.g.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="best-practices.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleway)</span>
+<span id="cb10-2"><a href="best-practices.html#cb10-2" aria-hidden="true" tabindex="-1"></a>mgoogle_places <span class="ot">&lt;-</span> <span class="fu">memoise</span>(google_places)</span></code></pre></div>
+<p>Back to the resetful catAPI example: If you run it the <code>mGET</code> instead of <code>GET</code> many times, you will get the same result over and over again.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="best-practices.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">content</span>(<span class="fu">mGET</span>(<span class="st">&quot;https://thatcopy.pw/catapi/rest/&quot;</span>))</span></code></pre></div>
+<p>It is because the response from the API is cached locally. All subsequent identical requests will not be made online. Instead they get fetched from the local cache. If you don’t need the local cache anymore, delete it using the <code>forget</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="best-practices.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forget</span>(mGET)</span></code></pre></div>
+<p>For more information information about memoisation, please refer to the <a href="https://memoise.r-lib.org/index.html">official website of memoise</a>.</p>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden <code>.*rc</code> file (e.g. <code>.bashrc</code> or <code>.zshrc</code>, depending on your shell). The method is to set that up using <code>export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"</code>. The envvars defined in your <code>.*rc</code> file can also be retrieved by <code>Sys.getenv</code>. The section on <a href="#google-translate-api">Google Translate API</a> actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your <code>.localrc</code> file instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.<a href="best-practices.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>For the people who need to use Github Actions to run or test your code, you can also store those envvars in your R code as <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">Github Encrypted Secrets</a>.<a href="best-practices.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="google-translation-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

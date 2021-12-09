@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
+  <title>Chapter 5 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit</title>
   <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24.4 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta property="og:title" content="Chapter 5 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
+  <meta name="twitter:title" content="Chapter 5 Google Natural Language API | 2021_apis_for_social_scientists_a_collaborative_review.knit" />
   
   <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="google-translation-api.html"/>
+<link rel="prev" href="crowdtangle-api.html"/>
+<link rel="next" href="google-places-api.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -173,94 +173,106 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequesits-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequesits: Authentication</a></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequesits-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequesits: Software &amp; packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>2</b> Google Natural Language API</a>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>2.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="2.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequesites"><i class="fa fa-check"></i><b>2.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="2.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call"><i class="fa fa-check"></i><b>2.3</b> Simple API call</a></li>
-<li class="chapter" data-level="2.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access"><i class="fa fa-check"></i><b>2.4</b> API access</a></li>
-<li class="chapter" data-level="2.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples"><i class="fa fa-check"></i><b>2.5</b> Social science examples</a></li>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>3</b> Google Translation API</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="3.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequesites-1"><i class="fa fa-check"></i><b>3.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="3.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
-<li class="chapter" data-level="3.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-1"><i class="fa fa-check"></i><b>3.4</b> API access</a></li>
-<li class="chapter" data-level="3.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+<li class="chapter" data-level="3.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequesites"><i class="fa fa-check"></i><b>3.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="3.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access"><i class="fa fa-check"></i><b>3.4</b> API access</a></li>
+<li class="chapter" data-level="3.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequesites-2"><i class="fa fa-check"></i><b>4.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
-<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-2"><i class="fa fa-check"></i><b>4.4</b> API access</a></li>
-<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequesites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-1"><i class="fa fa-check"></i><b>4.4</b> API access</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>5</b> Google Places API</a>
+<li class="chapter" data-level="5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>5</b> Google Natural Language API</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="5.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequesites-3"><i class="fa fa-check"></i><b>5.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="5.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
-<li class="chapter" data-level="5.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-3"><i class="fa fa-check"></i><b>5.4</b> API access</a></li>
-<li class="chapter" data-level="5.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+<li class="chapter" data-level="5.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequesites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="5.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-2"><i class="fa fa-check"></i><b>5.4</b> API access</a></li>
+<li class="chapter" data-level="5.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>6</b> Google Speech-to-Text API</a>
+<li class="chapter" data-level="6" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>6</b> Google Places API</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="6.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequesites-4"><i class="fa fa-check"></i><b>6.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="6.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
-<li class="chapter" data-level="6.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-4"><i class="fa fa-check"></i><b>6.4</b> API access</a></li>
-<li class="chapter" data-level="6.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+<li class="chapter" data-level="6.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequesites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="6.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-3"><i class="fa fa-check"></i><b>6.4</b> API access</a></li>
+<li class="chapter" data-level="6.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>7</b> Instagram Graph API</a>
+<li class="chapter" data-level="7" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>7</b> Google Speech-to-Text API</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="7.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequesites-5"><i class="fa fa-check"></i><b>7.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="7.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
-<li class="chapter" data-level="7.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-5"><i class="fa fa-check"></i><b>7.4</b> API access</a></li>
-<li class="chapter" data-level="7.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+<li class="chapter" data-level="7.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequesites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="7.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-4"><i class="fa fa-check"></i><b>7.4</b> API access</a></li>
+<li class="chapter" data-level="7.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>8</b> Instagram Basic Display API</a>
+<li class="chapter" data-level="8" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>8</b> Instagram Graph API</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>8.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="8.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequesites-6"><i class="fa fa-check"></i><b>8.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="8.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>8.3</b> Simple API call</a></li>
-<li class="chapter" data-level="8.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-6"><i class="fa fa-check"></i><b>8.4</b> API access</a></li>
+<li class="chapter" data-level="8.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>8.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="8.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequesites-5"><i class="fa fa-check"></i><b>8.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="8.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.3</b> Simple API call</a></li>
+<li class="chapter" data-level="8.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-5"><i class="fa fa-check"></i><b>8.4</b> API access</a></li>
+<li class="chapter" data-level="8.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>9</b> GoogleTrends API</a>
+<li class="chapter" data-level="9" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>9</b> Instagram Basic Display API</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="9.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequesites-7"><i class="fa fa-check"></i><b>9.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="9.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
-<li class="chapter" data-level="9.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-7"><i class="fa fa-check"></i><b>9.4</b> API access</a></li>
-<li class="chapter" data-level="9.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+<li class="chapter" data-level="9.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequesites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="9.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-6"><i class="fa fa-check"></i><b>9.4</b> API access</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>10</b> Youtube API</a>
+<li class="chapter" data-level="10" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>10</b> GoogleTrends API</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="10.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequesites-8"><i class="fa fa-check"></i><b>10.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="10.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
-<li class="chapter" data-level="10.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-8"><i class="fa fa-check"></i><b>10.4</b> API access</a></li>
-<li class="chapter" data-level="10.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+<li class="chapter" data-level="10.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequesites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="10.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-7"><i class="fa fa-check"></i><b>10.4</b> API access</a></li>
+<li class="chapter" data-level="10.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>11</b> CKAN API</a>
+<li class="chapter" data-level="11" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>11</b> Youtube API</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="11.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequesites-9"><i class="fa fa-check"></i><b>11.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="11.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
-<li class="chapter" data-level="11.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-9"><i class="fa fa-check"></i><b>11.4</b> API access</a></li>
-<li class="chapter" data-level="11.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+<li class="chapter" data-level="11.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequesites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="11.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-8"><i class="fa fa-check"></i><b>11.4</b> API access</a></li>
+<li class="chapter" data-level="11.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>12</b> MediaWiki Action API</a>
+<li class="chapter" data-level="12" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>12</b> CKAN API</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
-<li class="chapter" data-level="12.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequesites-10"><i class="fa fa-check"></i><b>12.2</b> Prerequesites</a></li>
-<li class="chapter" data-level="12.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
-<li class="chapter" data-level="12.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-10"><i class="fa fa-check"></i><b>12.4</b> API access</a></li>
-<li class="chapter" data-level="12.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+<li class="chapter" data-level="12.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequesites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="12.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-9"><i class="fa fa-check"></i><b>12.4</b> API access</a></li>
+<li class="chapter" data-level="12.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>13</b> References</a></li>
+<li class="chapter" data-level="13" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>13</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequesites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="13.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-10"><i class="fa fa-check"></i><b>13.4</b> API access</a></li>
+<li class="chapter" data-level="13.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>14</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
 
@@ -283,12 +295,12 @@ APIs for social scientists:<br>A collaborative review
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="google-natural-language-api" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Google Natural Language API</h1>
+<div id="google-natural-language-api" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Google Natural Language API</h1>
 <p><chauthors>Paul C. Bauer, Camille Landesvatter, Malte Söhren</chauthors>
 <br><br></p>
-<div id="provided-servicesdata" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Provided services/data</h2>
+<div id="provided-servicesdata-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Provided services/data</h2>
 <ul>
 <li><em>What data/service is provided by the API?</em></li>
 </ul>
@@ -306,16 +318,16 @@ This API review focuses on option 2, the Natural Language API. This API uses pre
 </ul>
 <p>A demo of the API that allows you to input text and explore the different classification capabilities can be found <a href="%22https://cloud.google.com/natural-language#section-2%22">here</a>.</p>
 </div>
-<div id="prerequesites" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Prerequesites</h2>
+<div id="prerequesites-2" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Prerequesites</h2>
 <ul>
 <li><em>What are the prerequisites to access the API (authentication)? </em></li>
 </ul>
 <p>The prerequisite to access Google Natural Language API is a Google Cloud Project. To create this you will need a Google account to log into the Google Cloud Platform (GCP). Within your Google Cloud Platform, you must enable the Natural Language API for your respective Google Cloud Project <a href="%22https://console.cloud.google.com/marketplace/product/google/language.googleapis.com%22">here</a>.
 Additionally, if you are planning to request the Natural Language API from outside a Google Cloud environment (e.g., R) you will be required to use a private (service account) key. This can be achieved by creating a <a href="%22https://cloud.google.com/docs/authentication/production#create_service_account%22">service account</a> which in turn will allow you to download your private key as a JSON file. To create your API key for authentication from within the GCP, go to <a href="%22https://console.cloud.google.com/apis/credentials%22">APIs &amp; Services &gt; Credentials</a>. Below we provide an example of how to authenticate from within the Google Cloud Platform (Cloud Shell + API key) and how to authenticate from within R (authentication via JSON key file).</p>
 </div>
-<div id="simple-api-call" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Simple API call</h2>
+<div id="simple-api-call-2" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Simple API call</h2>
 <ul>
 <li><em>What does a simple API call look like?</em></li>
 </ul>
@@ -324,27 +336,27 @@ Additionally, if you are planning to request the Natural Language API from outsi
 <li>To activate your Cloud Shell, inspect the upper right-hand corner of your Google Cloud Platform Console and click the icon called “Activate Shell.” Google Cloud Shell is a command line environment running in the cloud.</li>
 <li>Via the Cloud Shell command line, add your individual API key to the environment variables, so it is not required to be called for each request.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="google-natural-language-api.html#cb2-1" aria-hidden="true" tabindex="-1"></a>export API_KEY<span class="ot">=</span><span class="er">&lt;</span>YOUR_API_KEY<span class="sc">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="google-natural-language-api.html#cb22-1" aria-hidden="true" tabindex="-1"></a>export API_KEY<span class="ot">=</span><span class="er">&lt;</span>YOUR_API_KEY<span class="sc">&gt;</span></span></code></pre></div>
 <ul>
 <li>Via the built-in Editor in Cloud Shell create a JSON file (call it for instance ‘request.json’) with the text that you would like to perform analysis on. Consider that text can be uploaded in the request (shown below) or integrated with Cloud Storage. Supported types of your text are PLAIN_TEXT (shown below) or HTML.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="google-natural-language-api.html#cb3-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-2"><a href="google-natural-language-api.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;document&quot;</span><span class="sc">:</span>{</span>
-<span id="cb3-3"><a href="google-natural-language-api.html#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;type&quot;</span><span class="sc">:</span><span class="st">&quot;PLAIN_TEXT&quot;</span>,</span>
-<span id="cb3-4"><a href="google-natural-language-api.html#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;content&quot;</span><span class="sc">:</span><span class="st">&quot;Enjoy your vacation!&quot;</span></span>
-<span id="cb3-5"><a href="google-natural-language-api.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  },</span>
-<span id="cb3-6"><a href="google-natural-language-api.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;encodingType&quot;</span><span class="sc">:</span> <span class="st">&quot;UTF8&quot;</span></span>
-<span id="cb3-7"><a href="google-natural-language-api.html#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="google-natural-language-api.html#cb23-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-2"><a href="google-natural-language-api.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;document&quot;</span><span class="sc">:</span>{</span>
+<span id="cb23-3"><a href="google-natural-language-api.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;type&quot;</span><span class="sc">:</span><span class="st">&quot;PLAIN_TEXT&quot;</span>,</span>
+<span id="cb23-4"><a href="google-natural-language-api.html#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;content&quot;</span><span class="sc">:</span><span class="st">&quot;Enjoy your vacation!&quot;</span></span>
+<span id="cb23-5"><a href="google-natural-language-api.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb23-6"><a href="google-natural-language-api.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;encodingType&quot;</span><span class="sc">:</span> <span class="st">&quot;UTF8&quot;</span></span>
+<span id="cb23-7"><a href="google-natural-language-api.html#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <ul>
 <li>For sending your data, pass a curl command to your Cloud Shell command line where you refer (via @) to your request.json file from the previous step.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="google-natural-language-api.html#cb4-1" aria-hidden="true" tabindex="-1"></a>curl <span class="st">&quot;https://language.googleapis.com/v1/documents:analyzeEntities?key=${API_KEY}&quot;</span> <span class="sc">-</span>s <span class="sc">-</span>X POST <span class="sc">-</span>H <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="sc">--</span>data<span class="sc">-</span>binary <span class="sc">@</span>request.json</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="google-natural-language-api.html#cb24-1" aria-hidden="true" tabindex="-1"></a>curl <span class="st">&quot;https://language.googleapis.com/v1/documents:analyzeEntities?key=${API_KEY}&quot;</span> <span class="sc">-</span>s <span class="sc">-</span>X POST <span class="sc">-</span>H <span class="st">&quot;Content-Type: application/json&quot;</span> <span class="sc">--</span>data<span class="sc">-</span>binary <span class="sc">@</span>request.json</span></code></pre></div>
 <ul>
 <li>Depending on to which endpoint you send the request (here: analyzeEntities) you will receive your response with many different insights into your text data.</li>
 </ul>
 </div>
-<div id="api-access" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> API access</h2>
+<div id="api-access-2" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> API access</h2>
 <ul>
 <li><em>How can we access the API from R (httr + other packages)?</em></li>
 </ul>
@@ -358,31 +370,31 @@ beforehand also translated to english)</p></li>
 <li><p>.. plot your nouns in a word cloud</p></li>
 </ul>
 <p><em>Step 1: Load package</em></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="google-natural-language-api.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleLanguageR)</span>
-<span id="cb5-2"><a href="google-natural-language-api.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-3"><a href="google-natural-language-api.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)<span class="co">#stopwords</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="google-natural-language-api.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googleLanguageR)</span>
+<span id="cb25-2"><a href="google-natural-language-api.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-3"><a href="google-natural-language-api.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)<span class="co">#stopwords</span></span></code></pre></div>
 <p><em>Step 2: Authentication</em></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="google-natural-language-api.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl_auth</span>(<span class="st">&quot;./your-key.json&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="google-natural-language-api.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl_auth</span>(<span class="st">&quot;./your-key.json&quot;</span>)</span></code></pre></div>
 <p><em>Step 3: Analysis</em></p>
 <p>Start with loading your text data. For this example, we retrieve data inherit to the quanteda.corpora R package which in a broader sense is associated with the famous <a href="%22https://quanteda.io/%22">quanteda</a> package.</p>
 <p>The data we choose to download (‘data_corpus_guardian’) contains Guardian newspaper articles in politics, economy, society and international sections from 2012 to 2016. See <a href="%22https://github.com/quanteda/quanteda.corpora%22">here</a> for a list of even more publicy available text corpora from the quanteda.corpora package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="google-natural-language-api.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and store corpus</span></span>
-<span id="cb7-2"><a href="google-natural-language-api.html#cb7-2" aria-hidden="true" tabindex="-1"></a>guardian_corpus <span class="ot">&lt;-</span> quanteda.corpora<span class="sc">::</span><span class="fu">download</span>(<span class="st">&quot;data_corpus_guardian&quot;</span>)</span>
-<span id="cb7-3"><a href="google-natural-language-api.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="google-natural-language-api.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep text only from the corpus</span></span>
-<span id="cb7-5"><a href="google-natural-language-api.html#cb7-5" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> guardian_corpus[[<span class="st">&quot;documents&quot;</span>]][[<span class="st">&quot;texts&quot;</span>]]</span>
-<span id="cb7-6"><a href="google-natural-language-api.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="google-natural-language-api.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For demonstration purposes, subset the text data to 20 observations only</span></span>
-<span id="cb7-8"><a href="google-natural-language-api.html#cb7-8" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> text[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span>
-<span id="cb7-9"><a href="google-natural-language-api.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="google-natural-language-api.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn text into a data frame and add an identifier</span></span>
-<span id="cb7-11"><a href="google-natural-language-api.html#cb7-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(text)</span>
-<span id="cb7-12"><a href="google-natural-language-api.html#cb7-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rowid_to_column</span>(df, <span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="google-natural-language-api.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and store corpus</span></span>
+<span id="cb27-2"><a href="google-natural-language-api.html#cb27-2" aria-hidden="true" tabindex="-1"></a>guardian_corpus <span class="ot">&lt;-</span> quanteda.corpora<span class="sc">::</span><span class="fu">download</span>(<span class="st">&quot;data_corpus_guardian&quot;</span>)</span>
+<span id="cb27-3"><a href="google-natural-language-api.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="google-natural-language-api.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep text only from the corpus</span></span>
+<span id="cb27-5"><a href="google-natural-language-api.html#cb27-5" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> guardian_corpus[[<span class="st">&quot;documents&quot;</span>]][[<span class="st">&quot;texts&quot;</span>]]</span>
+<span id="cb27-6"><a href="google-natural-language-api.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="google-natural-language-api.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For demonstration purposes, subset the text data to 20 observations only</span></span>
+<span id="cb27-8"><a href="google-natural-language-api.html#cb27-8" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> text[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span>
+<span id="cb27-9"><a href="google-natural-language-api.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="google-natural-language-api.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn text into a data frame and add an identifier</span></span>
+<span id="cb27-11"><a href="google-natural-language-api.html#cb27-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(text)</span>
+<span id="cb27-12"><a href="google-natural-language-api.html#cb27-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rowid_to_column</span>(df, <span class="st">&quot;ID&quot;</span>)</span></code></pre></div>
 <p><em>Note</em>: Whenever you choose to work with textual data, a very common procedure is to pre-process the data via a set of certain transformations. For instance, you will convert all letters to lower case, remove numbers and punctuation, trim words to their word stem and eventually remove so-called stopwords. There are many tutorials (for example <a href="%22https://datamathstat.wordpress.com/2019/10/25/text-preprocessing-for-nlp-and-machine-learning-using-r/%22">here</a> or <a href="%22http://rstudio-pubs-static.s3.amazonaws.com/256588_57b585da6c054349825cba46685d8464.html%22">here</a>).</p>
 <p>After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function <code>gl_nlp()</code>. Here you will have to specify the quantity of interest (here: <code>analyzeSyntax</code>). Depending on what specific argument you make use of (e.g., <code>analyzeSyntax</code>, <code>analyzeSentiment</code>, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="google-natural-language-api.html#cb8-1" aria-hidden="true" tabindex="-1"></a>syntax_analysis <span class="ot">&lt;-</span> <span class="fu">gl_nlp</span>(df<span class="sc">$</span>text, <span class="at">nlp_type =</span> <span class="st">&quot;analyzeSyntax&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="google-natural-language-api.html#cb28-1" aria-hidden="true" tabindex="-1"></a>syntax_analysis <span class="ot">&lt;-</span> <span class="fu">gl_nlp</span>(df<span class="sc">$</span>text, <span class="at">nlp_type =</span> <span class="st">&quot;analyzeSyntax&quot;</span>)</span></code></pre></div>
 <p>Importantly, find the list <code>tokens</code> inherit to the large list <code>syntax_analysis</code>. This list stores two variables: <code>content</code> (contains the token) and <code>tag</code> (contains the tag, e.g., verb or noun). Let’s have a look at the first document.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="google-natural-language-api.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(syntax_analysis[[<span class="st">&quot;tokens&quot;</span>]][[<span class="dv">1</span>]][,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="google-natural-language-api.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(syntax_analysis[[<span class="st">&quot;tokens&quot;</span>]][[<span class="dv">1</span>]][,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <pre><code>##       content beginOffset   tag
 ## 1      London           0  NOUN
 ## 2 masterclass           7  NOUN
@@ -391,45 +403,45 @@ beforehand also translated to english)</p></li>
 ## 5      change          30  NOUN
 ## 6           |          37 PUNCT</code></pre>
 <p>Now imagine you are interested in all the nouns that were used in the Guardian Articels while removing all other types of words (e.g., adjectives, verbs, etc.). We can simply filter for those using the “tag”-list.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="google-natural-language-api.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add tokens from syntax analysis to original dataframe</span></span>
-<span id="cb11-2"><a href="google-natural-language-api.html#cb11-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>tokens <span class="ot">&lt;-</span> syntax_analysis[[<span class="st">&quot;tokens&quot;</span>]]</span>
-<span id="cb11-3"><a href="google-natural-language-api.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="google-natural-language-api.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep nouns only</span></span>
-<span id="cb11-5"><a href="google-natural-language-api.html#cb11-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nouns =</span> <span class="fu">map</span>(tokens, </span>
-<span id="cb11-6"><a href="google-natural-language-api.html#cb11-6" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">~</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(., tag <span class="sc">==</span> <span class="st">&quot;NOUN&quot;</span>))) </span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="google-natural-language-api.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add tokens from syntax analysis to original dataframe</span></span>
+<span id="cb31-2"><a href="google-natural-language-api.html#cb31-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>tokens <span class="ot">&lt;-</span> syntax_analysis[[<span class="st">&quot;tokens&quot;</span>]]</span>
+<span id="cb31-3"><a href="google-natural-language-api.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="google-natural-language-api.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep nouns only</span></span>
+<span id="cb31-5"><a href="google-natural-language-api.html#cb31-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">nouns =</span> <span class="fu">map</span>(tokens, </span>
+<span id="cb31-6"><a href="google-natural-language-api.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">~</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(., tag <span class="sc">==</span> <span class="st">&quot;NOUN&quot;</span>))) </span></code></pre></div>
 <p><em>Step 4: Visualization</em></p>
 <p>Finally, we can also plot our nouns in a wordcloud using the <a href="%22https://cran.r-project.org/web/packages/ggwordcloud/vignettes/ggwordcloud.html%22">ggwordcloud</a> package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="google-natural-language-api.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
-<span id="cb12-2"><a href="google-natural-language-api.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="google-natural-language-api.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data for the plot</span></span>
-<span id="cb13-2"><a href="google-natural-language-api.html#cb13-2" aria-hidden="true" tabindex="-1"></a>data_plot <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="google-natural-language-api.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># only keep content variable</span></span>
-<span id="cb13-4"><a href="google-natural-language-api.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nouns =</span> <span class="fu">map</span>(nouns, </span>
-<span id="cb13-5"><a href="google-natural-language-api.html#cb13-5" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">~</span> <span class="fu">select</span>(., content))) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="google-natural-language-api.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Write tokens in all rows into a single string</span></span>
-<span id="cb13-7"><a href="google-natural-language-api.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(nouns) <span class="sc">%&gt;%</span> <span class="co"># unnest tokens</span></span>
-<span id="cb13-8"><a href="google-natural-language-api.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest tokens</span></span>
-<span id="cb13-9"><a href="google-natural-language-api.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(<span class="at">output =</span> word, <span class="at">input =</span> content) <span class="sc">%&gt;%</span> <span class="co"># generate a wordcloud</span></span>
-<span id="cb13-10"><a href="google-natural-language-api.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(tidytext<span class="sc">::</span>stop_words) <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="google-natural-language-api.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word) <span class="sc">%&gt;%</span></span>
-<span id="cb13-12"><a href="google-natural-language-api.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="co">#only plot words that appear more than 10 times</span></span>
-<span id="cb13-13"><a href="google-natural-language-api.html#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="google-natural-language-api.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize in a word cloud</span></span>
-<span id="cb13-15"><a href="google-natural-language-api.html#cb13-15" aria-hidden="true" tabindex="-1"></a>data_plot <span class="sc">%&gt;%</span></span>
-<span id="cb13-16"><a href="google-natural-language-api.html#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> word, </span>
-<span id="cb13-17"><a href="google-natural-language-api.html#cb13-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> n)) <span class="sc">+</span></span>
-<span id="cb13-18"><a href="google-natural-language-api.html#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
-<span id="cb13-19"><a href="google-natural-language-api.html#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb13-20"><a href="google-natural-language-api.html#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
-<img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-14-1.png" alt="Wordcloud of nouns found within guardian articles" width="672" />
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="google-natural-language-api.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
+<span id="cb32-2"><a href="google-natural-language-api.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="google-natural-language-api.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data for the plot</span></span>
+<span id="cb33-2"><a href="google-natural-language-api.html#cb33-2" aria-hidden="true" tabindex="-1"></a>data_plot <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="google-natural-language-api.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># only keep content variable</span></span>
+<span id="cb33-4"><a href="google-natural-language-api.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nouns =</span> <span class="fu">map</span>(nouns, </span>
+<span id="cb33-5"><a href="google-natural-language-api.html#cb33-5" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">~</span> <span class="fu">select</span>(., content))) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-6"><a href="google-natural-language-api.html#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Write tokens in all rows into a single string</span></span>
+<span id="cb33-7"><a href="google-natural-language-api.html#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(nouns) <span class="sc">%&gt;%</span> <span class="co"># unnest tokens</span></span>
+<span id="cb33-8"><a href="google-natural-language-api.html#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest tokens</span></span>
+<span id="cb33-9"><a href="google-natural-language-api.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(<span class="at">output =</span> word, <span class="at">input =</span> content) <span class="sc">%&gt;%</span> <span class="co"># generate a wordcloud</span></span>
+<span id="cb33-10"><a href="google-natural-language-api.html#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(tidytext<span class="sc">::</span>stop_words) <span class="sc">%&gt;%</span></span>
+<span id="cb33-11"><a href="google-natural-language-api.html#cb33-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb33-12"><a href="google-natural-language-api.html#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="co">#only plot words that appear more than 10 times</span></span>
+<span id="cb33-13"><a href="google-natural-language-api.html#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="google-natural-language-api.html#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize in a word cloud</span></span>
+<span id="cb33-15"><a href="google-natural-language-api.html#cb33-15" aria-hidden="true" tabindex="-1"></a>data_plot <span class="sc">%&gt;%</span></span>
+<span id="cb33-16"><a href="google-natural-language-api.html#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> word, </span>
+<span id="cb33-17"><a href="google-natural-language-api.html#cb33-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> n)) <span class="sc">+</span></span>
+<span id="cb33-18"><a href="google-natural-language-api.html#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb33-19"><a href="google-natural-language-api.html#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb33-20"><a href="google-natural-language-api.html#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/unnamed-chunk-24-1.png" alt="Wordcloud of nouns found within guardian articles" width="672" />
 <p class="caption">
-Figure 2.1: Wordcloud of nouns found within guardian articles
+Figure 5.1: Wordcloud of nouns found within guardian articles
 </p>
 </div>
 </div>
-<div id="social-science-examples" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Social science examples</h2>
+<div id="social-science-examples-2" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Social science examples</h2>
 <ul>
 <li><em>Are there social science research examples using the API?</em></li>
 </ul>
@@ -456,8 +468,8 @@ Grimmer, Justin, and Brandon M Stewart. 2013. <span>“Text as Data: The Promise
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="google-translation-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="crowdtangle-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="google-places-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
