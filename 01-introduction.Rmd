@@ -35,7 +35,8 @@ pacman::p_load(
   mapsapi, #CH5
   stars, #CH5
   httr,
-  WikipediR # CH12
+  WikipediR, # CH12
+  memoise
 )
 
 # Move these installations before pacman?
