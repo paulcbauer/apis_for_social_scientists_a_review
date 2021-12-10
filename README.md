@@ -24,7 +24,11 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Lukas Isermann, Phili
     + To do so please check out examples of the other chapters for the structure, length and code examples. (1) We will ask you to [send](mailto:apireviews.editors@gmail.com) a .rmd file with the API review of your choice. (2) Provide all references in bibtex format (see 'references_overall.bib') and include corresponding bibtex keys in your chapter (e.g., 'Dobbrick2021-iz').
 * Add references to (your) published research examples that use the corresponding APIs
     + To do so please check out the examples in the chapters. (1) Provide a short sentence indicating how/for what the API was used. (2) Provide the reference in bibtex format (see 'references_overall.bib') and the bibtex key you used (e.g., 'Dobbrick2021-iz').
- 
+    
+### Incoming chapters
+* [Manifesto API](https://manifesto-project.wzb.eu/information/documents/api
+)
+
 ## How will we keep the reviews up to date?
 * Descriptions of and code examples for APIs are only useful when they are up to date. Our plan is to update chapters that are outdated, e.g., if an API version changes. Sometimes this might require adding new authors/contributors to a chapter if the original authors become inactive.
 
