@@ -24,7 +24,7 @@ One needs to have a Twitter account. To obtain Academic Research access, one nee
 
 With the granted access, a `bearer token` is available from [the dashboard of the developer portal](https://developer.twitter.com/en/portal/dashboard). For more information about the entire process, please read [this vignette of academictwitteR](https://cran.r-project.org/web/packages/academictwitteR/vignettes/academictwitteR-auth.html).
 
-It is recommended to set the `bearer token` as the environment variable `TWITTER_BEARER`. Please consult [Chapter 2](#best-practices) on how to do that.
+It is recommended to set the `bearer token` as the environment variable `TWITTER_BEARER`. Please consult [Chapter 2](#best-practices) on how to do that in the section on Environment Variables replacing `MYSECRET=ROMANCE` in the example with `TWITTER_BEARER=YourBearerToken`.
 
 ## Simple API call
 * *What does a simple API call look like?*
@@ -32,6 +32,7 @@ It is recommended to set the `bearer token` as the environment variable `TWITTER
 The documentation of the API is available [here](https://developer.twitter.com/en/docs/twitter-api). The `bearer token` obtained from Twitter should be supplied as an HTTP header preceding with "Bearer ", i.e.
 
 ```r
+## You should get "bearer YourBearerToken"
 paste0("bearer ", Sys.getenv("TWITTER_BEARER"))
 ```
 
