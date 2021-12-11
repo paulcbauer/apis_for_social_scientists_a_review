@@ -51,7 +51,7 @@ For most people, it should be a blank file. For some, the file might already hav
 MYSECRET=ROMANCE
 ```
 
-This line says: I want to create a user-level envvar called "MYSECRET" with the value being "ROMANCE". Please note that this is not R and you must use the equal sign. As instructed, save the file and then restart R.
+This line says: I want to create a user-level envvar called "MYSECRET" with the value being "ROMANCE". Please note that this is not R and you must use the equal sign. As instructed, save the file and then **restart R**.
 
 In the fresh R session, you can now retrieve the value of the environment variable "MYSECRET". If you did that correctly, running this should give you the value of "MYSECRET", i.e. "ROMANCE".
 
