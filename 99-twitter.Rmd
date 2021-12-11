@@ -1,0 +1,145 @@
+# Twitter API
+<chauthors>Chung-hong Chan</chauthors>
+<br><br>
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The API is provided by Twitter. As of 2021, there are 5 different tracks of API: [Standard (v1.1)](https://developer.twitter.com/en/docs/twitter-api/v1), [Premium (v1.1)](https://developer.twitter.com/en/docs/twitter-api/premium), [Essential (v2)](https://developer.twitter.com/en/portal/petition/essential/basic-info), [Elevated (v2)](https://developer.twitter.com/en/products/twitter-api/elevated-waitlist), and [Academic Research (v2)](https://developer.twitter.com/en/products/twitter-api/academic-research). They offer different data as well as cost differently. For academic research, one should use Standard (v1.1) or Academic Research (v2). I recommend using Academic Research (v2) track, not least because v1.1 is very restrictive for academic research and the version is now in maintenance mode (i.e. it will soon be deprecated). If one still want to use the Standard track v1.1, please see [the addendum](#addendum-twitter-v1.1) below.
+
+Academic Research Track provides the following data access
+
+1. Full archive search of tweets
+2. Tweet counts
+3. User lookup
+4. Compliance check (e.g. whether a tweet has been deleted by Twitter)
+
+and many other.
+
+## Prerequisites
+* *What are the prerequisites to access the API (authentication)? *
+
+One needs to have a Twitter account. To obtain Academic Research access, one needs to apply it from [here](https://developer.twitter.com/en/products/twitter-api/academic-research). In the application, one will need to provide a research profile (e.g. Google Scholar profile or a link to the profile in the student directory) and a short description about the research project that would be done with the data obtained through the API. Twitter will then review the application and grant the access if appropriate. For undergraduate students without a research profile, Twitter might ask for endorsement from academic supervisors.
+
+With the granted access, a `bearer token` is available from [the dashboard of the developer portal](https://developer.twitter.com/en/portal/dashboard). For more information about the entire process, please read [this vignette of academictwitteR](https://cran.r-project.org/web/packages/academictwitteR/vignettes/academictwitteR-auth.html).
+
+It is recommended to set the `bearer token` as the environment variable `TWITTER_BEARER`. Please consult [Chapter 2](#best-practices) on how to do that.
+
+## Simple API call
+* *What does a simple API call look like?*
+
+The documentation of the API is available [here](https://developer.twitter.com/en/docs/twitter-api). The `bearer token` obtained from Twitter should be supplied as an HTTP header preceding with "Bearer ", i.e.
+
+```r
+paste0("bearer ", Sys.getenv("TWITTER_BEARER"))
+```
+
+For using the [full archive search](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-all) and [tweet counts](https://developer.twitter.com/en/docs/twitter-api/tweets/counts/introduction) endpoints, one needs to [build a search query](https://developer.twitter.com/en/docs/twitter-api/tweets/search/integrate/build-a-query) first. For example, to search for all German tweets with the hashtags "#ichbinhanna" or "#ichwarhanna", the query looks like so: `#ichbinhanna OR #ichwarhanna lang:DE`.
+
+To make a call using `httr` to obtain tweets matched the above query from 2021-01-01 to 2021-07-31
+
+```r
+library(httr)
+my_query <- "#ichbinhanna OR #ichwarhanna lang:DE"
+endpoint_url <- "https://api.twitter.com/2/tweets/search/all"
+
+params <- list(
+  "query" = my_query,
+  "start_time" = "2021-01-01T00:00:00Z",
+  "end_time" = "2021-07-31T23:59:59Z",
+  "max_results" = 500
+)
+
+r <- httr::GET(url = endpoint_url,
+               httr::add_headers(
+                       Authorization = paste0("bearer ", Sys.getenv("TWITTER_BEARER"))),
+               query = params)
+content(r)
+```
+
+If one is simply interested in the time series data, just make a simply change to the endpoint and some parameters.
+
+```r
+params <- list(
+  "query" = my_query,
+  "start_time" = "2021-01-01T00:00:00Z",
+  "end_time" = "2021-07-31T23:59:59Z",
+  "granularity" = "day" ## obtain a daily time series
+)
+endpoint_url <- "https://api.twitter.com/2/tweets/counts/all"
+r <- httr::GET(url = endpoint_url,
+               httr::add_headers(
+                       Authorization = paste0("bearer ", Sys.getenv("TWITTER_BEARER"))),
+               query = params)
+content(r)
+```
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+The package `academictwitteR` [@barrie:2021] can be used to access the Academic Research Track. In the following example, the analysis by @hassler2021influence is reproduced. The research question is: How has the number of tweets published with the hashtag #fridaysforfuture been affected by the lockdowns? (See time series in the Figure 3 of the paper) The study period is 2019-06-01 to 2020-05-31 and restricted to only German tweets. The original analysis was done with the v1.1 API. But one can get a better dataset with the Academic Research Track.
+
+`academictwitteR` looks for the environment variable `TWITTER_BEARER` for the bearer token. To collect the time series data, we use the `count_all_tweets` function.
+
+<!-- A cache version of fff_ts is available in "figures/rds/twitter_fft_ts.RDS" -->
+
+```r
+library(academictwitteR)
+library(tidyverse)
+library(lubridate)
+fff_ts <- count_all_tweets(query = "#fridaysforfuture lang:DE",
+                           start_tweets = "2019-06-01T00:00:00Z",
+                           end_tweets = "2020-05-31T00:00:00Z",
+                           granularity = "day",
+                           n = Inf)
+head(fff_ts) # the data is in reverse chronological order
+```
+
+```{r, echo = FALSE, message = FALSE}
+library(tidyverse)
+library(lubridate)
+fff_ts <- readRDS("figures/rds/twitter_ffs_ts.RDS")
+```
+
+```{r, fff_ts, echo = FALSE}
+head(fff_ts)
+```
+
+The daily time series of number of German tweets tweets is displayed in Figure below. However, this is not a perfect replication of the original Figure 3. It is because the original Figure only considers Fridays. [^1] The Figure below is an "enhanced remake".
+
+```{r, fff_day}
+lockdown_date <- as.POSIXct(as.Date("2020-03-23"))
+fff_ts %>% mutate(start = ymd_hms(start)) %>% select(start, tweet_count) %>%
+  ggplot(aes(x = start, y = tweet_count)) + geom_line() +
+  geom_vline(xintercept = lockdown_date, color = "red", lty = 2) +
+  xlab("Date") + ylab("Number of German #fridaysforfuture tweets")
+```
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+There are so many (if not *too* many) social science research examples using this API. Twitter data have been used for network analysis, text analysis, time series analysis, just to name a few. If one is really interested in examples using the API, on Google Scholar there are around 1,720,000 results (as of writing).
+
+Some scholars link the abundance of papers using Twitter data to the relative openness of the API. @burgess2015easy label these Twitter data as "Easy Data". This massive overrepresentation of easy Twitter data in the literature draws criticism from some social scientists, especially communication scholars. @matamoros2021racism, for example, see this as problematic and the overrepresentation of Twitter in the literature "mak[es] all other platforms seem marginal." (p. 215) Ironically, in many countries the use of Twitter is marginal. According to the Digital News Report [@newman2021reuters], only 12% of the German population uses Twitter, which is much less than YouTube (58%), Facebook (44%), Instagram (29%), and even Pinterest (16%).
+
+I recommend thinking thoroughly whether the easy Twitter data are really suitable for answering one's research questions. If Twitter data are really needed to use, consider also alternative data sources for comparison if possible [e.g. @rauchfleisch:2021:HCD].
+
+## Addendum: Twitter v1.1
+
+The [Standard Track of Twitter v1.1 API](https://developer.twitter.com/en/docs/twitter-api/v1) is still available and probably will still be available in the near future. If one for any reason doesn't want to --- or cannot --- use the Academic Research Track, Twitter v1.1 API is still accessible using the R package `rtweet` [@kearney:2019].
+
+The access is relatively easy because in most cases, one only needs to have a Twitter account. Before making any actual query, `rtweet` will do the OAuth authentication automatically [^2].
+
+To "replicate" the #ichbinhanna query above:
+
+```r
+library(rtweet)
+search_tweets("#ichbinhanna OR #ichwarhanna", lang = "de")
+```
+
+However, this is not a replication. It is because the Twitter v1.1 API can only be used to search for tweets published in the last few days, whereas Academic Research Track supports full historical search. If one wants to collect a complete historical archive of tweets with v1.1, continuous collection of tweets is needed.
+
+[^1]: To truly answer the research question, I recommend using time series causal inference techniques such as Google's [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html).
+
+[^2]: The authentication information will be stored by default to the hidden file `.rtweet_token.rds` in [home directory](https://en.wikipedia.org/wiki/Home_directory).
