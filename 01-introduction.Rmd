@@ -36,7 +36,10 @@ pacman::p_load(
   stars, #CH5
   httr,
   WikipediR, # CH12
-  memoise
+  memoise,
+  academictwitteR,
+  rtweet,
+  lubridate
 )
 
 # Move these installations before pacman?
