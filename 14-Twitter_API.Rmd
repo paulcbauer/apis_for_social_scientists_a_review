@@ -6,7 +6,7 @@
 
 * *What data/service is provided by the API?*
 
-The API is provided by Twitter. As of 2021, there are 5 different tracks of API: [Standard (v1.1)](https://developer.twitter.com/en/docs/twitter-api/v1), [Premium (v1.1)](https://developer.twitter.com/en/docs/twitter-api/premium), [Essential (v2)](https://developer.twitter.com/en/portal/petition/essential/basic-info), [Elevated (v2)](https://developer.twitter.com/en/products/twitter-api/elevated-waitlist), and [Academic Research (v2)](https://developer.twitter.com/en/products/twitter-api/academic-research). They offer different data as well as cost differently. For academic research, one should use Standard (v1.1) or Academic Research (v2). I recommend using Academic Research (v2) track, not least because v1.1 is very restrictive for academic research and the version is now in maintenance mode (i.e. it will soon be deprecated). If one still want to use the Standard track v1.1, please see [the addendum](#addendum-twitter-v1.1) below.
+The API is provided by Twitter. As of 2021, there are 5 different tracks of API: [Standard (v1.1)](https://developer.twitter.com/en/docs/twitter-api/v1), [Premium (v1.1)](https://developer.twitter.com/en/docs/twitter-api/premium), [Essential (v2)](https://developer.twitter.com/en/portal/petition/essential/basic-info), [Elevated (v2)](https://developer.twitter.com/en/products/twitter-api/elevated-waitlist), and [Academic Research (v2)](https://developer.twitter.com/en/products/twitter-api/academic-research). They offer different data as well as cost differently. For academic research, one should use Standard (v1.1) or Academic Research (v2). I recommend using Academic Research (v2) track, not least because v1.1 is very restrictive for academic research and the version is now in maintenance mode (i.e. it will soon be deprecated). If one still wants to use the Standard track v1.1, please see [the addendum](#addendum-twitter-v1.1) below.
 
 Academic Research Track provides the following data access
 
@@ -107,7 +107,7 @@ fff_ts <- readRDS("figures/rds/twitter_ffs_ts.RDS")
 head(fff_ts)
 ```
 
-The daily time series of number of German tweets tweets is displayed in Figure below. However, this is not a perfect replication of the original Figure 3. It is because the original Figure only considers Fridays. [^1] The Figure below is an "enhanced remake".
+The daily time series of number of German tweets tweets is displayed in Figure below. However, this is not a perfect replication of the original Figure 3. It is because the original Figure only considers Fridays. [^causal] The Figure below is an "enhanced remake".
 
 ```{r, fff_day}
 lockdown_date <- as.POSIXct(as.Date("2020-03-23"))
@@ -130,7 +130,7 @@ I recommend thinking thoroughly whether the easy Twitter data are really suitabl
 
 The [Standard Track of Twitter v1.1 API](https://developer.twitter.com/en/docs/twitter-api/v1) is still available and probably will still be available in the near future. If one for any reason doesn't want to --- or cannot --- use the Academic Research Track, Twitter v1.1 API is still accessible using the R package `rtweet` [@kearney:2019].
 
-The access is relatively easy because in most cases, one only needs to have a Twitter account. Before making any actual query, `rtweet` will do the OAuth authentication automatically [^2].
+The access is relatively easy because in most cases, one only needs to have a Twitter account. Before making any actual query, `rtweet` will do the OAuth authentication automatically [^rtweet].
 
 To "replicate" the #ichbinhanna query above:
 
@@ -141,6 +141,6 @@ search_tweets("#ichbinhanna OR #ichwarhanna", lang = "de")
 
 However, this is not a replication. It is because the Twitter v1.1 API can only be used to search for tweets published in the last few days, whereas Academic Research Track supports full historical search. If one wants to collect a complete historical archive of tweets with v1.1, continuous collection of tweets is needed.
 
-[^1]: To truly answer the research question, I recommend using time series causal inference techniques such as Google's [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html).
+[^causal]: To truly answer the research question, I recommend using time series causal inference techniques such as Google's [CausalImpact](https://google.github.io/CausalImpact/CausalImpact.html).
 
-[^2]: The authentication information will be stored by default to the hidden file `.rtweet_token.rds` in [home directory](https://en.wikipedia.org/wiki/Home_directory).
+[^rtweet]: The authentication information will be stored by default to the hidden file `.rtweet_token.rds` in [home directory](https://en.wikipedia.org/wiki/Home_directory).

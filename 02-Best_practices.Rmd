@@ -43,7 +43,7 @@ For a quick experimentation, run this:
 usethis::edit_r_environ(scope = "user")
 ```
 
-If you are doing this in RStudio, a new file is now opened. That is your user-level `.Renviron` file. It is a hidden file (indicated by the ".") in your user directory [^1].
+If you are doing this in RStudio, a new file is now opened. That is your user-level `.Renviron` file. It is a hidden file (indicated by the ".") in your user directory [^unix].
 
 For most people, it should be a blank file. For some, the file might already have something in it. Now, in the file, put this line into it:
 
@@ -76,7 +76,7 @@ yt_oauth(app_id = Sys.getenv("YT_CLIENTID"),
          token = '')
 ```
 
-As long as your hidden `.Renviron` file is not leaked, you are safe. For reproducibility purposes, you should document all these envvars (the definitions, not the values) in the README file [^2].
+As long as your hidden `.Renviron` file is not leaked, you are safe. For reproducibility purposes, you should document all these envvars (the definitions, not the values) in the README file [^gha].
 
 This method is not perfect, of course. For example, your `.Renviron` is a plain text file and it can still be leaked. If you want to know other alternatives, see the ["Managing secrets" vignette](https://httr.r-lib.org/articles/secrets.html) of httr.
 
@@ -123,6 +123,6 @@ forget(mGET)
 
 For more information about memoisation, please refer to the [official website of memoise](https://memoise.r-lib.org/index.html).
 
-[^1]: For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden `.*rc` file (e.g. `.bashrc` or `.zshrc`, depending on your shell). The method is to set that up using `export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"`. The envvars defined in your `.*rc` file can also be retrieved by `Sys.getenv`. The section on [Google Natural Language API](#google-natural-language-api) actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your `.localrc` instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.
+[^unix]: For the Unix users (Mac OSX, Linux, FreeBSD, Solaris, HPUX, etc.) reading this, you can also define envvars in your hidden `.*rc` file (e.g. `.bashrc` or `.zshrc`, depending on your shell). The method is to set that up using `export YT_CLIENTSECRET="MbOSt6cQhhFkwETXKur-L9rN"`. The envvars defined in your `.*rc` file can also be retrieved by `Sys.getenv`. The section on [Google Natural Language API](#google-natural-language-api) actually contains an example. If you have an habit of publishing your dotfiles, you should store these envvars in your `.localrc` instead. Well, if you know what dotfiles are, your Unix Wizardry should be able to tell you how to do that.
 
-[^2]: For the people who need to use Github Actions to run or test your code, you can also store those envvars in your R code as [Github Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
+[^gha]: For the people who need to use Github Actions to run or test your code, you can also store those envvars in your R code as [Github Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
