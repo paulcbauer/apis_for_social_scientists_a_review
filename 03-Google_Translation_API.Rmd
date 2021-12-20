@@ -5,7 +5,6 @@
 
 ```{r cache-ch2, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
-# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
 ## Provided services/data
@@ -81,15 +80,10 @@ library(googleLanguageR)
 
 *Step 2: Authentication*
 
-```{r echo=FALSE}
-# Authentication (through your service account's JSON key file)
-gl_auth("./keys/trustme-312210-b9734c074f6f.json")
-```
-
 ```{r eval=FALSE}
+# Authentication (through your service account's JSON key file)
 gl_auth("./your-key.json")
 ```
-
 
 *Step 3: Analysis - API call and Translation*
 
@@ -103,8 +97,14 @@ df_original$text <- as.character(df_original$text)
 
 Next, using this data, call the API via the function 'gl_translate()' and importantly specify the target language (german in this example) within the 'target' argument.
 
-```{r message=FALSE, warning=FALSE}
-df_translate <- gl_translate(df_original$text, target = "de")
+<!-- A cache version of google_translate is available in "figures/rds/google_translate.RDS" -->
+
+```r
+google_translate <- gl_translate(df_original$text, target = "de")
+```
+
+```{r, echo = FALSE, message = FALSE}
+google_translate <- readRDS("figures/rds/google_translate.RDS")
 ```
 
 This API call eventually provides reuslts in a dataframe with three columns: translatedText ( &#8594; contains the translation), detectedSourceLangauge ( &#8594; contains a label for the original language being detected) and text ( &#8594; contains the original text). 
@@ -112,15 +112,15 @@ This API call eventually provides reuslts in a dataframe with three columns: tra
 Let's check the translation.
 
 ```{r message=FALSE, warning=FALSE, eval=F}
-df_translate$translatedText
+google_translate$translatedText
 ```
 
-*`r (paste(df_translate$translatedText))`*
+*`r (paste(google_translate$translatedText))`*
 
 <!-- ```{r echo=TRUE, message=FALSE, warning=FALSE} -->
 <!-- # Add translation to your original data -->
 <!-- df_orginal <- bind_cols(df_original,  -->
-<!--                          df_translate %>% select(translatedText)) -->
+<!--                          google_translate %>% select(translatedText)) -->
 
 <!-- ``` -->
 
