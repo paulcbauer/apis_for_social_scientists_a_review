@@ -263,14 +263,24 @@ merged_dataset <- fb_ad_list[["ad"]] %>%
 
 We end up with a "tidy" dataset, in which each row is one observation (ads) and columns are variables such as spending, reach, age group and region, making it amenable to quick summarisation and exploratory visualizations. Please note that you only need one ad that displays internationally and in your dataset and you will end up with many extra region columns that are NAs for most ads.
 
-For instance, in our case above, we get not only UK regions columns, but also all of the US states! In reality, there was only one ad that targeted both US and UK in our small sample. This means, that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.
+For instance, in our case above, we get not only UK regions columns, but also all of the US states! In eality, there was only one ad that targeted both US and UK in our small sample. This means, that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.
 
 ## Social science examples
 
 -   *Are there social science research examples using the API?*
 
-Since its launch in late 2018, Facebook Ads library has attracted some interdisciplinary research attention. For example,
+Since its launch in late 2018, the Facebook Ads library has attracted interdisciplinary research attention.
 
-There is also a literature focused on the weaknesses of the data provided by the Facebook Ad library.
+Among the peer-reviewed research findings, we find the theoretical overview of the situation of the scholarly social media API access in the aftermath of Cambridge Analytica by @bruns2019, mentioning the newly opened, "bespoke" Facebook Ad Library, but pointing out its lack of "comprehensive search functionality" and "limited international coverage."
 
--   Consider also the Google political Ads library
+Focusing on the US context during the 2018 mid-term elections, @fowler2021 compared TV advertising with Facebook advertising, concluding that the latter tends to occur earlier in the campaign, is less hostile and issue-focused. A study by @schmokel2021 presents a quantitative analysis of images from the Ad Library using clustering and visual emotion classification during the 2020 primary elections. Perhaps surprisingly, their results indicate that most of the images communicated happiness and calm, but the repertoire of the "core" images was minimal (434 out of over 80,000 images across eight candidates); hence most of the photos were merely repeated with a different text overlay.
+
+A recent example of a cross-country study is @bene2021, whose chapter uses the API to analyze the political advertisement of parties in 12 EU countries in the run-up to the 2019 European Parliament elections, finding that advertisements seem to form the majority of parties' activities on Facebook but, also, a considerable divergence in cross-country usage patterns.
+
+There is literature focused on the weaknesses of the data provided by the Facebook Ad library. For instance, in the case of Spain, @cano2021 focuses on the issue of disinformation during the 2019 Spanish general elections in the corpus of Facebook political ads, and @calvo2021 uses the same corpus and period to conduct an exploratory analysis of the political communication on Facebook. However, the authors note that due to the limitations for 2019 data using the API, they had to resort to web crawling of the Ad Library instead. It is also important to note that some NGOs, such as Transparency International, are involved in the [advocacy](https://www.transparency.cz/wp-content/uploads/2020/11/Why-Facebooks-Ad-Library-tool-falls-short-and-what-it-can-do-to-fix-it-2020.pdf) for a more transparent and comprehensive reporting in the Facebook Ad Library.
+
+Finally, there is a body of preliminary research using the Facebook Ad Library API - publications currently in the form of pre-prints or conference proceedings. For example, @edelson2020 investigates the security weaknesses of the Facebook advertising ecosystem, enabling malicious advertisers to conduct undeclared coordinated activities and construct inauthentic communities. The Italian political discourse regarding migration is at the center of exploration by @capozzi2021.
+
+To conclude, there are still significant gaps in the academic knowledge regarding the Facebook paid political advertising. More research attention paid to cross-country comparison, visual information, or ethical considerations would be beneficial to understand better the functioning of this ecosystem and its societal implications. Given the recently expanded transparency of Google regarding political advertisement on its platform, upcoming research should also consider using the [Google Political Ads dataset](https://transparencyreport.google.com/political-ads/home) in tandem with Facebook's Ad Library API.
+
+
