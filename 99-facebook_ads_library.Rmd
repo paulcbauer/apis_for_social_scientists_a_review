@@ -1,0 +1,288 @@
+# Facebook Ad Library API
+
+<chauthors>Ondřej Pekáček</chauthors> <br><br>
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval = FALSE, cache = TRUE)
+```
+
+## Provided services/data
+
+-   *What data/service is provided by the API?*
+
+The [Faceboook Ad Library API](https://www.facebook.com/ads/library/api/) is provided by Facebook and forms an extended part of its [Graph API](https://developers.facebook.com/docs/graph-api/) ecosystem.
+
+As of December 2021, it provides limited access to the [Facebook Ad Library](https://www.facebook.com/ads/library/). While the web version enables the user to search multiple types of paid advertising on Facebook platforms (including Instagram and WhatsApp), the API offers programmatic access to political/social issues ads. Facebook currently imposes a storage limit of 7 years for paid advertising on its platforms.
+
+Facebook also offers summarized information (on a per-country basis) about paid political ads in its [Ads Library Report](https://www.facebook.com/ads/library/report). However, this website only offers information on selected countries and displays information regarding the sum spent by the advertisers, neglecting the information on demographic and regional targeting.
+
+The API enables its users to get information on every paid political ad, regardless of whether it is still active.
+
+Researchers are currently able to obtain the following data (among others) for each individual paid ad:
+
+1.  Full text, date, unique link, and other metadata
+2.  Information on financial spending
+3.  Reach and impressions metrics
+4.  Gender and age category demographics
+5.  Country/region targeting information
+
+Please note that some key figures are not precise, such as spending, impressions, and reach. Instead, they are provided as min-max range estimates. Also, we should keep in mind that the API enforces a [rate limit](https://developers.facebook.com/docs/graph-api/overview/rate-limiting/) of 200 calls per hour.
+
+## Prerequisites
+
+-   *What are the prerequisites to access the API (authentication)?*
+
+As a first step, you need to [confirm](https://www.facebook.com/ID) their identity and location, which should take up to 48 hours.
+
+Secondly, proceed to the [Facebook Developers](https://developers.facebook.com/) and create an account there.
+
+Finally, you also need to create a [Facebook App](https://developers.facebook.com/apps/create) to use the API.
+
+You might also want to take note of the *App ID* and *App Secret*, which are found in the *Settings->Basic* section of the App.
+
+Unlike some other APIs, such as Twitter, Facebook does not provide us with a "permanent" access token.
+
+After the login, we get a short-lived (max. 2 hours) access token. It can be retrieved from the [Graph API Explorer](https://developers.facebook.com/tools/explorer/). Fortunately, we could easily extend the token to about two months with the [Access Token Debugger tool](https://developers.facebook.com/tools/debug/accesstoken/). We only need to paste the token, click *Debug*, and click the *Extend Access Token* button below the information panel and enter our Facebook password into the prompt. In the future, this process can also be done programmatically by calling the API with the short-lived access token, App ID, and App Secret (more information [here](https://developers.facebook.com/docs/facebook-login/access-tokens/refreshing/).
+
+As recommended in [Chapter 2](#best-practices), be careful not to include the token explicitly in your script for security purposes. In this chapter, we will set the token as the environment variable `FB_TOKEN` using `.Renviron` file and restart R for the changes to take effect. Running the `Sys.getenv("FB_TOKEN")` should provide us with a correct token.
+
+## Simple API call
+
+-   *What does a simple API call look like?*
+
+Firstly, it might be helpful to get familiar with the API parameters that we can request by reading the official [documentation](https://www.facebook.com/ads/library/api).
+
+We will follow the sample example on the API documentation page and replicate the simple call. However, we will use R's interface instead of cURL in a command line in our case.
+
+To this end, we need to first load the required packages in this script.
+
+```{r}
+# Specify the package names we will be using.
+packages <- c("httr", "remotes", "dplyr", "ggplot2", "tidyr")
+
+# Install packages not yet installed.
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Packages loading.
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+We are using the `httr` package to make the API call - it has already been loaded in the previous step.
+
+```{r}
+# We will be using the ads_archive endpoint of the 12th version of the Graph.
+endpoint_url <- "https://graph.facebook.com/v12.0/ads_archive"
+
+# Specify the query parameters to mirror the one in official documentation.
+my_query <- list(
+  search_terms = "california",
+  ad_type = "POLITICAL_AND_ISSUE_ADS",
+  ad_reached_countries = "US",
+  access_token = Sys.getenv("FB_TOKEN")
+)
+
+# Using the URL endpoint and the list of our queries, we make the API call.
+raw_response <- httr::GET(
+  url = endpoint_url,
+  # Using this header is not necessary here, but it is usually a good practice
+  # to specify we want a JSON back (some APIs might send us XML by default).
+  httr::add_headers(Accept = "application/json"),
+  query = my_query
+)
+
+# Check the status of the response. If everything is OK, it should be 200.
+cat("Our status message is: \n")
+httr::http_status(raw_response)
+
+# Finally, we inspect the content of the response. R sees list of lists,
+# which could be converted to other formats, such as a data frame.
+# We will select the second sub-list named "data".
+parsed_response <- httr::content(raw_response, as = "parsed")[["data"]]
+cat("The first ad in our response is: \n")
+parsed_response[[1]]
+```
+
+We could use additional parameters under the query list specified in the documentation. However, this approach can be relatively more complex for more focused use. For instance, each API response also returns a link to the next page (pagination), which means one would need to write quite a long script that takes this into account. Another complication is that part of the URL in the response, which links to the following page or to the individual ad itself, contains your full access token. You must thus make sure to remove it when sharing the data further.
+
+Fortunately, we do not need to deal with these issues directly for most use cases.  Instead, we will use the [Radlibrary package](https://github.com/facebookresearch/Radlibrary) for R, which significantly simplifies the API calls by providing an easy-to-understand functions. This package can handle the pagination automatically and reliably removes the access token from any downloaded data.
+
+## API access
+
+-   *How can we access the API from R (httr + other packages)?*
+
+Aside from writing our API functions using the `httr` package, we could use the `Radlibrary`, an open-source package written for R. As of December 2021, `Radlibrary` is not yet available at R's primary CRAN repository. Hence its installation is (slightly) more complicated since it needs to be installed directly from its GitHub repository instead. For this process, we will use the `install_github()` function, for which you either need to have `devtools` or `remotes` (a more lightweight package used here) installed.
+
+```{r}
+remotes::install_github("facebookresearch/Radlibrary")
+library(Radlibrary)
+```
+
+`Radlibrary` can also simplify the long-term access token retrieval discussed above. Run the function following functions. If you already have an `FB_TOKEN` environment variable set up from the previous step, **you can skip** this part. However, most APIs will not be doing the same for us, so it is a valuable skill to do this manually.
+
+```{r}
+# User-friendly setup that asks you for app ID and secret.
+adlib_setup()
+
+# This exchanges the short term token for the long term one.
+adlib_set_longterm_token()
+
+# You can verify that the token has been set correctly.
+token_get()
+```
+
+**Our first query with `Radlibrary`**
+
+Once the package is installed, we can construct a more complicated query with just a few lines. We will focus on the issue of housing in the UK in November 2021.
+
+```{r}
+detailed_query <- adlib_build_query(
+  # Let's select only United Kingdom.
+  ad_reached_countries = "GB",
+  # We want to get both active and inactive ads.
+  ad_active_status = "ALL",
+  search_terms = "Housing",
+  # Because of the amount of ads, we will extract only one week.
+  ad_delivery_date_min = "2021-11-01",
+  ad_delivery_date_max = "2021-11-07",
+  # We can only access Political/Social Issues ads using the API.
+  ad_type = "POLITICAL_AND_ISSUE_ADS",
+  # We want the adds for these platforms owned by Facebook/Meta.
+  publisher_platform = c(
+    "FACEBOOK",
+    "INSTAGRAM",
+    "MESSENGER",
+    "WHATSAPP"
+  ),
+  # This is the default limit for the API response.
+  # Since we use pagination, we can keep it as it is.
+  limit = 1000,
+  # What will be included in the returned data? Can also be
+  # "demographic_data" or "region_data", among others.
+  fields = "ad_data"
+)
+```
+
+The query is "lazy." Our API call will not be executed unless we specifically ask for it.
+
+```{r}
+# The function adlib_get_paginated is a version of adlib_get, suitable for
+# larger requests. If you got token using the adlib_setup() function, you do
+# not have to specify this argument. However, we will be using the
+# environment variable set in the previous part of the chapter.
+ads_list <- adlib_get_paginated(detailed_query, token = Sys.getenv("FB_TOKEN"))
+```
+
+We can convert the list to a standard dataset using the as_tibble function, because the `ads_list` is a particular type of class called `paginated_adlib_data_response`. This means we can specify other arguments to the `as_tibble` function, such as the type of the table we require and whether we wish to censor our access token from the data.
+
+```{r}
+# The "type" argument must correspond to the "fields" argument in the
+# adlib_build_query like this:
+# "ad_data" = "ad", "region_data" = "region", "demographic_data" = "demographic".
+ads_df <- as_tibble(ads_list, type = "ad", censor_access_token = TRUE)
+```
+
+**Practical case study: Housing in the UK through the prism of political advertising on Facebook's platforms and its audience**
+
+```{r}
+# First, save all of the data types that we will ask the API to extract.
+fields_vector <- c("ad_data", "region_data", "demographic_data")
+
+# Correspondingly, save all of the table types.
+table_type_vector <- c("ad", "region", "demographic")
+
+# Initiate an empty list to which we will append the extracted API data.
+# The list could be initiated simply by using list(); however, especially for
+# larger data sets, specifying the length of a list in R in advance speeds up
+# the processing. The length of the list equals our 3 data types.
+fb_ad_list <- vector(mode = "list", length = length(fields_vector))
+
+# We will also name its three items with values from table_type_vector so we can
+# refer to them further
+names(fb_ad_list) <- table_type_vector
+```
+
+We are using a for loop this time, where the API call in each iteration is the same, with the difference in the asked data type. Unlike in the first example, we are interested in the ads themselves and their audience.
+
+```{r}
+for (i in seq_along(fields_vector)) {
+  print(paste("Extracting the", fields_vector[i]))
+
+  query <- adlib_build_query(
+    ad_reached_countries = "GB",
+    ad_active_status = "ALL",
+    search_terms = "Housing",
+    ad_delivery_date_min = "2021-11-05",
+    ad_delivery_date_max = "2021-11-07",
+    ad_type = "POLITICAL_AND_ISSUE_ADS",
+    publisher_platform = c("FACEBOOK", "INSTAGRAM"),
+    fields = fields_vector[i]
+  )
+
+  # The call is limited to 1000 results but pagination of overcomes it.
+  # We pipe the output of the paginated call to the as_tibble function.
+  fb_ad_list[[table_type_vector[i]]] <- adlib_get_paginated(query,
+    token = Sys.getenv("FB_TOKEN")
+  ) %>%
+    as_tibble(
+      type = table_type_vector[i],
+      censor_access_token = TRUE
+    )
+}
+```
+
+After extraction using the for loop, we have three data frames in one list. However, these datasets are in a different format and with a different number of rows. The only information that unites them is the unique ID of each ad, which we will use when merging them.
+
+```{r}
+# The demographic & region datasets are in the "long" format (multiple
+# rows of information for each ad), and we need a transformation to a "wide" 
+# format (single row per ad) of the ad dataset using the tidyr package.
+
+fb_ad_list[["demographic"]] <- pivot_wider(fb_ad_list[["demographic"]],
+  id_cols = adlib_id,
+  names_from = c("gender", "age"),
+  names_sort = TRUE,
+  values_from = percentage
+)
+
+fb_ad_list[["region"]] <- pivot_wider(fb_ad_list[["region"]],
+  id_cols = adlib_id,
+  names_from = region,
+  names_sort = TRUE,
+  values_from = percentage
+)
+
+# Performing a left join on the common id column across the 3 datasets, remove
+# full duplicates and arrange by date.
+merged_dataset <- fb_ad_list[["ad"]] %>%
+  left_join(fb_ad_list[["demographic"]], by = "adlib_id") %>%
+  left_join(fb_ad_list[["region"]], by = "adlib_id") %>%
+  distinct() %>%
+  arrange(desc(ad_creation_time))
+```
+
+We end up with a "tidy" dataset, in which each row is one observation (ads) and columns are variables such as spending, reach, age group and region, making it amenable to quick summarisation and exploratory visualizations. Please note that you only need one ad that displays internationally and in your dataset and you will end up with many extra region columns that are NAs for most ads.
+
+For instance, in our case above, we get UK regions columns and all of the US states! In reality, only one ad targeted both US and UK in our small sample. As a result, it means that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.
+
+## Social science examples
+
+-   *Are there social science research examples using the API?*
+
+Since its launch in late 2018, the Facebook Ads library has attracted interdisciplinary research attention.
+
+Among the peer-reviewed research findings, we find the theoretical overview of the situation of the scholarly social media API access in the aftermath of Cambridge Analytica by @bruns2019, mentioning the newly opened, "bespoke" Facebook Ad Library, but pointing out its lack of "comprehensive search functionality" and "limited international coverage."
+
+Focusing on the US context during the 2018 mid-term elections, @fowler2021 compared TV advertising with Facebook advertising, concluding that the latter tends to occur earlier in the campaign, is less hostile and issue-focused. A study by @schmokel2021 presents a quantitative analysis of images from the Ad Library using clustering and visual emotion classification during the 2020 primary elections. Perhaps surprisingly, their results indicate that most of the images communicated happiness and calm, but the repertoire of the "core" images was minimal (434 out of over 80,000 images across eight candidates); hence most of the photos were merely repeated with a different text overlay.
+
+A recent example of a cross-country study is @bene2021, whose chapter uses the API to analyze the political advertisement of parties in 12 EU countries in the run-up to the 2019 European Parliament elections, finding that advertisements seem to form the majority of parties' activities on Facebook but, also, a considerable divergence in cross-country usage patterns.
+
+There is literature focused on the weaknesses of the data provided by the Facebook Ad library. For instance, in the case of Spain, @cano2021 focuses on the issue of disinformation during the 2019 Spanish general elections in the corpus of Facebook political ads, and @calvo2021 uses the same corpus and period to conduct an exploratory analysis of the political communication on Facebook. However, the authors note that due to the limitations for 2019 data using the API, they had to resort to web crawling of the Ad Library instead. It is also important to note that some NGOs, such as Transparency International, are involved in the [advocacy](https://www.transparency.cz/wp-content/uploads/2020/11/Why-Facebooks-Ad-Library-tool-falls-short-and-what-it-can-do-to-fix-it-2020.pdf) for a more transparent and comprehensive reporting in the Facebook Ad Library.
+
+Finally, there is a body of preliminary research using the Facebook Ad Library API - publications currently in the form of pre-prints or conference proceedings. For example, @edelson2020 investigates the security weaknesses of the Facebook advertising ecosystem, enabling malicious advertisers to conduct undeclared coordinated activities and construct inauthentic communities. The Italian political discourse regarding migration is at the center of exploration by @capozzi2021.
+
+To conclude, there are still significant gaps in the academic knowledge regarding the Facebook paid political advertising. More research attention paid to cross-country comparison, visual information, or ethical considerations would be beneficial to understand better the functioning of this ecosystem and its societal implications. Given the recently expanded transparency of Google regarding political advertisement on its platform, upcoming research should also consider using the [Google Political Ads dataset](https://transparencyreport.google.com/political-ads/home) in tandem with Facebook's Ad Library API.
+
+
