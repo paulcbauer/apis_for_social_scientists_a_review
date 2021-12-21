@@ -77,44 +77,71 @@ key <- "YOURAPIKEY"
 set_key(key)
 ```
 
-```{r eval=T, echo=F, message=FALSE, warning=FALSE}
-key<-readtext::readtext(paste0("./keys/google_places_key.txt"))
-library(googleway)
-set_key(key$text)
-```
-
 *API call*
 
-```{r echo=T, eval=T, warning=F, message=F}
-# Option 2: Accessing the API with googleway
+*Step 1: Load packages*
 
+```{r message=FALSE, warning=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(googleway)
+```
+
+
+<!-- A cache version of location is available in "figures/rds/google_places_location.RDS" -->
+
+```{r eval=F}
+# Option 2: Accessing the API with googleway
 
 # Request 'Mannheim' to get latitude and longitude information
 location <- googleway::google_places("Mannheim")
+```
 
+```{r, echo = FALSE, message = FALSE}
+location <- readRDS("figures/rds/google_places_location.RDS")
+```
 
+```{r warning=F, message=F}
 # Save latitude and longitude information in vector
 location <- location$results$geometry
 location <- c(location$location$lat, location$location$lng)
+```
 
 
+
+<!-- A cache version of this plot is available in "figures/rds/google_places_plot1.RDS" -->
+
+```{r eval=F}
 # Plot places to google map
 library(mapsapi)
 # for this you will also need to activate the "maps static API"
 r = mapsapi::mp_map(center = ("49.48746,8.466039"), zoom = 14, key = key, quiet = TRUE)
 library(stars)
+
 plot(r)
-
-
 ```
 
-```{r echo=T, eval=T, warning=F, message=F}
+```{r echo=F, out.width="100%", fig.align='center'}
+knitr::include_graphics("figures/rds/google_places_plot1.png")
+```
+
+
+
+
+
+<!-- A cache version of pizza is available in "figures/rds/google_places_pizza.RDS" -->
+
+```{r eval=F}
 # Google places request with googleway
 pizza <- google_places("Pizza", location = location, radius = 5000, place_type = "food")
+```
 
+```{r, echo = FALSE, message = FALSE}
+pizza <- readRDS("figures/rds/google_places_pizza.RDS")
+```
+
+
+```{r echo=T, warning=F, message=F}
 # Plot rankings as barplot
 pizza$results %>%
   ggplot() +

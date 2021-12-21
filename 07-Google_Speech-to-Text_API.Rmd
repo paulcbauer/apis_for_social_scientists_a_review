@@ -92,11 +92,6 @@ library(googleLanguageR)
 
 *Step 2: Authentication*
 
-```{r echo=FALSE}
-# Authentication (through your service account's JSON key file)
-gl_auth("./keys/trustme-312210-b9734c074f6f.json")
-```
-
 ```{r eval=FALSE}
 gl_auth("./your-key.json")
 ```
@@ -105,32 +100,44 @@ gl_auth("./your-key.json")
 
 We will now get a sample source file which comes along with the `googleLanuageR` package. The transcript of this file is: “To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so” - which according to @Edmondson2017-pv (one of the authors of the [‘googleLanguageR’ R package]("https://cran.r-project.org/web/packages/googleLanguageR/index.html")) is a fairly difficult sentence for computers to parse.
 
-```{r message=FALSE, warning=FALSE}
-test_audio <- system.file("woman1_wb.wav", package = "googleLanguageR")
+<!-- A cache version of exemplary_audio is available in "figures/rds/google_speech-to-text_audio.RDS" -->
+
+```{r eval=F}
+exemplary_audio <- system.file("woman1_wb.wav", package = "googleLanguageR")
+```
+
+```{r, echo = FALSE, message = FALSE}
+exemplary_audio <- readRDS("figures/rds/google_speech-to-text_audio.RDS")
 ```
 
 We can now call the API via the function `gl_speech()`. Here you will have to specify the quantity of interest, namely the `audio_source` (this can either be a local file or a Google Cloud Storage URI) as well as the `languageCode` (language spoken in your audio file).
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
-audio_data <- gl_speech(audio_source=test_audio, languageCode = "en-GB")
+<!-- A cache version of exemplary_audio_analysis is available in "figures/rds/google_speech-to-text_analysis.RDS" -->
+
+```{r eval=F}
+exemplary_audio_analysis <- gl_speech(audio_source=exemplary_audio, languageCode = "en-GB")
 ```
+```{r, echo = FALSE, message = FALSE}
+exemplary_audio_analysis <- readRDS("figures/rds/google_speech-to-text_analysis.RDS")
+```
+
 
 The result is a list containing two dataframes: `transcript` and `timings`.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
-dimnames(audio_data$transcript)
+dimnames(exemplary_audio_analysis$transcript)
 ```
 
 The `timings` dataframe stores timestamps telling us when each specific term was recognised. The `transcript` dataframe importantly provides the transcript as well as a confidence score. We can see that the transcript misses one term ("a") and indicates its confidence with a score close to 1.0.
 
 ```{r eval=FALSE}
-audio_data$transcript$transcript
+exemplary_audio_analysis$transcript$transcript
 ```
 
-*`r (paste(audio_data$transcript$transcript))`*
+*`r (paste(exemplary_audio_analysis$transcript$transcript))`*
 
 ```{r}
-audio_data$transcript$confidence #0.92
+exemplary_audio_analysis$transcript$confidence #0.92
 ```
 
 ## Social science examples
