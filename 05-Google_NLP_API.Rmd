@@ -2,9 +2,9 @@
 # Google Natural Language API
 <chauthors>Paul C. Bauer, Camille Landesvatter, Malte Söhren</chauthors>
 <br><br>
+
 ```{r cache-ch1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
-# setting cache to TRUE here allows that single API calls (e.g., line 140) do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
 
@@ -95,11 +95,6 @@ library(tm)#stopwords
 
 *Step 2: Authentication*
 
-```{r echo=FALSE}
-# Authentication (through your service account's JSON key file)
-gl_auth("./keys/trustme-312210-b9734c074f6f.json")
-```
-
 ```{r eval=FALSE}
 gl_auth("./your-key.json")
 ```
@@ -115,7 +110,9 @@ library(quanteda.corpora)
 
 The data we choose to download ('data_corpus_guardian') contains Guardian newspaper articles in politics, economy, society and international sections from 2012 to 2016. See [here]("https://github.com/quanteda/quanteda.corpora") for a list of even more publicy available text corpora from the quanteda.corpora package.
 
-```{r message=FALSE, warning=FALSE}
+<!-- A cache version of df is available in "figures/rds/google_nlp_data.RDS" -->
+
+```{r eval=F}
 # Download and store corpus
 guardian_corpus <- quanteda.corpora::download("data_corpus_guardian")
 
@@ -130,14 +127,23 @@ df <- as.data.frame(text)
 df <- tibble::rowid_to_column(df, "ID")
 ```
 
+```{r, echo = FALSE, message = FALSE}
+df <- readRDS("figures/rds/google_nlp_data.RDS")
+```
+
 *Note*: Whenever you choose to work with textual data, a very common procedure is to pre-process the data via a set of certain transformations. For instance, you will convert all letters to lower case, remove numbers and punctuation, trim words to their word stem and eventually remove so-called stopwords. There are many tutorials (for example [here]("https://datamathstat.wordpress.com/2019/10/25/text-preprocessing-for-nlp-and-machine-learning-using-r/") or [here]("http://rstudio-pubs-static.s3.amazonaws.com/256588_57b585da6c054349825cba46685d8464.html")).
 
 After having retrieved and prepared our to-be-analyzed (text) data, we can now call the API via the function `gl_nlp()`. Here you will have to specify the quantity of interest (here: `analyzeSyntax`). Depending on what specific argument you make use of (e.g., `analyzeSyntax`, `analyzeSentiment`, etc.) a list with information on different characteristics of your text is returned, e.g., sentences, tokens, tags of tokens.
 
-```{r message=FALSE, warning=FALSE}
+<!-- A cache version of syntax_analysis is available in "figures/rds/google_nlp_syntax_analysis.RDS" -->
+
+```{r eval=F}
 syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax")
 ```
 
+```{r, echo = FALSE, message = FALSE}
+syntax_analysis <- readRDS("figures/rds/google_nlp_syntax_analysis.RDS")
+```
 
 Importantly, find the list `tokens` inherit to the large list `syntax_analysis`. This list stores two variables: `content` (contains the token) and `tag` (contains the tag, e.g., verb or noun). Let's have a look at the first document.
 
