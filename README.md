@@ -29,6 +29,7 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Chung-hong Chan, Luka
 * [Manifesto API](https://manifesto-project.wzb.eu/information/documents/api
 ) (Lisa Zehnter, Tobias Burst)
 * [Google News API](https://newsapi.org/s/google-news-api) (Bernhard Clemm von Hohenberg)
+* [Media Cloude API](https://mediacloud.org/) (Chung-hong Chan)
 
 ## How will we keep the reviews up to date?
 * Descriptions of and code examples for APIs are only useful when they are up to date. Our plan is to update chapters that are outdated, e.g., if an API version changes. Sometimes this might require adding new authors/contributors to a chapter if the original authors become inactive.
