@@ -45,6 +45,7 @@ pacman::p_load(
 # Move these installations before pacman?
 devtools::install_github("quanteda/quanteda.corpora")
 devtools::install_github("cbpuschmann/RCrowdTangle")
+devtools::install_github("joon-e/mediacloud")
 ```
 
 
