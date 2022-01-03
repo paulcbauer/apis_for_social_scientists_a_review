@@ -6,7 +6,8 @@ Below we review different data- and service-APIs that may be useful to social sc
 * What data/service is provided by the API? (+ who provides it?)
 * What are the prerequisites to access the API (e.g., authentication)? 
 * What does a simple API call look like? 
-* How can we access the API from R (httr + other packages)? * Are there social science research examples using the API?
+* How can we access the API from R (httr + other packages)?
+* Are there social science research examples using the API?
 
 
 ## Prerequesits: Authentication
