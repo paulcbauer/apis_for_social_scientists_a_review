@@ -1,0 +1,50 @@
+# Genderize.io API
+
+<chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
+<br><br>
+
+```{r cache-ch2, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The [Genderize.io API](https://genderize.io/) provides a service for predicting the likely gender of a person given their name. The API is provided by Danish company *Demografix ApS* that also provides APIs for predicting age ([Agify.io](https://agify.io/)) and nationality ([Nationalize.io](https://nationalize.io/)) for a given name (more on that later).^[The author is in no way affiliated with Demografix ApS.] The service is useful to augment a dataset of individuals with the likely gender, when at least the first name is known.
+
+The results provided by the API should be taken with care. As with many commercial APIs, the exact data sources and methods for the genderize.io API are not disclosed. The [dedicated "Our Data" page](https://genderize.io/our-data) only states that *"[o]ur data is collected from all over the web"* and provides a list with the amount of data that was collected for many countries (a total of over 114M entries at time of writing). @wais_gender_2016 claims that scraped public social media profiles are used as data source.
+
+Another problem is that there's only a binary categorization of gender and the categorization comes with an accuracy estimate which in turn depends on the popularity of the name and of course the name itself (since there are many unisex names). Furthermore, gender prediction of a name may depend on country and year of birth (the Genderize.io API allows for country-specific results).
+
+So in general, predicting an individual's gender from their name is not an easy task. See @wais_gender_2016 for an overview on modern gender prediction methods. You should only consider using the methods in this chapter when there's no other way to obtain the gender information. In case you use the API, you should
+
+- transparently report the limits of the name-based approach,
+- report the accuracy of the predictions,
+- and use a threshold for the minimum accuracy and/or integrate the prediction accuracy into your models.
+
+For gender prediction, there are also alternatives to using this API:
+
+- the [gender package](https://cran.rstudio.com/web/packages/gender/) provides gender prediction using historical data from the US and a few European countries (see @blevins2015jane)
+- [NameCensus.com](https://namecensus.com/) provides lists of most common female and male first names in the US
+- WikiPedia provides [categories for given names](https://en.wikipedia.org/wiki/Category:Given_names) by gender
+
+
+## Prerequesites
+
+At the time of writing, the API can be queried with up to 1000 names per day for free. There's not even an API key required for the free tier. However, if you require more than 1000 API requests per day, you need to obtain an API key from [store.genderize.io](https://store.genderize.io/) – see [this page](https://store.genderize.io/pricing) for pricing.
+
+
+## Simple API call
+
+* *What does a simple API call look like?*
+
+## API access
+
+* *How can we access the API from R (httr + other packages)?* 
+
+## Social science examples
+
+* *Are there social science research examples using the API?*
+
+TODO (see https://genderize.io/use-cases)
