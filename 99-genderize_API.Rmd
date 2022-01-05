@@ -11,18 +11,18 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 
 * *What data/service is provided by the API?*
 
-The [Genderize.io API](https://genderize.io/) provides a service for predicting the likely gender of a person given their name. The API is provided by Danish company *Demografix ApS* that also provides APIs for predicting age ([Agify.io](https://agify.io/)) and nationality ([Nationalize.io](https://nationalize.io/)) for a given name (more on that later).^[The author of this chapter is in no way affiliated with Demografix ApS.] The service is useful to augment a dataset of individuals with the likely gender, when at least the first name is known.
+The [Genderize.io API](https://genderize.io/) provides a service for predicting the likely gender of a person given their name. The API is provided by Danish company *Demografix ApS* that also provides APIs for predicting age ([Agify.io](https://agify.io/)) and nationality ([Nationalize.io](https://nationalize.io/)) for a given name (more on that later).^[The author of this chapter is in no way affiliated with Demografix ApS.] The service is useful to augment a dataset of individuals with their likely gender, when at least the individuals' given name is known.
 
 The results provided by the API should be taken with care. As with many commercial APIs, the exact data sources and methods for the genderize.io API are not disclosed. The [dedicated "Our Data" page](https://genderize.io/our-data) only states that *"[o]ur data is collected from all over the web"* and provides a list with the amount of data that was collected for many countries (a total of over 114M entries at time of writing). @wais_gender_2016 claims that scraped public social media profiles are used as data source.
 
-Another problem is that there's only a binary categorization of gender. The categorization comes with an accuracy estimate which in turn depends on the popularity of the name and of course the name itself (since there are many unisex names). Furthermore, gender prediction for a name may depend on country and year of birth (the Genderize.io API allows for country-specific results). One also has to keep in mind different name orders in different cultures. E.g., in North and South America as well as most of Europe, it is common that the given name, from which a gender may be predicted, comes first before the family name, whereas in East Asia, the given name often comes last.
+Another problem is that there's only a binary categorization of gender. The categorization comes with a prediction probability estimate which in turn depends on the popularity of the name and of course the name itself (since there are many unisex names). Furthermore, gender prediction for a name may depend on country and year of birth (the Genderize.io API allows for country-specific results). One also has to keep in mind different name orders in different cultures. E.g., in North and South America as well as most of Europe it is common that the given name, from which a gender may be predicted, comes first before the family name, whereas in East Asia the given name often comes last.
 
 So in general, predicting an individual's gender from their name is not an easy task. See @wais_gender_2016 for an overview on modern gender prediction methods. You should only consider using the methods in this chapter when there's no other way to obtain the gender information. In case you use the API, you should
 
 - transparently report the limits of the name-based approach,
 - use country-specific results whenever possible (see below),
 - report the accuracy of the predictions,
-- and use a threshold for the minimum accuracy and/or integrate the prediction accuracy into your models.
+- and use a threshold for the minimum accuracy and/or incorporate the prediction accuracy into your models.
 
 For gender prediction, there are also alternatives to using this API:
 
@@ -45,7 +45,7 @@ The API is very simple and basically accepts two parameters for an HTTP GET requ
 1. `name` as the given name for which gender prediction is performed; an array of up to 10 names per request can be send
 2. `country_id` as optional localization parameter (given as [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code) 
 
-When no `country_id` is given, the gender prediction is performed using a database of given names for *all* countries with a notable bias towards Western countries (see the numbers on the ["Our Data" page](https://genderize.io/our-data)). If country information is known, you should provide it in the API request, as this gives more accurate, context-aware results. Especially if you're working with names outside the Western cultural sphere you should be aware of the Western bias in the datasets used for the predictions and make use of the localization feature.
+When no `country_id` is given, the gender prediction is performed using a database of given names for *all* countries with a notable bias towards Western countries (see the numbers on the ["Our Data" page](https://genderize.io/our-data)). If country information is known, you should provide it in the API request, as this gives more accurate, context-aware results. Especially if you're working with names outside the Western cultural sphere, you should be aware of the Western bias in the datasets used for the predictions and make use of the localization feature.
 
 We can perform a sample request using the `curl` command in a terminal or by simply visiting the URL in a browser:
 
@@ -54,7 +54,7 @@ curl 'https://api.genderize.io?name=sasha'
 ```
 
 
-The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction accuracy estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:
+The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction probability estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:
 
 ```{text eval=FALSE}
 {
@@ -65,7 +65,7 @@ The result is an HTTP response with JSON formatted data which contains the predi
 }
 ```
 
-This tells us that for the requested name "sasha", the gender was predicted as male but only with probability 0.51. This makes sense since this name is considered a unisex name in many countries. The prediction is based on 13219 samples in the database, which seems very solid.
+This tells us that for the requested name "sasha"^[Experiments showed that the API is not case-sensitive, i.e. it doesn't matter if you query the name "sasha", "Sasha" or "SASHA".], the gender was predicted as male, but only with probability 0.51. This makes sense since this name is considered a unisex name in many countries. The prediction is based on 13219 samples in the database, which seems very solid.
 
 Now to show the influence of localization, we try the German variant of this name, "Sascha", and append the `country_id` parameter for Germany:
 
@@ -85,7 +85,7 @@ curl 'https://api.genderize.io?name=sascha&country_id=DE'
 
 We can see that the localized request for Germany predicts "sascha" as male with 99% probability, based on 22408 database entries.
 
-Interestingly, only the Latinized forms of Sasha seem to be available in the database. Neither the Cyrillic form Саша, nor other non-Latin forms like Saša return results. (TODO: check this again using genderizer package)
+Interestingly, only the Latinized forms of Sasha seem to be available in the database. Neither the Cyrillic form Саша, nor other non-Latin forms like Saša return results. However, experiments with other names in non-Latin alphabets show a pattern: The German name "Jürgen" has about 700 entries in the genderize database, while "Jurgen" has almost 4000 entries. The Turkish name "Gül" exists only 36 times but "Gul" gives almost 5000 entries. A similar pattern is seen when using accents: "André" exists three times, but "Andre" more than 64,000 times. So in general, it seems you should convert all non-Latin (or non-ASCII) characters in a name to Latin counterparts in order to get better results.
 
 You can send up to ten names per request, by concatenating several `name[]=...` parameters:
 
@@ -98,8 +98,8 @@ The predictions are then listed for each supplied name:
 ```{text, eval=FALSE}
 [
   {"name": "sasha", "gender": "male", "probability": 0.51, "count": 13219},
-  {"name": "alex","gender": "male", "probability": 0.9, "count": 411319},
-  {"name": "alexandra","gender": "female","probability": 0.98, "count": 122985}
+  {"name": "alex", "gender": "male", "probability": 0.9, "count": 411319},
+  {"name": "alexandra", "gender": "female", "probability": 0.98, "count": 122985}
 ]
 ```
 
@@ -116,7 +116,74 @@ There are several packages for R that provide convenient functions for communica
 
 Since DemografixeR is the only package available on CRAN at time of writing, I will use this package for further demonstration. You can install the package via `install.packages('DemografixeR')`.
 
-TODO – cont. here
+### Load package
+
+Once installed, the package can be loaded with the following command:
+
+```{r}
+library(DemografixeR)
+```
+
+### The `genderize` function and its arguments
+
+The main function to use is the `genderize` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
+
+```{r}
+genderize('sasha')
+```
+
+Note that the output only consists of the gender prediction as character string vector. This is a dangerous default behavior, as it omits important information about the prediction probability and the size of the data pool used for the prediction. We need to set the `simplify` argument to `FALSE` in order to get that information in the form of a dataframe:
+
+```{r}
+genderize('sasha', simplify = FALSE)
+```
+
+Again, we can localize the request by using the `country_id` parameter:
+
+```{r}
+genderize('sascha', country_id = 'DE', simplify = FALSE)
+```
+
+Supplying a character string vector will predict the gender of all these names. Note that with the `genderize` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
+
+```{r}
+genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
+            'gökçe', 'gokce', 'jörg', 'jorg', 'rené', 'rene'),
+          simplify = FALSE)
+```
+
+You can also provide a different `country_id` for each name in the request:
+
+```{r}
+genderize(c('sasha', 'sascha'), country_id = c('RU', 'DE'), simplify = FALSE)
+```
+
+This is especially helpful together with `expand.grid`, which generates all combinations of values in the two vectors:
+
+```{r}
+names <- c('sasha', 'sascha')
+countries <- c('RU', 'DE')
+(names_cntrs <- expand.grid(names = names, countries = countries,
+                            stringsAsFactors = FALSE))
+```
+
+```{r}
+genderize(names_cntrs$names, country_id = names_cntrs$countries, simplify = FALSE)
+```
+
+Lastly, you can set the parameter `meta` to `TRUE`. This will add additional columns to the result with your rate limit (maximum daily number of requests), the remaining number of requests, the seconds until rate limit reset and the time of the request:
+
+```{r}
+genderize('judy', simplify = FALSE, meta = TRUE)
+```
+
+### Provide API key
+
+If you bought an API key, you can provide it using the `apikey` parameter. It's however recommended to use the `save_api_key` function to safely store such an API key. It will then automatically be used for each request.
+
+Please be careful when dealing with API keys and never publish them.
+
+### Functions for access to other APIs
 
 The package also provides access to the APIs for predicting age ([Agify.io](https://agify.io/)) and nationality ([Nationalize.io](https://nationalize.io/)) from a name. Examples on how to do that are given on the [package's website](https://matbmeijer.github.io/DemografixeR/). However, such predictions are even more problematic than the gender predictions and should never be trusted. Even the examples given on the API's respective websites showcase foolish predictions: A "Michael" is predicted as being 70 years old, living either in the US (9% probability), in Australia (6%) or New Zealand (5%). Pinpointing an age using only a given name is nonsense and the country predictions simply won't help you much for many names, given how many names are internationally used.
 
@@ -124,4 +191,8 @@ The package also provides access to the APIs for predicting age ([Agify.io](http
 
 * *Are there social science research examples using the API?*
 
-TODO (see https://genderize.io/use-cases)
+There seem to be several bibliometric studies that focus on the gender publication gap, which use the genderize.io API to estimate the gender of journal paper authors. Two notable examples are @holman_gender_2018 and @shen_persistent_2018.
+
+@hipp_has_2021 used the genderize.io API to predict the gender from names of GitHub users (for those that provided a valid given name). This was then used to analyze the different impact of the COVID-19 pandemic on the productivity of female and male software developers.
+
+Other examples (also outside academia) are listed on the ["Use cases" page](https://genderize.io/use-cases).
