@@ -1,0 +1,163 @@
+# Media Cloud API
+<chauthors>Chung-hong Chan</chauthors>
+<br><br>
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+According to [the official FAQ](https://mediacloud.org/support/), Media Cloud is "an open source and open data platform for storing, retrieving, visualizing, and analyzing online news." It is a consortium project across multiple institutions, including the University of Massachusetts Amherst, Northeastern University, and the Berkman Klein Center for Internet & Society at Harvard University. The full technical information about the project and the data provided are available in @roberts2021media. In short, the system continuously crawls RSS and similar feeds from a large collection of media sources (as of writing: > 25,000 media sources). Based on this large corpus of media contents, the system provides three services: Topic Mapper, Media Explorer, and Source Manager. 
+
+The services are accessible through the web interface and csv export is also supported from there. For programmatic access, Media Cloud also provides several [APIs](https://github.com/mediacloud/backend/tree/master/doc/api_2_0_spec). I will focus on the [main v2.0 API](https://github.com/mediacloud/backend/blob/master/doc/api_2_0_spec/api_2_0_spec.md), because it is currently the only public API.
+
+The main API provides functions to retrieve stories, tags, and sentences. Probably due to copyright reasons, the API does not provide full-text stories. But it is possible to pull document-term matrices from the API.
+
+## Prerequisites
+* What are the prerequisites to access the API (authentication)? *
+
+An API Key is required. One needs to register for an account at the [official website of Media Cloud](https://tools.mediacloud.org/#/user/signup). After having the access, click on [your profile](https://explorer.mediacloud.org/#/user/profile) to obtain the API Key.
+
+It is recommended to set the API key as the environment variable `MEDIACLOUD_API_KEY`. Please consult [Chapter 2](#best-practices) on how to do that in the section on Environment Variables.
+
+## Simple API call
+* *What does a simple API call look like?*
+
+The API documentation is available [here](https://github.com/mediacloud/backend/blob/master/doc/api_2_0_spec/api_2_0_spec.md). Please note the [request limit](https://github.com/mediacloud/backend/blob/master/doc/api_2_0_spec/api_2_0_spec.md#request-limits).
+
+The most important end points are:
+
+1. GET api/v2/media/list/
+2. GET api/v2/stories_public/list
+3. GET api/v2/stories_public/count
+4. GET api/v2/stories_public/word_matrix
+
+It is also important to learn about how to [write a solr query](https://mediacloud.org/getting-started-guide). It is used in either `q` ("query") and `fq` ("filter query") of many end point requests. For example, to search for stories with both "mannheim" and "university" in the New York Times (media_id = 1), the solr query should be: `text:mannheim+AND+text:university+AND+media_id:1`.
+
+In this example, we are going to search for 20 stories in the New York Times (Media ID: 1) mentioning "mannheim AND university". 
+
+```r
+require(httr)
+require(stringr)
+url <- parse_url("https://api.mediacloud.org/api/v2/stories_public/list")
+params <- list(q = "text:mannheim+AND+text:university+AND+media_id:1",
+               key = Sys.getenv("MEDIACLOUD_API_KEY"))
+url$query <- params
+final_url <- str_replace_all(build_url(url), c("%3A" = ":", "%2B" = "+"))
+
+res <- GET(final_url)
+content(res)
+```
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+As of writing, there are (at least) four R packages for accessing the Media Cloud API. Although the `mediacloudr` package by Dix Jan is available on CRAN, I recommend using the `mediacloud` package by Julian Unkel (LMU). It is available on Dr Unkel's [Github](https://github.com/joon-e/mediacloud). By default, the package always returns "tidy" objects. The package can be installed by:
+
+```r
+devtools::install_github("joon-e/mediacloud")
+```
+
+The above "mannheim" example can be replaced by (the package looks for the environment variable `MEDIACLOUD_API_KEY` automatically):
+
+<!-- cached as `mediacloud_mc_mannheim.RDS` -->
+
+```r
+require(mediacloud)
+mc_mannheim <- search_stories(text = "mannheim AND university", media_id = 1, n = 20)
+mc_mannheim
+```
+
+```{r, echo = FALSE}
+mc_mannheim <- readRDS("figures/rds/mediacloud_mc_mannheim.RDS")
+mc_mannheim
+```
+
+### Media keywords of "Universität Mannheim"
+
+In the following slightly more sophisticated example, we are going to first search for a list of all national German media outlets, search for a bunch of (German) articles mentioning "Universität Mannheim", and then extract keywords using term frequency-inverse document frequency (TF-IDF). There are three steps.
+
+#### Search for all national German media outlets
+
+All major German media outlets are tagged with `Germany___National`. The function `search_media` is used to retrieve information about all national German media outlets.
+
+<!-- cached as `mediacloud_de_media.RDS` -->
+
+```r
+de_media <- search_media(tag = "Germany___National", n = 100)
+```
+
+```{r, echo = FALSE}
+de_media <- readRDS("figures/rds/mediacloud_de_media.RDS")
+de_media
+```
+
+#### Pull a list of articles
+
+<!-- cached as `mediacloud_unima_articles.RDS` -->
+
+The following query gets a list of 100 articles mentioning "universität mannheim" published in a specific date range from all national German media outlets. Unlike the AND operator, this search for the exact term. Also, a query is case insensitive. The function `search_stories` can be used for this.
+
+```r
+unima_articles <- search_stories(text = "\"universität mannheim\"",
+                                 media_id = de_media$media_id,
+                                 n = 100,
+                                 after_date = "2021-01-01",
+                                 before_date = "2021-12-01")
+unima_articles
+```
+
+```{r, echo = FALSE}
+unima_articles <- readRDS("figures/rds/mediacloud_unima_articles.RDS")
+unima_articles
+```
+
+#### Pull word matrices
+
+With the list of `stories_id`, we can then use the function `get_word_matrices` to obtain word matrices. [^WORDMATRICES]
+
+<!-- cached as `mediacloud_unima_mat.RDS` -->
+
+```r
+unima_mat <- get_word_matrices(stories_id = unima_articles$stories_id, n = 100)
+```
+
+```{r, echo = FALSE}
+unima_mat <- readRDS("figures/rds/mediacloud_unima_mat.RDS")
+unima_mat
+```
+
+The data frame `unima_mat` is in the so-called "tidytext" format [@silge2016tidytext]. It can be used directly for analysis if one is fond of tidytext. For users of quanteda [@benoit2018quanteda], it is also possible to cast the data frame into a Document-Feature Matrix (DFM) [^DEDUP].
+
+<!-- cached as `mediacloud_unima_dfm.RDS` -->
+
+```r
+require(tidytext)
+require(quanteda)
+unima_dfm <- cast_dfm(unima_mat, stories_id, word_stem, word_counts)
+unima_dfm
+```
+
+```{r, echo = FALSE, message = FALSE}
+require(quanteda)
+unima_dfm <- readRDS("figures/rds/mediacloud_unima_dfm.RDS")
+unima_dfm
+```
+
+And then standard operations can be done.
+
+```{r}
+unima_dfm %>% dfm_tfidf() %>% topfeatures(n = 20)
+```
+
+The faculties of *BWL* (Business Administration) and *Jura* (Law) would be happy with this finding.
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+According to the paper by the official Media Cloud Team [@roberts2021media], there are over 100 papers mentioning Media Could. Many papers use the counting endpoint to generate a time series of media attention to specific keywords [e.g. @benkler:2015:SMN;@huckins:2020:MHB]. This function is widely used also in many [data journalism pieces](https://mediacloud.org/publications). The URLs collected from Media Cloud can also be used to do further crawling [e.g. @huckins:2020:MHB].
+
+It is perhaps worth mentioning that the openly available useNews dataset [@puschmann:2021] provides a large collection of content from Media Cloud together with meta data other data sources.
+
+[^WORDMATRICES]: For the sake of education, I split step 2 and 3 into two steps. Actually, it is possible to merge step 2 and step 3 by simply: `get_word_matrices(text = "\"universität mannheim\"")`
+
+[^DEDUP]: It is quite obvious that there are (many) duplicates in the retrieved data. For example, the first few documents are almost the same in the feature space. Packages such as [textsdc](https://github.com/chainsawriot/textsdc) might be useful for deduplication.
