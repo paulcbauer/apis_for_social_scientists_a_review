@@ -3,7 +3,7 @@
 <chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
 <br><br>
 
-```{r cache-ch2, include=FALSE} 
+```{r cache-ch-genderize, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
