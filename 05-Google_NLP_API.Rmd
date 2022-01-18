@@ -28,7 +28,7 @@ The following requests are available:
 
 A demo of the API that allows you to input text and explore the different classification capabilities can be  found [here]("https://cloud.google.com/natural-language#section-2").
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 

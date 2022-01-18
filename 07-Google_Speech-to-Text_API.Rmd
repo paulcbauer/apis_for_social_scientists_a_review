@@ -18,7 +18,7 @@ A demo of the API that allows you to record text via your microphone (or to uplo
 Also consider that there is a [Text-to-Speech API]("https://cloud.google.com/text-to-speech") - simply performing operations the other way around - offered by Google.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 To access and to use the API the following steps are necessary:

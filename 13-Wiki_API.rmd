@@ -12,7 +12,7 @@ To access *Wikipedia*, *MediaWiki* provides the MediaWiki Action API.
 The API can be used for multiple things, such as accessing wiki features, interacting with a wiki and obtaining meta-information about wikis and public users. Additionally, the web service can provide access data and post changes of *Wikipedia*-webpages.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header. 

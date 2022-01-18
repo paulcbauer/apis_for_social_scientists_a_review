@@ -29,7 +29,7 @@ For example, the [German](https://www.govdata.de/impressum) and the [US Governme
 The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal [govdata.de](https://www.govdata.de/impressum) for example serves as a collection point for all those data from various institutions. Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN.

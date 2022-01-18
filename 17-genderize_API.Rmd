@@ -31,7 +31,7 @@ For gender prediction, there are also alternatives to using this API:
 - WikiPedia provides [categories for given names](https://en.wikipedia.org/wiki/Category:Given_names) by gender
 
 
-## Prerequesites
+## Prerequisites
 
 At the time of writing, the API can be queried with up to 1000 names per day for free. There's not even an API key required for the free tier. However, if you require more than 1000 API requests per day, you need to obtain an API key from [store.genderize.io](https://store.genderize.io/) – see [this page](https://store.genderize.io/pricing) for pricing.
 

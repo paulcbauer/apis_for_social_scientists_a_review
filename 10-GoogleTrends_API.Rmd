@@ -29,7 +29,7 @@ Minus sign (e.g. corona -symptoms) | Excludes word after the operator
 <br />
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 
