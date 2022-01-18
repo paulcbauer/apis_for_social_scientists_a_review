@@ -1,0 +1,50 @@
+# GitHub.com API
+
+<chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
+<br><br>
+
+```{r cache-ch-genderize, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The [GitHub.com API](https://docs.github.com/en/rest) provides a service for interacting with the social coding platform [GitHub](https://github.com). GitHub is currently the largest such platform with more than 50M user accounts (as of January 2022). The API allows for retrieving user-generated data from this platform, which is probably of main interest for social scientists. It also provides tools for controlling your account, organizations and projects on the platform in order to automate workflows. This is more of interest for professional software development.
+
+From a social scientist's perspective, the API may be of interest when studying online communities, working methods, organizational structures, communication and discussions, etc. with a focus on (open-source) software development. Many projects that are hosted on GitHub are open-source projects with a transparent development process and communications. For private projects, which can also be hosted on GitHub, there's understandably only a few aggregate data available.
+
+When collecting data on GitHub, you should follow [GitHub's terms of service](https://docs.github.com/github/site-policy/github-terms-of-service), especially the [API terms](https://docs.github.com/en/github/site-policy/github-terms-of-service#h-api-terms). GitHub users agree that, when using the service, anything they post publicly may be viewed and used by other users (see [ToS section D5](https://docs.github.com/github/site-policy/github-terms-of-service#5-license-grant-to-other-users)). Still, you should be cautious when collecting and analyzing such user-generated data, as the user was not informed about contributing to a research project. If research data should later be published for replication, only aggregated and/or anonymized data should be made public. Depending on the data you collect, an ethics review should also be considered.
+
+There are several competing platforms to GitHub. Many of them also provide an API which allow you to retrieve data. A few of them include:
+
+- [BitBucket](https://bitbucket.org/) – [API documentation](https://developer.atlassian.com/cloud/bitbucket/)
+- [SourceForge](https://sourceforge.net/) – [API documentation](https://sourceforge.net/p/forge/documentation/API/)
+- [Launchpad](https://launchpad.net/) – [API documentation](https://help.launchpad.net/API)
+
+
+## Prerequesites
+
+
+
+## Simple API call
+
+* *What does a simple API call look like?*
+
+- actually two APIs: REST and GraphQL
+
+## API access
+
+* *How can we access the API from R?*
+
+### Load package
+
+
+### Provide API key
+
+
+## Social science examples
+
+* *Are there social science research examples using the API?*
+
