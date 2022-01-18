@@ -13,6 +13,40 @@ sansfont: Linux Biolinum O
 description: "This book provides an introduction to different APIs that may be useful to social scientists."
 ---
 
+
+```{r eval=FALSE, include=FALSE}
+
+# Hong's function to order chapters alphabetically
+# Use this to reorder chapters alphabetically
+require(fs)
+require(stringr)
+require(purrr)
+
+all_rmds <- dir_ls(regexp = "^[0-9].+[rR]md$")
+
+old_chap_numbers <- str_extract(all_rmds, "^[0-9]+")
+new_chap_numbers <- rep(NA, length(old_chap_numbers))
+
+fixed_loc <- old_chap_numbers %in% c("01", "02", "99")
+
+new_chap_numbers[fixed_loc] <- old_chap_numbers[fixed_loc]
+
+chap_names <- str_extract(all_rmds, "[A-zA-Z_]+")
+
+new_chap_numbers[!fixed_loc] <- formatC(match(chap_names[!fixed_loc], sort(chap_names[!fixed_loc])) + 2, width = "2", flag = "0")
+
+gen_fname <- function(x, y) {
+  paste0(x, "-", y, ".Rmd")
+}
+
+new_rmd_names <- map2_chr(new_chap_numbers, str_to_title(chap_names), gen_fname)
+
+file_move(all_rmds, new_rmd_names)
+
+
+```
+
+
 <!-- compile with 
 
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
@@ -24,6 +58,10 @@ bookdown::publish_book(
 )
 
 -->
+
+
+
+
 
 # Preface {-}
 The present online book provide a review of APIs that may be useful for social scientists. Please start by reading the [Introduction]. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding [github repository](https://github.com/paulcbauer/apis_for_social_scientists_a_review). If you are interested in contributing please check out the Section [How to contribute](https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute) in the github README.
