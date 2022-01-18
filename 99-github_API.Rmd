@@ -17,7 +17,7 @@ From a social scientist's perspective, the API may be of interest when studying 
 
 When collecting data on GitHub, you should follow [GitHub's terms of service](https://docs.github.com/github/site-policy/github-terms-of-service), especially the [API terms](https://docs.github.com/en/github/site-policy/github-terms-of-service#h-api-terms). GitHub users agree that, when using the service, anything they post publicly may be viewed and used by other users (see [ToS section D5](https://docs.github.com/github/site-policy/github-terms-of-service#5-license-grant-to-other-users)). Still, you should be cautious when collecting and analyzing such user-generated data, as the user was not informed about contributing to a research project. If research data should later be published for replication, only aggregated and/or anonymized data should be made public. Depending on the data you collect, an ethics review should also be considered.
 
-There are several competing platforms to GitHub. Many of them also provide an API which allow you to retrieve data. A few of them include:
+There are several competing platforms to GitHub. Many of them also provide an API which allow you to retrieve data. To list a few:
 
 - [BitBucket](https://bitbucket.org/) – [API documentation](https://developer.atlassian.com/cloud/bitbucket/)
 - [SourceForge](https://sourceforge.net/) – [API documentation](https://sourceforge.net/p/forge/documentation/API/)
@@ -33,7 +33,75 @@ The API can be used for free and you can send up to 60 requests per hour if you'
 
 * *What does a simple API call look like?*
 
-- actually two APIs: REST and GraphQL
+First of all, it's important to note that GitHub actually provides two APIs: A [REST API](https://docs.github.com/en/rest) and a [GraphQL API](https://docs.github.com/en/graphql). They differ mainly in how requests are performed and how the responses are formatted, but also in *what* can be requested. The REST API is the default interface and provides a way of access akin to most other APIs in this book. The GraphQL API provides a quite different interface which requires you to more specifically describe what kind of information you want to retrieve. Though some very detailed information can only be retrieved via the GraphQL API, we will stick to the REST API for this chapter due to the complexity of the GraphQL API.
+
+We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann:
+
+```{bash, eval=FALSE}
+curl https://api.github.com/users/LilithWittmann
+```
+
+The result is an HTTP response with JSON formatted data which contains user profile information that can also be found on the respective [public profile page](https://github.com/LilithWittmann):
+
+```{text, eval=FALSE}
+{
+  "login": "LilithWittmann",
+  "name": "Lilith Wittmann",
+  "location": "Berlin, Germany",
+  "bio": "freelance developer & consultant",
+  "twitter_username": "LilithWittmann",
+  "public_repos": 37,
+  "public_gists": 6,
+  "followers": 440,
+  "following": 52,
+  // [ more data ... ]
+}
+```
+
+Another example would be retrieving data about a project repository. We will use the [GitHub repository for the popular R package dplyr](https://github.com/tidyverse/dplyr) as an example:
+
+```{bash, eval=FALSE}
+curl https://api.github.com/repos/tidyverse/dplyr
+```
+
+```{text, eval=FALSE}
+{
+  "id": 6427813,
+  "name": "dplyr",
+  "full_name": "tidyverse/dplyr",
+  "description": "dplyr: A grammar of data manipulation",
+  "homepage": "https://dplyr.tidyverse.org",
+  "size": 50767,
+  "stargazers_count": 3959,
+  "watchers_count": 3959,
+  "language": "R",
+  // [ more data ... ]
+}
+```
+
+Finally, let's fetch data about an *issue* in the dplyr repository. On GitHub, issues are code or documentation problems as well as development tasks that users and collaborators bring up and discuss. Here, we collect all data on [dplyr issue #5958](https://github.com/tidyverse/dplyr/issues/5958):
+
+```{bash, eval=FALSE}
+curl https://api.github.com/repos/tidyverse/dplyr/issues/5958
+```
+
+```{text, eval=FALSE}
+{
+  "url": "https://api.github.com/repos/tidyverse/dplyr/issues/5958",
+  "number": 5958,
+  "title": "Inaccurate documentation for `name` argument of `count()`",
+  "user": {
+    "login": "sfirke",
+    "id": 7569808,
+    // [ more data ... ]
+  },
+  "comments": 13,
+  "body": "The documentation for `count()` says of the [...]",  // truncated
+  // [ more data ... ]
+}
+```
+
+As you can see in the example above, a response may contain nested data (the "user" entry shows information about the author of the issue as a nested structure).
 
 ## API access
 
