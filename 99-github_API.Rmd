@@ -35,7 +35,7 @@ The API can be used for free and you can send up to 60 requests per hour if you'
 
 First of all, it's important to note that GitHub actually provides two APIs: A [REST API](https://docs.github.com/en/rest) and a [GraphQL API](https://docs.github.com/en/graphql). They differ mainly in how requests are performed and how the responses are formatted, but also in *what* can be requested. The REST API is the default interface and provides a way of access akin to most other APIs in this book. The GraphQL API provides a quite different interface which requires you to more specifically describe what kind of information you want to retrieve. Though some very detailed information can only be retrieved via the GraphQL API, we will stick to the REST API for this chapter due to the complexity of the GraphQL API.
 
-We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann:
+We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann^[The author asked for permission for fetching and displaying this data.]:
 
 ```{bash, eval=FALSE}
 curl https://api.github.com/users/LilithWittmann
@@ -57,6 +57,40 @@ The result is an HTTP response with JSON formatted data which contains user prof
   // [ more data ... ]
 }
 ```
+
+The GitHub API offers extensive search capabilities. You can search for users, repositories, discussions and more by constructing a [search query](https://docs.github.com/en/rest/reference/search#constructing-a-search-query). Here, we search for users that use R and report being located in Berlin:
+
+```{bash, eval=FALSE}
+curl 'https://api.github.com/search/users?q=language:r+location:berlin'
+```
+
+```{text, eval=FALSE}
+{
+  "total_count": 541,
+  "incomplete_results": false,
+  "items": [
+    {
+      "login": "IndrajeetPatil",
+      "id": 11330453,
+      // [...]
+    },
+    {
+      "login": "christophergandrud",
+      "id": 1285805,
+      // [...]
+    },
+    {
+      "login": "RobertTLange",
+      "id": 20374662,
+      // [...]
+    },
+  // [ more data ... ]
+}
+```
+
+We could then continue fetching profile information for each account in the result set.
+
+Note that by default, the results are [ordered by "best match"](https://docs.github.com/en/rest/reference/search#ranking-search-results). This can be changed with an additional "sort" parameter.
 
 Another example would be retrieving data about a project repository. We will use the [GitHub repository for the popular R package dplyr](https://github.com/tidyverse/dplyr) as an example:
 
@@ -107,12 +141,36 @@ As you can see in the example above, a response may contain nested data (the "us
 
 * *How can we access the API from R?*
 
-- note Python package
+There are packages for many programming languages that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing. This means we can only access the API directly, e.g. by the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
 
-### Load package
+```{r}
+library(jsonlite)
+
+profile_data <- fromJSON('https://api.github.com/users/LilithWittmann')
+head(profile_data)
+```
+```{r}
+profile_repos <- fromJSON('https://api.github.com/users/LilithWittmann/repos')
+head(profile_repos[,1:5])
+```
+
+
+```{r}
+#search_results <- GET('https://api.github.com/search/users?q=language:r+location:berlin')
+#head(search_results)
+```
+
+
+
+```{r}
+repo_data <- fromJSON('https://api.github.com/repos/tidyverse/dplyr')
+head(repo_data)
+```
 
 
 ### Provide API key
+
+TODO
 
 
 ## Social science examples
