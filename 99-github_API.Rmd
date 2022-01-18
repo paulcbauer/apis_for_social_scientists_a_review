@@ -24,7 +24,7 @@ There are several competing platforms to GitHub. Many of them also provide an AP
 - [Launchpad](https://launchpad.net/) – [API documentation](https://help.launchpad.net/API)
 
 
-## Prerequesites
+## Prerequisites
 
 The API can be used for free and you can send up to 60 requests per hour if you're not authenticated (i.e. if you don't provide an API key). For serious data collection, this is not much, so it is recommended to sign up on GitHub and generate a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) that acts as API key. This token can then be used to authenticate your API requests. Your quota is then 5000 requests per hour.
 
