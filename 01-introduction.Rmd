@@ -39,7 +39,8 @@ pacman::p_load(
   memoise,
   academictwitteR,
   rtweet,
-  lubridate
+  lubridate,
+  DemografixeR
 )
 
 # Move these installations before pacman?
