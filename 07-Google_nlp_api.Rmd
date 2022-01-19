@@ -3,9 +3,29 @@
 <chauthors>Paul C. Bauer, Camille Landesvatter, Malte Söhren</chauthors>
 <br><br>
 
-```{r cache-ch1, include=FALSE} 
+```{r cache-google-nlp, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
+
+You will need to install/load the following packages:
+
+```{r eval=FALSE, include=FALSE}
+# Run this and copy output into the p_load function in next chunk
+# file <- rstudioapi::getActiveDocumentContext()$path
+file_R <- knitr::purl(input = "07-Google_nlp_api.Rmd") # extract R-code
+source(file_R)
+p <- NCmisc::list.functions.in.file(file_R) # chec
+file.remove(file_R)
+packages <- gsub("package:", "", names(p)[str_detect(names(p), "^package:")])[-1]
+dput(packages)
+```
+
+```{r}
+library(pacman)
+p_load(c("dplyr", "ggplot2", "ggwordcloud", "purrr", "tidyr", "utils"), 
+       character.only = TRUE)
+```
+
 
 
 ## Provided services/data
