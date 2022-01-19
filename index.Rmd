@@ -15,7 +15,7 @@ description: "This book provides an introduction to different APIs that may be u
 
 
 ```{r eval=FALSE, include=FALSE}
-
+# ORDER CHAPTERS ALPHABETICALLY
 # Hong's function to order chapters alphabetically
 # Use this to reorder chapters alphabetically
 require(fs)
@@ -58,6 +58,7 @@ bookdown::publish_book(
 )
 
 -->
+
 
 
 
