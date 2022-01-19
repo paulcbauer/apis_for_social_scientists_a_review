@@ -60,7 +60,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r eval=F, message=FALSE, warning=FALSE}
 
 #save your API key in the object key
 key<-"Your_API_Key"
