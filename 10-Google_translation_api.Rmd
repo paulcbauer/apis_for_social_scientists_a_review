@@ -103,11 +103,11 @@ Next, using this data, call the API via the function 'gl_translate()' and import
 google_translate <- gl_translate(df_original$text, target = "de")
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r message=FALSE, include=FALSE}
 google_translate <- readRDS("figures/rds/google_translate.RDS")
 ```
 
-This API call eventually provides reuslts in a dataframe with three columns: translatedText ( &#8594; contains the translation), detectedSourceLangauge ( &#8594; contains a label for the original language being detected) and text ( &#8594; contains the original text). 
+This API call eventually provides results in a dataframe with three columns: translatedText ( &#8594; contains the translation), detectedSourceLangauge ( &#8594; contains a label for the original language being detected) and text ( &#8594; contains the original text). 
 
 Let's check the translation.
 
@@ -115,7 +115,7 @@ Let's check the translation.
 google_translate$translatedText
 ```
 
-*`r (paste(google_translate$translatedText))`*
+*`r paste(google_translate$translatedText)`*
 
 <!-- ```{r echo=TRUE, message=FALSE, warning=FALSE} -->
 <!-- # Add translation to your original data -->
