@@ -14,7 +14,10 @@ You will need to install the following packages for this chapter (run the code):
 lines_text <- readLines("07-Google_nlp_api.Rmd")
 packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
-packages <- paste("# install.packages('pacman')\n", "library(pacman)\n", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
 cat(packages)
 ```
 
