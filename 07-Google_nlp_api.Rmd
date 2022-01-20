@@ -3,29 +3,20 @@
 <chauthors>Paul C. Bauer, Camille Landesvatter, Malte Söhren</chauthors>
 <br><br>
 
-```{r cache-google-nlp, include=FALSE} 
+```{r google-nlp-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
-You will need to install/load the following packages:
+You will need to install the following packages for this chapter (run the code):
 
-```{r eval=FALSE, include=FALSE}
+```{r google-nlp-3, echo=FALSE, comment=NA}
 # Run this and copy output into the p_load function in next chunk
-# file <- rstudioapi::getActiveDocumentContext()$path
-file_R <- knitr::purl(input = "07-Google_nlp_api.Rmd") # extract R-code
-source(file_R)
-p <- NCmisc::list.functions.in.file(file_R) # chec
-file.remove(file_R)
-packages <- gsub("package:", "", names(p)[str_detect(names(p), "^package:")])[-1]
-dput(packages)
+lines_text <- readLines("07-Google_nlp_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')\n", "library(pacman)\n", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+cat(packages)
 ```
-
-```{r}
-library(pacman)
-p_load(c("dplyr", "ggplot2", "ggwordcloud", "purrr", "tidyr", "utils"), 
-       character.only = TRUE)
-```
-
 
 
 ## Provided services/data
