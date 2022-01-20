@@ -137,7 +137,7 @@ token_get()
 
 Once the package is installed, we can construct a more complicated query with just a few lines. We will focus on the issue of housing in the UK in November 2021.
 
-```{r}
+```{r eval=F}
 detailed_query <- adlib_build_query(
   # Let's select only United Kingdom.
   ad_reached_countries = "GB",
