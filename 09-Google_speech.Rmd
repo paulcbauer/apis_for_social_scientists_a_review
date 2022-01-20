@@ -117,6 +117,7 @@ We can now call the API via the function `gl_speech()`. Here you will have to sp
 ```{r eval=F}
 exemplary_audio_analysis <- gl_speech(audio_source=exemplary_audio, languageCode = "en-GB")
 ```
+
 ```{r, echo = FALSE, message = FALSE}
 exemplary_audio_analysis <- readRDS("figures/rds/google_speech-to-text_analysis.RDS")
 ```
