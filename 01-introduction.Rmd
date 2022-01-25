@@ -39,7 +39,7 @@ cat(packages)
 ```
 
 
-```{r eval=FALSE, include=TRUE}
+```{r intro-2, eval=FALSE, include=TRUE}
 devtools::install_github("quanteda/quanteda.corpora")
 devtools::install_github("cbpuschmann/RCrowdTangle")
 devtools::install_github("joon-e/mediacloud")
