@@ -43,6 +43,7 @@ cat(packages)
 devtools::install_github("quanteda/quanteda.corpora")
 devtools::install_github("cbpuschmann/RCrowdTangle")
 devtools::install_github("joon-e/mediacloud")
+devtools::install_github("facebookresearch/Radlibrary")
 ```
 
 
