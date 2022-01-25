@@ -135,7 +135,7 @@ The `timings` dataframe stores timestamps telling us when each specific term was
 exemplary_audio_analysis$transcript$transcript
 ```
 
-*`r paste(exemplary_audio_analysis$transcript$transcript)`*
+*`r "to administer medicine to animals is frequently very difficult matter and yet sometimes it's necessary to do so"`*
 
 ```{r}
 exemplary_audio_analysis$transcript$confidence #0.92
