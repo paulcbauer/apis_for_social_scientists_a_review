@@ -3,8 +3,22 @@
 <chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
 <br><br>
 
-```{r cache-ch-genderize, include=FALSE} 
+```{r genderize-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r genderize-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("06-Genderize_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 ## Provided services/data
@@ -49,14 +63,14 @@ When no `country_id` is given, the gender prediction is performed using a databa
 
 We can perform a sample request using the `curl` command in a terminal or by simply visiting the URL in a browser:
 
-```{bash, eval=FALSE}
+```{bash genderize-3, eval=FALSE}
 curl 'https://api.genderize.io?name=sasha'
 ```
 
 
 The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction probability estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:
 
-```{text eval=FALSE}
+```{text genderize-4, eval=FALSE}
 {
   "name": "sasha",
   "gender": "male",
@@ -69,11 +83,11 @@ This tells us that for the requested name "sasha"^[Experiments showed that the A
 
 Now to show the influence of localization, we try the German variant of this name, "Sascha", and append the `country_id` parameter for Germany:
 
-```{bash, eval=FALSE}
+```{bash genderize-6, eval=FALSE}
 curl 'https://api.genderize.io?name=sascha&country_id=DE'
 ```
 
-```{text eval=FALSE}
+```{text genderize-7, eval=FALSE}
 {
   "name": "sascha",
   "gender": "male",
@@ -89,13 +103,13 @@ Interestingly, only the Latinized forms of Sasha seem to be available in the dat
 
 You can send up to ten names per request, by concatenating several `name[]=...` parameters:
 
-```{bash, eval=FALSE}
+```{bash genderize-8, eval=FALSE}
 curl 'https://api.genderize.io?name[]=sasha&name[]=alex&name[]=alexandra'
 ```
 
 The predictions are then listed for each supplied name:
 
-```{text, eval=FALSE}
+```{text genderize-9, eval=FALSE}
 [
   {"name": "sasha", "gender": "male", "probability": 0.51, "count": 13219},
   {"name": "alex", "gender": "male", "probability": 0.9, "count": 411319},
@@ -120,7 +134,7 @@ Since DemografixeR is the only package available on CRAN at time of writing, I w
 
 Once installed, the package can be loaded with the following command:
 
-```{r}
+```{r genderize-10}
 library(DemografixeR)
 ```
 
@@ -128,25 +142,25 @@ library(DemografixeR)
 
 The main function to use is the `genderize` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
 
-```{r}
+```{r genderize-11}
 genderize('sasha')
 ```
 
 Note that the output only consists of the gender prediction as character string vector. This is a dangerous default behavior, as it omits important information about the prediction probability and the size of the data pool used for the prediction. We need to set the `simplify` argument to `FALSE` in order to get that information in the form of a dataframe:
 
-```{r}
+```{r genderize-12}
 genderize('sasha', simplify = FALSE)
 ```
 
 Again, we can localize the request by using the `country_id` parameter:
 
-```{r}
+```{r genderize-13}
 genderize('sascha', country_id = 'DE', simplify = FALSE)
 ```
 
 Supplying a character string vector will predict the gender of all these names. Note that with the `genderize` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
 
-```{r}
+```{r genderize-14}
 genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
             'gökçe', 'gokce', 'jörg', 'jorg', 'rené', 'rene'),
           simplify = FALSE)
@@ -154,26 +168,26 @@ genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
 
 You can also provide a different `country_id` for each name in the request:
 
-```{r}
+```{r genderize-15}
 genderize(c('sasha', 'sascha'), country_id = c('RU', 'DE'), simplify = FALSE)
 ```
 
 This is especially helpful together with `expand.grid`, which generates all combinations of values in the two vectors:
 
-```{r}
+```{r genderize-16}
 names <- c('sasha', 'sascha')
 countries <- c('RU', 'DE')
 (names_cntrs <- expand.grid(names = names, countries = countries,
                             stringsAsFactors = FALSE))
 ```
 
-```{r}
+```{r genderize-17}
 genderize(names_cntrs$names, country_id = names_cntrs$countries, simplify = FALSE)
 ```
 
 Lastly, you can set the parameter `meta` to `TRUE`. This will add additional columns to the result with your rate limit (maximum daily number of requests), the remaining number of requests, the seconds until rate limit reset and the time of the request:
 
-```{r}
+```{r genderize-18}
 genderize('judy', simplify = FALSE, meta = TRUE)
 ```
 
