@@ -2,8 +2,22 @@
 
 <chauthors>Ondřej Pekáček</chauthors> <br><br>
 
-```{r, include=FALSE}
+```{r facebook-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r facebook-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("05-Facebook_ads_library_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 ## Provided services/data
@@ -57,17 +71,13 @@ We will follow the sample example on the API documentation page and replicate th
 To this end, we need to first load the required packages in this script.
 
 ```r
-# Specify the package names we will be using.
-packages <- c("httr", "remotes", "dplyr", "ggplot2", "tidyr")
+#loading packages
+library(httr)
+library(remotes)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 
-# Install packages not yet installed.
-installed_packages <- packages %in% rownames(installed.packages())
-if (any(installed_packages == FALSE)) {
-  install.packages(packages[!installed_packages])
-}
-
-# Packages loading.
-invisible(lapply(packages, library, character.only = TRUE))
 ```
 
 We are using the `httr` package to make the API call - it has already been loaded in the previous step.
@@ -237,25 +247,18 @@ After extraction using the for loop, we have three data frames in one list. Howe
 
 <!-- A cached version of fb_ad_list is available in "figures/rds/facebook_ads_uk_housing.RDS" -->
 
-```{r include=FALSE}
+```{r facebook-3, include=FALSE}
 # Specify the package names we will be using.
-packages <- c("dplyr", "tidyr", "DT")
-
-# Install packages not yet installed.
-installed_packages <- packages %in% rownames(installed.packages())
-if (any(installed_packages == FALSE)) {
-  install.packages(packages[!installed_packages])
-}
-
-# Packages loading.
-invisible(lapply(packages, library, character.only = TRUE))
+library(dplyr)
+library(tidyr)
+library(DT)
 
 # Load cached dataset without the need to extract the Ads with API key
 fb_ad_list <- readRDS("figures/rds/facebook_ads_uk_housing.RDS")
 ```
 
 
-```{r}
+```{r facebook-4}
 # The demographic & region datasets are in the "long" format (multiple
 # rows of information for each ad), and we need a transformation to a "wide" 
 # format (single row per ad) of the ad dataset using the tidyr package.
@@ -289,7 +292,7 @@ For instance, in our case, we get UK regions columns and all of the US states to
 
 As a final part of this exploration, let's create some summary statistics on UK housing ads from the first week of November 2021, using a few selected variables in our sample.
 
-```{r}
+```{r facebook-5}
 # Using the dataset containing combined ads, demographic and region data, we 
 # select only ads from the first week of November 2021, group by Facebook pages,
 # which paid for more than one add during this period. For these observations,

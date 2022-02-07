@@ -3,8 +3,22 @@
 <chauthors>Paul C. Bauer, Camille Landesvatter</chauthors>
 <br><br>
 
-```{r cache-ch2, include=FALSE} 
+```{r google-translation-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r google-translation-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("10-Google_translation_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 ## Provided services/data
@@ -46,7 +60,7 @@ Here we describe how a simple API call can be made from within the Google Cloud 
 
 * Via the built-in Editor in Cloud Shell create a JSON file (call it for instance ‘request.json’) with the text that you would like to perform analysis on. Consider that text can be uploaded in the request (shown below) or integrated with Cloud Storage. Supported types of your text are PLAIN_TEXT (shown below) or HTML.  
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-translation-3, echo=TRUE, eval=FALSE}
 {
  "q": ["To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so"], 
 "target": "de"
@@ -57,7 +71,7 @@ Here we describe how a simple API call can be made from within the Google Cloud 
 
 * Don’t forget to insert your individual API key in the curl command (alternatively, you could define it beforehand via adding a global variable to your environment &#8594; see example in the API call for Googles' NLP API earlier in this document).
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-translation-4, echo=TRUE, eval=FALSE}
 curl "https://translation.googleapis.com/language/translate/v2?key=APIKEY" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
 ```
 
@@ -74,13 +88,13 @@ In this small example we demonstrate how to...
 
 *Step 1: Load package*
 
-```{r message=FALSE, warning=FALSE}
+```{r google-translation-5, message=FALSE, warning=FALSE}
 library(googleLanguageR)
 ```
 
 *Step 2: Authentication*
 
-```{r eval=FALSE}
+```{r google-translation-6, eval=FALSE}
 # Authentication (through your service account's JSON key file)
 gl_auth("./your-key.json")
 ```
@@ -89,7 +103,7 @@ gl_auth("./your-key.json")
 
 First, we create exemplary data. For demonstration purposes, we here again make use of the sentence from above. Of course, for your own project use a complete vector containing text data from within your data.
 
-```{r message=FALSE, warning=FALSE}
+```{r google-translation-7, message=FALSE, warning=FALSE}
 df_original <- data.frame(text = "To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so")
 
 df_original$text <- as.character(df_original$text)
@@ -103,7 +117,7 @@ Next, using this data, call the API via the function 'gl_translate()' and import
 google_translate <- gl_translate(df_original$text, target = "de")
 ```
 
-```{r message=FALSE, include=FALSE}
+```{r google-translation-8, message=FALSE, include=FALSE}
 google_translate <- readRDS("figures/rds/google_translate.RDS")
 ```
 
@@ -111,7 +125,7 @@ This API call eventually provides results in a dataframe with three columns: tra
 
 Let's check the translation.
 
-```{r message=FALSE, warning=FALSE, eval=F}
+```{r google-translation-9, message=FALSE, warning=FALSE, eval=F}
 google_translate$translatedText
 ```
 
