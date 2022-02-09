@@ -11,7 +11,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 
 * *What data/service is provided by the API?*
 
-The [GitHub.com API](https://docs.github.com/en/rest) provides a service for interacting with the social coding platform [GitHub](https://github.com). GitHub is currently the largest such platform with more than 50M user accounts (as of January 2022). The API allows for retrieving user-generated data from this platform, which is probably of main interest for social scientists. It also provides tools for controlling your account, organizations and projects on the platform in order to automate workflows. This is more of interest for professional software development.
+The [GitHub.com API](https://docs.github.com/en/rest) provides a service for interacting with the social coding platform [GitHub](https://github.com).^[A social coding platform is a website that allows users to work on software projects collaboratively. Users can share their work, engage in discussions and track activities of other users and projects.] GitHub is currently the largest such platform with more than 50M user accounts (as of January 2022). GitHub's API allows for retrieving user-generated data from its platform, which is probably of main interest for social scientists. It also provides tools for controlling your account, organizations and projects on the platform in order to automate workflows. This is more of interest for professional software development.
 
 From a social scientist's perspective, the API may be of interest when studying online communities, working methods, organizational structures, communication and discussions, etc. with a focus on (open-source) software development. Many projects that are hosted on GitHub are open-source projects with a transparent development process and communications. For private projects, which can also be hosted on GitHub, there's understandably only a few aggregate data available.
 
@@ -141,7 +141,9 @@ As you can see in the example above, a response may contain nested data (the "us
 
 * *How can we access the API from R?*
 
-There are packages for many programming languages that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing. This means we can only access the API directly, e.g. by the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
+There are [packages for many programming languages](https://docs.github.com/en/rest/overview/libraries) that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing.^[Please note that the [git2r](https://cran.r-project.org/web/packages/git2r/index.html) package does *not* provide access to the GitHub API. It provides access to git repositories which is something completely different to accessing the web API of a social coding platform.] This means we can only access the API directly, e.g. by the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
+
+We start with translating the first API call from the previous section to R:
 
 ```{r}
 library(jsonlite)
@@ -149,23 +151,64 @@ library(jsonlite)
 profile_data <- fromJSON('https://api.github.com/users/LilithWittmann')
 head(profile_data)
 ```
+As we can see, the JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
+
 ```{r}
 profile_repos <- fromJSON('https://api.github.com/users/LilithWittmann/repos')
-head(profile_repos[,1:5])
+head(profile_repos[,1:3])   # selecting only the first 3 columns
 ```
-
+Let's also repeat the search query from the previous section. We want to obtain accounts that use R and entered "Berlin" in their profile's location field. This time, the result is a list that reports the number of search results as `search_results$total_count` and the search results details as a dataframe in `search_results$items`:
 
 ```{r}
-#search_results <- GET('https://api.github.com/search/users?q=language:r+location:berlin')
-#head(search_results)
+search_results <- fromJSON('https://api.github.com/search/users?q=language:r+location:berlin')
+str(search_results, list.len = 3, vec.len	= 3)
 ```
 
-
+Let's suppose we want to collect profile data for each account in the result set. First, let's investigate the search results in `search_results$items`:
 
 ```{r}
-repo_data <- fromJSON('https://api.github.com/repos/tidyverse/dplyr')
-head(repo_data)
+head(search_results$items[,1:3])
 ```
+
+To retrieve the profile details of each user, we only need the account name which we can then feed into the `https://api.github.com/users/<account>` API query. For demonstration purposes, let's only select the first ten users in the result set:
+
+```{r}
+r_users_berlin <- search_results$items$login[1:10]
+head(r_users_berlin)
+```
+We can now build the API queries to fetch the profile information for each user:
+
+```{r}
+users_query <- paste0('https://api.github.com/users/', r_users_berlin)
+head(users_query)
+```
+
+The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (so, a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
+
+```{r}
+users_details <- lapply(users_query, fromJSON)
+str(users_details, list.len = 3)
+```
+
+A nested list is hard to work with, so we convert the result to a dataframe. On the way, we select only the information that we actually want to work with. For demonstration purposes, we only select the account name, the real name, the location, the number of public repositories and the number of followers of each user.
+
+```{r}
+users_rows <- lapply(users_details, function(d) {
+  # select information that we need and generate a dataframe with a single row
+  data.frame(login = d$login,
+             name = d$name,
+             loc = d$location,
+             repos = d$public_repos,
+             followers = d$followers,
+             stringsAsFactors=FALSE)
+})
+
+# combine all dataframe rows to form the final dataframe
+users_df <- do.call(rbind, users_rows)
+users_df
+```
+
+As we can see, working with the results from the API requires some effort in R, since we have to deal with the often complex structure of the provided data. There's no "convenience wrapper" package for the GitHub API in R so far. If you're familiar with other programming languages, you may consider using one of the [recommended packages](https://docs.github.com/en/rest/overview/libraries).^[For example, the [PyGithub](https://github.com/PyGithub/PyGithub) package for Python provides a comprehensive set of tools for interacting with the GitHub API which usually requires much less programming effort than with R and jsonlite.]
 
 
 ### Provide API key
