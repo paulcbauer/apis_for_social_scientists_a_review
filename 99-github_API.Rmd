@@ -17,6 +17,8 @@ From a social scientist's perspective, the API may be of interest when studying 
 
 When collecting data on GitHub, you should follow [GitHub's terms of service](https://docs.github.com/github/site-policy/github-terms-of-service), especially the [API terms](https://docs.github.com/en/github/site-policy/github-terms-of-service#h-api-terms). GitHub users agree that, when using the service, anything they post publicly may be viewed and used by other users (see [ToS section D5](https://docs.github.com/github/site-policy/github-terms-of-service#5-license-grant-to-other-users)). Still, you should be cautious when collecting and analyzing such user-generated data, as the user was not informed about contributing to a research project. If research data should later be published for replication, only aggregated and/or anonymized data should be made public. Depending on the data you collect, an ethics review should also be considered.
 
+Special care should be taken about sampling techniques and replicability when working with this API. The sheer amount of data shared on GitHub requires sampling in most cases, but this is often hard to implement with the API, since results are often sorted in a way that introduces bias when you can only fetch the top *n* results (e.g. searching for users gives you the "most popular" users matching your criteria). @cosentino2016 show that many studies that use the GitHub API fail to implement proper sampling.
+
 There are several competing platforms to GitHub. Many of them also provide an API which allow you to retrieve data. To list a few:
 
 - [BitBucket](https://bitbucket.org/) – [API documentation](https://developer.atlassian.com/cloud/bitbucket/)
@@ -35,7 +37,7 @@ The API can be used for free and you can send up to 60 requests per hour if you'
 
 First of all, it's important to note that GitHub actually provides two APIs: A [REST API](https://docs.github.com/en/rest) and a [GraphQL API](https://docs.github.com/en/graphql). They differ mainly in how requests are performed and how the responses are formatted, but also in *what* can be requested. The REST API is the default interface and provides a way of access akin to most other APIs in this book. The GraphQL API provides a quite different interface which requires you to more specifically describe what kind of information you want to retrieve. Though some very detailed information can only be retrieved via the GraphQL API, we will stick to the REST API for this chapter due to the complexity of the GraphQL API.
 
-We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann^[The author asked for permission for fetching and displaying this data.]:
+We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann:^[The author asked for permission for fetching and displaying this data.]
 
 ```{bash, eval=FALSE}
 curl https://api.github.com/users/LilithWittmann
@@ -90,7 +92,7 @@ curl 'https://api.github.com/search/users?q=language:r+location:berlin'
 
 We could then continue fetching profile information for each account in the result set.
 
-Note that by default, the results are [ordered by "best match"](https://docs.github.com/en/rest/reference/search#ranking-search-results). This can be changed with an additional "sort" parameter.
+Note that by default, the results are [ordered by "best match"](https://docs.github.com/en/rest/reference/search#ranking-search-results). This can be changed with an additional "sort" parameter. The GitHub API doesn't provide a way of sampling search results – they are always sorted in some way and hence may introduce bias when you only fetch a limited number of results (which is often necessary since the result set is too large). You may consider to narrow the criteria for your search requests, e.g. by sampling geographical locations, so that you can always obtain the whole search results for a place.
 
 Another example would be retrieving data about a project repository. We will use the [GitHub repository for the popular R package dplyr](https://github.com/tidyverse/dplyr) as an example:
 
@@ -145,54 +147,60 @@ There are [packages for many programming languages](https://docs.github.com/en/r
 
 We start with translating the first API call from the previous section to R:
 
-```{r}
+```{r, eval=FALSE}
 library(jsonlite)
 
 profile_data <- fromJSON('https://api.github.com/users/LilithWittmann')
+# this gives a list
 head(profile_data)
 ```
-As we can see, the JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
+The JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
 
-```{r}
+```{r, eval=FALSE}
 profile_repos <- fromJSON('https://api.github.com/users/LilithWittmann/repos')
+# this gives a dataframe
 head(profile_repos[,1:3])   # selecting only the first 3 columns
 ```
 Let's also repeat the search query from the previous section. We want to obtain accounts that use R and entered "Berlin" in their profile's location field. This time, the result is a list that reports the number of search results as `search_results$total_count` and the search results details as a dataframe in `search_results$items`:
 
-```{r}
+```{r, eval=FALSE}
 search_results <- fromJSON('https://api.github.com/search/users?q=language:r+location:berlin')
+# this gives a list with a dataframe in "items"
 str(search_results, list.len = 3, vec.len	= 3)
 ```
 
 Let's suppose we want to collect profile data for each account in the result set. First, let's investigate the search results in `search_results$items`:
 
-```{r}
+```{r, eval=FALSE}
 head(search_results$items[,1:3])
 ```
 
 To retrieve the profile details of each user, we only need the account name which we can then feed into the `https://api.github.com/users/<account>` API query. For demonstration purposes, let's only select the first ten users in the result set:
 
-```{r}
+```{r, eval=FALSE}
 r_users_berlin <- search_results$items$login[1:10]
+# gives a character vector of 10 account names
 head(r_users_berlin)
 ```
 We can now build the API queries to fetch the profile information for each user:
 
-```{r}
+```{r, eval=FALSE}
 users_query <- paste0('https://api.github.com/users/', r_users_berlin)
+# gives a character vector of 10 API queries
 head(users_query)
 ```
 
 The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (so, a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
 
-```{r}
+```{r, eval=FALSE}
 users_details <- lapply(users_query, fromJSON)
+# gives a list of 10 lists (one for each user)
 str(users_details, list.len = 3)
 ```
 
 A nested list is hard to work with, so we convert the result to a dataframe. On the way, we select only the information that we actually want to work with. For demonstration purposes, we only select the account name, the real name, the location, the number of public repositories and the number of followers of each user.
 
-```{r}
+```{r, eval=FALSE}
 users_rows <- lapply(users_details, function(d) {
   # select information that we need and generate a dataframe with a single row
   data.frame(login = d$login,
@@ -205,6 +213,7 @@ users_rows <- lapply(users_details, function(d) {
 
 # combine all dataframe rows to form the final dataframe
 users_df <- do.call(rbind, users_rows)
+# gives a dataframe with login, name, location, number of repos, number of followers
 users_df
 ```
 
@@ -213,10 +222,25 @@ As we can see, working with the results from the API requires some effort in R, 
 
 ### Provide API key
 
-TODO
+Authenticating with the GitHub API via an API key allows you to send much more requests to the API (currently 5000 requests per hour instead of 60). API access keys for the GitHub API are called *personal access tokens (PAT)* and the [documentation explains how to generate a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) once you've logged into your GitHub account. **Please be careful with your PATs and never publish them.**
+
+When you want to use authenticated requests, you need to pass along authentication information (your GitHub user account and your PAT) with every request. This is not possible with `fromJSON` – you have to send HTTP requests directly, e.g. via `GET` from the [httr](https://cran.r-project.org/web/packages/httr/index.html) package and then need to handle the HTTP response. The following example shows this. Here, we have the secret access token `PAT` stored as environment variable and fetch it via `Sys.getenv`. Next, we use `GET` to make an authenticated HTTP response to the GitHub API. We use the [`/user` API endpoint](https://docs.github.com/en/rest/reference/users#get-the-authenticated-user), which simply reports information about the currently authenticated user (which is your own account). If we were to use this API endpoint in an unauthenticated manner, we'd receive the error message *"Requires authentication"*.^[Try that out yourself via `curl https://api.github.com/user` in the terminal.] We then need to get the content of the response as text (`content(response, as = 'text')`) and pass this to `fromJSON` in order to get the result as list object.
+
+```{r, eval=FALSE}
+library(httr)
+
+PAT <- Sys.getenv("PAT")
+
+response <- GET('https://api.github.com/user', authenticate('<account name>', PAT))
+account_details <- fromJSON(content(response, as = 'text'))
+account_details
+```
+
+You can use that code the same way as for the other API requests only that when you use authenticated requests, the request quotas are much higher.
 
 
 ## Social science examples
 
 * *Are there social science research examples using the API?*
 
+When the GitHub API is used in a research context, this is mainly done in the fields of computer science, (IT) business economics and social media studies. @lima2014coding analyze social ties, collaboration patterns and the geographical distribution of users on the platform. @chatziasimidis2015 try to find "success rules" for software projects by analyzing GitHub data and relating it to software download numbers. Importantly, @cosentino2016 provide a meta-analysis of 93 research papers and find *"concerns regarding the dataset collection process and size, the low level of replicability, poor sampling techniques, lack of longitudinal studies and scarce variety of methodologies."* @hipp_has_2021 used the GitHub API to collect data about open-source software development contributions before and during the COVID-19 pandemic. This was then used to analyze the different impact of the pandemic on the productivity of female and male software developers. They tackled the user sampling issue by employing geographic sampling and narrowing search results so that always the full result set of a user search for a place could be obtained.
