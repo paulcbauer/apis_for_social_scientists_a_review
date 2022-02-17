@@ -93,7 +93,6 @@ Here we are looking for channels, "part" is set on statistics and the id is the 
 To access the API from R we are using the same logic by building URL´s with our search request and using the "GET" function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
 In this example we will compare the channel statistics of the the two biggest youtuber´s, PewDiePie and MrBeast.
 
-
 ```r
 library(httr)
 library(jsonlite)
@@ -125,7 +124,6 @@ json_result <- content(api_result, "text", encoding="UTF-8")
 channel.json <- fromJSON(json_result, flatten = T)
 channel.MB <- as.data.frame(channel.json)
 
-
 #example with a username for PewDiePie channel. For part you can also insert more at once to get additional information.
 api_params2 <- 
   paste(paste0("key=", key), 
@@ -141,12 +139,23 @@ channel.json2 <- fromJSON(json_result2, flatten = T)
 channel.PDP <- as.data.frame(channel.json2)
 
 
+
 #Now we want to compare the two channels by some indicators like views etc. For this we are subsetting the data and create new indicators like average views per video
 MBchannel <- channel.MB %>% mutate(Channel = "MrBeast",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
   select(Channel,Views,Videos, averViewsVideo, Subscriber)
 
 PDPchannel <- channel.PDP %>% mutate(Channel = "PewDiePie",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
   select(Channel,Views,Videos, averViewsVideo, Subscriber)
+
+
+
+#Now we want to compare the two channels by some indicators like views etc. For this we are subsetting the data and create new indicators like average views per video
+MBchannel <- channel.MB %>% mutate(Channel = "MrBeast",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+  select(Channel,Views,Videos, averViewsVideo, Subscriber)
+
+PDPchannel <- channel.PDP %>% mutate(Channel = "PewDiePie",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+  select(Channel,Views,Videos, averViewsVideo, Subscriber)
+
 
 YTchannels <- rbind(MBchannel, PDPchannel)
 YTchannels
