@@ -11,13 +11,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 
 * *What data/service is provided by the API?*
 
-The [GitHub.com API](https://docs.github.com/en/rest) provides a service for interacting with the social coding platform [GitHub](https://github.com).^[A social coding platform is a website that allows users to work on software projects collaboratively. Users can share their work, engage in discussions and track activities of other users and projects.] GitHub is currently the largest such platform with more than 50M user accounts (as of January 2022). GitHub's API allows for retrieving user-generated data from its platform, which is probably of main interest for social scientists. It also provides tools for controlling your account, organizations and projects on the platform in order to automate workflows. This is more of interest for professional software development.
+The [GitHub.com API](https://docs.github.com/en/rest) provides a service for interacting with the social coding platform [GitHub](https://github.com). A social coding platform is a website that allows users to work on software projects collaboratively. Users can share their work, engage in discussions and track activities of other users and projects. GitHub is currently the largest such platform with more than 50M user accounts (as of January 2022). GitHub's API allows for retrieving user-generated data from its platform, which is probably of main interest for social scientists. It also provides tools for controlling your account, organizations and projects on the platform in order to automate workflows. This is more of interest for professional software development.
 
 From a social scientist's perspective, the API may be of interest when studying online communities, working methods, organizational structures, communication and discussions, etc. with a focus on (open-source) software development. Many projects that are hosted on GitHub are open-source projects with a transparent development process and communications. For private projects, which can also be hosted on GitHub, there's understandably only a few aggregate data available.
 
 When collecting data on GitHub, you should follow [GitHub's terms of service](https://docs.github.com/github/site-policy/github-terms-of-service), especially the [API terms](https://docs.github.com/en/github/site-policy/github-terms-of-service#h-api-terms). GitHub users agree that, when using the service, anything they post publicly may be viewed and used by other users (see [ToS section D5](https://docs.github.com/github/site-policy/github-terms-of-service#5-license-grant-to-other-users)). Still, you should be cautious when collecting and analyzing such user-generated data, as the user was not informed about contributing to a research project. If research data should later be published for replication, only aggregated and/or anonymized data should be made public. Depending on the data you collect, an ethics review should also be considered.
 
-Special care should be taken about sampling techniques and replicability when working with this API. The sheer amount of data shared on GitHub requires sampling in most cases, but this is often hard to implement with the API, since results are often sorted in a way that introduces bias when you can only fetch the top *n* results (e.g. searching for users gives you the "most popular" users matching your criteria). @cosentino2016 show that many studies that use the GitHub API fail to implement proper sampling.
+Special care should be taken about sampling techniques and replicability when working with this API. The sheer amount of data shared on GitHub requires sampling in most cases, but this is often hard to implement with the API, since results are usually sorted in a way that introduces bias when you can only fetch a certain number of top results (e.g. searching for users gives you the "most popular" users matching your criteria). @cosentino2016 show that many studies that use the GitHub API fail to implement proper sampling.
 
 There are several competing platforms to GitHub. Many of them also provide an API which allow you to retrieve data. To list a few:
 
@@ -143,7 +143,9 @@ As you can see in the example above, a response may contain nested data (the "us
 
 * *How can we access the API from R?*
 
-There are [packages for many programming languages](https://docs.github.com/en/rest/overview/libraries) that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing.^[Please note that the [git2r](https://cran.r-project.org/web/packages/git2r/index.html) package does *not* provide access to the GitHub API. It provides access to git repositories which is something completely different to accessing the web API of a social coding platform.] This means we can only access the API directly, e.g. by the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
+Note that there's no output provided for the code examples in this section. When you're learning to use this API, it's recommended to copy and paste the code examples and run them in your own R environment.
+
+There are [packages for many programming languages](https://docs.github.com/en/rest/overview/libraries) that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing.^[Please note that the [git2r](https://cran.r-project.org/web/packages/git2r/index.html) package does *not* provide access to the GitHub API. It provides access to git repositories which is something completely different to accessing the web API of a social coding platform.] This means we can only access the API directly, e.g. by using the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
 
 We start with translating the first API call from the previous section to R:
 
@@ -190,7 +192,7 @@ users_query <- paste0('https://api.github.com/users/', r_users_berlin)
 head(users_query)
 ```
 
-The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (so, a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
+The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (i.e. a nested structure – a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
 
 ```{r, eval=FALSE}
 users_details <- lapply(users_query, fromJSON)
@@ -208,7 +210,7 @@ users_rows <- lapply(users_details, function(d) {
              loc = d$location,
              repos = d$public_repos,
              followers = d$followers,
-             stringsAsFactors=FALSE)
+             stringsAsFactors = FALSE)
 })
 
 # combine all dataframe rows to form the final dataframe
@@ -222,7 +224,7 @@ As we can see, working with the results from the API requires some effort in R, 
 
 ### Provide API key
 
-Authenticating with the GitHub API via an API key allows you to send much more requests to the API (currently 5000 requests per hour instead of 60). API access keys for the GitHub API are called *personal access tokens (PAT)* and the [documentation explains how to generate a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) once you've logged into your GitHub account. **Please be careful with your PATs and never publish them.**
+Authenticating with the GitHub API via an API key allows you to send much more requests to the API (5000 requests per hour instead of 60 at the time of writing). API access keys for the GitHub API are called *personal access tokens (PAT)* and the [documentation explains how to generate a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) once you've logged into your GitHub account. **Please be careful with your PATs and never publish them.**
 
 When you want to use authenticated requests, you need to pass along authentication information (your GitHub user account and your PAT) with every request. This is not possible with `fromJSON` – you have to send HTTP requests directly, e.g. via `GET` from the [httr](https://cran.r-project.org/web/packages/httr/index.html) package and then need to handle the HTTP response. The following example shows this. Here, we have the secret access token `PAT` stored as environment variable and fetch it via `Sys.getenv`. Next, we use `GET` to make an authenticated HTTP response to the GitHub API. We use the [`/user` API endpoint](https://docs.github.com/en/rest/reference/users#get-the-authenticated-user), which simply reports information about the currently authenticated user (which is your own account). If we were to use this API endpoint in an unauthenticated manner, we'd receive the error message *"Requires authentication"*.^[Try that out yourself via `curl https://api.github.com/user` in the terminal.] We then need to get the content of the response as text (`content(response, as = 'text')`) and pass this to `fromJSON` in order to get the result as list object.
 
@@ -236,7 +238,7 @@ account_details <- fromJSON(content(response, as = 'text'))
 account_details
 ```
 
-You can use that code the same way as for the other API requests only that when you use authenticated requests, the request quotas are much higher.
+You can use that code the same way as for the other API requests, only that when you use authenticated requests the request quotas are much higher.
 
 
 ## Social science examples
