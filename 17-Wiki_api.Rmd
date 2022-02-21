@@ -1,0 +1,112 @@
+
+# MediaWiki Action API
+<chauthors>Noam Himmelrath, Jacopo Gambato</chauthors>
+<br><br>
+
+```{r wikipedia-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r wikipedia-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("16-Wiki_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+To access *Wikipedia*, *MediaWiki* provides the MediaWiki Action API.
+
+The API can be used for multiple things, such as accessing wiki features, interacting with a wiki and obtaining meta-information about wikis and public users. Additionally, the web service can provide access data and post changes of *Wikipedia*-webpages.
+
+
+## Prerequesites
+* *What are the prerequisites to access the API (authentication)? *
+
+No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header. 
+
+
+
+## Simple API call
+* *What does a simple API call look like?*
+
+As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need. 
+
+We include a basic API call to obtain information about the Albert Einstein Wikipedia page
+
+`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=info&titles=Albert%20Einstein`
+
+to be plugged into the search bar of a browser to obtain the basic information on the page.
+
+```r
+result:
+{"batchcomplete":"","query":
+  {"pages":
+    {"736":
+      {"pageid":736,"ns":0,"title":"AlbertEinstein",
+      "contentmodel":"wikitext","pagelanguage":"en",
+      "pagelanguagehtmlcode":"en","pagelanguagedir":"ltr",
+      "touched":"2022-02-06T12:46:49Z","lastrevid":1070093046,"length":184850}
+    }
+  }
+}
+
+```
+
+Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.
+
+## API access
+* *How can we access the API from R (httr + other packages)?* 
+
+The most common tool is [WikipediR](https://cran.r-project.org/web/packages/WikipediR/WikipediR.pdf), a wrapper around the Wikipedia API. It allows `R` to access information and "directions" for the relevant page or pages of Wikipedia and the content or metadata therein. Importantly, the wrapper only allows to gather information, which implies that the instrument needs to be accompanied by other packages such as `rvest` for scraping and `XML` or `jsonlite` for parsing.
+
+WikipediR allows us to get different information like general page info, backlinks, categories in page etc. In this example we are interested in the titles of the first ten backlinks of the Albert Einstein site.
+
+```{r wikipedia-3, echo=TRUE, warning =FALSE}
+library(WikipediR)
+
+all_bls <- page_backlinks("en","wikipedia", page = "Albert Einstein", limit = 10) #using "page_backlings" function of the WikipediR package
+bls_title <- data.frame()
+for(i in 1:10){
+  bls_title <- rbind(bls_title,all_bls$query$backlinks[[i]]$title)
+}
+colnames(bls_title) <- "backlinks"
+bls_title
+```
+
+We can also scrape data of Wikipedia by simple using the [“rvest” package](https://cran.r-project.org/web/packages/rvest/rvest.pdf) to scrape all kind of informations like tables, which is done in the following example.
+
+```{r wikipedia-4, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE }
+library(rvest)
+library(xml2)
+
+url <- "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
+html <- read_html(url) # reading the html code into memory
+
+#with the commands of the rvest package we are able to scrape the information we need, here html_table()
+
+tab <- html_table(html, fill=TRUE) # shows all tables on the website with the number of the table in double brackets [[number]]
+
+#we are interested in table 1, the inequality index of the countries 
+data <- tab[[1]]
+data <- data[-1,] # delete first row
+data[1:5,1:4] #for a better overview we are just loooking at the first 5 rows and the first 4 columns
+```
+
+## Social science examples
+* *Are there social science research examples using the API?*
+
+Some papers using Wikipedia-information rely on the API to access the data. These papers cover a wide range of social and economical sciences. Political science papers are, for example, concerned with political elections, more specifically election prediction [@margolin2016wiki; @salem2021wikipedia]. Other papers use the data accessed through the API to analyze media coverage of the COVID-19 pandemic [@gozzi2020collective] or the interplay between online information and investment markets [@elbahrawy2019wikipedia].
+
+
+
+

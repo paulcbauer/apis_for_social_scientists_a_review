@@ -3,11 +3,24 @@
 <chauthors>Jan Behnert, Dean Lajic</chauthors>
 <br><br>
 
-```{r cache-ch9, include=FALSE} 
+```{r google-trends-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
+You will need to install the following packages for this chapter (run the code):
+
+```{r google-trends-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("11-Googletrends_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
 
 ## Provided services/data
 
@@ -47,7 +60,7 @@ Just click [here](https://trends.google.com/trends).
 
 Example using [“httr” package](https://cran.r-project.org/web/packages/httr/httr.pdf):
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-trends-3, echo=TRUE, eval=FALSE}
 library(httr)
 GET("https://trends.google.com/trends/explore",
 	query=list(q = "Covid",geo = "US"))
@@ -59,7 +72,7 @@ GET("https://trends.google.com/trends/explore",
 Example using [“gtrendsR” package](https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf):
 
 
-```{r echo=TRUE, warning=FALSE}
+```{r google-trends-4, echo=TRUE, warning=FALSE}
 # visualizing google searches for the word "corona symptoms" in 
 # Germany and Austria in the period 01/01/2020 - 27/04/2021
 library(gtrendsR)
@@ -78,7 +91,7 @@ plot(res)
 * Note (1): the use of c() in the keyword argument of the gtrends function allows comparisons of up to 5 searches (separator = comma).  
 * Note (2): the use of the pattern '"xyz"' in the keyword argument of the gtrends function corresponds to the inverted commas in the table above, all other punctuation methods in the table above can be used as indicated in the table.
 
-```{r warning=FALSE}
+```{r google-trends-5, warning=FALSE}
 #Combination using dplyr and ggplot
 trend = gtrends(keyword="corona symptome", geo=c("DE", "AT"), time = "2020-01-01 2021-04-27", gprop="web") 
 

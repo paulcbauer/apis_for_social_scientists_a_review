@@ -2,6 +2,24 @@
 <chauthors>Chung-hong Chan</chauthors>
 <br><br>
 
+```{r mediacloud-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r mediacloud-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("14-Mediacloud_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
+
 ## Provided services/data
 
 * *What data/service is provided by the API?*
@@ -36,8 +54,8 @@ It is also important to learn about how to [write a solr query](https://mediaclo
 In this example, we are going to search for 20 stories in the New York Times (Media ID: 1) mentioning "mannheim AND university". 
 
 ```r
-require(httr)
-require(stringr)
+library(httr)
+library(stringr)
 url <- parse_url("https://api.mediacloud.org/api/v2/stories_public/list")
 params <- list(q = "text:mannheim+AND+text:university+AND+media_id:1",
                key = Sys.getenv("MEDIACLOUD_API_KEY"))
@@ -62,12 +80,12 @@ The above "mannheim" example can be replaced by (the package looks for the envir
 <!-- cached as `mediacloud_mc_mannheim.RDS` -->
 
 ```r
-require(mediacloud)
+library(mediacloud)
 mc_mannheim <- search_stories(text = "mannheim AND university", media_id = 1, n = 20)
 mc_mannheim
 ```
 
-```{r, echo = FALSE}
+```{r mediacloud-3, echo = FALSE}
 mc_mannheim <- readRDS("figures/rds/mediacloud_mc_mannheim.RDS")
 mc_mannheim
 ```
@@ -86,7 +104,7 @@ All major German media outlets are tagged with `Germany___National`. The functio
 de_media <- search_media(tag = "Germany___National", n = 100)
 ```
 
-```{r, echo = FALSE}
+```{r mediacloud-4, echo = FALSE}
 de_media <- readRDS("figures/rds/mediacloud_de_media.RDS")
 de_media
 ```
@@ -106,7 +124,7 @@ unima_articles <- search_stories(text = "\"universität mannheim\"",
 unima_articles
 ```
 
-```{r, echo = FALSE}
+```{r mediacloud-5, echo = FALSE}
 unima_articles <- readRDS("figures/rds/mediacloud_unima_articles.RDS")
 unima_articles
 ```
@@ -121,7 +139,7 @@ With the list of `stories_id`, we can then use the function `get_word_matrices` 
 unima_mat <- get_word_matrices(stories_id = unima_articles$stories_id, n = 100)
 ```
 
-```{r, echo = FALSE}
+```{r mediacloud-6, echo = FALSE}
 unima_mat <- readRDS("figures/rds/mediacloud_unima_mat.RDS")
 unima_mat
 ```
@@ -131,21 +149,21 @@ The data frame `unima_mat` is in the so-called "tidytext" format [@silge2016tidy
 <!-- cached as `mediacloud_unima_dfm.RDS` -->
 
 ```r
-require(tidytext)
-require(quanteda)
+library(tidytext)
+library(quanteda)
 unima_dfm <- cast_dfm(unima_mat, stories_id, word_stem, word_counts)
 unima_dfm
 ```
 
-```{r, echo = FALSE, message = FALSE}
-require(quanteda)
+```{r mediacloud-7, echo = FALSE, message = FALSE}
+library(quanteda)
 unima_dfm <- readRDS("figures/rds/mediacloud_unima_dfm.RDS")
 unima_dfm
 ```
 
 And then standard operations can be done.
 
-```{r}
+```{r mediacloud-8}
 unima_dfm %>% dfm_tfidf() %>% topfeatures(n = 20)
 ```
 

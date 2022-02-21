@@ -3,6 +3,23 @@
 <chauthors>Philipp Kadel</chauthors>
 <br><br>
 
+```{r instagram-graph-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r instagram-graph-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("13-Instagram_graph_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
 
 ## Provided services/data
 
@@ -37,6 +54,11 @@ For most endpoints you need an Instagram Business Account, a Facebook Page that 
 ## Simple API call
 * *What does a simple API call look like?*
 
+First of all you have to load the required `httr` package.
+```{r instagram-graph-3, echo=TRUE, warning=FALSE}
+library(httr)
+```
+
 Below you can find expamples of simple API calls for the Instagram Graph API.
 
 Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comments_count”, “like_count”, or “timestamp”.
@@ -45,7 +67,7 @@ Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comme
 
 Example:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-4, echo=TRUE, eval=FALSE}
 GET (“https://graph.facebook.com/v10.0/17895695668004550
       ?fields=id,media_type,media_url,owner,
       timestamp&access_token=IGQVJ...”)
@@ -53,7 +75,7 @@ GET (“https://graph.facebook.com/v10.0/17895695668004550
 
 Response:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-5, echo=TRUE, eval=FALSE}
 {
   "id": "17895695668004550",
   "media_type": "IMAGE",
@@ -73,7 +95,7 @@ Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag w
 
 Example:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-6, echo=TRUE, eval=FALSE}
 GET (“https://graph.facebook.com/17841593698074073
 ?fields=id,name
 &access_token=EAADd...”)
@@ -81,7 +103,7 @@ GET (“https://graph.facebook.com/17841593698074073
 
 Response:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-7, echo=TRUE, eval=FALSE}
 { "id": "17841593698074073",
   "name": "coke" }
 ```
@@ -92,14 +114,14 @@ Get fields and edges on an Instagram Business or Creator Account. Fields can be 
 
 Example:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-8, echo=TRUE, eval=FALSE}
 GET (“https://graph.facebook.com/v3.2/17841405822304914
       ?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...”)
 ```
 
 Response:
 
-```{r echo=TRUE, eval=FALSE}
+```{r instagram-graph-9, echo=TRUE, eval=FALSE}
 {  "biography": "Dino data crunching app",
   "id": "17841405822304914",
   "username": "metricsaurus",
