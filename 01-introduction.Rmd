@@ -10,13 +10,13 @@ Below we review different data- and service-APIs that may be useful to social sc
 * Are there social science research examples using the API?
 
 
-## Prerequesits: Authentication
+## Prerequisites: Authentication
 A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding [repository]("https://github.com/paulcbauer/apis_for_social_scientists_a_review") of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.
 
 <!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
 
 
-## Prerequesits: Software & packages
+## Prerequisites: Software & packages
 The code examples rely R and different packages thereof. It's probably easiest if you install all of them in one go using the code below. The `p_load()` function (`pacman` package) checks whether packages are installed. If not they are installed and loaded.
 
 <!-- add all used packages -->
