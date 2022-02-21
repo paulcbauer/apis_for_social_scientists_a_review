@@ -1,0 +1,131 @@
+# Google News API
+<chauthors>Bernhard Clemm von Hohenberg</chauthors>
+<br><br>
+
+```{r google-news-1, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r google-news-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+library(stringr)
+lines_text <- readLines("18-Google_news_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
+
+With the News API (formerly Google News API), you can get article snippets and news headlines, both up to four years old and real-time, from over 80,000 news sources worldwide. 
+
+## Prerequesites
+*What are the prerequisites to access the API (authentication)? *
+
+You need an API key, which can be requested via [https://newsapi.org/register](https://newsapi.org/register).
+
+One big drawback of the News API is that the free version ("Developer") does not get you very far. Some serious limitations are that you can only get articles that are up to a month old; that it is restricted to 100 requests per day; that the article content is truncated to the first 200 characters. In addition, the Developer key expires after a while even if you stick to those limits, although it is easy to sign up for a new Developer account (gmail address or else). The "Business" version costs $449 per month and allows searching for articles to up to 4 years old as well as 250,000 requests per month. More details on pricing can be found [here](https://newsapi.org/pricing). 
+
+Up until at least 2019, the Business version also allowed you to get the entire news article. The documentation is not clear whether this is still the case.
+
+## Simple API call
+*What does a simple API call look like?*
+
+The documentation of the API is available [here](https://newsapi.org/docs). A couple of good examples can be found on the landing page of the API. For instance, we could get all articles mentioning Biden since four weeks ago, sorted by recency, with the following call:
+
+```{r google-news-3, eval=F, message=F}
+
+library(httr)
+
+endpoint_url <- "https://newsapi.org/v2/everything?"
+my_query <- "biden"
+my_start_date <- Sys.Date() - 28
+my_api_key <- # <YOUR_API_KEY>
+
+params <- list(
+  "q" = my_query,
+  "from" = my_start_date,
+  "language" = "en",
+  "sortBy" = "publishedAt")
+
+news <- httr::GET(url = endpoint_url, 
+               httr::add_headers(Authorization = my_api_key),
+               query = params)
+
+content(news) # the resulting articles[[1]]$content shows that the article content is truncated
+```
+
+## API access
+*How can we access the API from R (httr + other packages)?* 
+
+To date, there is no R package facilitating access, but the API structure is simple enough to rely on `httr`. The API has three main endpoints: 
+
+- https://newsapi.org/v2/everything?, documented at https://newsapi.org/docs/endpoints/everything
+- https://newsapi.org/v2/top-headlines/sources?, documented at https://newsapi.org/docs/endpoints/sources
+- https://newsapi.org/v2/top-headlines?, documented at https://newsapi.org/docs/endpoints/top-headlines
+
+We have already explored the `everything` endpoint. Additional parameters to use are, for example, `searchIn` (specifying whether you want to search in the title, the description or the main text), `to` (specifying until what date to search) or `pageSize` (how many results to return per page). 
+
+Though perhaps not so interesting from a research perspective, the `sources` endpoint is useful because it allows to explore the list of sources in each country (not really documented anywhere). Let's get all sources from Germany---we can see that there are ten from which the News API draws content:
+
+```{r google-news-4, eval=F, message=F}
+
+library(dplyr)
+library(httr)
+
+endpoint_url <- "https://newsapi.org/v2/top-headlines/sources?"
+my_country <- "de"
+my_api_key <- # <YOUR_API_KEY>
+
+params <- list("country" = my_country)
+
+sources <- httr::GET(url = endpoint_url, 
+               httr::add_headers(Authorization = my_api_key),
+               query = params)
+
+sources_df <- bind_rows(content(sources)$sources)
+save(sources_df, file = "google_news-sources.RData")
+
+```
+
+```{r google-news-5}
+load("figures/rds/google_news-sources.RData")
+sources_df[,c("id", "name", "url", "category")]
+```
+
+This illustrates another weakness of the News API: The selection of sources is not neither comprehensive nor transparent. In any case, let's use this information to try out the `headlines` endpoint, getting breaking headlines from Bild (via its `id`), with 5 results per page. Note that in the Developer version, these headlines are not really breaking, but actually from one hour ago.
+
+```{r google-news-6, eval=F}
+
+endpoint_url <- "https://newsapi.org/v2/top-headlines?"
+my_source <- "bild"
+my_api_key <- # <YOUR_API_KEY>
+
+params <- list(
+  "sources" = my_source,
+  "pageSize" = 5)
+
+headlines <- httr::GET(url = endpoint_url, 
+               httr::add_headers(Authorization = my_api_key),
+               query = params)
+
+headlines_df <- bind_rows(content(headlines)$articles) %>% 
+  mutate(source = tolower(source)) %>% unique()
+save(headlines_df, file = "google_new-headlines.RData")
+
+```
+
+```{r google-news-7}
+load("figures/rds/google_new-headlines.RData")
+headlines_df[,c("publishedAt","title")]
+```
+
+## Social science examples
+*Are there social science research examples using the API?*
+
+A search on Google Scholar (queries "Google News API" and "News API") reveals that surprisingly few social-science studies make use of the News API, although many rely the web site of Google News for research (e.g., @Haimetal2018). One example from the social sciences is @Chrisingeretal2020, who ask how the discourse on food stamps in the United States has changed over time. Through the News API, they collected 13,987 newspaper articles using keyword queries, and ran a structural topic model. In one of my papers, I ask whether US conservatives and liberals differ in their ability to discern true from false information, and in their tendency to give more credit to information that is ideologically congruent. As I argue that these questions can best be answered if the news items used in a survey represent the universe of news well, the News API helps me get a decent approximation of this universe. Note, however, that at the time I was still able to get complete articles through the Business version of the API, and it is unclear whether this is still the case [@Clemm2022]^[https://osf.io/pqct8/]). 
+

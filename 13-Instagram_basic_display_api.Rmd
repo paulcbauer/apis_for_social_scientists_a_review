@@ -3,6 +3,24 @@
 <chauthors>Madleen Meier-Barthold</chauthors>
 <br><br>
 
+```{r instagram-basic-display-1, cache-ch-genderize, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r instagram-basic-display-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("12-Instagram_basic_display_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
+
 Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (@Tankovska_undated-ph). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (@Aslam2021-fp). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers. 
 
 ## Provided services/data
@@ -23,7 +41,7 @@ In order to access the Instagram Basic Display API, developers are required to f
 
 Another prerequisite to access the API is to get authentication. API authentication is handled through Instagram User Access Tokens that conform to the OAuth 2.0 protocol. The process of getting an access token includes two parts. First, each application user must grant an application permission to read the user node and/or the media node. These permissions are controlled via an Authorization Window. 
 
-```{r eval=F, echo=T}
+```{r instagram-basic-display-3, eval=F, echo=T}
 https://api.instagram.com/oauth/authorize
   ?client_id={appId}
   &redirect_uri={redirectURI}
@@ -47,7 +65,7 @@ When a user successfully grants the application permission to access their data,
 
 Then, the API can be queried.
 
-```{r pressure, eval=F, warning=F, message=F}
+```{r instagram-basic-display-4, pressure, eval=F, warning=F, message=F}
 library(httr)
 
 appId = "126..." #use Instagram App ID and secret (not Facebook App)
@@ -68,7 +86,7 @@ id<-POST("https://api.instagram.com/oauth/access_token",
 
 The Instagram Basic Display API is http-based. To query a node or edge, a GET call can be used. The base URLs are api.instagram.com and graph.instagram.com.
 
-```{r pressure2, eval=F, echo=T, message=F, warning=F}
+```{r instagram-basic-display-5, pressure2, eval=F, echo=T, message=F, warning=F}
 accessToken = "..."
 userId = "..."
 

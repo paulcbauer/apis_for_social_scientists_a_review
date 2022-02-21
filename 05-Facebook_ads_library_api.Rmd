@@ -2,8 +2,22 @@
 
 <chauthors>Ondřej Pekáček</chauthors> <br><br>
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval = FALSE, cache = TRUE)
+```{r facebook-1, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE)
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r facebook-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("05-Facebook_ads_library_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 ## Provided services/data
@@ -26,7 +40,7 @@ Researchers are currently able to obtain the following data (among others) for e
 4.  Gender and age category demographics
 5.  Country/region targeting information
 
-Please note that some key figures are not precise, such as spending, impressions, and reach. Instead, they are provided as min-max range estimates. Also, we should keep in mind that the API enforces a [rate limit](https://developers.facebook.com/docs/graph-api/overview/rate-limiting/) of 200 calls per hour.
+Please note that some key figures are not precise, such as spending, impressions, and reach. Instead, they are provided as min-max range estimates (such as `spend_lower` and `spend_upper` variables). Also, we should keep in mind that the API enforces a [rate limit](https://developers.facebook.com/docs/graph-api/overview/rate-limiting/) of 200 calls per hour.
 
 ## Prerequisites
 
@@ -56,23 +70,19 @@ We will follow the sample example on the API documentation page and replicate th
 
 To this end, we need to first load the required packages in this script.
 
-```{r}
-# Specify the package names we will be using.
-packages <- c("httr", "remotes", "dplyr", "ggplot2", "tidyr")
+```r
+#loading packages
+library(httr)
+library(remotes)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 
-# Install packages not yet installed.
-installed_packages <- packages %in% rownames(installed.packages())
-if (any(installed_packages == FALSE)) {
-  install.packages(packages[!installed_packages])
-}
-
-# Packages loading.
-invisible(lapply(packages, library, character.only = TRUE))
 ```
 
 We are using the `httr` package to make the API call - it has already been loaded in the previous step.
 
-```{r}
+```r
 # We will be using the ads_archive endpoint of the 12th version of the Graph.
 endpoint_url <- "https://graph.facebook.com/v12.0/ads_archive"
 
@@ -115,14 +125,14 @@ Fortunately, we do not need to deal with these issues directly for most use case
 
 Aside from writing our API functions using the `httr` package, we could use the `Radlibrary`, an open-source package written for R. As of December 2021, `Radlibrary` is not yet available at R's primary CRAN repository. Hence its installation is (slightly) more complicated since it needs to be installed directly from its GitHub repository instead. For this process, we will use the `install_github()` function, for which you either need to have `devtools` or `remotes` (a more lightweight package used here) installed.
 
-```{r}
+```r
 remotes::install_github("facebookresearch/Radlibrary")
 library(Radlibrary)
 ```
 
 `Radlibrary` can also simplify the long-term access token retrieval discussed above. Run the function following functions. If you already have an `FB_TOKEN` environment variable set up from the previous step, **you can skip** this part. However, most APIs will not be doing the same for us, so it is a valuable skill to do this manually.
 
-```{r}
+```r
 # User-friendly setup that asks you for app ID and secret.
 adlib_setup()
 
@@ -137,7 +147,7 @@ token_get()
 
 Once the package is installed, we can construct a more complicated query with just a few lines. We will focus on the issue of housing in the UK in November 2021.
 
-```{r}
+```r
 detailed_query <- adlib_build_query(
   # Let's select only United Kingdom.
   ad_reached_countries = "GB",
@@ -167,7 +177,7 @@ detailed_query <- adlib_build_query(
 
 The query is "lazy." Our API call will not be executed unless we specifically ask for it.
 
-```{r}
+```r
 # The function adlib_get_paginated is a version of adlib_get, suitable for
 # larger requests. If you got token using the adlib_setup() function, you do
 # not have to specify this argument. However, we will be using the
@@ -177,7 +187,7 @@ ads_list <- adlib_get_paginated(detailed_query, token = Sys.getenv("FB_TOKEN"))
 
 We can convert the list to a standard dataset using the as_tibble function, because the `ads_list` is a particular type of class called `paginated_adlib_data_response`. This means we can specify other arguments to the `as_tibble` function, such as the type of the table we require and whether we wish to censor our access token from the data.
 
-```{r}
+```r
 # The "type" argument must correspond to the "fields" argument in the
 # adlib_build_query like this:
 # "ad_data" = "ad", "region_data" = "region", "demographic_data" = "demographic".
@@ -186,7 +196,7 @@ ads_df <- as_tibble(ads_list, type = "ad", censor_access_token = TRUE)
 
 **Practical case study: Housing in the UK through the prism of political advertising on Facebook's platforms and its audience**
 
-```{r}
+```r
 # First, save all of the data types that we will ask the API to extract.
 fields_vector <- c("ad_data", "region_data", "demographic_data")
 
@@ -206,7 +216,7 @@ names(fb_ad_list) <- table_type_vector
 
 We are using a for loop this time, where the API call in each iteration is the same, with the difference in the asked data type. Unlike in the first example, we are interested in the ads themselves and their audience.
 
-```{r}
+```r
 for (i in seq_along(fields_vector)) {
   print(paste("Extracting the", fields_vector[i]))
 
@@ -235,7 +245,20 @@ for (i in seq_along(fields_vector)) {
 
 After extraction using the for loop, we have three data frames in one list. However, these datasets are in a different format and with a different number of rows. The only information that unites them is the unique ID of each ad, which we will use when merging them.
 
-```{r}
+<!-- A cached version of fb_ad_list is available in "figures/rds/facebook_ads_uk_housing.RDS" -->
+
+```{r facebook-3, include=FALSE}
+# Specify the package names we will be using.
+library(dplyr)
+library(tidyr)
+library(DT)
+
+# Load cached dataset without the need to extract the Ads with API key
+fb_ad_list <- readRDS("figures/rds/facebook_ads_uk_housing.RDS")
+```
+
+
+```{r facebook-4}
 # The demographic & region datasets are in the "long" format (multiple
 # rows of information for each ad), and we need a transformation to a "wide" 
 # format (single row per ad) of the ad dataset using the tidyr package.
@@ -263,9 +286,61 @@ merged_dataset <- fb_ad_list[["ad"]] %>%
   arrange(desc(ad_creation_time))
 ```
 
-We end up with a "tidy" dataset, in which each row is one observation (ads) and columns are variables such as spending, reach, age group and region, making it amenable to quick summarisation and exploratory visualizations. Please note that you only need one ad that displays internationally and in your dataset and you will end up with many extra region columns that are NAs for most ads.
+We end up with a "tidy" dataset, in which each row is one observation (ads) and columns are variables such as spending, reach, age group and region, making it amenable to quick summarisation and exploratory visualizations. Please note that you only need one ad that displays internationally in your dataset and you will end up with many extra region columns that are NAs for most ads.
 
-For instance, in our case above, we get UK regions columns and all of the US states! In reality, only one ad targeted both US and UK in our small sample. As a result, it means that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.
+For instance, in our case, we get UK regions columns and all of the US states together with some other EU regions as well! In reality, only two ads targeted both UK and other international regions in our small sample. As a result, it means that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.
+
+As a final part of this exploration, let's create some summary statistics on UK housing ads from the first week of November 2021, using a few selected variables in our sample.
+
+```{r facebook-5}
+# Using the dataset containing combined ads, demographic and region data, we 
+# select only ads from the first week of November 2021, group by Facebook pages,
+# which paid for more than one add during this period. For these observations,
+# we create summary statistics on selected variables. 
+merged_dataset %>%
+  filter(ad_delivery_start_time >= "2021-11-01" &
+    ad_delivery_start_time <= "2021-11-07") %>%
+  group_by(page_name) %>%
+  summarise(
+    nr_ads = n(),
+    spend_upper_avg = mean(spend_upper, na.rm = TRUE),
+    impressions_upper_avg = mean(impressions_upper, na.rm = TRUE),
+    avg_prop_England = mean(England, na.rm = TRUE),
+    avg_prop_female_25_34 = mean(`female_25-34`, na.rm = TRUE),
+    avg_prop_male_25_34 = mean(`male_25-34`, na.rm = TRUE),
+    avg_prop_female_65_plus = mean(`female_65+`, na.rm = TRUE),
+    avg_prop_male_65_plus = mean(`male_65+`, na.rm = TRUE)
+  ) %>%
+  filter(nr_ads > 1) %>%
+  arrange(desc(nr_ads)) %>%
+  # To visualize the information, we use DataTables package, which allows for
+  # interactivity (such as sorting and horizontal scrolling).
+  datatable(
+    extensions = "FixedColumns",
+    options = list(
+      scrollX = TRUE,
+      fixedColumns = TRUE,
+      dom = "t",
+      # DataTables does not display NAs, however, we can use a small JavaScript
+      # snippet to fill in the missing values in the table (optional).
+      rowCallback = JS(c(
+        "function(row, data){",
+        "  for(var i=0; i<data.length; i++){",
+        "    if(data[i] === null){",
+        "      $('td:eq('+i+')', row).html('NA')",
+        "        .css({'color': 'rgb(151,151,151)', 'font-style': 'italic'});",
+        "    }",
+        "  }",
+        "}"
+      ))
+    )
+  ) %>%
+  # DataTables enable us to format the data directly in the visual table, we do
+  # not necessarily need to make these changes to the original dataset.
+  formatCurrency(3, "\U00A3") %>%
+  formatPercentage(5:9, 2) %>%
+  formatRound(4, 0)
+```
 
 ## Social science examples
 

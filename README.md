@@ -5,7 +5,7 @@ You can find the document here: [APIs for social scientists:
 A collaborative review](https://bookdown.org/paul/apis_for_social_scientists/). The introduction explains how this project came about.
 
 ## Authors & contributors
-Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Chung-hong Chan, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Dean Lajic
+Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Dean Lajic
 
 ## Interested in contributing?
 
@@ -20,8 +20,8 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens, Chung-hong Chan, Luka
 ### How to contribute?
 * Provide feedback and let us know where you got stuck
 * Highlight or correct errors by raising [issues](https://github.com/paulcbauer/apis_for_social_scientists_a_review/issues) or by creating pull requests
-* Write another review chapter of an API (contact us by [Email](mailto:apireviews@googlegroups.com) beforehand please)
-    + To do so please check out examples of the other chapters for the structure, length and code examples. (1) We will ask you to [send](mailto:apireviews@googlegroups.com) a .rmd file with the API review of your choice. (2) Provide all references in bibtex format (see 'references_overall.bib') and include corresponding bibtex keys in your chapter (e.g., 'Dobbrick2021-iz').
+* Write another review chapter of an API (please contact us by [Email](mailto:apireviews@googlegroups.com) beforehand)
+    + To do so please check out examples of the other chapters for the structure, length and code examples. (1) We will ask you to [send](mailto:apireviews@googlegroups.com) a .rmd file with the API review of your choice. (2) Provide all references in bibtex format (to be included into 'references_overall.bib') and use corresponding bibtex keys in your chapter (e.g., 'Dobbrick2021-iz'). (3) Store/Cache data from your API call and make it available (e.g., RDS object, csv, etc.)
     + In principle you should be able to compile the website locally after cloning/forking the repo.
 * Add references to (your) published research examples that use the corresponding APIs
     + To do so please check out the examples in the chapters. (1) Provide a short sentence indicating how/for what the API was used. (2) Provide the reference in bibtex format (see 'references_overall.bib') and the bibtex key you used (e.g., 'Dobbrick2021-iz').

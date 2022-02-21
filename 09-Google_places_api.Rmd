@@ -3,6 +3,24 @@
 <chauthors>Lukas Isermann and Clara Husson</chauthors>
 <br><br>
 
+```{r google-places-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r google-places-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("08-Google_places_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
 
 ## Provided services/data
 
@@ -50,7 +68,7 @@ https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&location=4
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-places-3, echo=TRUE, eval=FALSE}
 
 
 # Option 1: Accessing the API with base "httr" commands
@@ -72,7 +90,7 @@ Alternatively, we can use a wrapper function for R provided by the R-Package goo
 
 *Authentication*
 
-```{r echo=TRUE, eval=F}
+```{r google-places-4, echo=TRUE, eval=F}
 key <- "YOURAPIKEY"
 set_key(key)
 ```
@@ -81,7 +99,7 @@ set_key(key)
 
 *Step 1: Load packages*
 
-```{r message=FALSE, warning=FALSE}
+```{r google-places-5, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(googleway)
@@ -90,18 +108,18 @@ library(googleway)
 
 <!-- A cache version of location is available in "figures/rds/google_places_location.RDS" -->
 
-```{r eval=F}
+```{r google-places-6, eval=F}
 # Option 2: Accessing the API with googleway
 
 # Request 'Mannheim' to get latitude and longitude information
 location <- googleway::google_places("Mannheim")
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r google-places-7, echo = FALSE, message = FALSE}
 location <- readRDS("figures/rds/google_places_location.RDS")
 ```
 
-```{r warning=F, message=F}
+```{r google-places-8, warning=F, message=F}
 # Save latitude and longitude information in vector
 location <- location$results$geometry
 location <- c(location$location$lat, location$location$lng)
@@ -111,7 +129,7 @@ location <- c(location$location$lat, location$location$lng)
 
 <!-- A cache version of this plot is available in "figures/rds/google_places_plot1.RDS" -->
 
-```{r eval=F}
+```{r google-places-9, eval=F}
 # Plot places to google map
 library(mapsapi)
 # for this you will also need to activate the "maps static API"
@@ -121,7 +139,7 @@ library(stars)
 plot(r)
 ```
 
-```{r echo=F, out.width="100%", fig.align='center'}
+```{r google-places-10, echo=F, out.width="100%", fig.align='center'}
 knitr::include_graphics("figures/rds/google_places_plot1.png")
 ```
 
@@ -131,17 +149,17 @@ knitr::include_graphics("figures/rds/google_places_plot1.png")
 
 <!-- A cache version of pizza is available in "figures/rds/google_places_pizza.RDS" -->
 
-```{r eval=F}
+```{r google-places-11, eval=F}
 # Google places request with googleway
 pizza <- google_places("Pizza", location = location, radius = 5000, place_type = "food")
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r google-places-12, echo = FALSE, message = FALSE}
 pizza <- readRDS("figures/rds/google_places_pizza.RDS")
 ```
 
 
-```{r echo=T, warning=F, message=F}
+```{r google-places-13, echo=T, warning=F, message=F}
 # Plot rankings as barplot
 pizza$results %>%
   ggplot() +
@@ -158,7 +176,7 @@ pizza$results %>%
 
 ```
 
-```{r echo=T, eval=F, warning=F, message=F}
+```{r google-places-14, echo=T, eval=F, warning=F, message=F}
 # Plot pizza places to google map
 #important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
 # unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file! 

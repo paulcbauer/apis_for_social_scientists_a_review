@@ -3,9 +3,23 @@
 <chauthors>Barbara K. Kreis</chauthors>
 <br><br>
 
-```{r cache-ch11, include=FALSE} 
+```{r ckan-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r ckan-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("03-Ckan_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.  
@@ -60,7 +74,7 @@ The CKAN API can be accessed from R with the [httr package](https://cran.r-proje
 Please note that as a scientist you can only use GET requests. All kinds of POST requests are restricted to government employees that work at the institutions which provide the data sets.
 
 
-```{r echo=TRUE, eval=FALSE}
+```{r ckan-3, echo=TRUE, eval=FALSE}
 # CKAN API #
 # Option 1: Use the httr package to access the API
 
@@ -72,7 +86,7 @@ base_url <- "https://www.govdata.de/ckan/api/3/action/resource_show"
 berlin <- GET(base_url, query=list(q="kinder",rows=5))
 ``` 
 
-```{r warning=FALSE, eval=FALSE}
+```{r ckan-4, warning=FALSE, eval=FALSE}
 # Option 2: Use the ckanr package to access the API
 
 # load relevant packages
@@ -81,7 +95,6 @@ library(ckanr)
 library(jsonlite)
 library(readxl)
 library(curl)
-library(readxl)
 
 #connect to the website
 url_site <- "https://www.govdata.de/ckan"

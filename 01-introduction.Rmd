@@ -17,36 +17,34 @@ A lot of the APIs require that you authenticate with the API provider. The under
 
 
 ## Prerequesits: Software & packages
-The code examples rely R and different packages thereof. It's probably easiest if you install all of them in one go. The `p_load()` function (`pacman` package) checks whether packages are installed. If not they are installed and loaded.
+The code examples rely R and different packages thereof. It's probably easiest if you install all of them in one go using the code below. The `p_load()` function (`pacman` package) checks whether packages are installed. If not they are installed and loaded.
 
 <!-- add all used packages -->
 
-```{r eval=FALSE, include=TRUE}
-library(pacman)
-pacman::p_load(
-  dplyr, # needed for almost any chapter in this review
-  ggplot2, # e.g. CH5
-  tidytext, # comes in handy whenever text data is being pre-processed (CH2)
-  devtools, # to download any package from github (e.g., RCrowdTangle in CH4)
-  jsonlite, # import of JSON formats (e.g., CH4)
-  httr, # Tools for Working with URLs and HTTP (various chapters if an API call can me made via URL)
-  googleLanguageR, # allows different API calls for languga processing (CH2, CH3)
-  RCrowdTangle, #CH4
-  googleway, #CH5
-  mapsapi, #CH5
-  stars, #CH5
-  httr,
-  WikipediR, # CH12
-  memoise,
-  academictwitteR,
-  rtweet,
-  lubridate
-)
 
-# Move these installations before pacman?
+```{r intro-1, echo=FALSE, comment=NA}
+options(width = 300)
+# Run this and copy output into the p_load function in next chunk
+library(stringr)
+lines_text <- readLines(knitr::current_input())
+packages <- gsub("library\\(|\\)", "", 
+                 unlist(str_extract_all(lines_text, 
+                                        "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- packages[packages!="p_load("]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
+
+
+```{r intro-2, eval=FALSE, include=TRUE}
 devtools::install_github("quanteda/quanteda.corpora")
 devtools::install_github("cbpuschmann/RCrowdTangle")
 devtools::install_github("joon-e/mediacloud")
+devtools::install_github("facebookresearch/Radlibrary")
 ```
 
 

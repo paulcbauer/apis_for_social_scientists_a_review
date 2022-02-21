@@ -3,9 +3,23 @@
 <chauthors>Lion Behrens and Pirmin Stöckle</chauthors>
 <br><br>
 
-```{r cache-ch4, include=FALSE} 
+```{r crowdTangle-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r crowdTangle-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("04-CrowdTangle_API.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
 ```
 
 CrowdTangle is a public insights tool, whose main intent was to monitor what content overperformed in terms of interactions (likes, shares, etc.) on Facebook and other social media platforms. In 2016, CrowdTangle was acquired by Facebook that now provides the service.
@@ -87,7 +101,7 @@ The respective API call looks like that:
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 
-```{r echo=TRUE, eval=FALSE}
+```{r crowdTangle-3, echo=TRUE, eval=FALSE}
 
 
 # Option 1: Accessing the API with base "httr" commands
@@ -115,7 +129,7 @@ rlist::list.stack(list_part)
 Alternatively, we can use a wrapper function for R, which is provided by the RCrowdTangle package available on [github]("https://github.com/cbpuschmann/RCrowdTangle"). The package provides wrapper functions for the /posts, /posts/search, and /links endpoints. Conveniently, the wrapper function directly produces a dataframe as output, which is typically what we want to work with. As the example below shows, the wrapper function may not include the specific information we are looking for, however, as the example also shows, it is relatively straightforward to adapt the function on our own depending on the specific question at hand.
 To download the package from github, we need to load the devtools package, and to use the wrapper function, we need dplyr and jsonlite.
 
-```{r echo=TRUE, eval=FALSE}
+```{r crowdTangle-4, echo=TRUE, eval=FALSE}
 
 # Option 2: There is a wrapper function for R, which can be downloaded from github
 
