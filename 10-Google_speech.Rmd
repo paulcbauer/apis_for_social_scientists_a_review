@@ -3,7 +3,24 @@
 <chauthors>Camille Landesvatter</chauthors>
 <br><br>
 
+```{r google-speech-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
+```
 
+You will need to install the following packages for this chapter (run the code):
+
+```{r google-speech-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("09-Google_speech.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
 
 ## Provided services/data
 
@@ -44,7 +61,7 @@ To access and to use the API the following steps are necessary:
 * The wav.file we uploaded for this example is an exemplary wav.file that comes along with the [‘googleLanguageR’ R package]("https://cran.r-project.org/web/packages/googleLanguageR/index.html").
 
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-speech-3, echo=TRUE, eval=FALSE}
 {
   "audio": {
     "content": "woman1_wb"
@@ -62,7 +79,7 @@ To access and to use the API the following steps are necessary:
 
 * Don’t forget to insert your individual API key (alternatively, you could define it beforehand via a variable in your environment -> see example in the API call for Google's NLP API later in this document).
 
-```{r echo=TRUE, eval=FALSE}
+```{r google-speech-4, echo=TRUE, eval=FALSE}
 curl "https://speech.googleapis.com/v1p1beta1/speech:recognize?key=APIKEY" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
 ```
 
@@ -85,14 +102,14 @@ For the usage of further arguments, also read the `gl_speech()` [documentation](
 
 *1. Load packages*
 
-```{r message=FALSE, warning=FALSE}
+```{r google-speech-5, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(googleLanguageR)
 ```
 
 *Step 2: Authentication*
 
-```{r eval=FALSE}
+```{r google-speech-6, eval=FALSE}
 gl_auth("./your-key.json")
 ```
 
@@ -102,11 +119,11 @@ We will now get a sample source file which comes along with the `googleLanuageR`
 
 <!-- A cache version of exemplary_audio is available in "figures/rds/google_speech-to-text_audio.RDS" -->
 
-```{r eval=F}
+```{r google-speech-7, eval=F}
 exemplary_audio <- system.file("woman1_wb.wav", package = "googleLanguageR")
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r google-speech-8, echo = FALSE, message = FALSE}
 exemplary_audio <- readRDS("figures/rds/google_speech-to-text_audio.RDS")
 ```
 
@@ -114,29 +131,30 @@ We can now call the API via the function `gl_speech()`. Here you will have to sp
 
 <!-- A cache version of exemplary_audio_analysis is available in "figures/rds/google_speech-to-text_analysis.RDS" -->
 
-```{r eval=F}
+```{r google-speech-9, eval=F}
 exemplary_audio_analysis <- gl_speech(audio_source=exemplary_audio, languageCode = "en-GB")
 ```
-```{r, echo = FALSE, message = FALSE}
+
+```{r google-speech-10, echo = FALSE, message = FALSE}
 exemplary_audio_analysis <- readRDS("figures/rds/google_speech-to-text_analysis.RDS")
 ```
 
 
 The result is a list containing two dataframes: `transcript` and `timings`.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r google-speech-11, echo=TRUE, message=FALSE, warning=FALSE}
 dimnames(exemplary_audio_analysis$transcript)
 ```
 
 The `timings` dataframe stores timestamps telling us when each specific term was recognised. The `transcript` dataframe importantly provides the transcript as well as a confidence score. We can see that the transcript misses one term ("a") and indicates its confidence with a score close to 1.0.
 
-```{r eval=FALSE}
+```{r google-speech-12}
+# Show transcript
 exemplary_audio_analysis$transcript$transcript
 ```
 
-*`r (paste(exemplary_audio_analysis$transcript$transcript))`*
-
-```{r}
+```{r google-speech-13}
+# Show confidence
 exemplary_audio_analysis$transcript$confidence #0.92
 ```
 

@@ -1,12 +1,25 @@
 
 # Youtube API
-<chauthors>Melike Kaplan, Jana Klein</chauthors>
+<chauthors>Melike Kaplan, Jana Klein, Dean Lajic</chauthors>
 <br><br>
-```{r cache-ch10, include=FALSE} 
+```{r youtube-1, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
+You will need to install the following packages for this chapter (run the code):
+
+```{r youtube-2, echo=FALSE, comment=NA}
+# Run this and copy output into the p_load function in next chunk
+lines_text <- readLines("17-Youtube_api.Rmd")
+packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- packages[packages!="pacman"]
+packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
+packages <- str_wrap(packages, width = 80)
+packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
+packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+cat(packages)
+```
 ## Provided services/data
 
 * *What data/service is provided by the API?*
@@ -26,7 +39,7 @@ The [google developer site](https://developers.google.com/youtube/v3/sample_requ
 ## Prerequesites
 * *What are the prerequisites to access the API (authentication)? *
 
-
+An overview and guide is given on the [Youtube Api website](https://developers.google.com/youtube/v3/getting-started).
 First, you will need a Google account which you will use to log into the Google Cloud Platform. You will need to create a new project unless you already have one ([here you can find more information](https://cloud.google.com/resource-manager/docs/creating-managing-projects)). Then, you can search for the four Youtube APIs (YouTube Analytics API, YouTube Data API v3, YouTube oEmbed API, YouTube Reporting API) mentioned above and enable them ([here you can find more information](https://support.google.com/googleapi/answer/6158841?hl=en)).
 
 Then, continue to the “APIs and Services” Page from the sidebar and click on “Credentials.” Click on “+ Create Credentials” at the top of the page. You have three options here: API Key, OAuth client ID or Service account. An API Key will identify your project with a simple key to check quota and access but if you wish to use the YouTube API for your app, you should create an OAuth client ID which will request user consent so that your app can access the user’s data. This is also necessary when you want to use the tuber package.  A Service account enables server to server, app-level authentication using robot accounts. We will continue with the option of creating an API Key, and later we provide an example of using the OAuth Client ID with the tuber package.
@@ -41,42 +54,66 @@ Your key is created! It is important to restrict the key!
 ## Simple API call
 * *What does a simple API call look like?*
 
-The base URL is https://www.googleapis.com/youtube/v3/.
-With the following API call we tried to get the channel statistics from the SWR youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.
-https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCy4_zQ59zmS7zO4Dc6vbT_w&key=[Your_API_Key]
-However, this call did not work for us, we got an error code 400 that said that our API key is not valid.
+You can access the API via your browser. The [Youtube API website](https://developers.google.com/youtube/v3/docs/search/list) facilitate this where you have just to insert your parameters like part (what kind of information) or q (your search query). There is also an overview of that parameters on the [Youtube Api website](https://developers.google.com/youtube/v3/getting-started).
 
+The base URL is https://www.googleapis.com/youtube/v3/.
+With the following API call we tried to get the channel statistics from the MrBeast youtube channel. The channel statistics include information on  the viewer count, subscriber count, whether there are hidden subscribers and on the video count.  
+https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCX6OQ3DkcsbYNE6H8uQQuVA&key=[YourAPIKey]  
+Here we are looking for channels, "part" is set on statistics and the id is the Youtube channel id. Inserted in the Browser we will get the following output.
+
+```r
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "ma9LJ5xRKmEdW36U5jKCcqE5JcU",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "PAtSZnFS2dTafqi67SnYTrL6f2E",
+      "id": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+      "statistics": {
+        "viewCount": "14370108796",
+        "subscriberCount": "88000000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "718"
+      }
+    }
+  ]
+}
+```
 
 ## API access
 * *How can we access the API from R (httr + other packages)?* 
 
-Example to get channel statistics:
+To access the API from R we are using the same logic by building URL´s with our search request and using the "GET" function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
+In this example we will compare the channel statistics of the the two biggest youtuber´s, PewDiePie and MrBeast.
 
-```{r message=FALSE, warning=FALSE}
+
+```r
 library(httr)
 library(jsonlite)
 library(here)
 library(dplyr)
 library(ggplot2)
-```
-
-```{r message=FALSE, warning=FALSE}
 
 #save your API key in the object key
-key<-"Your_API_Key"
+key<-"YourAPIKey"
 
 #YouTube channels either have a channel id or a user id
-ZDF_Magazin_Royle<-"UCNNEMxGKV1LsKZRt4vaIbvw" #channel id
-Boilerroom <- "brtvofficial" #user id
-
+MrBeastChannelID<-"UCX6OQ3DkcsbYNE6H8uQQuVA" #channel id
+PewDiePieUserID <- "PewDiePie" #user id
 #save the base URL in the object base
 base<- "https://www.googleapis.com/youtube/v3/"
 
-#get channel info with channel id
+
+#get channel info with channel id for MrBeast channel
 api_params <- 
   paste(paste0("key=", key), 
-        paste0("id=", ZDF_Magazin_Royle), 
-        "part=snippet,contentDetails,statistics",
+        paste0("id=", MrBeastChannelID), 
+        "part=statistics",
         sep = "&")
 api_call <- paste0(base, "channels", "?", api_params)
 api_result <- GET(api_call)
@@ -84,12 +121,13 @@ json_result <- content(api_result, "text", encoding="UTF-8")
 
 #format json into dataframe
 channel.json <- fromJSON(json_result, flatten = T)
-channel.df <- as.data.frame(channel.json)
+channel.MB <- as.data.frame(channel.json)
 
-#example with a username
+
+#example with a username for PewDiePie channel. For part you can also insert more at once to get additional information.
 api_params2 <- 
   paste(paste0("key=", key), 
-        paste0("forUsername=", Boilerroom), 
+        paste0("forUsername=", PewDiePieUserID), 
         "part=snippet,contentDetails,statistics",
         sep = "&")
 api_call2 <- paste0(base, "channels", "?", api_params2)
@@ -98,9 +136,22 @@ json_result2 <- content(api_result2, "text", encoding="UTF-8")
 
 #format json into dataframe
 channel.json2 <- fromJSON(json_result2, flatten = T)
-channel.df2 <- as.data.frame(channel.json2)
+channel.PDP <- as.data.frame(channel.json2)
 
 
+#Now we want to compare the two channels by some indicators like views etc. For this we are subsetting the data and create new indicators like average views per video
+MBchannel <- channel.MB %>% mutate(Channel = "MrBeast",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+  select(Channel,Views,Videos, averViewsVideo, Subscriber)
+
+PDPchannel <- channel.PDP %>% mutate(Channel = "PewDiePie",Views= as.numeric(items.statistics.viewCount), Videos = as.numeric(items.statistics.videoCount),averViewsVideo = Views/Videos, Subscriber = as.numeric(items.statistics.subscriberCount)) %>%
+  select(Channel,Views,Videos, averViewsVideo, Subscriber)
+
+YTchannels <- rbind(MBchannel, PDPchannel)
+YTchannels
+```
+```{r youtube-3, echo = FALSE, message = FALSE}
+YTchannels <- readRDS("figures/rds/youtube_example1.RDS")
+YTchannels
 ```
 
 On CRAN we found the [“tuber” package](https://cran.r-project.org/web/packages/tuber/index.html). The package enables you to get the comments posted on YouTube videos, number of likes of a video, search for videos with specific content and much more. You can also scrape captions from a few videos. To be able to use the tuber package, not an API key but the authentication with OAuth is necessary. OAuth (Open Authorization) uses authorization tokens to prove an identity between consumers and service providers. You can get your client ID and secret on the Google Cloud Platform under Credentials.
@@ -109,18 +160,15 @@ On CRAN we found the [“tuber” package](https://cran.r-project.org/web/packag
 First we had to configure the so-called OAuth consent screen, where we put “external” and then had to put an app name. For scopes we did not specify anything and just clicked save & continued. To be able to use the API you have to set your own google mail address that you use for the Google cloud.
 
 2) Get OAuth credentials  
-After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the Yt_oauth function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
+After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. In older guides it is recommended to choose the category "others" which no longer exists. Here you have to choose "desktop application". As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the Yt_oauth function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
 
 [This page](https://www.storybench.org/how-to-download-youtube-data-in-r-using-tuber-and-purrr/) provides some example API calls you can make with the tuber package.
 
-```{r }
+```r
 library(tuber) # youtube API
-library(magrittr) # Pipes %>%, %T>% and equals(), extract().
 library(tidyverse) # all tidyverse packages
 library(purrr) # package for iterating/extracting data
-```
 
-```{r eval=FALSE, message=FALSE, warning=FALSE}
 #save client id and secret in an object
 client_id<-"put client ID"
 client_secret<-"put client secret"
@@ -132,25 +180,38 @@ yt_oauth(app_id = client_id,
 
 #Downloading playlist data
 #first get playlist ID
-go_psych_playlist_id <- stringr::str_split(
-  string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
+go_psych_playlist_id <- stringr::str_split(string = "https://www.youtube.com/playlist?list=PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM", 
   pattern = "=", 
   n = 2,
   simplify = TRUE)[ , 2]
 go_psych_playlist_id
 
 #use the tuber function get_playlist_items to collect the videos into a data frame
+go_psych <- get_playlist_items(filter = c(playlist_id = "PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM"), 
+                                      part = "contentDetails") 
 
-go_psych <- tuber::get_playlist_items(filter = 
-                                                c(playlist_id = "PLD4cyJhQaFwWZ838zZhWVr3RG_nETlICM"), 
-                                              part = "contentDetails",
-                                              # set this to the number of videos
-                                              max_results = 200) 
 
-# check the data for go Psych
-#now we have the video ids of all videos in that playlist
-go_psych %>% dplyr::glimpse(78)
+##now we have the video ids of all videos in that playlist
+#extracting video id´s 
+go_psych_ids <- (go_psych$contentDetails.videoId)
+
+#In the next step we will use the map_df command of the purrr package which needs a function as a parameter
+#creating a function using the get_stats function of the tuber package 
+get_all_stats <- function(id) {
+  get_stats(video_id = id)
+} 
+
+# Now we can store the stats information in a data frame with the map_df command which needs an object .x and a function .f
+go_psych_AllStats <- map_df(.x = go_psych_ids, .f = get_all_stats)
+#Overview of the statistics of all videos in the playlist
+go_psych_AllStats
 ```
+
+```{r youtube-4, echo = FALSE, message = FALSE}
+go_psych_AllStats <- readRDS("figures/rds/youtube_example2.RDS")
+go_psych_AllStats
+```
+
 
 Package information:  
  * [CRAN - Package tuber](https://cran.r-project.org/web/packages/tuber/index.html)  
