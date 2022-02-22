@@ -89,11 +89,10 @@ sources <- httr::GET(url = endpoint_url,
                query = params)
 
 sources_df <- bind_rows(content(sources)$sources)
-save(sources_df, file = "google_news-sources.RData")
-
+sources_df[,c("id", "name", "url", "category")]
 ```
 
-```{r google-news-5}
+```{r google-news-5, echo = FALSE}
 load("figures/rds/google_news-sources.RData")
 sources_df[,c("id", "name", "url", "category")]
 ```
@@ -116,11 +115,10 @@ headlines <- httr::GET(url = endpoint_url,
 
 headlines_df <- bind_rows(content(headlines)$articles) %>% 
   mutate(source = tolower(source)) %>% unique()
-save(headlines_df, file = "google_new-headlines.RData")
-
+headlines_df[,c("publishedAt","title")]
 ```
 
-```{r google-news-7}
+```{r google-news-7, echo = FALSE}
 load("figures/rds/google_new-headlines.RData")
 headlines_df[,c("publishedAt","title")]
 ```
