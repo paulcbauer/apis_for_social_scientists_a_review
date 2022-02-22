@@ -11,7 +11,8 @@ You will need to install the following packages for this chapter (run the code):
 
 ```{r wikipedia-2, echo=FALSE, comment=NA}
 # Run this and copy output into the p_load function in next chunk
-lines_text <- readLines("16-Wiki_api.Rmd")
+file_name <- dir()[stringr::str_detect(dir(), "Wiki_api.Rmd")]
+lines_text <- readLines(file_name)
 packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
