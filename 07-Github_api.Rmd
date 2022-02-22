@@ -54,13 +54,13 @@ First of all, it's important to note that GitHub actually provides two APIs: A [
 
 We can perform a request using the `curl` command in a terminal or by simply visiting the URL in a browser. We will start by retrieving public profile data from the GitHub account of software developer and hacker Lilith Wittmann:^[The author asked for permission for fetching and displaying this data.]
 
-```{r github-api-3, eval=FALSE}
+```{bash github-api-3, eval=FALSE}
 curl https://api.github.com/users/LilithWittmann
 ```
 
 The result is an HTTP response with JSON formatted data which contains user profile information that can also be found on the respective [public profile page](https://github.com/LilithWittmann):
 
-```{r github-api-4, eval=FALSE}
+```{text github-api-4, eval=FALSE}
 {
   "login": "LilithWittmann",
   "name": "Lilith Wittmann",
@@ -77,11 +77,11 @@ The result is an HTTP response with JSON formatted data which contains user prof
 
 The GitHub API offers extensive search capabilities. You can search for users, repositories, discussions and more by constructing a [search query](https://docs.github.com/en/rest/reference/search#constructing-a-search-query). Here, we search for users that use R and report being located in Berlin:
 
-```{r github-api-5, eval=FALSE}
+```{bash github-api-5, eval=FALSE}
 curl 'https://api.github.com/search/users?q=language:r+location:berlin'
 ```
 
-```{r github-api-6, eval=FALSE}
+```{text github-api-6, eval=FALSE}
 {
   "total_count": 541,
   "incomplete_results": false,
@@ -111,11 +111,11 @@ Note that by default, the results are [ordered by "best match"](https://docs.git
 
 Another example would be retrieving data about a project repository. We will use the [GitHub repository for the popular R package dplyr](https://github.com/tidyverse/dplyr) as an example:
 
-```{r github-api-7, eval=FALSE}
+```{bash github-api-7, eval=FALSE}
 curl https://api.github.com/repos/tidyverse/dplyr
 ```
 
-```{r github-api-8, eval=FALSE}
+```{text github-api-8, eval=FALSE}
 {
   "id": 6427813,
   "name": "dplyr",
@@ -132,11 +132,11 @@ curl https://api.github.com/repos/tidyverse/dplyr
 
 Finally, let's fetch data about an *issue* in the dplyr repository. On GitHub, issues are code or documentation problems as well as development tasks that users and collaborators bring up and discuss. Here, we collect all data on [dplyr issue #5958](https://github.com/tidyverse/dplyr/issues/5958):
 
-```{r github-api-9, eval=FALSE}
+```{bash github-api-9, eval=FALSE}
 curl https://api.github.com/repos/tidyverse/dplyr/issues/5958
 ```
 
-```{r github-api-10, eval=FALSE}
+```{text github-api-10, eval=FALSE}
 {
   "url": "https://api.github.com/repos/tidyverse/dplyr/issues/5958",
   "number": 5958,
