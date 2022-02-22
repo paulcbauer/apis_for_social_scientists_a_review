@@ -31,7 +31,7 @@ The following five requests are available: Place Search, Place Details, Place Ph
 **Note:** You can display Places API results on a Google Map, or without a map but it is prohibited to use Places API data on a map that is not a Google map.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 

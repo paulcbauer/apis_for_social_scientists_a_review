@@ -45,7 +45,7 @@ Likewise, there are several metrics about stories that are provided by the API:
 * Replies	 – Total number of replies to the story.
 * Taps_forward – Total number of taps to see this story’s next photo or video.
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here]("https://developers.facebook.com/docs/instagram-api/getting-started").

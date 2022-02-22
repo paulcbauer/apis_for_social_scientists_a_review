@@ -36,7 +36,7 @@ There are different types of Youtube APIs that serve different purposes:
 The [google developer site](https://developers.google.com/youtube/v3/sample_requests) provides sample requests and a summary of the possible metrics that the API can give you data on. You can actually run your API requests there. All the possible calls you can make are provided on the page: Captions, ChannelBanners, Channels, ChannelSection, Comments, CommentThreads, i18nLanguages, i18nRegrions, Members, MembershipLevels, Playlistitems, Playlists, Search, Subscriptions, Thumbnails, VideoAbuseReportReasons, VideoCategories, and Videos.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 An overview and guide is given on the [Youtube Api website](https://developers.google.com/youtube/v3/getting-started).

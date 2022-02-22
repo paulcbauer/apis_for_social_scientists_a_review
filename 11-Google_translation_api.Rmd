@@ -36,7 +36,7 @@ The API limits in three ways: characters per day, characters per 100 seconds, an
 Consider that additionally to the Translation API which we demonstrate in this review, Google provides us with two further APIs for translation: AutoML Translation and the Advanced Translation API (see [here]("https://cloud.google.com/translate/?utm_source=google&utm_medium=cpc&utm_campaign=emea-de-all-de-dr-bkws-all-all-trial-e-gcp-1010042&utm_content=text-ad-none-any-DEV_c-CRE_170514365277-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20AI%20%26%20ML%20~%20Cloud%20Translation%23v3-KWID_43700053282385063-kwd-74703397964-userloc_9042003&utm_term=KW_google%20translator%20api-NET_g-PLAC_&gclid=CjwKCAjw_JuGBhBkEiwA1xmbRZOxg7QzGmhTHWseHFN_V0Al_Xlf8wZVBfX9EURtitWDbe2dLcTWIxoCjj0QAvD_BwE&gclsrc=aw.ds#section-4") for a short comparison).
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 To access and to use the API the following steps are necessary:

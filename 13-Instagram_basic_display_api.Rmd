@@ -34,7 +34,7 @@ The Instagram Basic Display API gives read-access to basic profile information, 
 
 It is a RESTful API, meaning that queries are made for static information at the current moment. Queries are subject to rate limits. Responses are in the form of JSON-formatted objects containing the default and requested fields and edges. 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 In order to access the Instagram Basic Display API, developers are required to first register as a Facebook developer on [developers.facebook.com]("https://developers.facebook.com/), to further create a Facebook App [here]("https://developers.facebook.com/docs/instagram-basic-display-api/getting-started") and to submit the application for review. 

@@ -23,7 +23,7 @@ cat(packages)
 
 With the News API (formerly Google News API), you can get article snippets and news headlines, both up to four years old and real-time, from over 80,000 news sources worldwide. 
 
-## Prerequesites
+## Prerequisites
 *What are the prerequisites to access the API (authentication)? *
 
 You need an API key, which can be requested via [https://newsapi.org/register](https://newsapi.org/register).
