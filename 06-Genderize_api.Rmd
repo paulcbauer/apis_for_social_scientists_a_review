@@ -1,6 +1,6 @@
 # Genderize.io API
 
-<chauthors>Markus Konrad (Wissenschaftszentrum Berlin für Sozialforschung – WZB)</chauthors>
+<chauthors>Markus Konrad (WZB)</chauthors>
 <br><br>
 
 ```{r genderize-1, include=FALSE} 
