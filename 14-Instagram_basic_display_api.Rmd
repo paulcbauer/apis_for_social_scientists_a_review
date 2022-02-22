@@ -11,7 +11,8 @@ You will need to install the following packages for this chapter (run the code):
 
 ```{r instagram-basic-display-2, echo=FALSE, comment=NA}
 # Run this and copy output into the p_load function in next chunk
-lines_text <- readLines("12-Instagram_basic_display_api.Rmd")
+file_name <- dir()[stringr::str_detect(dir(), "Instagram_basic_display_api.Rmd")]
+lines_text <- readLines(file_name)
 packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
@@ -34,7 +35,7 @@ The Instagram Basic Display API gives read-access to basic profile information, 
 
 It is a RESTful API, meaning that queries are made for static information at the current moment. Queries are subject to rate limits. Responses are in the form of JSON-formatted objects containing the default and requested fields and edges. 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 In order to access the Instagram Basic Display API, developers are required to first register as a Facebook developer on [developers.facebook.com]("https://developers.facebook.com/), to further create a Facebook App [here]("https://developers.facebook.com/docs/instagram-basic-display-api/getting-started") and to submit the application for review. 

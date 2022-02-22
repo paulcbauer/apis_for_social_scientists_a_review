@@ -12,7 +12,8 @@ You will need to install the following packages for this chapter (run the code):
 
 ```{r ckan-2, echo=FALSE, comment=NA}
 # Run this and copy output into the p_load function in next chunk
-lines_text <- readLines("03-Ckan_api.Rmd")
+file_name <- dir()[stringr::str_detect(dir(), "Ckan_api.Rmd")]
+lines_text <- readLines(file_name)
 packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
@@ -43,7 +44,7 @@ For example, the [German](https://www.govdata.de/impressum) and the [US Governme
 The specific datasets include a variety of different contents from public administration, such as election results, data on schools, maps and many more. The German data portal [govdata.de](https://www.govdata.de/impressum) for example serves as a collection point for all those data from various institutions. Those specific administrative institutions are the ones that actually provide the data. Therefore, not every institution provides the same data on the same topic.
 
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 There are no prerequisites to access the CKAN API. Furthermore, there seem to be no prerequisites to access the open data from the various governmental institutions using CKAN.

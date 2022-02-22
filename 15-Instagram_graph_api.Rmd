@@ -11,7 +11,8 @@ You will need to install the following packages for this chapter (run the code):
 
 ```{r instagram-graph-2, echo=FALSE, comment=NA}
 # Run this and copy output into the p_load function in next chunk
-lines_text <- readLines("13-Instagram_graph_api.Rmd")
+file_name <- dir()[stringr::str_detect(dir(), "Instagram_graph_api.Rmd")]
+lines_text <- readLines(file_name)
 packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
@@ -45,7 +46,7 @@ Likewise, there are several metrics about stories that are provided by the API:
 * Replies	 – Total number of replies to the story.
 * Taps_forward – Total number of taps to see this story’s next photo or video.
 
-## Prerequesites
+## Prerequisites
 * *What are the prerequisites to access the API (authentication)? *
 
 For most endpoints you need an Instagram Business Account, a Facebook Page that is connected to that account, a Facebook Developer Account and a Facebook App with Basic settings configured. Facebook provides a tutorial for setting this up [here]("https://developers.facebook.com/docs/instagram-api/getting-started").
