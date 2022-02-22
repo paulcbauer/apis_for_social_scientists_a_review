@@ -13,10 +13,10 @@ You will need to install the following packages for this chapter (run the code):
 # Run this and copy output into the p_load function in next chunk
 file_name <- dir()[stringr::str_detect(dir(), "Genderize_api.Rmd")]
 lines_text <- readLines(file_name)
-packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- gsub("library\\(|\\)", "", unlist(stringr::str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
-packages <- str_wrap(packages, width = 80)
+packages <- stringr::str_wrap(packages, width = 80)
 packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
 packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
 cat(packages)
@@ -67,7 +67,6 @@ We can perform a sample request using the `curl` command in a terminal or by sim
 ```{bash genderize-3, eval=FALSE}
 curl 'https://api.genderize.io?name=sasha'
 ```
-
 
 The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction probability estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:
 
