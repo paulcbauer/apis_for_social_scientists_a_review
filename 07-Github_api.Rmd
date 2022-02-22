@@ -13,10 +13,10 @@ You will need to install the following packages for this chapter (run the code):
 # Run this and copy output into the p_load function in next chunk
 file_name <- dir()[stringr::str_detect(dir(), "Github_api.Rmd")]
 lines_text <- readLines(file_name)
-packages <- gsub("library\\(|\\)", "", unlist(str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
+packages <- gsub("library\\(|\\)", "", unlist(stringr::str_extract_all(lines_text, "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
 packages <- packages[packages!="pacman"]
 packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
-packages <- str_wrap(packages, width = 80)
+packages <- stringr::str_wrap(packages, width = 80)
 packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
 packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
 cat(packages)
@@ -158,29 +158,27 @@ As you can see in the example above, a response may contain nested data (the "us
 
 * *How can we access the API from R?*
 
-Note that there's no output provided for the code examples in this section. When you're learning to use this API, it's recommended to copy and paste the code examples and run them in your own R environment.
-
 There are [packages for many programming languages](https://docs.github.com/en/rest/overview/libraries) that provide convenient access for communicating with the GitHub API. Unfortunately, there are no such packages for R at the time of writing.^[Please note that the [git2r](https://cran.r-project.org/web/packages/git2r/index.html) package does *not* provide access to the GitHub API. It provides access to git repositories which is something completely different to accessing the web API of a social coding platform.] This means we can only access the API directly, e.g. by using the [jsonlite package](https://cran.r-project.org/web/packages/jsonlite/index.html) to fetch the data and convert it to an R list or dataframe.
 
 We start with translating the first API call from the previous section to R:
 
-```{r github-api-11, eval=FALSE}
+```{r github-api-11}
 library(jsonlite)
 
 profile_data <- fromJSON('https://api.github.com/users/LilithWittmann')
 # this gives a list
-head(profile_data)
+head(profile_data, 3)
 ```
 The JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
 
-```{r github-api-12, eval=FALSE}
+```{r github-api-12}
 profile_repos <- fromJSON('https://api.github.com/users/LilithWittmann/repos')
 # this gives a dataframe
 head(profile_repos[,1:3])   # selecting only the first 3 columns
 ```
 Let's also repeat the search query from the previous section. We want to obtain accounts that use R and entered "Berlin" in their profile's location field. This time, the result is a list that reports the number of search results as `search_results$total_count` and the search results details as a dataframe in `search_results$items`:
 
-```{r github-api-13, eval=FALSE}
+```{r github-api-13}
 search_results <- fromJSON('https://api.github.com/search/users?q=language:r+location:berlin')
 # this gives a list with a dataframe in "items"
 str(search_results, list.len = 3, vec.len	= 3)
@@ -188,20 +186,20 @@ str(search_results, list.len = 3, vec.len	= 3)
 
 Let's suppose we want to collect profile data for each account in the result set. First, let's investigate the search results in `search_results$items`:
 
-```{r github-api-14, eval=FALSE}
+```{r github-api-14}
 head(search_results$items[,1:3])
 ```
 
 To retrieve the profile details of each user, we only need the account name which we can then feed into the `https://api.github.com/users/<account>` API query. For demonstration purposes, let's only select the first ten users in the result set:
 
-```{r github-api-15, eval=FALSE}
+```{r github-api-15}
 r_users_berlin <- search_results$items$login[1:10]
 # gives a character vector of 10 account names
 head(r_users_berlin)
 ```
 We can now build the API queries to fetch the profile information for each user:
 
-```{r github-api-16, eval=FALSE}
+```{r github-api-16}
 users_query <- paste0('https://api.github.com/users/', r_users_berlin)
 # gives a character vector of 10 API queries
 head(users_query)
@@ -209,7 +207,7 @@ head(users_query)
 
 The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (i.e. a nested structure – a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
 
-```{r github-api-17, eval=FALSE}
+```{r github-api-17}
 users_details <- lapply(users_query, fromJSON)
 # gives a list of 10 lists (one for each user)
 str(users_details, list.len = 3)
@@ -217,7 +215,7 @@ str(users_details, list.len = 3)
 
 A nested list is hard to work with, so we convert the result to a dataframe. On the way, we select only the information that we actually want to work with. For demonstration purposes, we only select the account name, the real name, the location, the number of public repositories and the number of followers of each user.
 
-```{r github-api-18, eval=FALSE}
+```{r github-api-18}
 users_rows <- lapply(users_details, function(d) {
   # select information that we need and generate a dataframe with a single row
   data.frame(login = d$login,
