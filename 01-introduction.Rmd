@@ -41,10 +41,10 @@ cat(packages)
 
 
 ```{r intro-2, eval=FALSE, include=TRUE}
-devtools::install_github("quanteda/quanteda.corpora")
-devtools::install_github("cbpuschmann/RCrowdTangle")
-devtools::install_github("joon-e/mediacloud")
-devtools::install_github("facebookresearch/Radlibrary")
+p_load_gh("quanteda/quanteda.corpora")
+p_load_gh("cbpuschmann/RCrowdTangle")
+p_load_gh("joon-e/mediacloud")
+p_load_gh("facebookresearch/Radlibrary")
 ```
 
 
