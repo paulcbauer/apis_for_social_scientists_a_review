@@ -14,8 +14,8 @@ description: "This book provides an introduction to different APIs that may be u
 ---
 
 
-```{r eval=FALSE, include=FALSE}
-# ORDER CHAPTERS ALPHABETICALLY
+```{r functions-not-run, eval=FALSE, include=FALSE}
+# FUNCTION: ORDER CHAPTERS ALPHABETICALLY
 # Hong's function to order chapters alphabetically
 # Use this to reorder chapters alphabetically
 require(fs)
@@ -42,6 +42,42 @@ gen_fname <- function(x, y) {
 new_rmd_names <- map2_chr(new_chap_numbers, str_to_title(chap_names), gen_fname)
 
 file_move(all_rmds, new_rmd_names)
+```
+
+
+```{r functions-run, include=FALSE}
+
+
+# FUNCTION: 
+
+
+#setwd("~/dev/apis_for_social_scientists_a_review")
+.gen_pacman_chunk <- function(x = NULL) {
+  if (is.null(x)) {
+    file_name <- knitr::current_input()
+  } else {
+    file_name <- stringr::str_subset(dir(), x)[1]
+  }
+  lines_text <- readLines(file_name) 
+  packages <- gsub("library\\(|\\)", "",  
+                  unlist(stringr::str_extract_all(lines_text,  
+                                         "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)"))) 
+  packages <- packages[packages!="pacman"] 
+  packages <- packages[packages!="p_load("] 
+  packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="") 
+  packages <- stringr::str_wrap(packages, width = 80) 
+  packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages) 
+  packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
+  cat(packages)
+  invisible(x)
+}
+
+#.gen_pacman_chunk("Crowdtangle")
+#> # install.packages('pacman')
+#> library(pacman)
+#> p_load('httr', 'devtools',
+#> 'RCrowdTangle', 'dplyr', 'jsonlite')
+#.gen_pacman_chunk("Facebook_ads")
 
 
 ```
