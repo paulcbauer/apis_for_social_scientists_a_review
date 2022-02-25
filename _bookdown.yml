@@ -1,5 +1,27 @@
-book_filename: "2021_apis_for_social_scientists_a_collaborative_review"
-delete_merged_file: true
+book_filename: 2021_apis_for_social_scientists_a_collaborative_review
+delete_merged_file: yes
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: 'Chapter '
+rmd_files:
+- index.Rmd
+- Chapter_Introduction.Rmd
+- Chapter_Best_practices.Rmd
+- Chapter_Ckan_api.Rmd
+- Chapter_Crowdtangle_api.Rmd
+- Chapter_Facebook_ads_library_api.Rmd
+- Chapter_Genderize_api.Rmd
+- Chapter_Github_api.Rmd
+- Chapter_Google_news_api.Rmd
+- Chapter_Google_nlp_api.Rmd
+- Chapter_Google_places_api.Rmd
+- Chapter_Google_speech.Rmd
+- Chapter_Google_translation_api.Rmd
+- Chapter_Googletrends_api.Rmd
+- Chapter_Instagram_basic_display_api.Rmd
+- Chapter_Instagram_graph_api.Rmd
+- Chapter_Mediacloud_api.Rmd
+- Chapter_Twitter_api.Rmd
+- Chapter_Wiki_api.Rmd
+- Chapter_Youtube_api.Rmd
+- Chapter_References_Appendix.rmd
