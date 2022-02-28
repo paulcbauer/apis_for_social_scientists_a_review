@@ -24,19 +24,7 @@ The code examples rely R and different packages thereof. It's probably easiest i
 
 ```{r intro-1, echo=FALSE, comment=NA}
 options(width = 300)
-# Run this and copy output into the p_load function in next chunk
-library(stringr)
-lines_text <- readLines(knitr::current_input())
-packages <- gsub("library\\(|\\)", "", 
-                 unlist(str_extract_all(lines_text, 
-                                        "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)")))
-packages <- packages[packages!="pacman"]
-packages <- packages[packages!="p_load("]
-packages <- paste("# install.packages('pacman')", "library(pacman)", "p_load('", paste(packages, collapse="', '"), "')",sep="")
-packages <- str_wrap(packages, width = 80)
-packages <- gsub("install.packages\\('pacman'\\)", "install.packages\\('pacman'\\)\n", packages)
-packages <- gsub("library\\(pacman\\)", "library\\(pacman\\)\n", packages)
-cat(packages)
+.gen_pacman_chunk()
 ```
 
 
