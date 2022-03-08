@@ -83,7 +83,7 @@ sources_df[,c("id", "name", "url", "category")]
 ```
 
 ```{r google-news-5, echo = FALSE}
-load("figures/rds/google_news-sources.RData")
+load("data/google_news-sources.RData")
 sources_df[,c("id", "name", "url", "category")]
 ```
 
@@ -109,7 +109,7 @@ headlines_df[,c("publishedAt","title")]
 ```
 
 ```{r google-news-7, echo = FALSE}
-load("figures/rds/google_new-headlines.RData")
+load("data/google_new-headlines.RData")
 headlines_df[,c("publishedAt","title")]
 ```
 

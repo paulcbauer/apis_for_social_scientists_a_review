@@ -93,7 +93,7 @@ The package `academictwitteR` [@barrie:2021] can be used to access the Academic 
 
 `academictwitteR` looks for the environment variable `TWITTER_BEARER` for the bearer token. To collect the time series data, we use the `count_all_tweets` function.
 
-<!-- A cache version of fff_ts is available in "figures/rds/twitter_fft_ts.RDS" -->
+<!-- A cache version of fff_ts is available in "data/twitter_fft_ts.RDS" -->
 
 ```r
 library(academictwitteR)
@@ -110,7 +110,7 @@ head(fff_ts) # the data is in reverse chronological order
 ```{r twitter-3, echo = FALSE, message = FALSE}
 library(tidyverse)
 library(lubridate)
-fff_ts <- readRDS("figures/rds/twitter_ffs_ts.RDS")
+fff_ts <- readRDS("data/twitter_ffs_ts.RDS")
 ```
 
 ```{r twitter-4, fff_ts, echo = FALSE}

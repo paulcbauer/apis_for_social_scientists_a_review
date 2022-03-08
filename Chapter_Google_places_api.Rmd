@@ -98,7 +98,7 @@ library(googleway)
 ```
 
 
-<!-- A cache version of location is available in "figures/rds/google_places_location.RDS" -->
+<!-- A cache version of location is available in "data/google_places_location.RDS" -->
 
 ```{r google-places-6, eval=F}
 # Option 2: Accessing the API with googleway
@@ -108,7 +108,7 @@ location <- googleway::google_places("Mannheim")
 ```
 
 ```{r google-places-7, echo = FALSE, message = FALSE}
-location <- readRDS("figures/rds/google_places_location.RDS")
+location <- readRDS("data/google_places_location.RDS")
 ```
 
 ```{r google-places-8, warning=F, message=F}
@@ -119,7 +119,7 @@ location <- c(location$location$lat, location$location$lng)
 
 
 
-<!-- A cache version of this plot is available in "figures/rds/google_places_plot1.RDS" -->
+<!-- A cache version of this plot is available in "data/google_places_plot1.RDS" -->
 
 ```{r google-places-9, eval=F}
 # Plot places to google map
@@ -132,14 +132,14 @@ plot(r)
 ```
 
 ```{r google-places-10, echo=F, out.width="100%", fig.align='center'}
-knitr::include_graphics("figures/rds/google_places_plot1.png")
+knitr::include_graphics("figures/google_places_plot1.png")
 ```
 
 
 
 
 
-<!-- A cache version of pizza is available in "figures/rds/google_places_pizza.RDS" -->
+<!-- A cache version of pizza is available in "data/google_places_pizza.RDS" -->
 
 ```{r google-places-11, eval=F}
 # Google places request with googleway
@@ -147,7 +147,7 @@ pizza <- google_places("Pizza", location = location, radius = 5000, place_type =
 ```
 
 ```{r google-places-12, echo = FALSE, message = FALSE}
-pizza <- readRDS("figures/rds/google_places_pizza.RDS")
+pizza <- readRDS("data/google_places_pizza.RDS")
 ```
 
 

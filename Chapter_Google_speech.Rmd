@@ -109,26 +109,26 @@ gl_auth("./your-key.json")
 
 We will now get a sample source file which comes along with the `googleLanuageR` package. The transcript of this file is: “To administer medicine to animals is frequently a very difficult matter, and yet sometimes it’s necessary to do so” - which according to @Edmondson2017-pv (one of the authors of the [‘googleLanguageR’ R package]("https://cran.r-project.org/web/packages/googleLanguageR/index.html")) is a fairly difficult sentence for computers to parse.
 
-<!-- A cache version of exemplary_audio is available in "figures/rds/google_speech-to-text_audio.RDS" -->
+<!-- A cache version of exemplary_audio is available in "data/google_speech-to-text_audio.RDS" -->
 
 ```{r google-speech-7, eval=F}
 exemplary_audio <- system.file("woman1_wb.wav", package = "googleLanguageR")
 ```
 
 ```{r google-speech-8, echo = FALSE, message = FALSE}
-exemplary_audio <- readRDS("figures/rds/google_speech-to-text_audio.RDS")
+exemplary_audio <- readRDS("data/google_speech-to-text_audio.RDS")
 ```
 
 We can now call the API via the function `gl_speech()`. Here you will have to specify the quantity of interest, namely the `audio_source` (this can either be a local file or a Google Cloud Storage URI) as well as the `languageCode` (language spoken in your audio file).
 
-<!-- A cache version of exemplary_audio_analysis is available in "figures/rds/google_speech-to-text_analysis.RDS" -->
+<!-- A cache version of exemplary_audio_analysis is available in "data/google_speech-to-text_analysis.RDS" -->
 
 ```{r google-speech-9, eval=F}
 exemplary_audio_analysis <- gl_speech(audio_source=exemplary_audio, languageCode = "en-GB")
 ```
 
 ```{r google-speech-10, echo = FALSE, message = FALSE}
-exemplary_audio_analysis <- readRDS("figures/rds/google_speech-to-text_analysis.RDS")
+exemplary_audio_analysis <- readRDS("data/google_speech-to-text_analysis.RDS")
 ```
 
 

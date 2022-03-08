@@ -237,7 +237,7 @@ for (i in seq_along(fields_vector)) {
 
 After extraction using the for loop, we have three data frames in one list. However, these datasets are in a different format and with a different number of rows. The only information that unites them is the unique ID of each ad, which we will use when merging them.
 
-<!-- A cached version of fb_ad_list is available in "figures/rds/facebook_ads_uk_housing.RDS" -->
+<!-- A cached version of fb_ad_list is available in "data/facebook_ads_uk_housing.RDS" -->
 
 ```{r facebook-3, include=FALSE}
 # Specify the package names we will be using.
@@ -246,7 +246,7 @@ library(tidyr)
 library(DT)
 
 # Load cached dataset without the need to extract the Ads with API key
-fb_ad_list <- readRDS("figures/rds/facebook_ads_uk_housing.RDS")
+fb_ad_list <- readRDS("data/facebook_ads_uk_housing.RDS")
 ```
 
 

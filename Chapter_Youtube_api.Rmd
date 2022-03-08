@@ -142,7 +142,7 @@ YTchannels <- rbind(MBchannel, PDPchannel)
 YTchannels
 ```
 ```{r youtube-3, echo = FALSE, message = FALSE}
-YTchannels <- readRDS("figures/rds/youtube_example1.RDS")
+YTchannels <- readRDS("data/youtube_example1.RDS")
 YTchannels
 ```
 
@@ -200,7 +200,7 @@ go_psych_AllStats
 ```
 
 ```{r youtube-4, echo = FALSE, message = FALSE}
-go_psych_AllStats <- readRDS("figures/rds/youtube_example2.RDS")
+go_psych_AllStats <- readRDS("data/youtube_example2.RDS")
 go_psych_AllStats
 ```
 

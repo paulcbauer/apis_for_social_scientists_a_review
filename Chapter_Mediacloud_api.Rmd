@@ -78,7 +78,7 @@ mc_mannheim
 ```
 
 ```{r mediacloud-3, echo = FALSE}
-mc_mannheim <- readRDS("figures/rds/mediacloud_mc_mannheim.RDS")
+mc_mannheim <- readRDS("data/mediacloud_mc_mannheim.RDS")
 mc_mannheim
 ```
 
@@ -97,7 +97,7 @@ de_media <- search_media(tag = "Germany___National", n = 100)
 ```
 
 ```{r mediacloud-4, echo = FALSE}
-de_media <- readRDS("figures/rds/mediacloud_de_media.RDS")
+de_media <- readRDS("data/mediacloud_de_media.RDS")
 de_media
 ```
 
@@ -117,7 +117,7 @@ unima_articles
 ```
 
 ```{r mediacloud-5, echo = FALSE}
-unima_articles <- readRDS("figures/rds/mediacloud_unima_articles.RDS")
+unima_articles <- readRDS("data/mediacloud_unima_articles.RDS")
 unima_articles
 ```
 
@@ -132,7 +132,7 @@ unima_mat <- get_word_matrices(stories_id = unima_articles$stories_id, n = 100)
 ```
 
 ```{r mediacloud-6, echo = FALSE}
-unima_mat <- readRDS("figures/rds/mediacloud_unima_mat.RDS")
+unima_mat <- readRDS("data/mediacloud_unima_mat.RDS")
 unima_mat
 ```
 
@@ -149,7 +149,7 @@ unima_dfm
 
 ```{r mediacloud-7, echo = FALSE, message = FALSE}
 library(quanteda)
-unima_dfm <- readRDS("figures/rds/mediacloud_unima_dfm.RDS")
+unima_dfm <- readRDS("data/mediacloud_unima_dfm.RDS")
 unima_dfm
 ```
 
