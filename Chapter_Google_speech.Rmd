@@ -153,7 +153,7 @@ exemplary_audio_analysis$transcript$confidence #0.92
 ## Social science examples
 * *Are there social science research examples using the API?*
 
-Similar to our note on social science research examples for Google’s Translation API, we are not aware of research that made explicit usage of Google's Speech-to-text API. 
-However, and especially in combination with the Translation API, we are convinced that speech-to-text conversion can be of great advantage for all kinds of qualitative or mixed-methods research projects.
+@Gavras2022-fn published research on how to use voice recording in smartphone surveys, i.e. they asked respondents to record their answer via microphone. For pre-processing and ultimately analyzing this data, they explicitly state to have used Google's Speech-to-Text API [@Gavras2022-fn, 9]. They also refer to another source, namely @Proksch2019-bw, who found the results of the API to be highly similar (e.g., r>0.9 between Google-transcribed and human-transcribed political speeches in German) to manual transcriptions carried out by humans. Importantly, collecting survey data via audio rather than text format has received increasing attention in the recent past [see e.g., @Schober2015-df; @Revilla2021-qb] as it is also part of a larger "text-as-data" movement.
+
 
 
