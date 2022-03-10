@@ -21,5 +21,9 @@ index_cache
 
 .Rhistory
 
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
 
 save_rds.txt
