@@ -47,7 +47,7 @@ It can be used without an API key by anyone for free directly in the internet br
 Just click [here](https://trends.google.com/trends).
 
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 Example using [“httr” package](https://cran.r-project.org/web/packages/httr/httr.pdf):

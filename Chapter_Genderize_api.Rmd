@@ -109,7 +109,7 @@ The predictions are then listed for each supplied name:
 ```
 
 
-## API access
+## API access in R
 
 * *How can we access the API from R?*
 

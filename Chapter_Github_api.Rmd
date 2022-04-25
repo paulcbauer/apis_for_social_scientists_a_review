@@ -145,7 +145,7 @@ curl https://api.github.com/repos/tidyverse/dplyr/issues/5958
 
 As you can see in the example above, a response may contain nested data (the "user" entry shows information about the author of the issue as a nested structure).
 
-## API access
+## API access in R
 
 * *How can we access the API from R?*
 

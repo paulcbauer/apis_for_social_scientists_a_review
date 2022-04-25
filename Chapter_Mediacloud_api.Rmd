@@ -58,7 +58,7 @@ res <- GET(final_url)
 content(res)
 ```
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 As of writing, there are (at least) four R packages for accessing the Media Cloud API. Although the `mediacloudr` package by Dix Jan is available on CRAN, I recommend using the `mediacloud` package by Julian Unkel (LMU). It is available on Dr Unkel's [Github](https://github.com/joon-e/mediacloud). By default, the package always returns "tidy" objects. The package can be installed by:

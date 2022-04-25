@@ -67,7 +67,7 @@ Here we describe how a simple API call can be made from within the Google Cloud 
 curl "https://translation.googleapis.com/language/translate/v2?key=APIKEY" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
 ```
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The following example makes use of the [‘googleLanguageR’]("https://cran.r-project.org/web/packages/googleLanguageR/index.html") package from R which among other options (e.g., syntax analysis &#8594; see Chapter 2 of this review) allows calling the Cloud Translation API.

@@ -50,7 +50,7 @@ news <- httr::GET(url = endpoint_url,
 content(news) # the resulting articles[[1]]$content shows that the article content is truncated
 ```
 
-## API access
+## API access in R
 *How can we access the API from R (httr + other packages)?* 
 
 To date, there is no R package facilitating access, but the API structure is simple enough to rely on `httr`. The API has three main endpoints: 

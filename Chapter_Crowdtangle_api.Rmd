@@ -89,7 +89,7 @@ On the user interface, I created a list of the pages of all parties currently in
 The respective API call looks like that:
 [https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10]("https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10"]), where token is the personal API key, and listIDs is the ID of the list created with the user interface. Here, we sortBy total interactions with the startDate at the beginning of this year and the output restricted to count 10 posts.
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.

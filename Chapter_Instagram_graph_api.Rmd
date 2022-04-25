@@ -120,7 +120,7 @@ Response:
   "website": "http://www.metricsaurus.com/" }
 ```
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The `httr` package can be used to access the Instagram Graph API. There used to be a `instaR` package but it was made for the old Instagram API and can not be used anymore. The [`FBinsightsR`]("https://rdrr.io/github/Deducive/FBinsightsR/") package provides access to the Insights API. Its `fbins_insta` function can be used to collect Instagram insights. Detailed information on the packages' functions can be found [here]("https://github.com/Deducive/FBinsightsR/blob/master/R/functions.R") and more information on the deprecated `instaR` package [here]("https://stackoverflow.com/questions/54488186/instagram-api-in-r-deprecated-need-to-use-graph-facebook-com").

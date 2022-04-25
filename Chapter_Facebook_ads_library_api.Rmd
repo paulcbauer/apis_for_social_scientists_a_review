@@ -111,7 +111,7 @@ We could use additional parameters under the query list specified in the documen
 
 Fortunately, we do not need to deal with these issues directly for most use cases.  Instead, we will use the [Radlibrary package](https://github.com/facebookresearch/Radlibrary) for R, which significantly simplifies the API calls by providing an easy-to-understand functions. This package can handle the pagination automatically and reliably removes the access token from any downloaded data.
 
-## API access
+## API access in R
 
 -   *How can we access the API from R (httr + other packages)?*
 

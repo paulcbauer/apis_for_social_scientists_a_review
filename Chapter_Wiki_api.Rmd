@@ -56,7 +56,7 @@ result:
 
 Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The most common tool is [WikipediR](https://cran.r-project.org/web/packages/WikipediR/WikipediR.pdf), a wrapper around the Wikipedia API. It allows `R` to access information and "directions" for the relevant page or pages of Wikipedia and the content or metadata therein. Importantly, the wrapper only allows to gather information, which implies that the instrument needs to be accompanied by other packages such as `rvest` for scraping and `XML` or `jsonlite` for parsing.

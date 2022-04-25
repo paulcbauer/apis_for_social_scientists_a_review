@@ -59,7 +59,7 @@ The following API call is an example when looking for the first 5 packages (data
 https://www.govdata.de/ckan/api/3/action/resource_show?q=kinder
 
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The CKAN API can be accessed from R with the [httr package](https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html) or the [ckanr package](https://cran.r-project.org/web/packages/ckanr/ckanr.pdf).  

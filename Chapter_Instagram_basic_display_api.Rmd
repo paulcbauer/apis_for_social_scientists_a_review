@@ -96,7 +96,7 @@ mediaId = "..."
 GET("https://graph.instagram.com/mediaId?fields=id,media_type,media_url,username,timestamp&access_token=accessToken")
 ```
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The Instagram Graphic Display API can be accessed from R using the httr package. 

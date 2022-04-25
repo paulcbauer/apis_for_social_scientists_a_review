@@ -75,7 +75,7 @@ curl "https://language.googleapis.com/v1/documents:analyzeEntities?key=${API_KEY
 
 * Depending on to which endpoint you send the request (here: analyzeEntities) you will receive your response with many different insights into your text data.
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 The input (i.e., text data) one provides to the API most often will go beyond a single word or sentence. The most convenient way which also produces the most insightful and structured results (on which you can directly perform further analysis on) are achieved when using the [‘googleLanguageR’ R package]("https://cran.r-project.org/web/packages/googleLanguageR/index.html") - a package which among other options (there are other examples in this review) allows calling the Natural Language API:

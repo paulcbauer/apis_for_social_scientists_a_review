@@ -77,7 +77,7 @@ Here we are looking for channels, "part" is set on statistics and the id is the 
 }
 ```
 
-## API access
+## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
 To access the API from R we are using the same logic by building URL´s with our search request and using the "GET" function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
