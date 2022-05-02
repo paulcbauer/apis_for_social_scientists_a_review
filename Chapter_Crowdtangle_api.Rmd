@@ -94,7 +94,7 @@ The respective API call looks like that:
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 
-```{r crowdTangle-3, echo=TRUE, eval=FALSE}
+```{r crowdTangle-3, echo=TRUE, eval=FALSE, comment=NA}
 
 
 # Option 1: Accessing the API with base "httr" commands
@@ -122,7 +122,7 @@ rlist::list.stack(list_part)
 Alternatively, we can use a wrapper function for R, which is provided by the RCrowdTangle package available on [github]("https://github.com/cbpuschmann/RCrowdTangle"). The package provides wrapper functions for the /posts, /posts/search, and /links endpoints. Conveniently, the wrapper function directly produces a dataframe as output, which is typically what we want to work with. As the example below shows, the wrapper function may not include the specific information we are looking for, however, as the example also shows, it is relatively straightforward to adapt the function on our own depending on the specific question at hand.
 To download the package from github, we need to load the devtools package, and to use the wrapper function, we need dplyr and jsonlite.
 
-```{r crowdTangle-4, echo=TRUE, eval=FALSE}
+```{r crowdTangle-4, echo=TRUE, eval=FALSE, comment=NA}
 
 # Option 2: There is a wrapper function for R, which can be downloaded from github
 
