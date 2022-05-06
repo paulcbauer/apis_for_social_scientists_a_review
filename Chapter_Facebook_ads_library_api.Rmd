@@ -62,7 +62,7 @@ We will follow the sample example on the API documentation page and replicate th
 
 To this end, we need to first load the required packages in this script.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 #loading packages
 library(httr)
 library(remotes)
@@ -74,7 +74,7 @@ library(tidyr)
 
 We are using the `httr` package to make the API call - it has already been loaded in the previous step.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 # We will be using the ads_archive endpoint of the 12th version of the Graph.
 endpoint_url <- "https://graph.facebook.com/v12.0/ads_archive"
 
@@ -117,14 +117,14 @@ Fortunately, we do not need to deal with these issues directly for most use case
 
 Aside from writing our API functions using the `httr` package, we could use the `Radlibrary`, an open-source package written for R. As of December 2021, `Radlibrary` is not yet available at R's primary CRAN repository. Hence its installation is (slightly) more complicated since it needs to be installed directly from its GitHub repository instead. For this process, we will use the `install_github()` function, for which you either need to have `devtools` or `remotes` (a more lightweight package used here) installed.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 remotes::install_github("facebookresearch/Radlibrary")
 library(Radlibrary)
 ```
 
 `Radlibrary` can also simplify the long-term access token retrieval discussed above. Run the function following functions. If you already have an `FB_TOKEN` environment variable set up from the previous step, **you can skip** this part. However, most APIs will not be doing the same for us, so it is a valuable skill to do this manually.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 # User-friendly setup that asks you for app ID and secret.
 adlib_setup()
 
@@ -139,7 +139,7 @@ token_get()
 
 Once the package is installed, we can construct a more complicated query with just a few lines. We will focus on the issue of housing in the UK in November 2021.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 detailed_query <- adlib_build_query(
   # Let's select only United Kingdom.
   ad_reached_countries = "GB",
@@ -169,7 +169,7 @@ detailed_query <- adlib_build_query(
 
 The query is "lazy." Our API call will not be executed unless we specifically ask for it.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 # The function adlib_get_paginated is a version of adlib_get, suitable for
 # larger requests. If you got token using the adlib_setup() function, you do
 # not have to specify this argument. However, we will be using the
@@ -179,7 +179,7 @@ ads_list <- adlib_get_paginated(detailed_query, token = Sys.getenv("FB_TOKEN"))
 
 We can convert the list to a standard dataset using the as_tibble function, because the `ads_list` is a particular type of class called `paginated_adlib_data_response`. This means we can specify other arguments to the `as_tibble` function, such as the type of the table we require and whether we wish to censor our access token from the data.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 # The "type" argument must correspond to the "fields" argument in the
 # adlib_build_query like this:
 # "ad_data" = "ad", "region_data" = "region", "demographic_data" = "demographic".
@@ -188,7 +188,7 @@ ads_df <- as_tibble(ads_list, type = "ad", censor_access_token = TRUE)
 
 **Practical case study: Housing in the UK through the prism of political advertising on Facebook's platforms and its audience**
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 # First, save all of the data types that we will ask the API to extract.
 fields_vector <- c("ad_data", "region_data", "demographic_data")
 
@@ -208,7 +208,7 @@ names(fb_ad_list) <- table_type_vector
 
 We are using a for loop this time, where the API call in each iteration is the same, with the difference in the asked data type. Unlike in the first example, we are interested in the ads themselves and their audience.
 
-```r
+```{r, echo=TRUE, eval=FALSE, comment=NA}
 for (i in seq_along(fields_vector)) {
   print(paste("Extracting the", fields_vector[i]))
 
@@ -239,7 +239,7 @@ After extraction using the for loop, we have three data frames in one list. Howe
 
 <!-- A cached version of fb_ad_list is available in "data/facebook_ads_uk_housing.RDS" -->
 
-```{r facebook-3, include=FALSE}
+```{r facebook-3, include=FALSE, comment=NA}
 # Specify the package names we will be using.
 library(dplyr)
 library(tidyr)
@@ -250,7 +250,7 @@ fb_ad_list <- readRDS("data/facebook_ads_uk_housing.RDS")
 ```
 
 
-```{r facebook-4}
+```{r facebook-4, comment=NA}
 # The demographic & region datasets are in the "long" format (multiple
 # rows of information for each ad), and we need a transformation to a "wide" 
 # format (single row per ad) of the ad dataset using the tidyr package.
@@ -284,7 +284,7 @@ For instance, in our case, we get UK regions columns and all of the US states to
 
 As a final part of this exploration, let's create some summary statistics on UK housing ads from the first week of November 2021, using a few selected variables in our sample.
 
-```{r facebook-5}
+```{r facebook-5, comment=NA}
 # Using the dataset containing combined ads, demographic and region data, we 
 # select only ads from the first week of November 2021, group by Facebook pages,
 # which paid for more than one add during this period. For these observations,
