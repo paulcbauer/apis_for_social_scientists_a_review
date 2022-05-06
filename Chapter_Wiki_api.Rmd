@@ -77,7 +77,7 @@ bls_title
 
 We can also scrape data of Wikipedia by simple using the [“rvest” package](https://cran.r-project.org/web/packages/rvest/rvest.pdf) to scrape all kind of informations like tables, which is done in the following example.
 
-```{r wikipedia-4, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE }
+```{r wikipedia-4, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE, comment=NA}
 library(rvest)
 library(xml2)
 
