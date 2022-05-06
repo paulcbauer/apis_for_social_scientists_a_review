@@ -53,7 +53,7 @@ To access and to use the API the following steps are necessary:
 * The wav.file we uploaded for this example is an exemplary wav.file that comes along with the [‘googleLanguageR’ R package]("https://cran.r-project.org/web/packages/googleLanguageR/index.html").
 
 
-```{r google-speech-3, echo=TRUE, eval=FALSE}
+```{r google-speech-3, echo=TRUE, eval=FALSE, comment=NA}
 {
   "audio": {
     "content": "woman1_wb"
@@ -71,7 +71,7 @@ To access and to use the API the following steps are necessary:
 
 * Don’t forget to insert your individual API key (alternatively, you could define it beforehand via a variable in your environment -> see example in the API call for Google's NLP API later in this document).
 
-```{r google-speech-4, echo=TRUE, eval=FALSE}
+```{r google-speech-4, echo=TRUE, eval=FALSE, comment=NA}
 curl "https://speech.googleapis.com/v1p1beta1/speech:recognize?key=APIKEY" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
 ```
 
@@ -101,7 +101,7 @@ library(googleLanguageR)
 
 *Step 2: Authentication*
 
-```{r google-speech-6, eval=FALSE}
+```{r google-speech-6, eval=FALSE, comment=NA}
 gl_auth("./your-key.json")
 ```
 
@@ -111,7 +111,7 @@ We will now get a sample source file which comes along with the `googleLanuageR`
 
 <!-- A cache version of exemplary_audio is available in "data/google_speech-to-text_audio.RDS" -->
 
-```{r google-speech-7, eval=F}
+```{r google-speech-7, eval=F, comment=NA}
 exemplary_audio <- system.file("woman1_wb.wav", package = "googleLanguageR")
 ```
 
@@ -123,7 +123,7 @@ We can now call the API via the function `gl_speech()`. Here you will have to sp
 
 <!-- A cache version of exemplary_audio_analysis is available in "data/google_speech-to-text_analysis.RDS" -->
 
-```{r google-speech-9, eval=F}
+```{r google-speech-9, eval=F, comment=NA}
 exemplary_audio_analysis <- gl_speech(audio_source=exemplary_audio, languageCode = "en-GB")
 ```
 
