@@ -33,7 +33,7 @@ In order to access the Instagram Basic Display API, developers are required to f
 
 Another prerequisite to access the API is to get authentication. API authentication is handled through Instagram User Access Tokens that conform to the OAuth 2.0 protocol. The process of getting an access token includes two parts. First, each application user must grant an application permission to read the user node and/or the media node. These permissions are controlled via an Authorization Window. 
 
-```{r instagram-basic-display-3, eval=F, echo=T}
+```{r instagram-basic-display-3, eval=F, echo=T, comment=NA}
 https://api.instagram.com/oauth/authorize
   ?client_id={appId}
   &redirect_uri={redirectURI}
@@ -57,7 +57,7 @@ When a user successfully grants the application permission to access their data,
 
 Then, the API can be queried.
 
-```{r instagram-basic-display-4, pressure, eval=F, warning=F, message=F}
+```{r instagram-basic-display-4, pressure, eval=F, warning=F, message=F, comment=NA}
 library(httr)
 
 appId = "126..." #use Instagram App ID and secret (not Facebook App)
@@ -78,7 +78,7 @@ id<-POST("https://api.instagram.com/oauth/access_token",
 
 The Instagram Basic Display API is http-based. To query a node or edge, a GET call can be used. The base URLs are api.instagram.com and graph.instagram.com.
 
-```{r instagram-basic-display-5, pressure2, eval=F, echo=T, message=F, warning=F}
+```{r instagram-basic-display-5, pressure2, eval=F, echo=T, message=F, warning=F, comment=NA}
 accessToken = "..."
 userId = "..."
 
