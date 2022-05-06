@@ -52,7 +52,7 @@ Just click [here](https://trends.google.com/trends).
 
 Example using [“httr” package](https://cran.r-project.org/web/packages/httr/httr.pdf):
 
-```{r google-trends-3, echo=TRUE, eval=FALSE}
+```{r google-trends-3, echo=TRUE, eval=FALSE, comment=NA}
 library(httr)
 GET("https://trends.google.com/trends/explore",
 	query=list(q = "Covid",geo = "US"))
