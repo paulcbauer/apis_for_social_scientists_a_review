@@ -86,7 +86,7 @@ library(googleLanguageR)
 
 *Step 2: Authentication*
 
-```{r google-translation-6, eval=FALSE}
+```{r google-translation-6, eval=FALSE, comment=NA}
 # Authentication (through your service account's JSON key file)
 gl_auth("./your-key.json")
 ```
@@ -117,7 +117,7 @@ This API call eventually provides results in a dataframe with three columns: tra
 
 Let's check the translation.
 
-```{r google-translation-9, message=FALSE, warning=FALSE, eval=F}
+```{r google-translation-9, message=FALSE, warning=FALSE, eval=F, comment=NA}
 google_translate$translatedText
 ```
 
