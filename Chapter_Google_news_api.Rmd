@@ -2,7 +2,7 @@
 <chauthors>Bernhard Clemm von Hohenberg</chauthors>
 <br><br>
 
-```{r google-news-1, include=FALSE}
+```{r google-news-1, include=FALSE, comment=NA}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -28,7 +28,7 @@ Up until at least 2019, the Business version also allowed you to get the entire 
 
 The documentation of the API is available [here](https://newsapi.org/docs). A couple of good examples can be found on the landing page of the API. For instance, we could get all articles mentioning Biden since four weeks ago, sorted by recency, with the following call:
 
-```{r google-news-3, eval=F, message=F}
+```{r google-news-3, eval=F, message=F, comment=NA}
 
 library(httr)
 
@@ -63,7 +63,7 @@ We have already explored the `everything` endpoint. Additional parameters to use
 
 Though perhaps not so interesting from a research perspective, the `sources` endpoint is useful because it allows to explore the list of sources in each country (not really documented anywhere). Let's get all sources from Germany---we can see that there are ten from which the News API draws content:
 
-```{r google-news-4, eval=F, message=F}
+```{r google-news-4, eval=F, message=F, comment=NA}
 
 library(dplyr)
 library(httr)
@@ -82,14 +82,14 @@ sources_df <- bind_rows(content(sources)$sources)
 sources_df[,c("id", "name", "url", "category")]
 ```
 
-```{r google-news-5, echo = FALSE}
+```{r google-news-5, echo = FALSE, comment=NA}
 load("data/google_news-sources.RData")
 sources_df[,c("id", "name", "url", "category")]
 ```
 
 This illustrates another weakness of the News API: The selection of sources is not neither comprehensive nor transparent. In any case, let's use this information to try out the `headlines` endpoint, getting breaking headlines from Bild (via its `id`), with 5 results per page. Note that in the Developer version, these headlines are not really breaking, but actually from one hour ago.
 
-```{r google-news-6, eval=F}
+```{r google-news-6, eval=F, comment=NA}
 
 endpoint_url <- "https://newsapi.org/v2/top-headlines?"
 my_source <- "bild"
@@ -108,7 +108,7 @@ headlines_df <- bind_rows(content(headlines)$articles) %>%
 headlines_df[,c("publishedAt","title")]
 ```
 
-```{r google-news-7, echo = FALSE}
+```{r google-news-7, echo = FALSE, comment=NA}
 load("data/google_new-headlines.RData")
 headlines_df[,c("publishedAt","title")]
 ```
