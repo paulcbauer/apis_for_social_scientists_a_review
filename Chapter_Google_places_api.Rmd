@@ -60,7 +60,7 @@ https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&location=4
 
 Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
 
-```{r google-places-3, echo=TRUE, eval=FALSE}
+```{r google-places-3, echo=TRUE, eval=FALSE, comment=NA}
 
 
 # Option 1: Accessing the API with base "httr" commands
@@ -82,7 +82,7 @@ Alternatively, we can use a wrapper function for R provided by the R-Package goo
 
 *Authentication*
 
-```{r google-places-4, echo=TRUE, eval=F}
+```{r google-places-4, echo=TRUE, eval=F, comment=NA}
 key <- "YOURAPIKEY"
 set_key(key)
 ```
@@ -100,7 +100,7 @@ library(googleway)
 
 <!-- A cache version of location is available in "data/google_places_location.RDS" -->
 
-```{r google-places-6, eval=F}
+```{r google-places-6, eval=F, comment=NA}
 # Option 2: Accessing the API with googleway
 
 # Request 'Mannheim' to get latitude and longitude information
@@ -121,7 +121,7 @@ location <- c(location$location$lat, location$location$lng)
 
 <!-- A cache version of this plot is available in "data/google_places_plot1.RDS" -->
 
-```{r google-places-9, eval=F}
+```{r google-places-9, eval=F, comment=NA}
 # Plot places to google map
 library(mapsapi)
 # for this you will also need to activate the "maps static API"
@@ -141,7 +141,7 @@ knitr::include_graphics("figures/google_places_plot1.png")
 
 <!-- A cache version of pizza is available in "data/google_places_pizza.RDS" -->
 
-```{r google-places-11, eval=F}
+```{r google-places-11, eval=F, comment=NA}
 # Google places request with googleway
 pizza <- google_places("Pizza", location = location, radius = 5000, place_type = "food")
 ```
@@ -168,7 +168,7 @@ pizza$results %>%
 
 ```
 
-```{r google-places-14, echo=T, eval=F, warning=F, message=F}
+```{r google-places-14, echo=T, eval=F, warning=F, message=F, comment=NA}
 # Plot pizza places to google map
 #important: in order to display the map correctly, you will also have to enable the Maps JavaScript API on GCP
 # unfortunately we can not display an intercative card in this document, but check out the below code in your own rmd-file! 
