@@ -66,7 +66,7 @@ The CKAN API can be accessed from R with the [httr package](https://cran.r-proje
 Please note that as a scientist you can only use GET requests. All kinds of POST requests are restricted to government employees that work at the institutions which provide the data sets.
 
 
-```{r ckan-3, echo=TRUE, eval=FALSE}
+```{r ckan-3, echo=TRUE, eval=FALSE, comment=NA}
 # CKAN API #
 # Option 1: Use the httr package to access the API
 
@@ -78,7 +78,7 @@ base_url <- "https://www.govdata.de/ckan/api/3/action/resource_show"
 berlin <- GET(base_url, query=list(q="kinder",rows=5))
 ``` 
 
-```{r ckan-4, warning=FALSE, eval=FALSE}
+```{r ckan-4, warning=FALSE, eval=FALSE, comment=NA}
 # Option 2: Use the ckanr package to access the API
 
 # load relevant packages
