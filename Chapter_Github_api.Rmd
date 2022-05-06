@@ -232,7 +232,7 @@ Authenticating with the GitHub API via an API key allows you to send much more r
 
 When you want to use authenticated requests, you need to pass along authentication information (your GitHub user account and your PAT) with every request. This is not possible with `fromJSON` – you have to send HTTP requests directly, e.g. via `GET` from the [httr](https://cran.r-project.org/web/packages/httr/index.html) package and then need to handle the HTTP response. The following example shows this. Here, we have the secret access token `PAT` stored as environment variable and fetch it via `Sys.getenv`. Next, we use `GET` to make an authenticated HTTP response to the GitHub API. We use the [`/user` API endpoint](https://docs.github.com/en/rest/reference/users#get-the-authenticated-user), which simply reports information about the currently authenticated user (which is your own account). If we were to use this API endpoint in an unauthenticated manner, we'd receive the error message *"Requires authentication"*.^[Try that out yourself via `curl https://api.github.com/user` in the terminal.] We then need to get the content of the response as text (`content(response, as = 'text')`) and pass this to `fromJSON` in order to get the result as list object.
 
-```{r github-api-19, eval=FALSE}
+```{r github-api-19, eval=FALSE, comment=NA}
 library(httr)
 
 PAT <- Sys.getenv("PAT")
