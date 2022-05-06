@@ -125,7 +125,7 @@ Since DemografixeR is the only package available on CRAN at time of writing, I w
 
 Once installed, the package can be loaded with the following command:
 
-```{r genderize-10}
+```{r genderize-10, comment=NA}
 library(DemografixeR)
 ```
 
@@ -133,25 +133,25 @@ library(DemografixeR)
 
 The main function to use is the `genderize` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
 
-```{r genderize-11}
+```{r genderize-11, comment=NA}
 genderize('sasha')
 ```
 
 Note that the output only consists of the gender prediction as character string vector. This is a dangerous default behavior, as it omits important information about the prediction probability and the size of the data pool used for the prediction. We need to set the `simplify` argument to `FALSE` in order to get that information in the form of a dataframe:
 
-```{r genderize-12}
+```{r genderize-12, comment=NA}
 genderize('sasha', simplify = FALSE)
 ```
 
 Again, we can localize the request by using the `country_id` parameter:
 
-```{r genderize-13}
+```{r genderize-13, comment=NA}
 genderize('sascha', country_id = 'DE', simplify = FALSE)
 ```
 
 Supplying a character string vector will predict the gender of all these names. Note that with the `genderize` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
 
-```{r genderize-14}
+```{r genderize-14, comment=NA}
 genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
             'gökçe', 'gokce', 'jörg', 'jorg', 'rené', 'rene'),
           simplify = FALSE)
@@ -159,26 +159,26 @@ genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
 
 You can also provide a different `country_id` for each name in the request:
 
-```{r genderize-15}
+```{r genderize-15, comment=NA}
 genderize(c('sasha', 'sascha'), country_id = c('RU', 'DE'), simplify = FALSE)
 ```
 
 This is especially helpful together with `expand.grid`, which generates all combinations of values in the two vectors:
 
-```{r genderize-16}
+```{r genderize-16, comment=NA}
 names <- c('sasha', 'sascha')
 countries <- c('RU', 'DE')
 (names_cntrs <- expand.grid(names = names, countries = countries,
                             stringsAsFactors = FALSE))
 ```
 
-```{r genderize-17}
+```{r genderize-17, comment=NA}
 genderize(names_cntrs$names, country_id = names_cntrs$countries, simplify = FALSE)
 ```
 
 Lastly, you can set the parameter `meta` to `TRUE`. This will add additional columns to the result with your rate limit (maximum daily number of requests), the remaining number of requests, the seconds until rate limit reset and the time of the request:
 
-```{r genderize-18}
+```{r genderize-18, comment=NA}
 genderize('judy', simplify = FALSE, meta = TRUE)
 ```
 
