@@ -41,7 +41,7 @@ It is recommended to set the `bearer token` as the environment variable `TWITTER
 
 The documentation of the API is available [here](https://developer.twitter.com/en/docs/twitter-api). The `bearer token` obtained from Twitter should be supplied as an HTTP header preceding with "Bearer ", i.e.
 
-```r
+```{r}
 ## You should get "bearer YourBearerToken"
 paste0("bearer ", Sys.getenv("TWITTER_BEARER"))
 ```
@@ -50,7 +50,7 @@ For using the [full archive search](https://developer.twitter.com/en/docs/twitte
 
 To make a call using `httr` to obtain tweets matched the above query from 2021-01-01 to 2021-07-31
 
-```r
+```{r}
 library(httr)
 my_query <- "#ichbinhanna OR #ichwarhanna lang:DE"
 endpoint_url <- "https://api.twitter.com/2/tweets/search/all"
@@ -71,7 +71,7 @@ content(r)
 
 If one is simply interested in the time series data, just make a simply change to the endpoint and some parameters.
 
-```r
+```{r}
 params <- list(
   "query" = my_query,
   "start_time" = "2021-01-01T00:00:00Z",
@@ -95,7 +95,7 @@ The package `academictwitteR` [@barrie:2021] can be used to access the Academic 
 
 <!-- A cache version of fff_ts is available in "data/twitter_fft_ts.RDS" -->
 
-```r
+```{r}
 library(academictwitteR)
 library(tidyverse)
 library(lubridate)
@@ -144,7 +144,7 @@ The access is relatively easy because in most cases, one only needs to have a Tw
 
 To "replicate" the #ichbinhanna query above:
 
-```r
+```{r}
 library(rtweet)
 search_tweets("#ichbinhanna OR #ichwarhanna", lang = "de")
 ```
