@@ -28,7 +28,7 @@ options(width = 300)
 ```
 
 
-```{r intro-2, eval=FALSE, include=TRUE}
+```{r intro-2, eval=FALSE, include=TRUE, comment=NA}
 p_load_gh("quanteda/quanteda.corpora")
 p_load_gh("cbpuschmann/RCrowdTangle")
 p_load_gh("joon-e/mediacloud")
