@@ -63,7 +63,7 @@ content(res)
 
 As of writing, there are (at least) four R packages for accessing the Media Cloud API. Although the `mediacloudr` package by Dix Jan is available on CRAN, I recommend using the `mediacloud` package by Julian Unkel (LMU). It is available on Dr Unkel's [Github](https://github.com/joon-e/mediacloud). By default, the package always returns "tidy" objects. The package can be installed by:
 
-```{r}
+```{r, eval=F, comment=NA}
 devtools::install_github("joon-e/mediacloud")
 ```
 
@@ -71,7 +71,7 @@ The above "mannheim" example can be replaced by (the package looks for the envir
 
 <!-- cached as `mediacloud_mc_mannheim.RDS` -->
 
-```{r}
+```{r, eval=F, comment=NA}
 library(mediacloud)
 mc_mannheim <- search_stories(text = "mannheim AND university", media_id = 1, n = 20)
 mc_mannheim
@@ -92,7 +92,7 @@ All major German media outlets are tagged with `Germany___National`. The functio
 
 <!-- cached as `mediacloud_de_media.RDS` -->
 
-```{r}
+```{r, eval=F, comment=NA}
 de_media <- search_media(tag = "Germany___National", n = 100)
 ```
 
@@ -107,7 +107,7 @@ de_media
 
 The following query gets a list of 100 articles mentioning "universität mannheim" published in a specific date range from all national German media outlets. Unlike the AND operator, this search for the exact term. Also, a query is case insensitive. The function `search_stories` can be used for this.
 
-```{r}
+```{r, eval=F, comment=NA}
 unima_articles <- search_stories(text = "\"universität mannheim\"",
                                  media_id = de_media$media_id,
                                  n = 100,
@@ -127,7 +127,7 @@ With the list of `stories_id`, we can then use the function `get_word_matrices` 
 
 <!-- cached as `mediacloud_unima_mat.RDS` -->
 
-```{r}
+```{r, eval=F, comment=NA}
 unima_mat <- get_word_matrices(stories_id = unima_articles$stories_id, n = 100)
 ```
 
@@ -140,7 +140,7 @@ The data frame `unima_mat` is in the so-called "tidytext" format [@silge2016tidy
 
 <!-- cached as `mediacloud_unima_dfm.RDS` -->
 
-```{r}
+```{r, eval=F, comment=NA}
 library(tidytext)
 library(quanteda)
 unima_dfm <- cast_dfm(unima_mat, stories_id, word_stem, word_counts)
