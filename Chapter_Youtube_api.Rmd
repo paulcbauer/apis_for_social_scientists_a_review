@@ -84,7 +84,7 @@ To access the API from R we are using the same logic by building URL´s with our
 In this example we will compare the channel statistics of the the two biggest youtuber´s, PewDiePie and MrBeast.
 
 
-```{r}
+```{r, eval=F, comment=NA}
 library(httr)
 library(jsonlite)
 library(here)
@@ -156,7 +156,7 @@ After setting up the consent screen you can go back and click “create credenti
 
 [This page](https://www.storybench.org/how-to-download-youtube-data-in-r-using-tuber-and-purrr/) provides some example API calls you can make with the tuber package.
 
-```{r}
+```{r, eval=F, comment=NA}
 library(tuber) # youtube API
 library(tidyverse) # all tidyverse packages
 library(purrr) # package for iterating/extracting data
