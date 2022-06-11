@@ -19,7 +19,7 @@ Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens (current Editor), Chun
 ### How to contribute?
 * Provide feedback and let us know where you got stuck
 * Highlight or correct errors by raising [issues](https://github.com/paulcbauer/apis_for_social_scientists_a_review/issues) or by creating pull requests
-* Write another review chapter of an API. To so please read the instructions in the section [Contributing a chapter] below and take one of the existing chapter as an example.
+* Write another review chapter of an API. To so please read the instructions in the section [#contributing-a-chapter] below and take one of the existing chapter as an example.
 
 
 ### Contributing a chapter
