@@ -1,4 +1,4 @@
-# Internet Archive API and archiveRetriever
+# Internet Archive API
 
 <chauthors>Lukas Isermann</chauthors> <br><br>
 

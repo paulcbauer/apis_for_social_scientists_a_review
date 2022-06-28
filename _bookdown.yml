@@ -20,9 +20,9 @@ rmd_files:
 - Chapter_Googletrends_api.Rmd
 - Chapter_Instagram_basic_display_api.Rmd
 - Chapter_Instagram_graph_api.Rmd
+- Chapter_Internet_archive.Rmd
 - Chapter_Mediacloud_api.Rmd
 - Chapter_Twitter_api.Rmd
-- Chapter_Internet_archive.Rmd
 - Chapter_Wiki_api.Rmd
 - Chapter_Youtube_api.Rmd
 - Chapter_References_Appendix.rmd
