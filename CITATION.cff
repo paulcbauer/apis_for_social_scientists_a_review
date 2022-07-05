@@ -14,13 +14,13 @@ date-released: 2022-07-05
 url: "https://github.com/paulcbauer/apis_for_social_scientists_a_review"
 preferred-citation:
   type: book
-authors:
-- family-names: "Bauer"
-  given-names: "Paul C."
-- family-names: "Landesvatter"
-  given-names: "Camille"
-- family-names: "Behrens"
-  given-names: "Lion"
-doi: "10.5281/zenodo.6798690"
-title: "APIs for social scientists: A collaborative review"
-year: 2022
+  authors:
+  - family-names: "Bauer"
+    given-names: "Paul C."
+  - family-names: "Landesvatter"
+    given-names: "Camille"
+  - family-names: "Behrens"
+    given-names: "Lion"
+  doi: "10.5281/zenodo.6798690"
+  title: "APIs for social scientists: A collaborative review"
+  year: 2022
