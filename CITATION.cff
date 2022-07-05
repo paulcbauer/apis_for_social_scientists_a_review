@@ -14,7 +14,7 @@ date-released: 2022-07-05
 url: "https://github.com/paulcbauer/apis_for_social_scientists_a_review"
 preferred-citation:
   type: book
-  editors:
+  editor:
   - family-names: "Bauer"
     given-names: "Paul C."
   - family-names: "Landesvatter"
