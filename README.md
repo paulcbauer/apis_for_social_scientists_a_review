@@ -7,6 +7,12 @@ A collaborative review](https://bookdown.org/paul/apis_for_social_scientists/). 
 ## Current authors & contributors
 Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens (current Editor), Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Dean Lajic
 
+In case you want/need to cite the project or chapters you can do so as follows:
+
+**Project**: Bauer, P. C., Landesvatter, C., & Behrens, L. (2022, Eds.). APIs for social scientists: A collaborative review v1.0. https://doi.org/10.5281/zenodo.6798690
+
+**Chapter(s)**: Chan, Chung-hong (2022). "Best Practices." In APIs for social scientists: A collaborative review v1.0, edited by Paul C. Bauer, Camille Landesvatter & Lion Behrens. https://doi.org/10.5281/zenodo.6798690
+
 
 ### Why contribute?
 * You can learn about an API by writing about it :bulb:
