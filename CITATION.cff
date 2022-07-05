@@ -7,7 +7,7 @@ authors:
   given-names: "Camille"
 - family-names: "Behrens"
   given-names: "Lion"
-title: "APIs for social scientists: A collaborative review"
+title: "APIs for social scientists: A collaborative review v1.0"
 version: 1.0
 doi: "10.5281/zenodo.6798690"
 date-released: 2022-07-05
@@ -22,5 +22,5 @@ preferred-citation:
   - family-names: "Behrens (Eds.)"
     given-names: "Lion"
   doi: "10.5281/zenodo.6798690"
-  title: "APIs for social scientists: A collaborative review"
-  year: 2022
+  title: "APIs for social scientists: A collaborative review v1.0"
+  year: "2022, Eds."
