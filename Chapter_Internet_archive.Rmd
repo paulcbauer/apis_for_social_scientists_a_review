@@ -69,7 +69,7 @@ res <- GET("http://web.archive.org/cdx/search/cdx?", query = list(
          ))
 
 # Translate json output to tibble
-result <- content(res, type = "text")
+result <- httr::content(res, type = "text")
 result <- fromJSON(result)
 result <- as_tibble(result)
 names(result) <- result[1,]

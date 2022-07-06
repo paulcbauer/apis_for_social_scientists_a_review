@@ -92,7 +92,7 @@ library(dplyr)
 library(ggplot2)
 
 #save your API key in the object key
-key<-"YourAPIKey"
+key <- Sys.getenv("Youtube_token")
 
 #YouTube channels either have a channel id or a user id
 MrBeastChannelID<-"UCX6OQ3DkcsbYNE6H8uQQuVA" #channel id
@@ -109,7 +109,7 @@ api_params <-
         sep = "&")
 api_call <- paste0(base, "channels", "?", api_params)
 api_result <- GET(api_call)
-json_result <- content(api_result, "text", encoding="UTF-8")
+json_result <- httr::content(api_result, "text", encoding="UTF-8")
 
 #format json into dataframe
 channel.json <- fromJSON(json_result, flatten = T)
@@ -124,7 +124,7 @@ api_params2 <-
         sep = "&")
 api_call2 <- paste0(base, "channels", "?", api_params2)
 api_result2 <- GET(api_call2)
-json_result2 <- content(api_result2, "text", encoding="UTF-8")
+json_result2 <- httr::content(api_result2, "text", encoding="UTF-8")
 
 #format json into dataframe
 channel.json2 <- fromJSON(json_result2, flatten = T)
@@ -141,7 +141,8 @@ PDPchannel <- channel.PDP %>% mutate(Channel = "PewDiePie",Views= as.numeric(ite
 YTchannels <- rbind(MBchannel, PDPchannel)
 YTchannels
 ```
-```{r youtube-3, echo = FALSE, message = FALSE}
+
+```{r youtube-3, echo = FALSE, message = FALSE, purl=F}
 YTchannels <- readRDS("data/youtube_example1.RDS")
 YTchannels
 ```
@@ -199,7 +200,7 @@ go_psych_AllStats <- map_df(.x = go_psych_ids, .f = get_all_stats)
 go_psych_AllStats
 ```
 
-```{r youtube-4, echo = FALSE, message = FALSE}
+```{r youtube-4, echo = FALSE, message = FALSE, purl=F}
 go_psych_AllStats <- readRDS("data/youtube_example2.RDS")
 go_psych_AllStats
 ```

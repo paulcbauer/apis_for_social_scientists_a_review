@@ -8,14 +8,22 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
+The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike. 
+
+This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Switzerland and many more.
+
 You will need to install the following packages for this chapter (run the code):
 
 ```{r ckan-2, echo=FALSE, comment=NA}
 .gen_pacman_chunk("Ckan_api")
 ```
 
-The CKAN API is an API offered by the open-source data management system (DMS) CKAN (Open Knowledge Foundation). Currently, CKAN is used as a DMS by many different users, governmental institutions and corporations alike.  
-This API review will focus on the use of the CKAN API to access and work with open government data. As the CKAN DMS is used by various governments to offer open datasets, it is a helpful tool for researchers to access this treasure of publicly open information. CKAN hosts free datasets from various governments, such as from Germany, Canada, Australia, the Switzerland and many more.
+If the code presented in this chapter renders an error when you execute it, you can re-run the code using the day-specific snapshot of the CRAN server when we were compiling this chapter. Some of the R packages that you have installed and loaded above might regularly get updated, which often comes with slight changes in functionality. R will install all packages that you have loaded with the `p_load()` function above in the same version as we used them on the date at which we last worked on the code. To ensure replicability, simply run
+
+```{r ckan-2_1, echo=FALSE, comment=NA}
+.gen_checkpoint_chunk("Ckan_api")
+```
+
 
 ## Provided services/data
 

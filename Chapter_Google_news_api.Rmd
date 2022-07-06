@@ -35,7 +35,7 @@ library(httr)
 endpoint_url <- "https://newsapi.org/v2/everything?"
 my_query <- "biden"
 my_start_date <- Sys.Date() - 28
-my_api_key <- # <YOUR_API_KEY>
+my_api_key <- Sys.getenv("GoogleNews_token") # <YOUR_API_KEY>
 
 params <- list(
   "q" = my_query,
@@ -47,7 +47,7 @@ news <- httr::GET(url = endpoint_url,
                httr::add_headers(Authorization = my_api_key),
                query = params)
 
-content(news) # the resulting articles[[1]]$content shows that the article content is truncated
+httr::content(news) # the resulting articles[[1]]$content shows that the article content is truncated
 ```
 
 ## API access in R
@@ -70,7 +70,7 @@ library(httr)
 
 endpoint_url <- "https://newsapi.org/v2/top-headlines/sources?"
 my_country <- "de"
-my_api_key <- # <YOUR_API_KEY>
+my_api_key <- Sys.getenv("GoogleNews_token") # <YOUR_API_KEY>
 
 params <- list("country" = my_country)
 
@@ -78,11 +78,11 @@ sources <- httr::GET(url = endpoint_url,
                httr::add_headers(Authorization = my_api_key),
                query = params)
 
-sources_df <- bind_rows(content(sources)$sources)
+sources_df <- bind_rows(httr::content(sources)$sources)
 sources_df[,c("id", "name", "url", "category")]
 ```
 
-```{r google-news-5, echo = FALSE, comment=NA}
+```{r google-news-5, echo = FALSE, comment=NA, purl=F}
 load("data/google_news-sources.RData")
 sources_df[,c("id", "name", "url", "category")]
 ```
@@ -93,7 +93,7 @@ This illustrates another weakness of the News API: The selection of sources is n
 
 endpoint_url <- "https://newsapi.org/v2/top-headlines?"
 my_source <- "bild"
-my_api_key <- # <YOUR_API_KEY>
+my_api_key <- Sys.getenv("GoogleNews_token") # <YOUR_API_KEY>
 
 params <- list(
   "sources" = my_source,
@@ -103,12 +103,12 @@ headlines <- httr::GET(url = endpoint_url,
                httr::add_headers(Authorization = my_api_key),
                query = params)
 
-headlines_df <- bind_rows(content(headlines)$articles) %>% 
+headlines_df <- bind_rows(httr::content(headlines)$articles) %>% 
   mutate(source = tolower(source)) %>% unique()
 headlines_df[,c("publishedAt","title")]
 ```
 
-```{r google-news-7, echo = FALSE, comment=NA}
+```{r google-news-7, echo = FALSE, comment=NA, purl=F}
 load("data/google_new-headlines.RData")
 headlines_df[,c("publishedAt","title")]
 ```

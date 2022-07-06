@@ -86,8 +86,11 @@ library(googleLanguageR)
 
 *Step 2: Authentication*
 
-```{r google-translation-6, eval=FALSE, comment=NA}
-# Authentication (through your service account's JSON key file)
+```{r google-translation-6_1, eval=FALSE, include=F, comment=NA}
+gl_auth("api-reviews-gl_auth.json")
+```
+
+```{r google-translation-6_2, eval=FALSE, comment=NA, purl=F}
 gl_auth("./your-key.json")
 ```
 
@@ -105,11 +108,11 @@ Next, using this data, call the API via the function 'gl_translate()' and import
 
 <!-- A cache version of google_translate is available in "data/google_translate.RDS" -->
 
-```r
+```{r google-translation-8, eval=F, comment=NA}
 google_translate <- gl_translate(df_original$text, target = "de")
 ```
 
-```{r google-translation-8, message=FALSE, include=FALSE}
+```{r google-translation-9, message=FALSE, include=FALSE, purl=F}
 google_translate <- readRDS("data/google_translate.RDS")
 ```
 
@@ -117,7 +120,7 @@ This API call eventually provides results in a dataframe with three columns: tra
 
 Let's check the translation.
 
-```{r google-translation-9, message=FALSE, warning=FALSE, eval=F, comment=NA}
+```{r google-translation-10, message=FALSE, warning=FALSE, eval=F, comment=NA}
 google_translate$translatedText
 ```
 

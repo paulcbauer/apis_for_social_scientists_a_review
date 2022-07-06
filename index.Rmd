@@ -1,6 +1,6 @@
 ---
 title: "<center>APIs for social scientists:<br>A collaborative review</center>"
-author: "<center><h5><blue>Current editors:</blue><br>Paul C. Bauer, Lion Behrens, Camille Landesvatter<br><br><blue>Authors & contributors:</blue><br>Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Malte Söhren</h5></center>"
+author: "<center><h5><blue>Current editors:</blue><br>Paul C. Bauer, Camille Landesvatter, Lion Behrens<br><br><blue>Authors & contributors:</blue><br>Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Malte Söhren</h5></center>"
 date: '<center><h5><blue>First public version:</blue> 29 November, 2021<br><blue>This version:</blue> `r format(Sys.time(), "%d %B, %Y")`</h5></center>'
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -78,6 +78,27 @@ file_move(all_rmds, new_rmd_names)
 #> p_load('httr', 'devtools',
 #> 'RCrowdTangle', 'dplyr', 'jsonlite')
 #.gen_pacman_chunk("Facebook_ads")
+
+
+.gen_checkpoint_chunk <- function(x = NULL) {
+  if (is.null(x)) {
+    file_name <- knitr::current_input()
+  } else {
+    file_name <- stringr::str_subset(dir(), x)[1]
+  }
+  lines_text <- readLines(file_name) 
+  packages <- gsub("library\\(|\\)", "",  
+                   unlist(stringr::str_extract_all(lines_text,  
+                                                   "library\\([a-zA-z0-9]*\\)|p_load\\([a-zA-z0-9]*\\)"))) 
+  packages <- packages[packages!="pacman"] 
+  packages <- packages[packages!="p_load("] 
+  packages <- paste("# install.packages('checkpoint')", "library(checkpoint)", "checkpoint('", Sys.Date(), "')", sep="") 
+  packages <- stringr::str_wrap(packages, width = 80) 
+  packages <- gsub("install.packages\\('checkpoint'\\)", "install.packages\\('checkpoint'\\)\n", packages) 
+  packages <- gsub("library\\(checkpoint\\)", "library\\(checkpoint\\)\n", packages)
+  cat(packages)
+  invisible(x)
+}
 
 
 ```

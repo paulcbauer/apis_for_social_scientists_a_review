@@ -235,10 +235,10 @@ When you want to use authenticated requests, you need to pass along authenticati
 ```{r github-api-19, eval=FALSE, comment=NA}
 library(httr)
 
-PAT <- Sys.getenv("PAT")
+PAT <- Sys.getenv("GitHub_token")
 
 response <- GET('https://api.github.com/user', authenticate('<account name>', PAT))
-account_details <- fromJSON(content(response, as = 'text'))
+account_details <- fromJSON(httr::content(response, as = 'text'))
 account_details
 ```
 

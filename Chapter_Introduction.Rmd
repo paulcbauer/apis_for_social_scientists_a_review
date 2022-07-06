@@ -22,7 +22,7 @@ The code examples rely R and different packages thereof. It's probably easiest i
 <!-- add all used packages -->
 
 
-```{r intro-1, echo=FALSE, comment=NA}
+```{r intro-1, echo=FALSE, purl=F}
 options(width = 300)
 .gen_pacman_chunk()
 ```
@@ -35,7 +35,15 @@ p_load_gh("joon-e/mediacloud")
 p_load_gh("facebookresearch/Radlibrary")
 ```
 
+## Replication 
+A lot of the R packages that you have installed and loaded above regularly get updated, which often comes with slight changes in functionality. Also, new versions of the R programming environment itself are constantly developed. While we rely on an automatized way to regularly check whether all code that is presented in the subsequent chapters replicates without errors, it might be that you are executing code just before we find out about conflicts that come with newer versions of R or used packages. If you would like to ensure that all of the presented code runs smoothly, you can execute the following commands before proceeding.
 
+```{r intro-3, eval=FALSE, include=TRUE, comment=NA}
+p_load('checkpoint')
+checkpoint("2022-06-14")
+```
+
+The `checkpoint` package from the [Reproducible R Toolkit (RRT)](https://cran.r-project.org/web/packages/checkpoint/vignettes/checkpoint.html) makes use of the daily snapshots of CRAN which are mirrored by the RRT-team on a separate server. Once you execute the command above, R will install all packages that you have loaded with the `p_load()` function in the same version as we used them on the date at which we last worked on the code. You may choose to only take this route if you would like to replicate the code presented in a particular chapter, but run into an error message. To reset your session to the state it was before using `checkpoint`, call `uncheckpoint()` or simply restart R. 
 
 <!--
 * Data vs. machine learning APIS

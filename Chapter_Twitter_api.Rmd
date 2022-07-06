@@ -66,7 +66,7 @@ r <- httr::GET(url = endpoint_url,
                httr::add_headers(
                        Authorization = paste0("bearer ", Sys.getenv("TWITTER_BEARER"))),
                query = params)
-content(r)
+httr::content(r)
 ```
 
 If one is simply interested in the time series data, just make a simply change to the endpoint and some parameters.
@@ -83,7 +83,7 @@ r <- httr::GET(url = endpoint_url,
                httr::add_headers(
                        Authorization = paste0("bearer ", Sys.getenv("TWITTER_BEARER"))),
                query = params)
-content(r)
+httr::content(r)
 ```
 
 ## API access in R
@@ -107,7 +107,7 @@ fff_ts <- count_all_tweets(query = "#fridaysforfuture lang:DE",
 head(fff_ts) # the data is in reverse chronological order
 ```
 
-```{r twitter-3, echo = FALSE, message = FALSE}
+```{r twitter-3, echo = FALSE, message = FALSE, purl=F}
 library(tidyverse)
 library(lubridate)
 fff_ts <- readRDS("data/twitter_ffs_ts.RDS")
@@ -120,6 +120,7 @@ head(fff_ts)
 The daily time series of number of German tweets tweets is displayed in Figure below. However, this is not a perfect replication of the original Figure 3. It is because the original Figure only considers Fridays. [^causal] The Figure below is an "enhanced remake".
 
 ```{r twitter-5, fff_day}
+library(dplyr)
 lockdown_date <- as.POSIXct(as.Date("2020-03-23"))
 fff_ts %>% mutate(start = ymd_hms(start)) %>% select(start, tweet_count) %>%
   ggplot(aes(x = start, y = tweet_count)) + geom_line() +

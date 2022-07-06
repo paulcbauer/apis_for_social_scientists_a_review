@@ -60,14 +60,14 @@ Get Fields and Edges on an IG Media. Fields can be e.g., “caption”, “comme
 Example:
 
 ```{r instagram-graph-4, echo=TRUE, eval=FALSE, comment=NA}
-GET (“https://graph.facebook.com/v10.0/17895695668004550
+GET("https://graph.facebook.com/v10.0/17895695668004550
       ?fields=id,media_type,media_url,owner,
-      timestamp&access_token=IGQVJ...”)
+      timestamp&access_token=IGQVJ...")
 ```
 
 Response:
 
-```{r instagram-graph-5, echo=TRUE, eval=FALSE, comment=NA}
+```{r instagram-graph-5, echo=TRUE, eval=FALSE}
 {
   "id": "17895695668004550",
   "media_type": "IMAGE",
@@ -88,32 +88,32 @@ Return Fields and Edges on an IG Hashtag. Field can be the name of the hashtag w
 Example:
 
 ```{r instagram-graph-6, echo=TRUE, eval=FALSE, comment=NA}
-GET (“https://graph.facebook.com/17841593698074073
+GET("https://graph.facebook.com/17841593698074073
 ?fields=id,name
-&access_token=EAADd...”)
+&access_token=EAADd...")
 ```
 
 Response:
 
-```{r instagram-graph-7, echo=TRUE, eval=FALSE, comment=NA}
+```{r instagram-graph-7, echo=TRUE, eval=FALSE}
 { "id": "17841593698074073",
   "name": "coke" }
 ```
 
 Get fields and edges on an Instagram Business or Creator Account. Fields can be e.g., “biography”, “id”, “followers_count”, or “media_count”.
 
-* GET (“https://graph.facebook.com/v10.0/{ig-user-id}?fields={fields} &access_token={access-token}”)
+* GET("https://graph.facebook.com/v10.0/{ig-user-id}?fields={fields} &access_token={access-token}")
 
 Example:
 
 ```{r instagram-graph-8, echo=TRUE, eval=FALSE, comment=NA}
-GET (“https://graph.facebook.com/v3.2/17841405822304914
-      ?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...”)
+GET("https://graph.facebook.com/v3.2/17841405822304914
+      ?fields=biography%2Cid%2Cusername%2Cwebsite&access_token=EAACwX...")
 ```
 
 Response:
 
-```{r instagram-graph-9, echo=TRUE, eval=FALSE, comment=NA}
+```{r instagram-graph-9, echo=TRUE, eval=FALSE}
 {  "biography": "Dino data crunching app",
   "id": "17841405822304914",
   "username": "metricsaurus",

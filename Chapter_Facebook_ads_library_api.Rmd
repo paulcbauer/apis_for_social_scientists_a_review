@@ -239,7 +239,7 @@ After extraction using the for loop, we have three data frames in one list. Howe
 
 <!-- A cached version of fb_ad_list is available in "data/facebook_ads_uk_housing.RDS" -->
 
-```{r facebook-3, include=FALSE, comment=NA}
+```{r facebook-3, include=FALSE, comment=NA, purl=F}
 # Specify the package names we will be using.
 library(dplyr)
 library(tidyr)

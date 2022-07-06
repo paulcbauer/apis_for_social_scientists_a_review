@@ -66,7 +66,7 @@ Instead of typing the API request into our browser, we can use the httr packageâ
 # Option 1: Accessing the API with base "httr" commands
 library(httr)
 
-key <- "YOURAPIKEY"
+key <- Sys.getenv("GooglePlaces_token")
 
 res<-GET("https://maps.googleapis.com/maps/api/place/textsearch/json?", query = list(
            query = "pizza",
@@ -83,7 +83,8 @@ Alternatively, we can use a wrapper function for R provided by the R-Package goo
 *Authentication*
 
 ```{r google-places-4, echo=TRUE, eval=F, comment=NA}
-key <- "YOURAPIKEY"
+library(googleway)
+key <- Sys.getenv("GooglePlaces_token")
 set_key(key)
 ```
 
@@ -94,7 +95,6 @@ set_key(key)
 ```{r google-places-5, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(tidyverse)
-library(googleway)
 ```
 
 
@@ -107,7 +107,7 @@ library(googleway)
 location <- googleway::google_places("Mannheim")
 ```
 
-```{r google-places-7, echo = FALSE, message = FALSE}
+```{r google-places-7, echo = FALSE, message = FALSE, purl=F}
 location <- readRDS("data/google_places_location.RDS")
 ```
 
@@ -146,7 +146,7 @@ knitr::include_graphics("figures/google_places_plot1.png")
 pizza <- google_places("Pizza", location = location, radius = 5000, place_type = "food")
 ```
 
-```{r google-places-12, echo = FALSE, message = FALSE}
+```{r google-places-12, echo = FALSE, message = FALSE, purl=F}
 pizza <- readRDS("data/google_places_pizza.RDS")
 ```
 

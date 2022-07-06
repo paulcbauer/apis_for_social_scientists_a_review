@@ -51,13 +51,13 @@ Here we describe how a simple API call can be made from within the Google Cloud 
 * Via the Cloud Shell command line, add your individual API key to the environment variables, so it is not required to be called for each request.
 
 
-```{r google-nlp-3, echo=TRUE, eval=FALSE, comment=NA}
+```{r google-nlp-3, echo=TRUE, eval=FALSE}
 export API_KEY=<YOUR_API_KEY>
 ```
 
 * Via the built-in Editor in Cloud Shell create a JSON file (call it for instance ‘request.json’) with the text that you would like to perform analysis on. Consider that text can be uploaded in the request (shown below) or integrated with Cloud Storage. Supported types of your text are PLAIN_TEXT (shown below) or HTML.  
 
-```{r google-nlp-4, echo=TRUE, eval=FALSE, comment=NA}
+```{r google-nlp-4, echo=TRUE, eval=FALSE}
 {
   "document":{
     "type":"PLAIN_TEXT",
@@ -69,7 +69,7 @@ export API_KEY=<YOUR_API_KEY>
 
 * For sending your data, pass a curl command to your Cloud Shell command line where you refer (via @) to your request.json file from the previous step.
 
-```{r google-nlp-5, echo=TRUE, eval=FALSE, comment=NA}
+```{r google-nlp-5, echo=TRUE, eval=FALSE}
 curl "https://language.googleapis.com/v1/documents:analyzeEntities?key=${API_KEY}" -s -X POST -H "Content-Type: application/json" --data-binary @request.json
 ```
 
@@ -101,7 +101,11 @@ library(tm)#stopwords
 
 *Step 2: Authentication*
 
-```{r google-nlp-7, eval=FALSE, comment=NA}
+```{r google-nlp-7_1, eval=FALSE, include=F, comment=NA}
+gl_auth("api-reviews-gl_auth.json")
+```
+
+```{r google-nlp-7_2, eval=FALSE, comment=NA, purl=F}
 gl_auth("./your-key.json")
 ```
 
@@ -133,7 +137,7 @@ df <- as.data.frame(text)
 df <- tibble::rowid_to_column(df, "ID")
 ```
 
-```{r, google-nlp-10, echo = FALSE, message = FALSE, comment=NA}
+```{r, google-nlp-10, echo = FALSE, message = FALSE, comment=NA, purl=F}
 df <- readRDS("data/google_nlp_data.RDS")
 ```
 
@@ -147,7 +151,7 @@ After having retrieved and prepared our to-be-analyzed (text) data, we can now c
 syntax_analysis <- gl_nlp(df$text, nlp_type = "analyzeSyntax")
 ```
 
-```{r, google-nlp-12, echo = FALSE, message = FALSE, comment=NA}
+```{r, google-nlp-12, echo = FALSE, message = FALSE, comment=NA, purl=F}
 syntax_analysis <- readRDS("data/google_nlp_syntax_analysis.RDS")
 ```
 

@@ -101,7 +101,7 @@ Instead of typing the API request into our browser, we can use the httr packageâ
 library(httr)
  
 ct_posts_resp <- GET("https://api.crowdtangle.com/posts",
-    query=list(token = token, # API key has to be included in every query
+    query=list(token = Sys.getenv("Crowdtangle_token"), # API key has to be included in every query
                listIds = listIds, # ID of the created list of pages or groups
                sortBy = "total_interactions",
                startDate = "2021-01-01",
