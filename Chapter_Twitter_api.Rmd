@@ -91,7 +91,7 @@ httr::content(r)
 
 The package `academictwitteR` [@barrie:2021] can be used to access the Academic Research Track. In the following example, the analysis by @hassler2021influence is reproduced. The research question is: How has the number of tweets published with the hashtag #fridaysforfuture been affected by the lockdowns? (See time series in the Figure 3 of the paper) The study period is 2019-06-01 to 2020-05-31 and restricted to only German tweets. The original analysis was done with the v1.1 API. But one can get a better dataset with the Academic Research Track.
 
-`academictwitteR` looks for the environment variable `TWITTER_BEARER` for the bearer token. To collect the time series data, we use the `count_all_tweets` function.
+`academictwitteR` looks for the environment variable `TWITTER_BEARER` for the bearer token. To collect the time series data, we use the `count_all_tweets()` function.
 
 <!-- A cache version of fff_ts is available in "data/twitter_fft_ts.RDS" -->
 
