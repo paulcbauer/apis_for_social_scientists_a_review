@@ -88,7 +88,7 @@ In the following slightly more sophisticated example, we are going to first sear
 
 #### Search for all national German media outlets
 
-All major German media outlets are tagged with `Germany___National`. The function `search_media` is used to retrieve information about all national German media outlets.
+All major German media outlets are tagged with `Germany___National`. The function `search_media()` is used to retrieve information about all national German media outlets.
 
 <!-- cached as `mediacloud_de_media.RDS` -->
 
@@ -105,7 +105,7 @@ de_media
 
 <!-- cached as `mediacloud_unima_articles.RDS` -->
 
-The following query gets a list of 100 articles mentioning "universität mannheim" published in a specific date range from all national German media outlets. Unlike the AND operator, this search for the exact term. Also, a query is case insensitive. The function `search_stories` can be used for this.
+The following query gets a list of 100 articles mentioning "universität mannheim" published in a specific date range from all national German media outlets. Unlike the AND operator, this search for the exact term. Also, a query is case insensitive. The function `search_stories()` can be used for this.
 
 ```{r, eval=F, comment=NA}
 unima_articles <- search_stories(text = "\"universität mannheim\"",
@@ -123,7 +123,7 @@ unima_articles
 
 #### Pull word matrices
 
-With the list of `stories_id`, we can then use the function `get_word_matrices` to obtain word matrices. [^WORDMATRICES]
+With the list of `stories_id`, we can then use the function `get_word_matrices()` to obtain word matrices. [^WORDMATRICES]
 
 <!-- cached as `mediacloud_unima_mat.RDS` -->
 

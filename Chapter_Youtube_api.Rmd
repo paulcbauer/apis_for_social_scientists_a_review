@@ -80,7 +80,7 @@ Here we are looking for channels, "part" is set on statistics and the id is the 
 ## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
-To access the API from R we are using the same logic by building URL´s with our search request and using the "GET" function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
+To access the API from R we are using the same logic by building URL´s with our search request and using the `GET()` function of the [httr package](https://cran.r-project.org/web/packages/httr/index.html).
 In this example we will compare the channel statistics of the the two biggest youtuber´s, PewDiePie and MrBeast.
 
 
@@ -153,7 +153,7 @@ On CRAN we found the [“tuber” package](https://cran.r-project.org/web/packag
 First we had to configure the so-called OAuth consent screen, where we put “external” and then had to put an app name. For scopes we did not specify anything and just clicked save & continued. To be able to use the API you have to set your own google mail address that you use for the Google cloud.
 
 2) Get OAuth credentials  
-After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. In older guides it is recommended to choose the category "others" which no longer exists. Here you have to choose "desktop application". As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the Yt_oauth function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
+After setting up the consent screen you can go back and click “create credentials” and add a “OAuth client ID”. In older guides it is recommended to choose the category "others" which no longer exists. Here you have to choose "desktop application". As a result you get an OAuth client id and secret. You can download this information stored in a JSON file. With the `Yt_oauth()` function you can then authenticate yourself. This will forward us to logging into our google account. Allow the access to your google account. (like with google bigquery).
 
 [This page](https://www.storybench.org/how-to-download-youtube-data-in-r-using-tuber-and-purrr/) provides some example API calls you can make with the tuber package.
 

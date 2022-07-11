@@ -177,7 +177,7 @@ The query is "lazy." Our API call will not be executed unless we specifically as
 ads_list <- adlib_get_paginated(detailed_query, token = Sys.getenv("FB_TOKEN"))
 ```
 
-We can convert the list to a standard dataset using the as_tibble function, because the `ads_list` is a particular type of class called `paginated_adlib_data_response`. This means we can specify other arguments to the `as_tibble` function, such as the type of the table we require and whether we wish to censor our access token from the data.
+We can convert the list to a standard dataset using the `as_tibble()` function, because the `ads_list` is a particular type of class called `paginated_adlib_data_response`. This means we can specify other arguments to the `as_tibble()` function, such as the type of the table we require and whether we wish to censor our access token from the data.
 
 ```{r, echo=TRUE, eval=FALSE, comment=NA}
 # The "type" argument must correspond to the "fields" argument in the

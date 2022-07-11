@@ -160,7 +160,7 @@ profile_data <- fromJSON('https://api.github.com/users/LilithWittmann')
 # this gives a list
 head(profile_data, 3)
 ```
-The JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
+The JSON response from the GitHub API was directly converted to an R list object. When a JSON result only consists of arrays, `fromJSON()` automatically converts the result to a dataframe by default. We can observe that when fetching the repositories of an user:
 
 ```{r github-api-12}
 profile_repos <- fromJSON('https://api.github.com/users/LilithWittmann/repos')
@@ -196,7 +196,7 @@ users_query <- paste0('https://api.github.com/users/', r_users_berlin)
 head(users_query)
 ```
 
-The `fromJSON` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply` which passes each query to `fromJSON` and stores the result as a list of ten lists (i.e. a nested structure – a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
+The `fromJSON()` function only accepts a single character string as query, but we have a vector of ten queries for the ten users. Hence, we resort to `lapply()` which passes each query to `fromJSON()` and stores the result as a list of ten lists (i.e. a nested structure – a list of lists). Each item in `users_details` is then a list that contains the profile information for the respective user.
 
 ```{r github-api-17}
 users_details <- lapply(users_query, fromJSON)
@@ -230,7 +230,7 @@ As we can see, working with the results from the API requires some effort in R, 
 
 Authenticating with the GitHub API via an API key allows you to send much more requests to the API (5000 requests per hour instead of 60 at the time of writing). API access keys for the GitHub API are called *personal access tokens (PAT)* and the [documentation explains how to generate a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) once you've logged into your GitHub account. **Please be careful with your PATs and never publish them.**
 
-When you want to use authenticated requests, you need to pass along authentication information (your GitHub user account and your PAT) with every request. This is not possible with `fromJSON` – you have to send HTTP requests directly, e.g. via `GET` from the [httr](https://cran.r-project.org/web/packages/httr/index.html) package and then need to handle the HTTP response. The following example shows this. Here, we have the secret access token `PAT` stored as environment variable and fetch it via `Sys.getenv`. Next, we use `GET` to make an authenticated HTTP response to the GitHub API. We use the [`/user` API endpoint](https://docs.github.com/en/rest/reference/users#get-the-authenticated-user), which simply reports information about the currently authenticated user (which is your own account). If we were to use this API endpoint in an unauthenticated manner, we'd receive the error message *"Requires authentication"*.^[Try that out yourself via `curl https://api.github.com/user` in the terminal.] We then need to get the content of the response as text (`content(response, as = 'text')`) and pass this to `fromJSON` in order to get the result as list object.
+When you want to use authenticated requests, you need to pass along authentication information (your GitHub user account and your PAT) with every request. This is not possible with `fromJSON()` – you have to send HTTP requests directly, e.g. via `GET()` from the [httr](https://cran.r-project.org/web/packages/httr/index.html) package and then need to handle the HTTP response. The following example shows this. Here, we have the secret access token `PAT` stored as environment variable and fetch it via `Sys.getenv()`. Next, we use `GET()` to make an authenticated HTTP response to the GitHub API. We use the [`/user` API endpoint](https://docs.github.com/en/rest/reference/users#get-the-authenticated-user), which simply reports information about the currently authenticated user (which is your own account). If we were to use this API endpoint in an unauthenticated manner, we'd receive the error message *"Requires authentication"*.^[Try that out yourself via `curl https://api.github.com/user` in the terminal.] We then need to get the content of the response as text (`content(response, as = 'text')`) and pass this to `fromJSON()` in order to get the result as list object.
 
 ```{r github-api-19, eval=FALSE, comment=NA}
 library(httr)

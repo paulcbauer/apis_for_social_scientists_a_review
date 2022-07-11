@@ -8,15 +8,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # setting cache to TRUE here allows that single API calls do not have to be run every time when knitting index or the single script, but only when something has been changed in index or single script
 ```
 
+CrowdTangle is a public insights tool, whose main intent was to monitor what content overperformed in terms of interactions (likes, shares, etc.) on Facebook and other social media platforms. In 2016, CrowdTangle was acquired by Facebook that now provides the service.
+
 You will need to install the following packages for this chapter (run the code):
 
 ```{r crowdTangle-2, echo=FALSE, comment=NA}
 .gen_pacman_chunk("Crowdtangle")
 ```
-
-
-CrowdTangle is a public insights tool, whose main intent was to monitor what content overperformed in terms of interactions (likes, shares, etc.) on Facebook and other social media platforms. In 2016, CrowdTangle was acquired by Facebook that now provides the service.
-
 
 ## Provided services/data
 
