@@ -5,7 +5,7 @@ You can find the document here: [APIs for social scientists:
 A collaborative review](https://bookdown.org/paul/apis_for_social_scientists/). The introduction explains how this project came about.
 
 ### Current authors & contributors
-Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens (current Editor), Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Dean Lajic
+Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens (current Editor), Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Domantas Undzėnas
 
 In case you want/need to cite the project or chapters you can do so as follows:
 
