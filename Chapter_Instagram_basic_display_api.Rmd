@@ -7,13 +7,13 @@
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
+Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (@Tankovska_undated-ph). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (@Aslam2021-fp). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers. 
+
 You will need to install the following packages for this chapter (run the code):
 
 ```{r instagram-basic-display-2, echo=FALSE, comment=NA}
 .gen_pacman_chunk("Instagram_basic_display_api")
 ```
-
-Initially released in 2010, Instagram currently counts 1+ billion monthly active users with 50+ billion photos stored (@Tankovska_undated-ph). User engagement is high, with an average of 28 minutes per day spent on the platform in 2020 (@Aslam2021-fp). Needless to say, the photo and video sharing social networking service holds invaluable data that could be leveraged by social researchers. 
 
 ## Provided services/data
 * *What data/service is provided by the API?*
@@ -76,7 +76,7 @@ id<-POST("https://api.instagram.com/oauth/access_token",
 ## Simple API call
 * *What does a simple API call look like?*
 
-The Instagram Basic Display API is http-based. To query a node or edge, a GET call can be used. The base URLs are api.instagram.com and graph.instagram.com.
+The Instagram Basic Display API is http-based. To query a node or edge, a `GET()` call can be used. The base URLs are api.instagram.com and graph.instagram.com.
 
 ```{r instagram-basic-display-5, pressure2, eval=F, echo=T, message=F, warning=F, comment=NA}
 accessToken = "..."

@@ -58,7 +58,7 @@ https://maps.googleapis.com/maps/api/place/textsearch/xml?query=pizza&location=4
 ## API access in R
 * *How can we access the API from R (httr + other packages)?* 
 
-Instead of typing the API request into our browser, we can use the httr package’s GET function to access the API from R.
+Instead of typing the API request into our browser, we can use the httr package’s `GET()` function to access the API from R.
 
 ```{r google-places-3, echo=TRUE, eval=FALSE, comment=NA}
 

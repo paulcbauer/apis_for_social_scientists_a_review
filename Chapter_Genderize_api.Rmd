@@ -131,7 +131,7 @@ library(DemografixeR)
 
 ### The `genderize` function and its arguments
 
-The main function to use is the `genderize` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
+The main function to use is the `genderize()` function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:
 
 ```{r genderize-11, comment=NA}
 genderize('sasha')
@@ -149,7 +149,7 @@ Again, we can localize the request by using the `country_id` parameter:
 genderize('sascha', country_id = 'DE', simplify = FALSE)
 ```
 
-Supplying a character string vector will predict the gender of all these names. Note that with the `genderize` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
+Supplying a character string vector will predict the gender of all these names. Note that with the `genderize()` function, you're not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:
 
 ```{r genderize-14, comment=NA}
 genderize(c('gül', 'gul', 'jürgen', 'jurgen', 'andré', 'andre',
@@ -163,7 +163,7 @@ You can also provide a different `country_id` for each name in the request:
 genderize(c('sasha', 'sascha'), country_id = c('RU', 'DE'), simplify = FALSE)
 ```
 
-This is especially helpful together with `expand.grid`, which generates all combinations of values in the two vectors:
+This is especially helpful together with `expand.grid()`, which generates all combinations of values in the two vectors:
 
 ```{r genderize-16, comment=NA}
 names <- c('sasha', 'sascha')
@@ -184,7 +184,7 @@ genderize('judy', simplify = FALSE, meta = TRUE)
 
 ### Provide API key
 
-If you bought an API key, you can provide it using the `apikey` parameter. It's however recommended to use the `save_api_key` function to safely store such an API key. It will then automatically be used for each request.
+If you bought an API key, you can provide it using the `apikey` parameter. It's however recommended to use the `save_api_key()` function to safely store such an API key. It will then automatically be used for each request.
 
 Please be careful when dealing with API keys and never publish them.
 

@@ -6,13 +6,14 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+With the News API (formerly Google News API), you can get article snippets and news headlines, both up to four years old and real-time, from over 80,000 news sources worldwide. 
+
 You will need to install the following packages for this chapter (run the code):
 
 ```{r google-news-2, echo=FALSE, comment=NA}
 .gen_pacman_chunk("Google_news_api")
 ```
 
-With the News API (formerly Google News API), you can get article snippets and news headlines, both up to four years old and real-time, from over 80,000 news sources worldwide. 
 
 ## Prerequisites
 *What are the prerequisites to access the API (authentication)? *
