@@ -6,17 +6,10 @@
 knitr::opts_chunk$set(warning = F, message = F, cache = T)
 ```
 
-You will need to install the following packages for the code to work
+You will need to install the following packages for this chapter (run the code):
 
-```{r reddit-2}
-# install.packages('pacman')
-library(pacman)
-# install.packages('kableExtra')
-# install.packages('RedditExtractoR')
-# install.packages('tidyverse')
-# install.packages('httr')
-# install.packages('rjson')
-p_load('tidyverse', 'RedditExtractoR', 'kableExtra', 'httr', 'rjson')
+```{r reddit-2, echo=FALSE, comment=NA}
+.gen_pacman_chunk("Reddit_api")
 ```
 
 ## Provided services/data
@@ -93,6 +86,7 @@ rownames(popular_data) <- c('post title', 'upvotes', 'upvote_ratio')
 colnames(popular_data) <- 'Information'
 
 # making a nice table
+library(kableExtra)
 kable(popular_data) %>%
   kable_styling(position = 'center')
 
