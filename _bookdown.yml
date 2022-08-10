@@ -22,6 +22,7 @@ rmd_files:
 - Chapter_Instagram_graph_api.Rmd
 - Chapter_Internet_archive.Rmd
 - Chapter_Mediacloud_api.Rmd
+- Chapter_Reddit_api.Rmd
 - Chapter_Twitter_api.Rmd
 - Chapter_Wiki_api.Rmd
 - Chapter_Youtube_api.Rmd

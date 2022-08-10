@@ -1,0 +1,252 @@
+# Reddit API
+<chauthors>Domantas Undzėnas</chauthors>
+<br><br>
+
+```{r reddit-1, include=FALSE} 
+knitr::opts_chunk$set(warning = F, message = F, cache = T)
+```
+
+You will need to install the following packages for the code to work
+
+```{r reddit-2}
+# install.packages('pacman')
+library(pacman)
+# install.packages('kableExtra')
+# install.packages('RedditExtractoR')
+# install.packages('tidyverse')
+# install.packages('httr')
+# install.packages('rjson')
+p_load('tidyverse', 'RedditExtractoR', 'kableExtra', 'httr', 'rjson')
+```
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The [Reddit](https://en.wikipedia.org/wiki/Reddit) API is provided by Reddit [itself](https://www.reddit.com/dev/api/). It allows data collection from subreddits^[Communities focusing on a specific topic within Reddit like cats], threads^[Posts about a specific topic in a subreddit], users and many other interesting things! The data primarily come in text format. As such, you can use it for various text analyses. Data gathered also contains popularity of posts which allows you to test popularity of certain topics. In this review I will be focusing on describing the data you can gather from the API and not delving into complex analyses. The section on social science examples elaborates how Reddit data is used by researchers.
+
+## Prerequisites
+
+* *What are the prerequisites to access the API (authentication)?*
+
+When the API was [created](https://github.com/reddit-archive/reddit/wiki/API) it required users to have a Reddit account and use [OAuth2](https://github.com/reddit-archive/reddit/wiki/OAuth2) authentication. This required the user to create an application in their Reddit developer page. This would then generate a unique access token that users could use to gather data with various programming languages. As of 2022, after Reddit updated it's entire platform, users can no longer access their developer accounts. While the API *de jure* requires users to authenticate, recent packages do not require any authentication or even creating an account. This makes the authentication *de facto* not required if one wishes to access Reddit data.
+
+## Simple API call
+
+* *What does a simple API call look like?*
+
+The Reddit API limits calls per user to one request per second. This may not allow one to collect lots of data during a short period of time. Fortunately data dumps such as [this one](https://files.pushshift.io/reddit/) exist to make your life easier. If you do want to collect your own data on Reddit, then let's continue!
+
+A simple API call in R is possible using the *httr* package while having a link to the content that you want. Say you want to analyse a community dedicated to cats in Reddit. You just need to obtain the link to the subreddit and paste it into R. However, you should specify what structure of data you want. Let's try to obtain JSON data - a format that is very popular for storing data structures. Specifying what data you want is very easy, as you just add a full stop and your data abbreviation to the already existing link. For example, the "r/cats" subreddit link is *https://www.reddit.com/r/cats/*. To obtain a JSON file you simply change the link to *https://www.reddit.com/r/cats/.json*. Let's collect some data!
+
+One thing to keep in mind with all of these calls is that they change over time due to Reddit being an active platform. As you may be reading a year from the publication of this chapter, your calls will not be the same as mine. I have saved the datasets that I use for this chapter, so you can access them at any time, provided you load them in your working directory.
+
+```{r reddit-3}
+
+# this is the url with the file extension you want to get
+ 
+  # url <- 'https://www.reddit.com/r/cats/.json'
+
+# this is how you should use the httr function to get data
+# if you want to collect your own data, run this code
+  
+  # response <- GET(url, user_agent('Extracting data from Reddit'))
+
+# this returns a list of infornmation about the subreddit
+
+# this saves the data
+  
+  # saveRDS(response, 'reddit_cats.RDS')
+
+# importing the data that I have saved
+
+cats <- readRDS('data/reddit_cats.RDS')
+
+# exctracting the content from the response list
+
+cats <- content(cats, type = 'application/json')
+
+
+```
+
+This returns a big list (1.3 MB) of information about the "r/cats" subreddit. We can obtain information on the most popular post in the subreddit by extracting some of the data. In total, the 25 most popular posts will be extracted during your search.
+
+```{r reddit-4}
+
+#extracting all the posts
+posts_data <- cats$data$children
+
+#extracts data for the most popular post
+popular_post <-posts_data[[1]]$data
+
+# extracts rverything we need from the list
+popular_data <- c(popular_post$title, popular_post$ups, popular_post$upvote_ratio)
+
+# preparing data to be plotted
+popular_data <- matrix(popular_data)
+
+# putting quotes on the title
+popular_data[1,1] <- paste0('"',popular_data[1,1],'"')
+
+rownames(popular_data) <- c('post title', 'upvotes', 'upvote_ratio')
+
+colnames(popular_data) <- 'Information'
+
+# making a nice table
+kable(popular_data) %>%
+  kable_styling(position = 'center')
+
+```
+
+We can see that the most popular post in this subreddit is about a person who recently got to see his cat after the COVID pandemic. The post has a lot of upvotes (akin to likes on platforms like Facebook or Twitter) as well as having 97% of the people who interacted with the post upvoting it. It seems that people generally like seeing reunions with pets.
+
+## API access in R
+
+* *How can we access the API from R (httr + other packages)?*
+
+Gathering data with the *httr* package is definitely possible, but requires a lot of further work to process needed data. If you don't want to write massive chunks of code, you can turn to people who have already done that! Here we use the [*RedditExtractoR*](https://github.com/ivan-rivera/RedditExtractor) package developed by @rivera to gather data more easily. Let's begin with a simple call to find all the subreddits that use the word *politics* in their subreddit. The *find_subreddits()* will look for communities that use the word in question in its name, description or the various threads that users post.
+
+```{r reddit-5}
+# this gets us all the subreddits that use the word politics
+
+  # subred <- find_subreddits('politics')
+
+# you can use this to collect your own data
+
+# this saves the data you have gathered for the analysis
+  
+  # saveRDS(subred, 'reddit_subreddits.RDS')
+
+```
+
+Now that we have the subreddits, let's visualise ten of those that have the highest amount of subscribers and use the word *politics* subreddit description or discussions.
+
+```{r reddit-6}
+
+# this function imports the data I have collected
+subreddits <- readRDS('data/reddit_subreddits.RDS')
+
+# this cleans the data to be more presentable
+subreddits <- subreddits %>%
+  select(subreddit, title, subscribers) %>% # selects variables you want to explore
+  mutate(subscribers_million = subscribers/1000000, subscribers = NULL, title = paste0('"',title,'"')) %>% # creates new variables
+  arrange(desc(subscribers_million)) # arranges data from highest subscriber count
+
+# this removes the unique id of each subreddit
+rownames(subreddits) <- NULL
+
+```
+
+```{r reddit-7}
+# making a nice table to display our results
+kable(head(subreddits, 10)) %>%
+  kable_styling(position = 'center')
+
+```
+
+We have our usual suspects here. Of course the people discussing world news, politics and Europe are talking about politics! But then we can also see that teenager, atheist, unpopular opinion communities and even people who make memes are talking about politics. However, this "talking" may not always mean that users actively discuss politics on the subreddit. The [unpopular opinion](https://www.reddit.com/r/unpopularopinion/), [meme](https://www.reddit.com/r/memes/) and [prequel meme](https://www.reddit.com/r/PrequelMemes/) subreddits explicitly put a "no politics" clause in their community rules. Even though the word *politics* is used here only once, the *find_subreddits()* function still returns the subreddits. Researchers should be careful when using the function to make sure they don't stumble onto subreddits that explicitly ban the keyword they are interested in.
+
+Okay, let's say we want to find out what is going on in one of these communities. To make this analysis interesting, let's see what unpopular opinions Reddit users have.
+
+```{r reddit-8}
+
+# this code is for collecting unpopular opinions yourself
+  
+  # opinions <- find_thread_urls(subreddit = 'unpopularopinion', #specifies the subreddit
+                    # sort_by = 'top', #specifies what posts we are looking for
+                    # period = 'week') #specifies the period you want to search for
+
+  # saveRDS(opinions, file = 'reddit_unpopular_opinions.RDS') 
+# this code was used to save the top threads that I collected when writing of this chapter
+
+```
+Let's dive right in! The full dataset contains time stamps, titles, full text, url to the post and much more. Here we are mostly interested in the titles and engagement with the individual posts (measured in number of comments).
+
+```{r reddit-9}
+# this loads my data again
+unpop_opinions <- readRDS('data/reddit_unpopular_opinions.RDS')
+
+# and cleans the data
+unpop_opinions <- unpop_opinions  %>%
+  select(title, comments) %>% # selects variables we want
+  mutate(title = paste0('"',title,'"')) %>% # adds quotation marks to title
+  arrange(desc(comments)) # arranges data by larges comment count
+
+rownames(unpop_opinions) <- NULL
+
+```
+
+```{r reddit-10}
+# making a nice table again
+kable(head(unpop_opinions, 10)) %>%
+  kable_styling(position = 'center')
+
+```
+
+Are these opinions really unpopular? You be the judge. The *find_thread_urls()* function also allows you to search for threads based on a keyword. While it is useful to highlight what is being talked about right now regarding a subreddit or keyword, you can also use to gather data for generating word clouds, sentiment analysis and much more!
+
+Let's say you are not interested in a specific community or keyword but a user. The package has that covered too. If you don't have anyone in mind, Reddit has a list of it's users [here](https://www.reddit.com/users/). For this chapter we will explore the user profile of former California senator Arnold Schwarzenegger. You do not need to limit yourself to only one person, however, as the package allows you to gather information about multiple users at once.
+
+```{r reddit-11}
+# this collects data about a single user
+  # arnold <- get_user_content('GovSchwarzenegger')
+
+# this function will collect data for two users, you can add as many as you want
+  # arnold_nasa <- get_user_content(c('GovSchwarzenegger', 'NASA'))
+
+# saving data
+  # saveRDS(arnold, file = 'reddit_arnold.RDS')
+```
+
+This returns a list. It contains basic information about the user as well lists for comments and threads they have posted. Since Arnold Schwarzenegger's profile is very popular and active in Reddit, the list will be quite large (1.1 MB). It is important to keep this in mind if you plan to collect data about many popular user accounts.
+
+```{r reddit-12}
+
+# loading the data I collected for Arnold's account
+my_arnold <- readRDS('data/reddit_arnold.RDS')
+
+# this is a vector of descriptions about the account
+about <- unlist(my_arnold$GovSchwarzenegger$about)
+
+# this is a data frame of all of the user's comments
+arnold_comments <- my_arnold$GovSchwarzenegger$comments
+
+# this is a data frame of all of the threads that the user has started
+arnold_threads <- my_arnold$GovSchwarzenegger$threads
+
+```
+
+Let's check the most popular (measured by upvotes minus downvotes) thread names the former senator has created and in which subreddits he posted them.
+
+```{r reddit-13}
+# cleaning the dataset
+arnold_threads <- arnold_threads %>%
+  select(subreddit, title, score) %>% # gets the variables we want to use
+  mutate(title = paste0('"',title,'"')) %>% # adds quotation marks to the titles
+  arrange(desc(score)) # arranges the data from with the highest score at the top
+
+rownames(arnold_threads) <- NULL
+```
+
+```{r reddit-14}
+# a table for viewing where Arnold posts
+kable(head(arnold_threads, 10)) %>%
+  kable_styling(position = 'center')
+
+```
+
+Cool! So Arnold's top threads are in subreddits about cute things, movies and bodybuilding. For those who are interested, this is Dutch, the newest addition to Arnold's family.
+
+![Figure 1: Dutch](https://i.redd.it/fj8vqooc8nd51.jpg){width=30%}
+
+## Social science examples
+
+* *Are there social science research examples using the API?*
+
+In the timespan from 2010 and 2020 there have been 727 manuscripts analysing Reddit [@proferes]. 338 of them are journal articles. Out of these journal aritlces, around 23% have been published in social science journals. It seems that Reddit is mostly studied by sociologists and psychologists with political scientists only boasting 3 articles on Reddit during a 10 year period.
+
+Specific examples include @apostolou using a Reddit thread about self-reported reasons why men stay single to explore the topic through an evolutionary psychology lens. The author finds that among the most prevalent reasons that men stay single are poor flirting skills, low self-confidence and poor looks. It is argued that the change societal patterns of finding a mate for men has changed significantly over the past centuries. From pre-industrial societies where men gained access to women through conquest or through arranged marriages by parents, traits like flirting skills, looks and confidence were not important. In modern societies, however, where people are free to choose their spouses, these traits play a much bigger role.
+
+Reddit is also used for research into the extreme right. For example @gaudette perform an analysis on a sample of most popular comments compared to random comments sampled from the *The_Donald* subreddit. The authors show that the top comments in the subreddit paint a strongly negative view and sometimes advocate violence towards Muslims and left-wingers as opposed to a random sample of comments from the subreddit. The authors argue that this encourages a collective identity of the subreddit that calls for violence against minorities and political opponents of right-wingers.
+
+@chipidza discusses the reliability of news content being discussed in regards to the COVID pandemic among conservatives and liberals in the US. The authors find that liberal subreddits discuss topics related to Trump, the White House and economic relief topics. For conservatives the primary topics of discussion are China and deaths caused by COVID. Additionally, liberal subreddits contain more articles from credible news sources compared to conservative subreddits.
