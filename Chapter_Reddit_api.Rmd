@@ -22,7 +22,7 @@ The [Reddit](https://en.wikipedia.org/wiki/Reddit) API is provided by Reddit [it
 
 * *What are the prerequisites to access the API (authentication)?*
 
-When the API was [created](https://github.com/reddit-archive/reddit/wiki/API) it required users to have a Reddit account and use [OAuth2](https://github.com/reddit-archive/reddit/wiki/OAuth2) authentication. This required the user to create an application in their Reddit developer page. This would then generate a unique access token that users could use to gather data with various programming languages. As of 2022, after Reddit updated it's entire platform, users can no longer access their developer accounts. While the API *de jure* requires users to authenticate, recent packages do not require any authentication or even creating an account. This makes the authentication *de facto* not required if one wishes to access Reddit data.
+When the API was [created](https://github.com/reddit-archive/reddit/wiki/API) it required users to have a Reddit account and use [OAuth2](https://github.com/reddit-archive/reddit/wiki/OAuth2) authentication. This required the user to create an application in their Reddit developer page. This would then generate a unique access token that users could use to gather data with various programming languages. As of 2022, users can still access their developer accounts and generate authentication keys, but this has become redundant. While the API *de jure* requires users to authenticate, R packages do not require any authentication or even creating an account to collect data from Reddit. This makes the authentication *de facto* not required if one wishes to access Reddit data.
 
 ## Simple API call
 
