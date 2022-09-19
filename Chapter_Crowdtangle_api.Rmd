@@ -85,7 +85,7 @@ GET /lists | Retrieve the lists, saved searches and saved post lists of the dash
 On the user interface, I created a list of the pages of all parties currently in the German Bundestag. We want to find out which party or parties posted the 10 most successful posts (i.e. the posts with the most interactions) this year.
 
 The respective API call looks like that:
-[https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10]("https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10"]), where token is the personal API key, and listIDs is the ID of the list created with the user interface. Here, we sortBy total interactions with the startDate at the beginning of this year and the output restricted to count 10 posts.
+[https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10](https://api.crowdtangle.com/posts?token=token&listIds=listIDs&sortBy=total_interactions&startDate=2021-01-01&count=10), where token is the personal API key, and listIDs is the ID of the list created with the user interface. Here, we sortBy total interactions with the startDate at the beginning of this year and the output restricted to count 10 posts.
 
 ## API access in R
 * *How can we access the API from R (httr + other packages)?* 
@@ -117,7 +117,7 @@ rlist::list.stack(list_part)
 
 ```
 
-Alternatively, we can use a wrapper function for R, which is provided by the RCrowdTangle package available on [github]("https://github.com/cbpuschmann/RCrowdTangle"). The package provides wrapper functions for the /posts, /posts/search, and /links endpoints. Conveniently, the wrapper function directly produces a dataframe as output, which is typically what we want to work with. As the example below shows, the wrapper function may not include the specific information we are looking for, however, as the example also shows, it is relatively straightforward to adapt the function on our own depending on the specific question at hand.
+Alternatively, we can use a wrapper function for R, which is provided by the RCrowdTangle package available on [github](https://github.com/cbpuschmann/RCrowdTangle). The package provides wrapper functions for the /posts, /posts/search, and /links endpoints. Conveniently, the wrapper function directly produces a dataframe as output, which is typically what we want to work with. As the example below shows, the wrapper function may not include the specific information we are looking for, however, as the example also shows, it is relatively straightforward to adapt the function on our own depending on the specific question at hand.
 To download the package from github, we need to load the devtools package, and to use the wrapper function, we need dplyr and jsonlite.
 
 ```{r crowdTangle-4, echo=TRUE, eval=FALSE, comment=NA}
