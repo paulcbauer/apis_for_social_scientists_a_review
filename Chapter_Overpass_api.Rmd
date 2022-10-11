@@ -1,12 +1,6 @@
----
-title: "Overpass API"
-author: "Grace Olzinski and Nina Osenbrügge"
-date: "3/25/2022"
-output:
-  html_document: default
-  pdf_document: default
-bibliography: references.bib
----
+# Overpass API
+<chauthors>Grace Olzinski and Nina Osenbrügge</chauthors>
+<br><br>
 
 ```{r overpass-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
@@ -14,7 +8,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 
 You will need to install the following packages for this chapter (run the code):
 ```{r overpass-2, echo=FALSE, comment=NA}
-#.gen_pacman_chunk("Overpass_api")
+.gen_pacman_chunk("Overpass_api")
 ```
 
 ## Provided Services/Data
@@ -103,7 +97,7 @@ Mannheim_data <- opq(bbox = getbb("Mannheim")) # Mannheim, Germany
 
 ```{r overpass-7, echo = FALSE, message = FALSE, purl=F}
 #A cached version is available
-Mannheim_data <- readRDS("Mannheim_data.RDS")
+Mannheim_data <- readRDS("data/Mannheim_data.RDS")
 ```
 
 To make the query, the addition of the command `add_osm_feature` is necessary. It refers to physical features on the ground (e.g., roads or buildings) using tags attached to its basic data structures. Each tag describes a geographic attribute of the feature shown by the specific node, way, or relation. It builds the basis of all following analyses.
@@ -149,7 +143,7 @@ Mannheim_restaurants <- opq(bbox = getbb("Mannheim")) %>%
 
 ```{r overpass-9, echo = FALSE, message = FALSE, purl=F}
 #A cached version is available
-Mannheim_restaurants <- readRDS("Mannheim_restaurants.RDS")
+Mannheim_restaurants <- readRDS("data/Mannheim_restaurants.RDS")
 ```
 A list of content is returned. At first glance, this data seems confusing because no single data frame is returned, but we instead receive nested data. However, the list obtained is crucial for further analyses and contains important information. We will transform the data set in the last part of this report and provide further insights into the data structure.
 
