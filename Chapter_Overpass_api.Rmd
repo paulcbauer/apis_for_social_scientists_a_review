@@ -58,7 +58,7 @@ out skel qt;
 
 Or if you are already familiar with the query language, you can write your queries directly in the console. Here you also have the option to load, export, or share your data.
 
-Alternatively, it is recommended to use the [Wget](https://en.wikipedia.org/wiki/Wget) program. Click [here](http://overpass-api.de/command_line.html) for further details on how to write short and long queries using *https* . 
+Alternatively, it is recommended to use the [Wget](https://en.wikipedia.org/wiki/Wget) program. Click [here](http://overpass-api.de/command_line.html) for further details on how to write short and long queries using *https*. 
 
 ## API Access in R
 
@@ -77,7 +77,7 @@ library(sf)
 library(ggmap)
 ```
 
-API queries via Overpass are made using the `opq` command. As shown below, the argument `bbox` needs to be specified. For this, you enter the area you want to analyze. In this case, we want to analyze the area of Mannheim, Germany, so we first want to find out the coordinates. The results of the coordinate shows that the degree of latitude = 49.4874592 and degree of longitude = 8.4660395.
+API queries via Overpass are made using the `opq` command. As shown below, the argument `bbox` needs to be specified. For this, you enter the area you want to analyze. In this case, we want to analyze the area of Mannheim, Germany, so we first want to find out the coordinates. The results of the coordinate shows that the degree of latitude is 49.4874592 and degree of longitude is 8.4660395.
 If you are unsure about the coordinates that you need for the call, you can simply enter the place you want to research into the `getbb()` command. The following code then returns the coordinates that you need for your analyses:
 
 ```{r overpass-5, echo=TRUE}
@@ -237,7 +237,7 @@ ggmap(Mannheim_Map)+
 
 *Are there any social science examples using the API?*
 
-There is a relatively recent history of utilizing geodata in the social sciences. @ostermann2022 claimed that today's spatial research is limited by administrative divisions, e.g., districts and counties. Thus a major advantage of geodata is its flexibility to be used outside of pre-determined boundaries. @ostermann2022 applied geodata in labor market research to create a data set of employment biographies of the German working population from 2000 to 2017. They further demonstrated the potential of geodata both on the macro level, such as examining the effect of economic developments on regions, and on the micro scale, for instance determining neighborhood effects and patterns of segregation.
+There is a relatively recent history of utilizing geodata in the social sciences. @ostermann2022 claimed that today's spatial research is limited by administrative divisions, e.g., districts and counties. Thus, a major advantage of geodata is its flexibility to be used outside of pre-determined boundaries. @ostermann2022 applied geodata in labor market research to create a data set of employment biographies of the German working population from 2000 to 2017. They further demonstrated the potential of geodata both on the macro level, such as examining the effect of economic developments on regions, and on the micro scale, for instance determining neighborhood effects and patterns of segregation.
 
 Another line of studies combined geographical information with survey data, such as @hintze_lakes2009 who analyzed Germany’s Socio-Economic Panel (SOEP) data. They claimed that adding geodata is beneficial because it provides a complementary source of information, allows for an assessment of spatial patterns and non-spatial variables, and can be transformed into descriptive maps and scatter plots, among others. In the context of the SOEP, they not only used geodata to locating SOEP households but also research the economic and social components of specific areas. @hintze_lakes2009 further mentioned the potential of *spatial indicators* in answering research questions. For instance, households' accessibility to local infrastructure could be measured by how close homes are to hospitals, schools, public transportation, and cultural infrastructure. 
 
@@ -248,5 +248,3 @@ According to @steinberg_steinberg2006, geodata and geographic information system
 * Public planning
 * Social services
 * Social change
-
-## References
