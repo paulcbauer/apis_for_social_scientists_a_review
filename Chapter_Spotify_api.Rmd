@@ -1,0 +1,293 @@
+---
+title: "Spotify API"
+bibliography: references_overall.bib
+nocite: '@*'
+---
+<chauthors>Johanna Mehltretter, Marie-Lou Sohnius</chauthors>
+<br><br>
+
+<style>
+.table-hover > tbody > tr:hover { 
+  background-color: #555555;
+}
+</style>
+
+```{r spotify-1, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
+# setting cache to TRUE here allows that single API calls do not have to
+# be run every time when knitting index or the single script, but only
+# when something has been changed in index or single script.
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+
+You will need to install the following packages for this chapter (run the code):
+
+```{r spotify-2, install-packages}
+library(pacman)
+pacman::p_load('spotifyr',  # To access the API
+               'tidyverse', # Data wrangling and plots
+               'plotly',    # Interactive plots
+               'ggimage',   # Adding album covers to ggplot
+               'kableExtra',# Format tables
+               'httpuv',    # To be able to access the Spotify URL
+               'httr')      # In case you want to access the API w/o
+                            # the package
+```
+
+
+## Provided services/data
+
+* *What data/service is provided by the API?*
+
+The `Spotify` Web API allows you to pull data from the platform on listed artists, albums, tracks, and playlists. Possible requests include getting information on track audio features (e.g., danceability, score, or pace) as well as popularity metrics of single tracks and albums. Beyond these general query options, you can also collect data on individual users' (including your own) listening behavior. Accessing personal information, however, depends on users' consent. 
+
+
+## Prerequisites
+
+* *What are the prerequisites to access the API (authentication)? *
+
+### Authentication
+
+To access the Spotify API, you need to have a Spotify account. Don't have one yet? Then sign up for free [here](https://www.spotify.com/signup/)! It does not matter whether you have a Premium account or not. Once you're ready to use your Spotify account, you can [set up a developer account](https://developer.spotify.com/dashboard/login) to access the Spotify Web API. With the developer access, you can create new integrations and manage your Spotify credentials.
+
+
+Once you have a developer account, you will need to create an app on the dashboard page. 
+
+![Figure 1: Create the app on the dashboard (Screenshot from the [Spotify for Developers page](https://developer.spotify.com))](figures/SpotifyrAPP_Dashboard.png)
+
+
+### Authorization code flow
+
+If you want to access information on your own account (e.g. your favorite artists, your playlists), you need to complete one additional step: Go to the app you created in the Spotify API dashboard, go to edit settings and add a Redirect URI. A recommended option for your Redirect URI is `http://localhost:1410/`. See [Spotify's developer guide](https://developer.spotify.com/documentation/web-api/) for more information.
+
+
+![Figure 2: Open settings of the app (Screenshot from the [Spotify for Developers page](https://developer.spotify.com))](figures/SpotifyrAPP_Edit_Settings.png)
+
+![Figure 3: Add the Redirect URI (`http://localhost:1410/`) to the settings (Screenshot from the [Spotify for Developers page](https://developer.spotify.com))](figures/SpotifyrAPP_Settings.png)
+
+### Savely storing your credentials in the R environment
+
+Via the app you created, you receive your client ID and client secret. You can find them on the app page in your Spotify developer account. Save both credentials in the R environment. For accessing your personal data, also add the redirect URI (the same one you added in your app's settings!): 
+
+```{r spotify-3, eval = FALSE, warning=FALSE}
+# Here you can store the credentials as follows:
+
+# Sys.setenv(SPOTIFY_CLIENT_ID="xxx") #
+# Sys.setenv(SPOTIFY_CLIENT_SECRET="xxx") #
+# Sys.setenv(SPOTIFY_REDIRECT_URI="http://localhost:1410/") #
+
+# Beware: The credential locals are case-sensitive, thus must be stored
+# exactly as above to work correctly with the spotifyr package.
+
+ access_token <- get_spotify_access_token() # Stores your client ID in a 
+ #local object
+
+```
+
+## Simple API call
+
+* *What does a simple API call look like?*
+
+In this chapter, we solely focus on how to make API calls via the corresponding `spotifyr` package. There also exists the option to access the Spotify API using the more common `httr` package. The latter option is more complicated than using the customized `spotifyr` package, though, as the manual authentication process is more difficult to implement. If you are interested in making API calls without the package, have a look at [this detailed guide by Ray Heberer](https://rayheberer.ai/archive/spotifyapi/).
+
+
+## API access in R
+
+* *How can we access the API from R (httr + other packages)?* 
+
+Instead of typing the API request into our browser or using the `httr` package, we can use the `spotifyr` package to easily access the API from R.
+
+**Note:** For information on all possible queries available through the `spotifyr` wrapper, see the [online documentation](https://cran.r-project.org/web/packages/spotifyr/spotifyr.pdf) or [this detailed introduction to the package](https://www.rcharlie.com/spotifyr/) which also informed this chapter. You can also check the R built-in help function on the package:
+
+```{r spotify-4}
+library(spotifyr)
+?spotifyr
+```
+
+
+### Playlist features
+
+So let's submit our first query to the API! In this example, we are interested in the features of current global top 50 tracks. To get this information, we first retrieve the Spotify playlist ID by opening the playlist we want to analyze in the browser and then copying the id part from the link. In our example of the Spotify [global top 50 playlist](https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF):
+
+
+**Playlist link:**
+[https://open.spotify.com/playlist/**37i9dQZEVXbMDoHDwVN2tF**](https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF)
+
+**Playlist ID:**
+37i9dQZEVXbMDoHDwVN2tF
+
+Now that we have the ID, we can retrieve all information on tracks in the playlist by calling the function `get_playlist_audio_features`.
+
+
+```{r spotify-5, echo = FALSE, message = FALSE, purl=F}
+library(tidyverse)
+library(lubridate)
+f1 <- readRDS("data/spotify_data_f1.RDS")
+top50 <- readRDS("data/spotify_data_top50.RDS")
+topartists <- readRDS("data/spotify_data_topartists.RDS")
+```
+
+
+```{r spotify-6, eval = FALSE, warning=FALSE}
+# Store the data in a dataframe
+top50 <- get_playlist_audio_features(playlist_uris = '37i9dQZEVXbMDoHDwVN2tF') 
+# Global Top 50
+
+
+# Add the tracks' rank to the dataset:
+# the data comes sorted as listed in the playlist but does not contain a
+# specific variable indicating the rank. Therefore, we create a new 
+# variable that contains the rank in ascending order, ranging from 1 to
+# 50.
+
+top50$rank <- seq.int(nrow(top50)) 
+
+
+# So far, so good. Looking at the data, artist names are currently stored
+# in lists.
+# The next snippet moves artist names into a new variable for easier
+# access. Also, we add the album cover link to a new variable image to
+# plot the covers later.
+
+for (i in 1:50) {
+  top50$artist[i] <- top50[[28]][[i]]$name
+  top50$image[i] <- c(top50[[49]][[i]]$url[2], size=10, replace = TRUE)
+}
+
+```
+
+```{r spotify-7}
+# Now that we have the data set ready to go, let's take a look at what
+# variables are in there.
+names(top50) %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("hover")) %>% 
+  scroll_box(width = "100%", height = "300px")
+
+```
+
+
+In the next step, we want to take a closer look at track popularity. That is, how does a track's rank on the top 50 playlist correlate with Spotify's popularity measure? Note that the index is calculated by Spotify not solely based on a track's recent stream count, but also taking other metrics into account. Beyond, we'll have a look at more fun features such as a track's danceability and valence (happiness).
+
+
+```{r spotify-8}
+
+top50 %>% select(rank, track.name, artist, track.popularity,
+                 danceability, valence) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("hover")) %>% 
+  scroll_box(width = "100%", height = "300px")
+
+```
+
+Let's plot this data!
+
+```{r spotify-9, eval=knitr::is_html_output()}
+f1 <-
+  ggplot(data = top50, aes(x = track.popularity, y = rank, text = (
+    paste(
+      "Track:",
+      track.name,
+      "<br>",
+      "Artist:",
+      artist,
+      "<br>",
+      "Release date:",
+      track.album.release_date
+    )
+  ))) +
+  geom_point() +
+  theme_minimal() +
+  ylab("Playlist rank") +
+  xlab("Popularity") 
+
+# This code snippet creates an interactive version of our plot that allows you to
+# hover over each data point to receive more information.
+ggplotly(f1, tooltip = c("text"))
+
+```
+
+We can see in the graph above that tracks in the top 50 playlist are definitely rather on the popular side, however, some tracks have a comparably low popularity score. When you look at the interactive plotly graph, you'll be able to identify the outlier that ranks below 70 on Spotify's the popularity scale despite being in the charts: *Another Love by Tom Odell* (2013),
+
+While the exact estimation of the score is confidential, there exists evidence that [the age of a track factors into its popularity score](https://lodgecove.com/what-is-the-spotify-popularity-index/). That way, two tracks with 100,000 streams can have different popularity scores dependent on when they were released. In the algorithm's logic, the more recent track gained the same number of streams in a shorter time and is therefore evaluated as more popular. 
+
+Applying this to our outliers, we can see that the age of both tracks likely affects their low popularity score.
+
+Spotify also provides you with album cover links in varying sizes, so why not use the covers instead of black scatterpoints in a plot? Before we used `geom_point` for the scatterplot, now we simply need to replace that command with `geom_image` and specify the variable containing the image link. In the following plot, we explore the correlation between track happiness and danceability.
+
+```{r spotify-10, eval=knitr::is_html_output()}
+ggplot(data = top50, aes(x = valence, y = danceability, text = (
+    paste(
+      "Track:",
+      track.name,
+      "<br>",
+      "Artist:",
+      artist
+    )
+  ))) +
+  geom_image(aes(image=image), asp = 1.7) +
+  theme_minimal() +
+  ylab("Danceability") +
+  xlab("Happiness") 
+
+
+```
+
+
+### Your Spotify data
+
+You can also analyze your personal listening behavior with the Spotify API. For example, this snippet using the `get_my_top_artists_or_tracks` function allows you to explore your favorite artists of all time.
+
+```{r spotify-11, eval = TRUE}
+## Finding all time favorite artists
+topartists <- get_my_top_artists_or_tracks(type = 'artists',
+  time_range = 'long_term', limit = 50) %>%
+  select(name, genres) %>%
+  rowwise %>%
+  mutate(genres = paste(genres, collapse = ', ')) %>%
+  ungroup
+```
+  
+```{r spotify-12, eval = TRUE}
+topartists$rank <- seq.int(nrow(topartists)) # add rank variable
+
+topartists %>% 
+  select(rank, name, genres) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("hover")) %>% 
+  scroll_box(width = "100%", height = "300px")
+```
+
+```{r spotify-13, eval = TRUE, echo = FALSE}
+saveRDS(f1, file = "data/spotify_data_f1.RDS")
+saveRDS(top50, file = "data/spotify_data_top50.RDS")
+saveRDS(topartists, file = "data/spotify_data_topartists.RDS")
+```
+
+
+You can retrieve your all-time favourite tracks by still using the `get_my_top_artists_or_tracks` function but changing  `type=` to `tracks`.
+
+
+As you have seen, the Spotify API opens up many opportunities for data analysis. The functionality of the Spotifyr wrapper goes beyond the simple examples demonstrated here. Now it's your time to explore the data! 
+
+
+## Social science examples
+
+* *Are there social science research examples using the API?*
+
+So far, not much has been done with the Spotify API and music data from the field of social sciences (this is where you could step in!). Some notable exceptions below:
+
+- @MacTaggart2018 and @Lacognata2021 both looked at the link between music and politics. At an aggregate level, @MacTaggart2018 examined the association of chart trends within pop music and trends within politics in the US from 1959 to 2016. The author finds that musical trends reflect trends in society and politics.
+
+- @Lacognata2021 investigated a potential correlation of political orientation, personality traits, and music taste. The authors used individual-level survey data and linked these data to respondents’ Spotify accounts. However, they did not find any association between music taste and neither political orientation nor personality traits.
+
+- In a recent poster presentation, @Songetal2021 examined how the Covid-19 pandemic affected emotion-driven listening behavior with the help of the Spotify AP. The authors used monthly Spotify chart data from December 2019 to December 2021 and extracted measures on the valence, energy, and danceability of the tracks (we already know these measures from our own example on the global top 50 tracks). The authors did not find any correlation of tracks’ energy and danceability with Covid-19 related events. At the same time, Song et al did find that the tracks’ valence reflects the course of the pandemic: When the Covid-19-vaccine got distributed, people listened to happier music, while when the news of the Omicron variant spread, less happy tracks became more popular.
+
+- For more inspiration, you can also check out [Spotify's Developer Showcase website](https://developer.spotify.com/community/showcase/)!
+
+What will you do with the Spotify API?
+
+
+## References
