@@ -1,5 +1,5 @@
 # Introduction
-This project *APIs for Social Scientists: A collaborative Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim in 2021. While teaching the seminar we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will help future students to start diving into different APIs.
+This project *APIs for Social Scientists: A collaborative Review* is an outcome of the seminar *Computational Social Science* (CSS) taught at the University of Mannheim in 2021. While teaching the seminar, we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will help future students to start diving into different APIs.
 
 Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions: 
 
@@ -17,7 +17,7 @@ A lot of the APIs require that you authenticate with the API provider. The under
 
 
 ## Prerequisites: Software & packages
-The code examples rely R and different packages thereof. It's probably easiest if you install all of them in one go using the code below. The `p_load()` function (`pacman` package) checks whether packages are installed. If not they are installed and loaded.
+The code examples rely on R and different packages thereof. It is probably easiest if you install all of them in one go using the code below. The `p_load()` function (`pacman` package) checks whether packages are installed. If not, they are installed and loaded.
 
 <!-- add all used packages -->
 
@@ -43,7 +43,7 @@ p_load('checkpoint')
 checkpoint("2022-08-03")
 ```
 
-The `checkpoint` package from the [Reproducible R Toolkit (RRT)](https://cran.r-project.org/web/packages/checkpoint/vignettes/checkpoint.html) makes use of the daily snapshots of CRAN which are mirrored by the RRT-team on a separate server. Once you execute the command above, R will install all packages that you have loaded with the `p_load()` function in the same version as we used them on the date at which we last worked on the code. You may choose to only take this route if you would like to replicate the code presented in a particular chapter, but run into an error message. To reset your session to the state it was before using `checkpoint`, call `uncheckpoint()` or simply restart R. 
+The `checkpoint` package from the [Reproducible R Toolkit (RRT)](https://cran.r-project.org/web/packages/checkpoint/vignettes/checkpoint.html) makes use of the daily snapshots of CRAN which are mirrored by the RRT-team on a separate server. Once you execute the command above, R will install all packages that you have loaded with the `p_load()` function in the same version as we used them on the date at which we last worked on the code. You may choose to only take this route if you would like to replicate the code presented in a particular chapter but run into an error message. To reset your session to the state it was before using `checkpoint`, call `uncheckpoint()` or simply restart R. 
 
 <!--
 * Data vs. machine learning APIS

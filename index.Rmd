@@ -122,9 +122,9 @@ bookdown::publish_book(
 
 
 # Preface {-}
-The present online book provide a review of APIs that may be useful for social scientists. Please start by reading the [Introduction]. The material was/is being developed by various contributors that you can find above and in the contributor section of the corresponding [github repository](https://github.com/paulcbauer/apis_for_social_scientists_a_review). If you are interested in contributing please check out the Section [How to contribute](https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute) in the github README.
+The present online book provides a review of APIs that may be useful for social scientists. Please start by reading the [Introduction]. The material was/is being developed by various contributors, which you can find above and in the contributor section of the corresponding [github repository](https://github.com/paulcbauer/apis_for_social_scientists_a_review). If you are interested in contributing, please check out the Section [How to contribute](https://github.com/paulcbauer/apis_for_social_scientists_a_review#how-to-contribute) in the github README.
 
-The material is licensed under a [Apache License 2.0](https://en.wikipedia.org/wiki/Apache_License) license. Where we draw on other authors material other licenses may apply. We are extremely grateful for feedback and if you find errors please let us know.
+The material is licensed under a [Apache License 2.0](https://en.wikipedia.org/wiki/Apache_License) license. Where we draw on other authors' material, other licenses may apply. We are extremely grateful for feedback and if you find errors, please let us know.
 
 This document was generated with [R](https://www.r-project.org/), [RMarkdown](http://rmarkdown.rstudio.com/) and [Bookdown](https://bookdown.org/).
 
