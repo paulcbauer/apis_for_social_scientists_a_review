@@ -24,6 +24,7 @@ rmd_files:
 - Chapter_Mediacloud_api.Rmd
 - Chapter_Overpass_api.Rmd
 - Chapter_Reddit_api.Rmd
+- Chapter_Spotify_api.Rmd
 - Chapter_Twitter_api.Rmd
 - Chapter_Wiki_api.Rmd
 - Chapter_Youtube_api.Rmd
