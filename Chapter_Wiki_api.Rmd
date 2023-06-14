@@ -1,9 +1,8 @@
-
 # MediaWiki Action API
-<chauthors>Noam Himmelrath, Jacopo Gambato</chauthors>
-<br><br>
 
-```{r wikipedia-1, include=FALSE} 
+<chauthors>Noam Himmelrath, Jacopo Gambato</chauthors> <br><br>
+
+```{r wikipedia-1, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
@@ -15,23 +14,21 @@ You will need to install the following packages for this chapter (run the code):
 
 ## Provided services/data
 
-* *What data/service is provided by the API?*
-To access *Wikipedia*, *MediaWiki* provides the MediaWiki Action API.
+-   *What data/service is provided by the API?* To access *Wikipedia*, *MediaWiki* provides the MediaWiki Action API.
 
 The API can be used for multiple things, such as accessing wiki features, interacting with a wiki and obtaining meta-information about wikis and public users. Additionally, the web service can provide access data and post changes of *Wikipedia*-webpages.
 
-
 ## Prerequisites
-* *What are the prerequisites to access the API (authentication)? *
 
-No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header. 
+-   *What are the prerequisites to access the API (authentication)?*
 
-
+No pre-registration is required to access the API. However, for certain actions, such as very large queries, a registration is required. Moreover, while there is no hard and fast limit on read requests, the system administrators heavily recommend limiting the request rate to secure the stability of the side. It is also best practice to set a descriptive User Agent header.
 
 ## Simple API call
-* *What does a simple API call look like?*
 
-As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need. 
+-   *What does a simple API call look like?*
+
+As mentioned, the API can be used to communicate with Wikipedia for a variety of actions. As it is most likely for social scientist to extract information rather than post changes to a Wikipedia page, we focus here on obtaining from Wikipedia the information we need.
 
 We include a basic API call to obtain information about the Albert Einstein Wikipedia page
 
@@ -39,7 +36,7 @@ We include a basic API call to obtain information about the Albert Einstein Wiki
 
 to be plugged into the search bar of a browser to obtain the basic information on the page.
 
-```r
+``` r
 result:
 {"batchcomplete":"","query":
   {"pages":
@@ -51,13 +48,13 @@ result:
     }
   }
 }
-
 ```
 
 Notice that the first line is common for all calls of the API, while the second line relates to the specific action you are trying to perform.
 
 ## API access in R
-* *How can we access the API from R (httr + other packages)?* 
+
+-   *How can we access the API from R (httr + other packages)?*
 
 The most common tool is [WikipediR](https://cran.r-project.org/web/packages/WikipediR/WikipediR.pdf), a wrapper around the Wikipedia API. It allows `R` to access information and "directions" for the relevant page or pages of Wikipedia and the content or metadata therein. Importantly, the wrapper only allows to gather information, which implies that the instrument needs to be accompanied by other packages such as `rvest` for scraping and `XML` or `jsonlite` for parsing.
 
@@ -75,7 +72,7 @@ colnames(bls_title) <- "backlinks"
 bls_title
 ```
 
-We can also scrape data of Wikipedia by simple using the [“rvest” package](https://cran.r-project.org/web/packages/rvest/rvest.pdf) to scrape all kind of informations like tables, which is done in the following example.
+We can also scrape data of Wikipedia by simple using the ["rvest" package](https://cran.r-project.org/web/packages/rvest/rvest.pdf) to scrape all kind of informations like tables, which is done in the following example.
 
 ```{r wikipedia-4, echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE, comment=NA}
 library(rvest)
@@ -89,16 +86,13 @@ html <- read_html(url) # reading the html code into memory
 tab <- html_table(html, fill=TRUE) # shows all tables on the website with the number of the table in double brackets [[number]]
 
 #we are interested in table 1, the inequality index of the countries 
-data <- tab[[1]]
+data <- tab[[2]]
 data <- data[-1,] # delete first row
 data[1:5,1:4] #for a better overview we are just loooking at the first 5 rows and the first 4 columns
 ```
 
 ## Social science examples
-* *Are there social science research examples using the API?*
+
+-   *Are there social science research examples using the API?*
 
 Some papers using Wikipedia-information rely on the API to access the data. These papers cover a wide range of social and economical sciences. Political science papers are, for example, concerned with political elections, more specifically election prediction [@margolin2016wiki; @salem2021wikipedia]. Other papers use the data accessed through the API to analyze media coverage of the COVID-19 pandemic [@gozzi2020collective] or the interplay between online information and investment markets [@elbahrawy2019wikipedia].
-
-
-
-
