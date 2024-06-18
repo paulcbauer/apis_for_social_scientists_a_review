@@ -1,0 +1,197 @@
+# Large Language Model APIs
+<chauthors>Felix Rusche</chauthors>
+<br><br>
+
+This chapter provides an introduction to APIs for Large Language Models (LLMs). Given the wealth of models, I focus on text based models only. I provide information on one commercial and one open source 'platform': OpenAI and Ollama. Both offer a range of different models, depending on use case and budget. While **OpenAI's** (and other commercial providers') models are (potentially) more capable and accurate, open source models provided on **Ollama** are free to use, offer additional features (such as uncensored versions), and can be run on local machines. They may also better replicate given that commercial providers tend to deprecate outdated models once new ones are made available.
+
+In this short introduction, I show how to make API calls to LLMs via R. Overall, LLMs offer substantial efficiency gains in certain tasks (such as classifying text) and allow researchers to delve into new data sets or revisit old ones with new tools at hand. However, it should also be noted that working with LLMs poses risks, some of which are yet to be discovered. For example, LLMs may amplify stereotypes and are well known to 'hallucinate', i.e. provide false information with much confidence. This requires researchers to thoroughly evaluate the quality of LLMs' output. 
+
+Final disclaimer: this chapter solely provides a short introduction to the use of LLMs via API requests and does not provide an in-depth introduction to the fine tuning of LLMs or prompts.
+
+
+## Prerequisites
+### Software and Registration
+
+For *OpenAI*, the key requirement is a registration via their [website](https://openai.com/index/openai-api/), including the provision of a method of payment. Users can then [generate an API key](https://platform.openai.com/api-keys). As suggested in the [Best Practices Chapter](https://bookdown.org/paul/apis_for_social_scientists/best-practices.html), it is recommended to store the key as an environment variable. To do so, type the following in the console:
+
+```{r LLM-1, eval=F, comment=NA}
+usethis::edit_r_environ(scope = "user")
+```
+
+A document will open. Add a new line with the key and re-start R:
+
+```{r LLM-2, eval=F, comment=NA}
+OPENAI_API_KEY=ENTER_KEY_HERE
+```
+The key can now be called using the *Sys.getenv("OPENAI_API_KEY")* command (see below). While not recommended, users may also replace this command with the actual key.
+
+To use *Ollama*, users simply need to [download, install, and run Ollama](https://ollama.com/).
+
+
+### Choosing a Model
+
+Depending on use case and budget, researchers can choose from a host of different models from both *Ollama* and *OpenAI*. These mainly differ in their power and accuracy. They may also differ in other dimensions, e.g. if models are created for more specific use cases.
+
+Starting with *OpenAI*, the firm offers models of different quality and pricing. For some tasks (like simple classification tasks), cheaper models may be sufficient. For more complex ones, users may prefer to draw on more expensive and capable ones. It is generally advisable to test the quality of different models to determine which one is the best fit. Models are paid by the length of input and output text. [OpenAI's pricing page](https://openai.com/api/pricing/) allows users to estimate costs.
+
+At *Ollama*, the use of models is free of charge. However, open source models currently remain less powerful than commercial models. On the website, users can choose from a wide range of different models. For this article, [Llama3](https://ollama.com/library/llama3) is chosen, a capable open source model developed by Meta. After choosing the model, a version of the model may need to be selected. Usually, multiple versions of models with the same name are offered. These vary by use case and, more importantly, parameter size. For example, Llama3 comes in two sizes: 8 billion and 70 billion parameters. While a higher number of parameters translates into a more powerful model, it also requires substantially more (GPU) RAM and storage space. For instance, while the 8B version is likely to run on a (good) notebook or computer, the 70B one likely requires an external server / high speed computer.
+
+To install the 8B version of Llama3, users simply open their terminal/console and type:
+
+```{r LLM-3, eval=FALSE}
+ollama run llama3
+```
+This will download an start the model. It also enables users to directly chat with the model via the terminal. This window can be closed once the respective model was downloaded. In order to call Ollama's API, one then needs to start the previously installed application and run it in the background. This will create an active access point for API calls.
+
+
+## Simple API Call in R
+
+To access the APIs and prepare its results in R, the following three packages are required:
+
+```{r LLM-4, message=FALSE, warning=FALSE}
+library(httr)
+library(jsonlite)
+library(stringr)
+```
+
+Further, a prompt needs to be defined, e.g.
+```{r LLM-5, eval=F, comment=NA}
+prompt <- "Briefly answer: What is the most unusual item that has ever been used as currency?"
+```
+
+### OpenAI: ChatGPT-4o
+For *OpenAI*, I choose the model GPT-4o. Models and their respective names can be found via [OpenAI's website](https://platform.openai.com/docs/models). A simple API call then looks like this:
+
+```{r LLM-6, eval=F, comment=NA}
+
+response_OpenAI <- POST(
+  url = "https://api.openai.com/v1/chat/completions", 
+  add_headers(Authorization = paste("Bearer", Sys.getenv("OPENAI_API_KEY"))),
+  content_type_json(),
+  encode = "json",
+  body = list(
+    model = "gpt-4o", # choose model
+    messages = list(list(role = "user", content = prompt)), # enter prompt to be sent to model
+    temperature = 0 # choose "temperature"
+  )
+)
+
+# here, the answer is extracted from the json file provided by the API
+answer_OpenAI <- content(response_OpenAI)$choices[[1]]$message$content
+answer_OpenAI <- str_trim(answer_OpenAI)
+
+```
+
+```{r LLM-7, echo = FALSE, message = FALSE, purl=F}
+# load example answer
+answer_OpenAI <- readRDS("data/LLM_OpenAI.RDS")
+```
+
+Print answer:
+```{r LLM-8, eval=T, comment=NA}
+cat(answer_OpenAI)
+```
+
+
+
+#### Alternative: Using ChatGPT-4o via an API Wrapper: 
+
+An alternative to directly calling the API via httr is the use of an API wrapper, i.e. a package that simplifies the call further. For Python, [OpenAI maintains its own wrapper](https://github.com/openai/openai-python). For R (which this article is focused on) @rudnytskyi2023 maintains a package. This keeps getting updated, so please visit the [package's website](https://irudnyts.github.io/openai/) for updates. The package is applied as follows:
+
+```{r LLM-9, eval=F, comment=NA}
+# if not yet installed, install the package 
+remotes::install_github("irudnyts/openai", ref = "r6")
+
+#-------
+# load it
+library(openai)
+
+# load the API key. The package expects it to be stored as an 
+# environment variable called OPENAI_API_KEY!! 
+# Make sure it is stored this way (see Prerequisites above)
+client <- OpenAI()
+
+# send API request
+completion <- client$chat$completions$create(
+    model = "gpt-4o", # choose model
+    messages = list(list(role = "user", content = prompt)), # enter prompt to be sent to model
+    temperature = 0 # choose "temperature" (and potentially other settings)
+)
+
+# Extract answer from returned object
+answer_OpenAI2 <- completion[["choices"]][[1]][["message"]][["content"]]
+
+```
+
+```{r LLM-10, echo = FALSE, message = FALSE, purl=F}
+# load example answer
+answer_OpenAI2 <- readRDS("data/LLM_OpenAI2.RDS")
+```
+
+Print answer:
+```{r LLM-11, echo = TRUE, message = FALSE, purl=F}
+cat(answer_OpenAI2)
+```
+
+
+
+
+### Ollama: Llama3
+Similarly, a simple API call using *Llama3* can be conducted as follows:
+```{r LLM-12, eval=F, comment=NA}
+
+response_Llama <- POST(
+  url =  "http://localhost:11434/api/generate", 
+  body =
+    list(
+      model = "llama3", # choose model
+      prompt = prompt, # enter prompt to be sent to model
+      stream = FALSE,
+      options = list(
+        temperature = 0 # choose "temperature"
+    )),
+  encode = "json"
+)
+
+# here, the answer is extracted from the json file provided by the API and prepared as a full text file
+response_text <- content(response_Llama, "text")
+json_strings <- strsplit(response_text, "\n")[[1]]
+parsed_jsons <- lapply(json_strings, fromJSON)
+responses <- sapply(parsed_jsons, function(x) x$response)
+answer_Llama <- paste(responses, collapse = " ")
+
+```
+
+```{r LLM-13, echo = FALSE, message = FALSE, purl=F}
+# load example answer
+answer_Llama <- readRDS("data/LLM_Llama.RDS")
+```
+
+Print answer:
+```{r LLM-14, echo = TRUE, message = FALSE, purl=F}
+cat(answer_Llama)
+```
+
+### Some Parameter Choices and Settings
+
+For better replicability, the *temperature* (usually defined between 0 and 2) of the above LLMs is set to 0. A lower temperature ensures that the algorithm will tend to select words with the highest probability. While some randomness remains, this increases the probability that results will replicate. It also decreases the creativity/diversity of responses and, hence, the probability of 'halucination'.
+
+Models also allow users to control a number of *additional parameters*. For example, this includes the maximum response length, the number of responses created, or (sometimes even) to set a seed. To find out about specific models' parameters, it is recommendable to visit their documentation pages.
+
+Another setting that may be relevant is the role assigned to the model. Specifically, one can tell the OpenAI model to answer and behave in specific ways via the *messages* item. The model will then behave accordingly. For example, one of the most common roles assigned is that of the "helpful assistant":
+
+```{r LLM-15, eval=F, comment=NA}
+messages = list(list(role = "system", content = "You are a helpful assistant."),
+                list(role = "user", content = prompt))
+```
+
+To use this setting, simply replace the message item in the API request above.
+
+The most important 'setting' is the prompt itself. Prompts can substantially affect the quality of answers. It is advisable to read guides on how to best prompt specific models and to test different versions of the 'same' prompt. Models also differ in how well their prompting works. For instance, it is argued that OpenAI models are easy to prompt while, e.g., Llama3 can produce results of similar quality but the prompt is more difficult to get right.
+
+Finally, OpenAI allows users to send [batch requests](https://platform.openai.com/docs/guides/batch/overview?lang=curl). In theory, these should be particularly interesting to power users that aim to send many of the same requests on different texts. However, at the time this article is written, batch requests only start getting interesting once users made a considerable number of requests and moved up [OpenAI's user ladder](https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three). Specifically, to increase rate limits, users have to effectively spend money and time on the platform. They subsequently move up the user ladder from "free" to tier 1 and finally tier 5. Through this, they receive higher rate limits. Batch request only really get interesting once users reach tier 3.
+
+
+## Social science examples
+
+LLMs are a recent tool and its applications in research are still being explored. One application is the use of LLMs as a cheap research assistant. LLMs can read and classify hundreds or even thousands of texts within minutes and at very lost costs. For example, in @evsyukova2023 my co-authors and I send responses received in an experiment to ChatGPT-4 in order to evaluate their usefulness and classify their content. In a different application, @djourelova2024experience explore newspaper coverage following extreme weather events. Specifically, the authors send local newspaper articles on the event to a LLM, asking whether the respective article draws a causal connection between the event and climate change (among other questions). In both papers, the authors find that agreement between LLMs and human annotators is at a similar level as agreement between any two human annotators. Another potential pathway for social science is 'random silicon sampling' as suggested by @sun2024random. Specifically, LLMs can be assigned specific demographic features and be asked to answer surveys or questions in ways that resemble this demographic group.

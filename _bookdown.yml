@@ -21,6 +21,7 @@ rmd_files:
 - Chapter_Instagram_basic_display_api.Rmd
 - Chapter_Instagram_graph_api.Rmd
 - Chapter_Internet_archive.Rmd
+- Chapter_LLM_api.Rmd
 - Chapter_Mediacloud_api.Rmd
 - Chapter_Overpass_api.Rmd
 - Chapter_Reddit_api.Rmd
