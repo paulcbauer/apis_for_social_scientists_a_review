@@ -206,7 +206,7 @@ Finally, XML data can be produced. With the function `osmdata_xml`, raw data are
 
 We use the `SF` object function, because there is a preexisting geometry function for using the `ggplot2` package.
 
-```{r overpass-16, include=TRUE}
+```{r overpass-16, include=TRUE, eval=FALSE}
 SF_Mannheim <- osmdata_sf(Mannheim_restaurants)
 SF_Mannheim
 ```
@@ -215,7 +215,7 @@ Using the `ggmap` package, we can visualize our results. First, we need the back
 
 To build the graph, we use the `ggmap()` function, including the object with our background map. In addition, we specify the points of the restaurants in Mannheim with `geom_sf()`. The argument `inherit.aes`needs to be set to `FALSE`. Depending on our preferences, we can adjust the following settings: `colour` `fill` `transparency (alpha)` `size` `shape` (@roye2018).
 
-```{r overpass-17, include=TRUE}
+```{r overpass-17, include=TRUE, eval=FALSE}
 library(osmdata)
 library(ggmap)
 #our background map

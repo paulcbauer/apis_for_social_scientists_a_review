@@ -52,7 +52,7 @@ A detailed description of the different functions of the API can be found on  [g
 
 Instead of typing the API request into our browser, we can use the httr package's `GET()` function to access the API from R.
 
-```{r internet-archive-3, message = FALSE}
+```{r internet-archive-3, message = FALSE, eval=FALSE}
 # Load required packages
 library(httr)
 library(jsonlite)
@@ -81,7 +81,7 @@ result
 
 This output can also be used to generate the Urls of the stored mementos.
 
-```{r internet-archive-4}
+```{r internet-archive-4, eval=FALSE}
 # Generate vector of memento Urls
 urls <- paste0("https://web.archive.org/web/", result$timestamp, "/", result$original)
 
@@ -95,7 +95,7 @@ Alternatively, we can use the archiveRetriever to access selected functions of t
 
 `archive_overview()` queries the Internet Archive API to get an overview over the dates for which mementos of a specific Url are stored in the Internet Archive. The function outputs a nicely formatted calendar to graphically display the Url's availability in the Internet Archive.
 
-```{r internet-archive-5}
+```{r internet-archive-5, eval=FALSE}
 library(archiveRetriever)
 
 archive_overview("nytimes.com", startDate = "20051101", endDate = "20051130")
@@ -104,7 +104,7 @@ archive_overview("nytimes.com", startDate = "20051101", endDate = "20051130")
 
 `retrieve_urls()` offers direct access to the memento Urls of any Url stored in the Internet Archive. The function takes the base Url and the time frame as inputs and returns a vector of memento Urls. For convenience, `retrieve_urls()` automatically collapses mementos by day. However, this can be deactivated with the option `collapseDate = FALSE`.
 
-```{r internet-archive-6}
+```{r internet-archive-6, eval=FALSE}
 
 urls <- retrieve_urls(homepage = "nytimes.com", startDate = "20191201", endDate = "20191202", collapseDate = FALSE)
 
@@ -113,7 +113,7 @@ head(urls)
 
 Oftentimes researchers and practitioners do not know the specific Urls they are interested in, but want to retrieve information from all or some subpages of a base Url, e.g. when scraping news content from online newspapers. For this purpose, the archiveRetriever offers the function `retrieve_links()`. `retrieve_links()` takes any number of memento Urls (obtained via `retrieve_urls()`) as input and returns a data.frame listing all links of mementos referenced to in the original memento. This enables users e.g. to obtain all mementos of newspaper articles from the New York Times linked to on the memento of the homepage of the newspaper.
 
-```{r internet-archive-7}
+```{r internet-archive-7, eval=FALSE}
 
 links <- retrieve_links("http://web.archive.org/web/20191201001433/https://www.nytimes.com/")
 
@@ -122,7 +122,7 @@ head(links)
 
 Finally, memento Urls and their time stamps are seldom the information of interest for anyone using the Internet Archive. Therefore, the archiveRetriever offers the function `scrape_urls()` to easily scrape any content from Internet Archive mementos obtained by the previous functions. The function takes a memento of the Internet Archive and a named vector of XPaths (or CSS) as obligatory inputs and results in a tibble with the content scraped using the XPath/CSS selectors.
 
-```{r internet-archive-8}
+```{r internet-archive-8, eval=FALSE}
 nytimes_article <- scrape_urls(Urls = "http://web.archive.org/web/20201001004918/https://www.nytimes.com/2020/09/30/opinion/biden-trump-2020-debate.html",
                                Paths = c(title = "//h1[@itemprop='headline']",
                                          author = "//span[@itemprop='name']",

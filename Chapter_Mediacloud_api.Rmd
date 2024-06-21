@@ -45,7 +45,7 @@ It is also important to learn about how to [write a solr query](https://mediaclo
 
 In this example, we are going to search for 20 stories in the New York Times (Media ID: 1) mentioning "mannheim AND university". 
 
-```{r}
+```{r, eval=FALSE}
 library(httr)
 library(stringr)
 url <- parse_url("https://api.mediacloud.org/api/v2/stories_public/list")
