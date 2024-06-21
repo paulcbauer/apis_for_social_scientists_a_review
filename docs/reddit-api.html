@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 20 Reddit API |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 20 Reddit API |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 20 Reddit API |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="overpass-api.html"/>
+<link rel="next" href="spotify-api.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reddit-api" class="section level1 hasAnchor" number="20">
+<h1><span class="header-section-number">Chapter 20</span> Reddit API<a href="reddit-api.html#reddit-api" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><chauthors>Domantas Undzėnas</chauthors>
+<br><br></p>
+<p>You will need to install the following packages for this chapter (run the code):</p>
+<pre><code># install.packages(&#39;pacman&#39;)
+library(pacman)
+p_load(&#39;kableExtra&#39;)</code></pre>
+<div id="provided-servicesdata-15" class="section level2 hasAnchor" number="20.1">
+<h2><span class="header-section-number">20.1</span> Provided services/data<a href="reddit-api.html#provided-servicesdata-15" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>The <a href="https://en.wikipedia.org/wiki/Reddit">Reddit</a> API is provided by Reddit <a href="https://www.reddit.com/dev/api/">itself</a>. It allows data collection from subreddits<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>, threads<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>, users and many other interesting things! The data primarily come in text format. As such, you can use it for various text analyses. Data gathered also contains popularity of posts which allows you to test popularity of certain topics. In this review I will be focusing on describing the data you can gather from the API and not delving into complex analyses. The section on social science examples elaborates how Reddit data is used by researchers.</p>
+</div>
+<div id="prerequisites-16" class="section level2 hasAnchor" number="20.2">
+<h2><span class="header-section-number">20.2</span> Prerequisites<a href="reddit-api.html#prerequisites-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)?</em></li>
+</ul>
+<p>When the API was <a href="https://github.com/reddit-archive/reddit/wiki/API">created</a> it required users to have a Reddit account and use <a href="https://github.com/reddit-archive/reddit/wiki/OAuth2">OAuth2</a> authentication. This required the user to create an application in their Reddit developer page. This would then generate a unique access token that users could use to gather data with various programming languages. As of 2022, users can still access their developer accounts and generate authentication keys, but this has become redundant. While the API <em>de jure</em> requires users to authenticate, R packages do not require any authentication or even creating an account to collect data from Reddit. This makes the authentication <em>de facto</em> not required if one wishes to access Reddit data.</p>
+</div>
+<div id="simple-api-call-16" class="section level2 hasAnchor" number="20.3">
+<h2><span class="header-section-number">20.3</span> Simple API call<a href="reddit-api.html#simple-api-call-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>The Reddit API limits calls per user to one request per second. This may not allow one to collect lots of data during a short period of time. Fortunately data dumps such as <a href="https://files.pushshift.io/reddit/">this one</a> exist to make your life easier. If you do want to collect your own data on Reddit, then let’s continue!</p>
+<p>A simple API call in R is possible using the <em>httr</em> package while having a link to the content that you want. Say you want to analyse a community dedicated to cats in Reddit. You just need to obtain the link to the subreddit and paste it into R. However, you should specify what structure of data you want. Let’s try to obtain JSON data - a format that is very popular for storing data structures. Specifying what data you want is very easy, as you just add a full stop and your data abbreviation to the already existing link. For example, the “r/cats” subreddit link is <em><a href="https://www.reddit.com/r/cats/" class="uri">https://www.reddit.com/r/cats/</a></em>. To obtain a JSON file you simply change the link to <em><a href="https://www.reddit.com/r/cats/.json" class="uri">https://www.reddit.com/r/cats/.json</a></em>. Let’s collect some data!</p>
+<p>One thing to keep in mind with all of these calls is that they change over time due to Reddit being an active platform. As you may be reading a year from the publication of this chapter, your calls will not be the same as mine. I have saved the datasets that I use for this chapter, so you can access them at any time, provided you load them in your working directory.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="reddit-api.html#cb203-1" tabindex="-1"></a><span class="co"># this is the url with the file extension you want to get</span></span>
+<span id="cb203-2"><a href="reddit-api.html#cb203-2" tabindex="-1"></a> </span>
+<span id="cb203-3"><a href="reddit-api.html#cb203-3" tabindex="-1"></a>  <span class="co"># url &lt;- &#39;https://www.reddit.com/r/cats/.json&#39;</span></span>
+<span id="cb203-4"><a href="reddit-api.html#cb203-4" tabindex="-1"></a></span>
+<span id="cb203-5"><a href="reddit-api.html#cb203-5" tabindex="-1"></a><span class="co"># this is how you should use the httr function to get data</span></span>
+<span id="cb203-6"><a href="reddit-api.html#cb203-6" tabindex="-1"></a><span class="co"># if you want to collect your own data, run this code</span></span>
+<span id="cb203-7"><a href="reddit-api.html#cb203-7" tabindex="-1"></a>  </span>
+<span id="cb203-8"><a href="reddit-api.html#cb203-8" tabindex="-1"></a>  <span class="co"># response &lt;- GET(url, user_agent(&#39;Extracting data from Reddit&#39;))</span></span>
+<span id="cb203-9"><a href="reddit-api.html#cb203-9" tabindex="-1"></a></span>
+<span id="cb203-10"><a href="reddit-api.html#cb203-10" tabindex="-1"></a><span class="co"># this returns a list of infornmation about the subreddit</span></span>
+<span id="cb203-11"><a href="reddit-api.html#cb203-11" tabindex="-1"></a></span>
+<span id="cb203-12"><a href="reddit-api.html#cb203-12" tabindex="-1"></a><span class="co"># this saves the data</span></span>
+<span id="cb203-13"><a href="reddit-api.html#cb203-13" tabindex="-1"></a>  </span>
+<span id="cb203-14"><a href="reddit-api.html#cb203-14" tabindex="-1"></a>  <span class="co"># saveRDS(response, &#39;reddit_cats.RDS&#39;)</span></span>
+<span id="cb203-15"><a href="reddit-api.html#cb203-15" tabindex="-1"></a></span>
+<span id="cb203-16"><a href="reddit-api.html#cb203-16" tabindex="-1"></a><span class="co"># importing the data that I have saved</span></span>
+<span id="cb203-17"><a href="reddit-api.html#cb203-17" tabindex="-1"></a></span>
+<span id="cb203-18"><a href="reddit-api.html#cb203-18" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;data/reddit_cats.RDS&#39;</span>)</span>
+<span id="cb203-19"><a href="reddit-api.html#cb203-19" tabindex="-1"></a></span>
+<span id="cb203-20"><a href="reddit-api.html#cb203-20" tabindex="-1"></a><span class="co"># exctracting the content from the response list</span></span>
+<span id="cb203-21"><a href="reddit-api.html#cb203-21" tabindex="-1"></a></span>
+<span id="cb203-22"><a href="reddit-api.html#cb203-22" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">content</span>(cats, <span class="at">type =</span> <span class="st">&#39;application/json&#39;</span>)</span></code></pre></div>
+<p>This returns a big list (1.3 MB) of information about the “r/cats” subreddit. We can obtain information on the most popular post in the subreddit by extracting some of the data. In total, the 25 most popular posts will be extracted during your search.</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="reddit-api.html#cb204-1" tabindex="-1"></a><span class="co">#extracting all the posts</span></span>
+<span id="cb204-2"><a href="reddit-api.html#cb204-2" tabindex="-1"></a>posts_data <span class="ot">&lt;-</span> cats<span class="sc">$</span>data<span class="sc">$</span>children</span>
+<span id="cb204-3"><a href="reddit-api.html#cb204-3" tabindex="-1"></a></span>
+<span id="cb204-4"><a href="reddit-api.html#cb204-4" tabindex="-1"></a><span class="co">#extracts data for the most popular post</span></span>
+<span id="cb204-5"><a href="reddit-api.html#cb204-5" tabindex="-1"></a>popular_post <span class="ot">&lt;-</span>posts_data[[<span class="dv">1</span>]]<span class="sc">$</span>data</span>
+<span id="cb204-6"><a href="reddit-api.html#cb204-6" tabindex="-1"></a></span>
+<span id="cb204-7"><a href="reddit-api.html#cb204-7" tabindex="-1"></a><span class="co"># extracts rverything we need from the list</span></span>
+<span id="cb204-8"><a href="reddit-api.html#cb204-8" tabindex="-1"></a>popular_data <span class="ot">&lt;-</span> <span class="fu">c</span>(popular_post<span class="sc">$</span>title, popular_post<span class="sc">$</span>ups, popular_post<span class="sc">$</span>upvote_ratio)</span>
+<span id="cb204-9"><a href="reddit-api.html#cb204-9" tabindex="-1"></a></span>
+<span id="cb204-10"><a href="reddit-api.html#cb204-10" tabindex="-1"></a><span class="co"># preparing data to be plotted</span></span>
+<span id="cb204-11"><a href="reddit-api.html#cb204-11" tabindex="-1"></a>popular_data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(popular_data)</span>
+<span id="cb204-12"><a href="reddit-api.html#cb204-12" tabindex="-1"></a></span>
+<span id="cb204-13"><a href="reddit-api.html#cb204-13" tabindex="-1"></a><span class="co"># putting quotes on the title</span></span>
+<span id="cb204-14"><a href="reddit-api.html#cb204-14" tabindex="-1"></a>popular_data[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;&quot;&#39;</span>,popular_data[<span class="dv">1</span>,<span class="dv">1</span>],<span class="st">&#39;&quot;&#39;</span>)</span>
+<span id="cb204-15"><a href="reddit-api.html#cb204-15" tabindex="-1"></a></span>
+<span id="cb204-16"><a href="reddit-api.html#cb204-16" tabindex="-1"></a><span class="fu">rownames</span>(popular_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;post title&#39;</span>, <span class="st">&#39;upvotes&#39;</span>, <span class="st">&#39;upvote_ratio&#39;</span>)</span>
+<span id="cb204-17"><a href="reddit-api.html#cb204-17" tabindex="-1"></a></span>
+<span id="cb204-18"><a href="reddit-api.html#cb204-18" tabindex="-1"></a><span class="fu">colnames</span>(popular_data) <span class="ot">&lt;-</span> <span class="st">&#39;Information&#39;</span></span>
+<span id="cb204-19"><a href="reddit-api.html#cb204-19" tabindex="-1"></a></span>
+<span id="cb204-20"><a href="reddit-api.html#cb204-20" tabindex="-1"></a><span class="co"># making a nice table</span></span>
+<span id="cb204-21"><a href="reddit-api.html#cb204-21" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb204-22"><a href="reddit-api.html#cb204-22" tabindex="-1"></a><span class="fu">kable</span>(popular_data) <span class="sc">%&gt;%</span></span>
+<span id="cb204-23"><a href="reddit-api.html#cb204-23" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">&#39;center&#39;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Information
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+post title
+</td>
+<td style="text-align:left;">
+“Sister took my cat because of financial things. Covid happened. First time seeing my old bud in quite a few years.”
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+upvotes
+</td>
+<td style="text-align:left;">
+21346
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+upvote_ratio
+</td>
+<td style="text-align:left;">
+0.97
+</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that the most popular post in this subreddit is about a person who recently got to see his cat after the COVID pandemic. The post has a lot of upvotes (akin to likes on platforms like Facebook or Twitter) as well as having 97% of the people who interacted with the post upvoting it. It seems that people generally like seeing reunions with pets.</p>
+</div>
+<div id="api-access-in-r-15" class="section level2 hasAnchor" number="20.4">
+<h2><span class="header-section-number">20.4</span> API access in R<a href="reddit-api.html#api-access-in-r-15" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Gathering data with the <em>httr</em> package is definitely possible, but requires a lot of further work to process needed data. If you don’t want to write massive chunks of code, you can turn to people who have already done that! Here we use the <a href="https://github.com/ivan-rivera/RedditExtractor"><em>RedditExtractoR</em></a> package developed by <span class="citation">Rivera (<a href="#ref-rivera">2022</a>)</span> to gather data more easily. Let’s begin with a simple call to find all the subreddits that use the word <em>politics</em> in their subreddit. The <em>find_subreddits()</em> will look for communities that use the word in question in its name, description or the various threads that users post.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="reddit-api.html#cb205-1" tabindex="-1"></a><span class="co"># this gets us all the subreddits that use the word politics</span></span>
+<span id="cb205-2"><a href="reddit-api.html#cb205-2" tabindex="-1"></a></span>
+<span id="cb205-3"><a href="reddit-api.html#cb205-3" tabindex="-1"></a>  <span class="co"># subred &lt;- find_subreddits(&#39;politics&#39;)</span></span>
+<span id="cb205-4"><a href="reddit-api.html#cb205-4" tabindex="-1"></a></span>
+<span id="cb205-5"><a href="reddit-api.html#cb205-5" tabindex="-1"></a><span class="co"># you can use this to collect your own data</span></span>
+<span id="cb205-6"><a href="reddit-api.html#cb205-6" tabindex="-1"></a></span>
+<span id="cb205-7"><a href="reddit-api.html#cb205-7" tabindex="-1"></a><span class="co"># this saves the data you have gathered for the analysis</span></span>
+<span id="cb205-8"><a href="reddit-api.html#cb205-8" tabindex="-1"></a>  </span>
+<span id="cb205-9"><a href="reddit-api.html#cb205-9" tabindex="-1"></a>  <span class="co"># saveRDS(subred, &#39;reddit_subreddits.RDS&#39;)</span></span></code></pre></div>
+<p>Now that we have the subreddits, let’s visualise ten of those that have the highest amount of subscribers and use the word <em>politics</em> subreddit description or discussions.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="reddit-api.html#cb206-1" tabindex="-1"></a><span class="co"># this function imports the data I have collected</span></span>
+<span id="cb206-2"><a href="reddit-api.html#cb206-2" tabindex="-1"></a>subreddits <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;data/reddit_subreddits.RDS&#39;</span>)</span>
+<span id="cb206-3"><a href="reddit-api.html#cb206-3" tabindex="-1"></a></span>
+<span id="cb206-4"><a href="reddit-api.html#cb206-4" tabindex="-1"></a><span class="co"># this cleans the data to be more presentable</span></span>
+<span id="cb206-5"><a href="reddit-api.html#cb206-5" tabindex="-1"></a>subreddits <span class="ot">&lt;-</span> subreddits <span class="sc">%&gt;%</span></span>
+<span id="cb206-6"><a href="reddit-api.html#cb206-6" tabindex="-1"></a>  <span class="fu">select</span>(subreddit, title, subscribers) <span class="sc">%&gt;%</span> <span class="co"># selects variables you want to explore</span></span>
+<span id="cb206-7"><a href="reddit-api.html#cb206-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">subscribers_million =</span> subscribers<span class="sc">/</span><span class="dv">1000000</span>, <span class="at">subscribers =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;&quot;&#39;</span>,title,<span class="st">&#39;&quot;&#39;</span>)) <span class="sc">%&gt;%</span> <span class="co"># creates new variables</span></span>
+<span id="cb206-8"><a href="reddit-api.html#cb206-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(subscribers_million)) <span class="co"># arranges data from highest subscriber count</span></span>
+<span id="cb206-9"><a href="reddit-api.html#cb206-9" tabindex="-1"></a></span>
+<span id="cb206-10"><a href="reddit-api.html#cb206-10" tabindex="-1"></a><span class="co"># this removes the unique id of each subreddit</span></span>
+<span id="cb206-11"><a href="reddit-api.html#cb206-11" tabindex="-1"></a><span class="fu">rownames</span>(subreddits) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="reddit-api.html#cb207-1" tabindex="-1"></a><span class="co"># making a nice table to display our results</span></span>
+<span id="cb207-2"><a href="reddit-api.html#cb207-2" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(subreddits, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb207-3"><a href="reddit-api.html#cb207-3" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">&#39;center&#39;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+subreddit
+</th>
+<th style="text-align:left;">
+title
+</th>
+<th style="text-align:right;">
+subscribers_million
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+AskReddit
+</td>
+<td style="text-align:left;">
+“Ask Reddit…”
+</td>
+<td style="text-align:right;">
+35.187653
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+worldnews
+</td>
+<td style="text-align:left;">
+“World News”
+</td>
+<td style="text-align:right;">
+28.234964
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+memes
+</td>
+<td style="text-align:left;">
+“/r/Memes the original since 2008”
+</td>
+<td style="text-align:right;">
+17.964003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AdviceAnimals
+</td>
+<td style="text-align:left;">
+“Advice Animals”
+</td>
+<td style="text-align:right;">
+9.458493
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+politics
+</td>
+<td style="text-align:left;">
+“Politics”
+</td>
+<td style="text-align:right;">
+7.974496
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+europe
+</td>
+<td style="text-align:left;">
+“Europe”
+</td>
+<td style="text-align:right;">
+3.039875
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+teenagers
+</td>
+<td style="text-align:left;">
+“r/teenagers”
+</td>
+<td style="text-align:right;">
+2.752169
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+atheism
+</td>
+<td style="text-align:left;">
+“atheism”
+</td>
+<td style="text-align:right;">
+2.709896
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+unpopularopinion
+</td>
+<td style="text-align:left;">
+“For your Opinions that are Unpopular”
+</td>
+<td style="text-align:right;">
+2.365810
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PrequelMemes
+</td>
+<td style="text-align:left;">
+“PrequelMemes - Memes of the Star Wars Prequels”
+</td>
+<td style="text-align:right;">
+2.003999
+</td>
+</tr>
+</tbody>
+</table>
+<p>We have our usual suspects here. Of course the people discussing world news, politics and Europe are talking about politics! But then we can also see that teenager, atheist, unpopular opinion communities and even people who make memes are talking about politics. However, this “talking” may not always mean that users actively discuss politics on the subreddit. The <a href="https://www.reddit.com/r/unpopularopinion/">unpopular opinion</a>, <a href="https://www.reddit.com/r/memes/">meme</a> and <a href="https://www.reddit.com/r/PrequelMemes/">prequel meme</a> subreddits explicitly put a “no politics” clause in their community rules. Even though the word <em>politics</em> is used here only once, the <em>find_subreddits()</em> function still returns the subreddits. Researchers should be careful when using the function to make sure they don’t stumble onto subreddits that explicitly ban the keyword they are interested in.</p>
+<p>Okay, let’s say we want to find out what is going on in one of these communities. To make this analysis interesting, let’s see what unpopular opinions Reddit users have.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="reddit-api.html#cb208-1" tabindex="-1"></a><span class="co"># this code is for collecting unpopular opinions yourself</span></span>
+<span id="cb208-2"><a href="reddit-api.html#cb208-2" tabindex="-1"></a>  </span>
+<span id="cb208-3"><a href="reddit-api.html#cb208-3" tabindex="-1"></a>  <span class="co"># opinions &lt;- find_thread_urls(subreddit = &#39;unpopularopinion&#39;, #specifies the subreddit</span></span>
+<span id="cb208-4"><a href="reddit-api.html#cb208-4" tabindex="-1"></a>                    <span class="co"># sort_by = &#39;top&#39;, #specifies what posts we are looking for</span></span>
+<span id="cb208-5"><a href="reddit-api.html#cb208-5" tabindex="-1"></a>                    <span class="co"># period = &#39;week&#39;) #specifies the period you want to search for</span></span>
+<span id="cb208-6"><a href="reddit-api.html#cb208-6" tabindex="-1"></a></span>
+<span id="cb208-7"><a href="reddit-api.html#cb208-7" tabindex="-1"></a>  <span class="co"># saveRDS(opinions, file = &#39;reddit_unpopular_opinions.RDS&#39;) </span></span>
+<span id="cb208-8"><a href="reddit-api.html#cb208-8" tabindex="-1"></a><span class="co"># this code was used to save the top threads that I collected when writing of this chapter</span></span></code></pre></div>
+<p>Let’s dive right in! The full dataset contains time stamps, titles, full text, url to the post and much more. Here we are mostly interested in the titles and engagement with the individual posts (measured in number of comments).</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="reddit-api.html#cb209-1" tabindex="-1"></a><span class="co"># this loads my data again</span></span>
+<span id="cb209-2"><a href="reddit-api.html#cb209-2" tabindex="-1"></a>unpop_opinions <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;data/reddit_unpopular_opinions.RDS&#39;</span>)</span>
+<span id="cb209-3"><a href="reddit-api.html#cb209-3" tabindex="-1"></a></span>
+<span id="cb209-4"><a href="reddit-api.html#cb209-4" tabindex="-1"></a><span class="co"># and cleans the data</span></span>
+<span id="cb209-5"><a href="reddit-api.html#cb209-5" tabindex="-1"></a>unpop_opinions <span class="ot">&lt;-</span> unpop_opinions  <span class="sc">%&gt;%</span></span>
+<span id="cb209-6"><a href="reddit-api.html#cb209-6" tabindex="-1"></a>  <span class="fu">select</span>(title, comments) <span class="sc">%&gt;%</span> <span class="co"># selects variables we want</span></span>
+<span id="cb209-7"><a href="reddit-api.html#cb209-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;&quot;&#39;</span>,title,<span class="st">&#39;&quot;&#39;</span>)) <span class="sc">%&gt;%</span> <span class="co"># adds quotation marks to title</span></span>
+<span id="cb209-8"><a href="reddit-api.html#cb209-8" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(comments)) <span class="co"># arranges data by larges comment count</span></span>
+<span id="cb209-9"><a href="reddit-api.html#cb209-9" tabindex="-1"></a></span>
+<span id="cb209-10"><a href="reddit-api.html#cb209-10" tabindex="-1"></a><span class="fu">rownames</span>(unpop_opinions) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="reddit-api.html#cb210-1" tabindex="-1"></a><span class="co"># making a nice table again</span></span>
+<span id="cb210-2"><a href="reddit-api.html#cb210-2" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(unpop_opinions, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb210-3"><a href="reddit-api.html#cb210-3" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">&#39;center&#39;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+title
+</th>
+<th style="text-align:right;">
+comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+“5 years later, on St Patrick’s Day, I return to tell Americans that they aren’t Irish”
+</td>
+<td style="text-align:right;">
+8885
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Kinkshaming should be encouraged”
+</td>
+<td style="text-align:right;">
+3029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“It is impossible to be super fit and work a 9-6 job.”
+</td>
+<td style="text-align:right;">
+2758
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Can you explain this gap in your resume? Is totally rude and completely inappropriate to ask”
+</td>
+<td style="text-align:right;">
+2243
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Using someone elses toothbrush is not a big deal”
+</td>
+<td style="text-align:right;">
+2113
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Drake is an absolute shit rapper with shit lyrics and even shittier ideals and anyone who thinks otherwise has the brain/creativity of a lamp.”
+</td>
+<td style="text-align:right;">
+2075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Girl scouts are a creepy scam”
+</td>
+<td style="text-align:right;">
+2062
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Wearing dress clothes for work does nothing and just makes people uncomfortable all day”
+</td>
+<td style="text-align:right;">
+1713
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Taco Bell doesn’t give you the shits. You just never eat fiber.”
+</td>
+<td style="text-align:right;">
+1660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“College is a waste of time and money for most people”
+</td>
+<td style="text-align:right;">
+1496
+</td>
+</tr>
+</tbody>
+</table>
+<p>Are these opinions really unpopular? You be the judge. The <em>find_thread_urls()</em> function also allows you to search for threads based on a keyword. While it is useful to highlight what is being talked about right now regarding a subreddit or keyword, you can also use to gather data for generating word clouds, sentiment analysis and much more!</p>
+<p>Let’s say you are not interested in a specific community or keyword but a user. The package has that covered too. If you don’t have anyone in mind, Reddit has a list of it’s users <a href="https://www.reddit.com/users/">here</a>. For this chapter we will explore the user profile of former California senator Arnold Schwarzenegger. You do not need to limit yourself to only one person, however, as the package allows you to gather information about multiple users at once.</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="reddit-api.html#cb211-1" tabindex="-1"></a><span class="co"># this collects data about a single user</span></span>
+<span id="cb211-2"><a href="reddit-api.html#cb211-2" tabindex="-1"></a>  <span class="co"># arnold &lt;- get_user_content(&#39;GovSchwarzenegger&#39;)</span></span>
+<span id="cb211-3"><a href="reddit-api.html#cb211-3" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="reddit-api.html#cb211-4" tabindex="-1"></a><span class="co"># this function will collect data for two users, you can add as many as you want</span></span>
+<span id="cb211-5"><a href="reddit-api.html#cb211-5" tabindex="-1"></a>  <span class="co"># arnold_nasa &lt;- get_user_content(c(&#39;GovSchwarzenegger&#39;, &#39;NASA&#39;))</span></span>
+<span id="cb211-6"><a href="reddit-api.html#cb211-6" tabindex="-1"></a></span>
+<span id="cb211-7"><a href="reddit-api.html#cb211-7" tabindex="-1"></a><span class="co"># saving data</span></span>
+<span id="cb211-8"><a href="reddit-api.html#cb211-8" tabindex="-1"></a>  <span class="co"># saveRDS(arnold, file = &#39;reddit_arnold.RDS&#39;)</span></span></code></pre></div>
+<p>This returns a list. It contains basic information about the user as well lists for comments and threads they have posted. Since Arnold Schwarzenegger’s profile is very popular and active in Reddit, the list will be quite large (1.1 MB). It is important to keep this in mind if you plan to collect data about many popular user accounts.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="reddit-api.html#cb212-1" tabindex="-1"></a><span class="co"># loading the data I collected for Arnold&#39;s account</span></span>
+<span id="cb212-2"><a href="reddit-api.html#cb212-2" tabindex="-1"></a>my_arnold <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;data/reddit_arnold.RDS&#39;</span>)</span>
+<span id="cb212-3"><a href="reddit-api.html#cb212-3" tabindex="-1"></a></span>
+<span id="cb212-4"><a href="reddit-api.html#cb212-4" tabindex="-1"></a><span class="co"># this is a vector of descriptions about the account</span></span>
+<span id="cb212-5"><a href="reddit-api.html#cb212-5" tabindex="-1"></a>about <span class="ot">&lt;-</span> <span class="fu">unlist</span>(my_arnold<span class="sc">$</span>GovSchwarzenegger<span class="sc">$</span>about)</span>
+<span id="cb212-6"><a href="reddit-api.html#cb212-6" tabindex="-1"></a></span>
+<span id="cb212-7"><a href="reddit-api.html#cb212-7" tabindex="-1"></a><span class="co"># this is a data frame of all of the user&#39;s comments</span></span>
+<span id="cb212-8"><a href="reddit-api.html#cb212-8" tabindex="-1"></a>arnold_comments <span class="ot">&lt;-</span> my_arnold<span class="sc">$</span>GovSchwarzenegger<span class="sc">$</span>comments</span>
+<span id="cb212-9"><a href="reddit-api.html#cb212-9" tabindex="-1"></a></span>
+<span id="cb212-10"><a href="reddit-api.html#cb212-10" tabindex="-1"></a><span class="co"># this is a data frame of all of the threads that the user has started</span></span>
+<span id="cb212-11"><a href="reddit-api.html#cb212-11" tabindex="-1"></a>arnold_threads <span class="ot">&lt;-</span> my_arnold<span class="sc">$</span>GovSchwarzenegger<span class="sc">$</span>threads</span></code></pre></div>
+<p>Let’s check the most popular (measured by upvotes minus downvotes) thread names the former senator has created and in which subreddits he posted them.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="reddit-api.html#cb213-1" tabindex="-1"></a><span class="co"># cleaning the dataset</span></span>
+<span id="cb213-2"><a href="reddit-api.html#cb213-2" tabindex="-1"></a>arnold_threads <span class="ot">&lt;-</span> arnold_threads <span class="sc">%&gt;%</span></span>
+<span id="cb213-3"><a href="reddit-api.html#cb213-3" tabindex="-1"></a>  <span class="fu">select</span>(subreddit, title, score) <span class="sc">%&gt;%</span> <span class="co"># gets the variables we want to use</span></span>
+<span id="cb213-4"><a href="reddit-api.html#cb213-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;&quot;&#39;</span>,title,<span class="st">&#39;&quot;&#39;</span>)) <span class="sc">%&gt;%</span> <span class="co"># adds quotation marks to the titles</span></span>
+<span id="cb213-5"><a href="reddit-api.html#cb213-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="co"># arranges the data from with the highest score at the top</span></span>
+<span id="cb213-6"><a href="reddit-api.html#cb213-6" tabindex="-1"></a></span>
+<span id="cb213-7"><a href="reddit-api.html#cb213-7" tabindex="-1"></a><span class="fu">rownames</span>(arnold_threads) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="reddit-api.html#cb214-1" tabindex="-1"></a><span class="co"># a table for viewing where Arnold posts</span></span>
+<span id="cb214-2"><a href="reddit-api.html#cb214-2" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(arnold_threads, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb214-3"><a href="reddit-api.html#cb214-3" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">&#39;center&#39;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+subreddit
+</th>
+<th style="text-align:left;">
+title
+</th>
+<th style="text-align:right;">
+score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+aww
+</td>
+<td style="text-align:left;">
+“Meet the newest member of the family, Dutch!”
+</td>
+<td style="text-align:right;">
+266522
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+aww
+</td>
+<td style="text-align:left;">
+“Say hello to Schnitzel”
+</td>
+<td style="text-align:right;">
+178734
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movies
+</td>
+<td style="text-align:left;">
+“Terminator came out 35 years ago - here are some of my personal behind the scenes shots”
+</td>
+<td style="text-align:right;">
+118233
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movies
+</td>
+<td style="text-align:left;">
+“Finally filming Kung Fury 2”
+</td>
+<td style="text-align:right;">
+96316
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MasterReturns
+</td>
+<td style="text-align:left;">
+“Dutch was very happy when I got back from Cleveland last night”
+</td>
+<td style="text-align:right;">
+75899
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movies
+</td>
+<td style="text-align:left;">
+“An original storyboard from The Terminator by Jim Cameron”
+</td>
+<td style="text-align:right;">
+68475
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movies
+</td>
+<td style="text-align:left;">
+“Were back. Heres your Terminator: Dark Fate trailer that doesnt give the movie away.”
+</td>
+<td style="text-align:right;">
+67517
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bodybuilding
+</td>
+<td style="text-align:left;">
+“To my best friend, Franco”
+</td>
+<td style="text-align:right;">
+67269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movies
+</td>
+<td style="text-align:left;">
+“My character poster for Terminator: Dark Fate”
+</td>
+<td style="text-align:right;">
+64134
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bodybuilding
+</td>
+<td style="text-align:left;">
+“Thank you all for pumping me up on my birthday”
+</td>
+<td style="text-align:right;">
+63459
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cool! So Arnold’s top threads are in subreddits about cute things, movies and bodybuilding. For those who are interested, this is Dutch, the newest addition to Arnold’s family.</p>
+<div class="float">
+<img src="https://i.redd.it/fj8vqooc8nd51.jpg" style="width:30.0%" alt="Figure 1: Dutch" />
+<div class="figcaption">Figure 1: Dutch</div>
+</div>
+</div>
+<div id="social-science-examples-16" class="section level2 hasAnchor" number="20.5">
+<h2><span class="header-section-number">20.5</span> Social science examples<a href="reddit-api.html#social-science-examples-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>In the timespan from 2010 and 2020 there have been 727 manuscripts analysing Reddit <span class="citation">(<a href="#ref-proferes">Proferes et al. 2021</a>)</span>. 338 of them are journal articles. Out of these journal aritlces, around 23% have been published in social science journals. It seems that Reddit is mostly studied by sociologists and psychologists with political scientists only boasting 3 articles on Reddit during a 10 year period.</p>
+<p>Specific examples include <span class="citation">Apostolou (<a href="#ref-apostolou">2019</a>)</span> using a Reddit thread about self-reported reasons why men stay single to explore the topic through an evolutionary psychology lens. The author finds that among the most prevalent reasons that men stay single are poor flirting skills, low self-confidence and poor looks. It is argued that the change societal patterns of finding a mate for men has changed significantly over the past centuries. From pre-industrial societies where men gained access to women through conquest or through arranged marriages by parents, traits like flirting skills, looks and confidence were not important. In modern societies, however, where people are free to choose their spouses, these traits play a much bigger role.</p>
+<p>Reddit is also used for research into the extreme right. For example <span class="citation">Gaudette et al. (<a href="#ref-gaudette">2021</a>)</span> perform an analysis on a sample of most popular comments compared to random comments sampled from the <em>The_Donald</em> subreddit. The authors show that the top comments in the subreddit paint a strongly negative view and sometimes advocate violence towards Muslims and left-wingers as opposed to a random sample of comments from the subreddit. The authors argue that this encourages a collective identity of the subreddit that calls for violence against minorities and political opponents of right-wingers.</p>
+<p><span class="citation">Chipidza et al. (<a href="#ref-chipidza">2022</a>)</span> discusses the reliability of news content being discussed in regards to the COVID pandemic among conservatives and liberals in the US. The authors find that liberal subreddits discuss topics related to Trump, the White House and economic relief topics. For conservatives the primary topics of discussion are China and deaths caused by COVID. Additionally, liberal subreddits contain more articles from credible news sources compared to conservative subreddits.</p>
+
+</div>
+</div>
+<h3> References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-apostolou" class="csl-entry">
+Apostolou, Menelaos. 2019. <span>“Why <span>Men</span> <span>Stay</span> <span>Single</span>? <span>Evidence</span> from <span>Reddit</span>.”</span> <em>Evolutionary Psychological Science</em> 5 (1): 87–97. <a href="https://doi.org/10.1007/s40806-018-0163-7">https://doi.org/10.1007/s40806-018-0163-7</a>.
+</div>
+<div id="ref-chipidza" class="csl-entry">
+Chipidza, Wallace, Christopher Krewson, Nicole Gatto, Elmira Akbaripourdibazar, and Tendai Gwanzura. 2022. <span>“Ideological Variation in Preferred Content and Source Credibility on <span>Reddit</span> During the <span>COVID</span>-19 Pandemic.”</span> <em>Big Data &amp; Society</em> 9 (1): 20539517221076486. <a href="https://doi.org/10.1177/20539517221076486">https://doi.org/10.1177/20539517221076486</a>.
+</div>
+<div id="ref-gaudette" class="csl-entry">
+Gaudette, Tiana, Ryan Scrivens, Garth Davies, and Richard Frank. 2021. <span>“Upvoting Extremism: <span>Collective</span> Identity Formation and the Extreme Right on <span>Reddit</span>.”</span> <em>New Media &amp; Society</em> 23 (12): 3491–3508. <a href="https://doi.org/10.1177/1461444820958123">https://doi.org/10.1177/1461444820958123</a>.
+</div>
+<div id="ref-proferes" class="csl-entry">
+Proferes, Nicholas, Naiyan Jones, Sarah Gilbert, Casey Fiesler, and Michael Zimmer. 2021. <span>“Studying <span>Reddit</span>: <span>A</span> <span>Systematic</span> <span>Overview</span> of <span>Disciplines</span>, <span>Approaches</span>, <span>Methods</span>, and <span>Ethics</span>.”</span> <em>Social Media + Society</em> 7 (2): 205630512110190. <a href="https://doi.org/10.1177/20563051211019004">https://doi.org/10.1177/20563051211019004</a>.
+</div>
+<div id="ref-rivera" class="csl-entry">
+Rivera, Ivan. 2022. <span>“RedditExtractoR: Reddit Data Extraction Toolkit.”</span> <a href="https://CRAN.R-project.org/package=RedditExtractoR">https://CRAN.R-project.org/package=RedditExtractoR</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="13">
+<li id="fn13"><p>Communities focusing on a specific topic within Reddit like cats<a href="reddit-api.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>Posts about a specific topic in a subreddit<a href="reddit-api.html#fnref14" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overpass-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="spotify-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

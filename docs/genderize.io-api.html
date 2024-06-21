@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Genderize.io API |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Genderize.io API |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Genderize.io API |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="facebook-ad-library-api.html"/>
+<link rel="next" href="github.com-api.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="genderize.io-api" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Genderize.io API<a href="genderize.io-api.html#genderize.io-api" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><chauthors>Markus Konrad (WZB)</chauthors>
+<br><br></p>
+<p>You will need to install the following packages for this chapter (run the code):</p>
+<pre><code># install.packages(&#39;pacman&#39;)
+library(pacman)
+p_load(&#39;DemografixeR&#39;)</code></pre>
+<div id="provided-servicesdata-3" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Provided services/data<a href="genderize.io-api.html#provided-servicesdata-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>The <a href="https://genderize.io/">Genderize.io API</a> provides a service for predicting the likely gender of a person given their name. The API is provided by Danish company <em>Demografix ApS</em> that also provides APIs for predicting age (<a href="https://agify.io/">Agify.io</a>) and nationality (<a href="https://nationalize.io/">Nationalize.io</a>) for a given name (more on that later).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> The service is useful to augment a dataset of individuals with their likely gender, when at least the individuals’ given name is known.</p>
+<p>The results provided by the API should be taken with care. As with many commercial APIs, the exact data sources and methods for the genderize.io API are not disclosed. The <a href="https://genderize.io/our-data">dedicated “Our Data” page</a> only states that <em>“[o]ur data is collected from all over the web”</em> and provides a list with the amount of data that was collected for many countries (a total of over 114M entries at time of writing). <span class="citation">Wais (<a href="#ref-wais_gender_2016">2016</a>)</span> claims that scraped public social media profiles are used as data source.</p>
+<p>Another problem is that there’s only a binary categorization of gender. The categorization comes with a prediction probability estimate which in turn depends on the popularity of the name and of course the name itself (since there are many unisex names). Furthermore, gender prediction for a name may depend on country and year of birth (the Genderize.io API allows for country-specific results). One also has to keep in mind different name orders in different cultures. E.g., in North and South America as well as most of Europe it is common that the given name, from which a gender may be predicted, comes first before the family name, whereas in East Asia the given name often comes last.</p>
+<p>So in general, predicting an individual’s gender from their name is not an easy task. See <span class="citation">Wais (<a href="#ref-wais_gender_2016">2016</a>)</span> for an overview on modern gender prediction methods. You should only consider using the methods in this chapter when there’s no other way to obtain the gender information. In case you use the API, you should</p>
+<ul>
+<li>transparently report the limits of the name-based approach,</li>
+<li>use country-specific results whenever possible (see below),</li>
+<li>report the accuracy of the predictions,</li>
+<li>and use a threshold for the minimum accuracy and/or incorporate the prediction accuracy into your models.</li>
+</ul>
+<p>For gender prediction, there are also alternatives to using this API:</p>
+<ul>
+<li>the <a href="https://cran.rstudio.com/web/packages/gender/">gender package</a> provides gender prediction using historical data from the US and a few European countries (see <span class="citation">Blevins and Mullen (<a href="#ref-blevins2015jane">2015</a>)</span>)</li>
+<li><a href="https://namecensus.com/">NameCensus.com</a> provides lists of most common female and male first names in the US</li>
+<li>WikiPedia provides <a href="https://en.wikipedia.org/wiki/Category:Given_names">categories for given names</a> by gender</li>
+</ul>
+</div>
+<div id="prerequisites-3" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Prerequisites<a href="genderize.io-api.html#prerequisites-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At the time of writing, the API can be queried with up to 1000 names per day for free. There’s not even an API key required for the free tier. However, if you require more than 1000 API requests per day, you need to obtain an API key from <a href="https://store.genderize.io/">store.genderize.io</a> – see <a href="https://store.genderize.io/pricing">this page</a> for pricing.</p>
+</div>
+<div id="simple-api-call-3" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Simple API call<a href="genderize.io-api.html#simple-api-call-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>The API is very simple and basically accepts two parameters for an HTTP GET request:</p>
+<ol style="list-style-type: decimal">
+<li><code>name</code> as the given name for which gender prediction is performed; an array of up to 10 names per request can be send</li>
+<li><code>country_id</code> as optional localization parameter (given as <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> country code)</li>
+</ol>
+<p>When no <code>country_id</code> is given, the gender prediction is performed using a database of given names for <em>all</em> countries with a notable bias towards Western countries (see the numbers on the <a href="https://genderize.io/our-data">“Our Data” page</a>). If country information is known, you should provide it in the API request, as this gives more accurate, context-aware results. Especially if you’re working with names outside the Western cultural sphere, you should be aware of the Western bias in the datasets used for the predictions and make use of the localization feature.</p>
+<p>We can perform a sample request using the <code>curl</code> command in a terminal or by simply visiting the URL in a browser:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="genderize.io-api.html#cb35-1" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&#39;https://api.genderize.io?name=sasha&#39;</span></span></code></pre></div>
+<p>The result is an HTTP response with JSON formatted data which contains the predicted gender, the prediction probability estimate and the count of entries which informed the prediction. For the example requests above, the API responds with:</p>
+<pre class="text"><code>{
+  &quot;name&quot;: &quot;sasha&quot;,
+  &quot;gender&quot;: &quot;male&quot;,
+  &quot;probability&quot;: 0.51,
+  &quot;count&quot;: 13219
+}</code></pre>
+<p>This tells us that for the requested name “sasha”<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, the gender was predicted as male, but only with probability 0.51. This makes sense since this name is considered a unisex name in many countries. The prediction is based on 13219 samples in the database, which seems very solid.</p>
+<p>Now to show the influence of localization, we try the German variant of this name, “Sascha”, and append the <code>country_id</code> parameter for Germany:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="genderize.io-api.html#cb37-1" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&#39;https://api.genderize.io?name=sascha&amp;country_id=DE&#39;</span></span></code></pre></div>
+<pre class="text"><code>{
+  &quot;name&quot;: &quot;sascha&quot;,
+  &quot;gender&quot;: &quot;male&quot;,
+  &quot;probability&quot;: 0.99,
+  &quot;count&quot;: 22408,
+  &quot;country_id&quot;: &quot;DE&quot;
+}</code></pre>
+<p>We can see that the localized request for Germany predicts “sascha” as male with 99% probability, based on 22408 database entries.</p>
+<p>Interestingly, only the Latinized forms of Sasha seem to be available in the database. Neither the Cyrillic form Саша, nor other non-Latin forms like Saša return results. However, experiments with other names in non-Latin alphabets show a pattern: The German name “Jürgen” has about 700 entries in the genderize database, while “Jurgen” has almost 4000 entries. The Turkish name “Gül” exists only 36 times but “Gul” gives almost 5000 entries. A similar pattern is seen when using accents: “André” exists three times, but “Andre” more than 64,000 times. So in general, it seems you should convert all non-Latin (or non-ASCII) characters in a name to Latin counterparts in order to get better results.</p>
+<p>You can send up to ten names per request, by concatenating several <code>name[]=...</code> parameters:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="genderize.io-api.html#cb39-1" tabindex="-1"></a><span class="ex">curl</span> <span class="st">&#39;https://api.genderize.io?name[]=sasha&amp;name[]=alex&amp;name[]=alexandra&#39;</span></span></code></pre></div>
+<p>The predictions are then listed for each supplied name:</p>
+<pre class="text"><code>[
+  {&quot;name&quot;: &quot;sasha&quot;, &quot;gender&quot;: &quot;male&quot;, &quot;probability&quot;: 0.51, &quot;count&quot;: 13219},
+  {&quot;name&quot;: &quot;alex&quot;, &quot;gender&quot;: &quot;male&quot;, &quot;probability&quot;: 0.9, &quot;count&quot;: 411319},
+  {&quot;name&quot;: &quot;alexandra&quot;, &quot;gender&quot;: &quot;female&quot;, &quot;probability&quot;: 0.98, &quot;count&quot;: 122985}
+]</code></pre>
+</div>
+<div id="api-access-in-r-3" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> API access in R<a href="genderize.io-api.html#api-access-in-r-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>How can we access the API from R?</em></li>
+</ul>
+<p>There are several packages for R that provide convenient functions for communicating with the genderize.io API:</p>
+<ul>
+<li><a href="https://cloud.r-project.org/web/packages/DemografixeR/index.html">DemografixeR (CRAN)</a> – <a href="https://matbmeijer.github.io/DemografixeR/">Package website</a></li>
+<li><a href="https://github.com/eamoncaddigan/GenderGuesser">GenderGuesser</a></li>
+<li><a href="https://github.com/kalimu/genderizeR">genderizeR</a><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></li>
+</ul>
+<p>Since DemografixeR is the only package available on CRAN at time of writing, I will use this package for further demonstration. You can install the package via <code>install.packages('DemografixeR')</code>.</p>
+<div id="load-package" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Load package<a href="genderize.io-api.html#load-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once installed, the package can be loaded with the following command:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="genderize.io-api.html#cb41-1" tabindex="-1"></a><span class="fu">library</span>(DemografixeR)</span></code></pre></div>
+</div>
+<div id="the-genderize-function-and-its-arguments" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> The <code>genderize</code> function and its arguments<a href="genderize.io-api.html#the-genderize-function-and-its-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The main function to use is the <code>genderize()</code> function. The first argument is the one or more names (as character string vector) for which you want to predict the gender. So to replicate the first API call from the previous section in R, we could write:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="genderize.io-api.html#cb42-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="st">&#39;sasha&#39;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;female&quot;</code></pre>
+<p>Note that the output only consists of the gender prediction as character string vector. This is a dangerous default behavior, as it omits important information about the prediction probability and the size of the data pool used for the prediction. We need to set the <code>simplify</code> argument to <code>FALSE</code> in order to get that information in the form of a dataframe:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="genderize.io-api.html#cb44-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="st">&#39;sasha&#39;</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>   name   type count gender probability
+1 sasha gender 14512 female        0.52</code></pre>
+<p>Again, we can localize the request by using the <code>country_id</code> parameter:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="genderize.io-api.html#cb46-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="st">&#39;sascha&#39;</span>, <span class="at">country_id =</span> <span class="st">&#39;DE&#39;</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>    name   type count gender country_id probability
+1 sascha gender 22624   male         DE        0.99</code></pre>
+<p>Supplying a character string vector will predict the gender of all these names. Note that with the <code>genderize()</code> function, you’re not limited to ten names as when using the API directly. Here, we predict the gender of six names in their original and Latinized variant each. This also shows the higher counts when using only Latin characters in the query:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="genderize.io-api.html#cb48-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="fu">c</span>(<span class="st">&#39;gül&#39;</span>, <span class="st">&#39;gul&#39;</span>, <span class="st">&#39;jürgen&#39;</span>, <span class="st">&#39;jurgen&#39;</span>, <span class="st">&#39;andré&#39;</span>, <span class="st">&#39;andre&#39;</span>,</span>
+<span id="cb48-2"><a href="genderize.io-api.html#cb48-2" tabindex="-1"></a>            <span class="st">&#39;gökçe&#39;</span>, <span class="st">&#39;gokce&#39;</span>, <span class="st">&#39;jörg&#39;</span>, <span class="st">&#39;jorg&#39;</span>, <span class="st">&#39;rené&#39;</span>, <span class="st">&#39;rene&#39;</span>),</span>
+<span id="cb48-3"><a href="genderize.io-api.html#cb48-3" tabindex="-1"></a>          <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>     name   type count gender probability
+6     gül gender    NA   &lt;NA&gt;          NA
+5     gul gender    NA   &lt;NA&gt;          NA
+10 jürgen gender    NA   &lt;NA&gt;          NA
+9  jurgen gender    NA   &lt;NA&gt;          NA
+2   andré gender    NA   &lt;NA&gt;          NA
+1   andre gender    NA   &lt;NA&gt;          NA
+4   gökçe gender    NA   &lt;NA&gt;          NA
+3   gokce gender    NA   &lt;NA&gt;          NA
+8    jörg gender    NA   &lt;NA&gt;          NA
+7    jorg gender   818   male        0.98
+12   rené gender    NA   &lt;NA&gt;          NA
+11   rene gender 37687   male        0.90</code></pre>
+<p>You can also provide a different <code>country_id</code> for each name in the request:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="genderize.io-api.html#cb50-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="fu">c</span>(<span class="st">&#39;sasha&#39;</span>, <span class="st">&#39;sascha&#39;</span>), <span class="at">country_id =</span> <span class="fu">c</span>(<span class="st">&#39;RU&#39;</span>, <span class="st">&#39;DE&#39;</span>), <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>    name   type count gender country_id probability
+2  sasha gender  2690   male         RU        0.59
+1 sascha gender 22624   male         DE        0.99</code></pre>
+<p>This is especially helpful together with <code>expand.grid()</code>, which generates all combinations of values in the two vectors:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="genderize.io-api.html#cb52-1" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;sasha&#39;</span>, <span class="st">&#39;sascha&#39;</span>)</span>
+<span id="cb52-2"><a href="genderize.io-api.html#cb52-2" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;RU&#39;</span>, <span class="st">&#39;DE&#39;</span>)</span>
+<span id="cb52-3"><a href="genderize.io-api.html#cb52-3" tabindex="-1"></a>(names_cntrs <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">names =</span> names, <span class="at">countries =</span> countries,</span>
+<span id="cb52-4"><a href="genderize.io-api.html#cb52-4" tabindex="-1"></a>                            <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>   names countries
+1  sasha        RU
+2 sascha        RU
+3  sasha        DE
+4 sascha        DE</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="genderize.io-api.html#cb54-1" tabindex="-1"></a><span class="fu">genderize</span>(names_cntrs<span class="sc">$</span>names, <span class="at">country_id =</span> names_cntrs<span class="sc">$</span>countries, <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>    name   type count gender country_id probability
+4  sasha gender    NA   &lt;NA&gt;       &lt;NA&gt;          NA
+3 sascha gender    39   male         RU        0.82
+2  sasha gender    NA   &lt;NA&gt;       &lt;NA&gt;          NA
+1 sascha gender 22624   male         DE        0.99</code></pre>
+<p>Lastly, you can set the parameter <code>meta</code> to <code>TRUE</code>. This will add additional columns to the result with your rate limit (maximum daily number of requests), the remaining number of requests, the seconds until rate limit reset and the time of the request:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="genderize.io-api.html#cb56-1" tabindex="-1"></a><span class="fu">genderize</span>(<span class="st">&#39;judy&#39;</span>, <span class="at">simplify =</span> <span class="cn">FALSE</span>, <span class="at">meta =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>  name   type  count gender probability api_rate_limit api_rate_remaining api_rate_reset api_request_timestamp
+1 judy gender 225977 female           1            100                 90             NA   2024-06-21 15:57:02</code></pre>
+</div>
+<div id="provide-api-key" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Provide API key<a href="genderize.io-api.html#provide-api-key" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you bought an API key, you can provide it using the <code>apikey</code> parameter. It’s however recommended to use the <code>save_api_key()</code> function to safely store such an API key. It will then automatically be used for each request.</p>
+<p>Please be careful when dealing with API keys and never publish them.</p>
+</div>
+<div id="functions-for-access-to-other-apis" class="section level3 hasAnchor" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> Functions for access to other APIs<a href="genderize.io-api.html#functions-for-access-to-other-apis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The package also provides access to the APIs for predicting age (<a href="https://agify.io/">Agify.io</a>) and nationality (<a href="https://nationalize.io/">Nationalize.io</a>) from a name. Examples on how to do that are given on the <a href="https://matbmeijer.github.io/DemografixeR/">package’s website</a>. However, such predictions are even more problematic than the gender predictions and should never be trusted. Even the examples given on the API’s respective websites showcase foolish predictions: A “Michael” is predicted as being 70 years old, living either in the US (9% probability), in Australia (6%) or New Zealand (5%). Pinpointing an age using only a given name is nonsense and the country predictions simply won’t help you much for many names, given how many names are internationally used.</p>
+</div>
+</div>
+<div id="social-science-examples-3" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Social science examples<a href="genderize.io-api.html#social-science-examples-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>There seem to be several bibliometric studies that focus on the gender publication gap, which use the genderize.io API to estimate the gender of journal paper authors. Two notable examples are <span class="citation">Holman, Stuart-Fox, and Hauser (<a href="#ref-holman_gender_2018">2018</a>)</span> and <span class="citation">Shen et al. (<a href="#ref-shen_persistent_2018">2018</a>)</span>.</p>
+<p><span class="citation">Hipp and Konrad (<a href="#ref-hipp_has_2021">2021</a>)</span> used the genderize.io API to predict the gender from names of GitHub users (for those that provided a valid given name). This was then used to analyze the different impact of the COVID-19 pandemic on the productivity of female and male software developers.</p>
+<p>Other examples (also outside academia) are listed on the <a href="https://genderize.io/use-cases">“Use cases” page</a>.</p>
+
+</div>
+</div>
+<h3> References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-blevins2015jane" class="csl-entry">
+Blevins, Cameron, and Lincoln Mullen. 2015. <span>“Jane, John... Leslie? A Historical Method for Algorithmic Gender Prediction.”</span> <em>DHQ: Digital Humanities Quarterly</em> 9 (3).
+</div>
+<div id="ref-hipp_has_2021" class="csl-entry">
+Hipp, Lena, and Markus Konrad. 2021. <span>“Has <span>Covid</span>-19 Increased Gender Inequalities in Professional Advancement? <span>Cross</span>-Country Evidence on Productivity Differences Between Male and Female Software Developers.”</span> <em>Journal of Family Research</em>, September. <a href="https://doi.org/10.20377/jfr-697">https://doi.org/10.20377/jfr-697</a>.
+</div>
+<div id="ref-holman_gender_2018" class="csl-entry">
+Holman, Luke, Devi Stuart-Fox, and Cindy E. Hauser. 2018. <span>“The Gender Gap in Science: <span>How</span> Long Until Women Are Equally Represented?”</span> <em>PLOS Biology</em> 16 (4): e2004956. <a href="https://doi.org/10.1371/journal.pbio.2004956">https://doi.org/10.1371/journal.pbio.2004956</a>.
+</div>
+<div id="ref-shen_persistent_2018" class="csl-entry">
+Shen, Yiqin Alicia, Jason M. Webster, Yuichi Shoda, and Ione Fine. 2018. <span>“Persistent <span>Underrepresentation</span> of <span>Women</span>’s <span>Science</span> in <span>High</span> <span>Profile</span> <span>Journals</span>.”</span> <a href="https://doi.org/10.1101/275362">https://doi.org/10.1101/275362</a>.
+</div>
+<div id="ref-wais_gender_2016" class="csl-entry">
+Wais, Kamil. 2016. <span>“Gender <span>Prediction</span> <span>Methods</span> <span>Based</span> on <span>First</span> <span>Names</span> with <span class="nocase">genderizeR</span>.”</span> <em>The R Journal</em> 8 (1): 17. <a href="https://doi.org/10.32614/RJ-2016-002">https://doi.org/10.32614/RJ-2016-002</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>The author of this chapter is in no way affiliated with Demografix ApS.<a href="genderize.io-api.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Experiments showed that the API is not case-sensitive, i.e. it doesn’t matter if you query the name “sasha”, “Sasha” or “SASHA”.<a href="genderize.io-api.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>At time of writing, the package was no longer maintained and not available on CRAN anymore.<a href="genderize.io-api.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="facebook-ad-library-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="github.com-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

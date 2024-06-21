@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 25 References |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 25 References |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 25 References |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="youtube-api.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references-1" class="section level1 hasAnchor" number="25">
+<h1><span class="header-section-number">Chapter 25</span> References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div class="csl-entry">
+Apostolou, Menelaos. 2019. <span>“Why <span>Men</span> <span>Stay</span> <span>Single</span>? <span>Evidence</span> from <span>Reddit</span>.”</span> <em>Evolutionary Psychological Science</em> 5 (1): 87–97. <a href="https://doi.org/10.1007/s40806-018-0163-7">https://doi.org/10.1007/s40806-018-0163-7</a>.
+</div>
+<div class="csl-entry">
+Aslam, Salman. 2021. <span>“• Instagram by the Numbers (2021): Stats, Demographics &amp; Fun Facts.”</span> <a href="https://www.omnicoreagency.com/instagram-statistics/" class="uri">https://www.omnicoreagency.com/instagram-statistics/</a>.
+</div>
+<div class="csl-entry">
+Baertl, M. 2018. <span>“YouTube Channels, Uploads and Views: A Statistical Analysis of the Past 10 Years.”</span> <em>Convergence</em>.
+</div>
+<div class="csl-entry">
+Barrie, Christopher, and Justin Ho. 2021. <span>“academictwitteR: An r Package to Access the Twitter Academic Research Product Track V2 API Endpoint.”</span> <em>Journal of Open Source Software</em> 6 (62): 3272. <a href="https://doi.org/10.21105/joss.03272">https://doi.org/10.21105/joss.03272</a>.
+</div>
+<div class="csl-entry">
+Bedini, Farazi, I. 2014. <span>“Open Government Data: Fostering Innovation. EJournal of EDemocracy and Open Government.”</span> <em>EJournal of EDemocracy and Open Government</em>.
+</div>
+<div class="csl-entry">
+Bene, Márton, and Simon Kruschinski. 2021. <span>“Political <span>Advertising</span> on <span>Facebook</span>.”</span> In <em>Campaigning on <span>Facebook</span> in the 2019 <span>European Parliament Election</span>: <span>Informing</span>, <span>Interacting</span> with, and <span>Mobilising Voters</span></em>, edited by Jörg Haßler, Melanie Magin, Uta Russmann, and Vicente Fenoll, 283–99. Political <span>Campaigning</span> and <span>Communication</span>. <span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-030-73851-8_18">https://doi.org/10.1007/978-3-030-73851-8_18</a>.
+</div>
+<div class="csl-entry">
+Benkler, Yochai, Hal Roberts, Robert Faris, Alicia Solow-Niederman, and Bruce Etling. 2015. <span>“Social Mobilization and the Networked Public Sphere: Mapping the SOPA-PIPA Debate.”</span> <em>Political Communication</em> 32 (4): 594–624. <a href="https://doi.org/10.1080/10584609.2014.986349">https://doi.org/10.1080/10584609.2014.986349</a>.
+</div>
+<div class="csl-entry">
+Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng, Stefan Müller, and Akitaka Matsuo. 2018. <span>“<span class="nocase">quanteda: An R package for the quantitative analysis of textual data</span>.”</span> <em>Journal of Open Source Software</em> 3 (30): 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a>.
+</div>
+<div class="csl-entry">
+Berriche, Manon, and Sacha Altay. 2020. <span>“Internet Users Engage More with Phatic Posts Than with Health Misinformation on Facebook.”</span> <em>Palgrave Communications</em> 6 (1): 1–9.
+</div>
+<div class="csl-entry">
+Blevins, Cameron, and Lincoln Mullen. 2015. <span>“Jane, John... Leslie? A Historical Method for Algorithmic Gender Prediction.”</span> <em>DHQ: Digital Humanities Quarterly</em> 9 (3).
+</div>
+<div class="csl-entry">
+Brodeur, Clark, A. 2021. <span>“COVID-19, Lockdowns and Well-Being: Evidence from Google Trends.”</span> <em>Journal of Public Economics</em>.
+</div>
+<div class="csl-entry">
+Broniatowski, David A, Amelia M Jamison, Neil F Johnson, Nicolás Velasquez, Rhys Leahy, Nicholas Johnson Restrepo, Mark Dredze, and Sandra C Quinn. 2020. <span>“Facebook Pages, the <span>‘Disneyland’</span> Measles Outbreak, and Promotion of Vaccine Refusal as a Civil Right, 2009-2019.”</span> <em>Am. J. Public Health</em> 110 (S3): S312–18.
+</div>
+<div class="csl-entry">
+Brown, Rebecca C, Eileen Bendig, Tin Fischer, A David Goldwich, Harald Baumeister, and Paul L Plener. 2019. <span>“Can Acute Suicidality Be Predicted by Instagram Data? Results from Qualitative and Quantitative Language Analyses.”</span> <em>PLoS One</em> 14 (9): e0220623.
+</div>
+<div class="csl-entry">
+Brügger, Niels, Ditte Laursen, and Janne Nielsen. 2017. <span>“Exploring the Domain Names of the <span>Danish</span> Web.”</span> In <em>The <span>Web</span> as <span>History</span>: <span>Using Web Archives</span> to <span>Understand</span> the <span>Past</span> and the <span>Present</span></em>, edited by Niels Brügger and Ralph Schroeder. <span>UCL Press</span>. <a href="https://doi.org/10.2307/j.ctt1mtz55k">https://doi.org/10.2307/j.ctt1mtz55k</a>.
+</div>
+<div class="csl-entry">
+Bruns, Axel. 2019. <span>“After the <span>APIcalypse</span>: Social Media Platforms and Their Fight Against Critical Scholarly Research.”</span> <em>Information, Communication &amp; Society</em> 22 (11): 1544–66. <a href="https://doi.org/10.1080/1369118X.2019.1637447">https://doi.org/10.1080/1369118X.2019.1637447</a>.
+</div>
+<div class="csl-entry">
+Bruns, Axel, Stephen Harrington, and Edward Hurcombe. 2020. <span>“<span>‘Corona? 5G? Or Both?’</span>: The Dynamics of <span>COVID-19/5G</span> Conspiracy Theories on Facebook.”</span> <em>Media International Australia</em> 177 (1): 12–29.
+</div>
+<div class="csl-entry">
+Burgess, Jean, and Axel Bruns. 2015. <span>“Easy Data, Hard Data: The Politics and Pragmatics of Twitter Research After the Computational Turn.”</span> <em>Compromised Data: From Social Media to Big Data</em>. Bloomsbury Academic New York, NY.
+</div>
+<div class="csl-entry">
+Calvo, Dafne, Lorena Cano-Orón, and Tomás Baviera. 2021. <span>“Global <span>Spaces</span> for <span>Local Politics</span>: <span>An Exploratory Analysis</span> of <span>Facebook Ads</span> in <span>Spanish Election Campaigns</span>.”</span> <em>Social Sciences</em> 10 (7): 271. <a href="https://doi.org/10.3390/socsci10070271">https://doi.org/10.3390/socsci10070271</a>.
+</div>
+<div class="csl-entry">
+Cano-Orón, Lorena, Dafne Calvo, Guillermo López García, and Tomás Baviera. 2021. <span>“Disinformation in <span>Facebook Ads</span> in the 2019 <span>Spanish General Election Campaigns</span>.”</span> <em>Media and Communication</em> 9 (1): 217–28. <a href="https://doi.org/10.17645/mac.v9i1.3335">https://doi.org/10.17645/mac.v9i1.3335</a>.
+</div>
+<div class="csl-entry">
+Capozzi, Arthur, Gianmarco De Francisci Morales, Yelena Mejova, Corrado Monti, André Panisson, and Daniela Paolotti. 2021. <span>“Clandestino or <span>Rifugiato</span>? <span class="nocase">Anti-immigration Facebook Ad Targeting</span> in <span>Italy</span>.”</span> In <em>Proceedings of the 2021 <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em>, 1–15. <span>Yokohama Japan</span>: <span>ACM</span>. <a href="https://doi.org/10.1145/3411764.3445082">https://doi.org/10.1145/3411764.3445082</a>.
+</div>
+<div class="csl-entry">
+Chatziasimidis, Fragkiskos, and Ioannis Stamelos. 2015. <span>“Data Collection and Analysis of GitHub Repositories and Users.”</span> In <em>2015 6th International Conference on Information, Intelligence, Systems and Applications (IISA)</em>, 1–6. <a href="https://doi.org/10.1109/IISA.2015.7388026">https://doi.org/10.1109/IISA.2015.7388026</a>.
+</div>
+<div class="csl-entry">
+Chipidza, Wallace, Christopher Krewson, Nicole Gatto, Elmira Akbaripourdibazar, and Tendai Gwanzura. 2022. <span>“Ideological Variation in Preferred Content and Source Credibility on <span>Reddit</span> During the <span>COVID</span>-19 Pandemic.”</span> <em>Big Data &amp; Society</em> 9 (1): 20539517221076486. <a href="https://doi.org/10.1177/20539517221076486">https://doi.org/10.1177/20539517221076486</a>.
+</div>
+<div class="csl-entry">
+Chrisinger, Benjamin W., Eliza W. Kinsey, Ellie Pavlick, and Chris Callison-Burch. 2021. <span>“SNAP Judgments into the Digital Age: Reporting on Food Stamps Varies Significantly with Time, Publication Type, and Political Leaning.”</span> <em>Commun. Methods Meas.</em>, November, 1–18.
+</div>
+<div class="csl-entry">
+Clemm von Hohenberg, Bernhard. 2022. <span>“Truth and Bias, Left and Right.”</span>
+</div>
+<div class="csl-entry">
+Corrêa, Corrêa, A. S. 2015. <span>“A Collaborative-Oriented Middleware for Structuring Information to Open Government Data.”</span> <em>Proceedings of the 16th Annual International Conference on Digital Government Research</em>.
+</div>
+<div class="csl-entry">
+Cosentino, Valerio, Javier Luis Cánovas Izquierdo, and Jordi Cabot. 2016. <span>“<a href="">Findings from GitHub: Methods, Datasets and Limitations</a>.”</span> In <em>2016 IEEE/ACM 13th Working Conference on Mining Software Repositories (MSR)</em>, 137–41.
+</div>
+<div class="csl-entry">
+Djourelova, Milena, Ruben Durante, Elliot Motte, and Eleonora Patacchini. 2024. <span>“Experience, Narratives, and Climate Change Beliefs.”</span> Working Paper.
+</div>
+<div class="csl-entry">
+Dobbrick, Timo, Julia Jakob, Chung-Hong Chan, and Hartmut Wessler. 2021. <span>“Enhancing <span>Theory-Informed</span> Dictionary Approaches with <span>‘Glass-Box’</span> Machine Learning: The Case of Integrative Complexity in Social Media Comments.”</span> <em>Commun. Methods Meas.</em>, November, 1–18.
+</div>
+<div class="csl-entry">
+Edelson, Laura, Tobias Lauinger, and Damon McCoy. 2020. <span>“A <span>Security Analysis</span> of the <span>Facebook Ad Library</span>.”</span> In <em>2020 <span>IEEE Symposium</span> on <span>Security</span> and <span>Privacy</span> (<span>SP</span>)</em>, 661–78. <span>San Francisco, CA, USA</span>: <span>IEEE</span>. <a href="https://doi.org/10.1109/SP40000.2020.00084">https://doi.org/10.1109/SP40000.2020.00084</a>.
+</div>
+<div class="csl-entry">
+Edmondson, Mark. 2017. <span>“Google Cloud Speech <span>API</span>.”</span> <a href="https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html" class="uri">https://mran.microsoft.com/snapshot/2017-09-27/web/packages/googleLanguageR/vignettes/speech.html</a>.
+</div>
+<div class="csl-entry">
+ElBahrawy, Abeer, Laura Alessandretti, and Andrea Baronchelli. 2019. <span>“Wikipedia and Cryptocurrencies: Interplay Between Collective Attention and Market Performance.”</span> <em>Frontiers in Blockchain</em> 2: 12.
+</div>
+<div class="csl-entry">
+Evsyukova, Yulia, Felix Rusche, and Wladislaw Mill. 2023. <span>“LinkedOut? A Field Experiment on Discrimination in Job Network Formation.”</span> CRC TR 224 Discussion Paper Series No. 482. <a href="https://www.crctr224.de/research/discussion-papers/archive/dp482">https://www.crctr224.de/research/discussion-papers/archive/dp482</a>.
+</div>
+<div class="csl-entry">
+Facebook for Developers. 2021. <span>“Instagram Basic Display <span>API</span>.”</span> <a href="https://developers.facebook.com/docs/instagram-basic-display-api/" class="uri">https://developers.facebook.com/docs/instagram-basic-display-api/</a>.
+</div>
+<div class="csl-entry">
+<span>“FAQs.”</span> 2022. <a href="https://www.openstreetmap.de/faq.html#was_ist_osm">https://www.openstreetmap.de/faq.html#was_ist_osm</a>.
+</div>
+<div class="csl-entry">
+Ferwerda, Bruce, Markus Schedl, and Marko Tkalcic. 2015. <span>“Predicting Personality Traits with Instagram Pictures.”</span> In <em>Proceedings of the 3rd Workshop on Emotions and Personality in Personalized Systems 2015</em>, 7–10. EMPIRE ’15. New York, NY, USA: Association for Computing Machinery.
+</div>
+<div class="csl-entry">
+Fowler, Erika Franklin, Michael M. Franz, Gregory J. Martin, Zachary Peskowitz, and Travis N. Ridout. 2021. <span>“Political <span>Advertising Online</span> and <span>Offline</span>.”</span> <em>American Political Science Review</em> 115 (1): 130–49. <a href="https://doi.org/10.1017/S0003055420000696">https://doi.org/10.1017/S0003055420000696</a>.
+</div>
+<div class="csl-entry">
+Gaudette, Tiana, Ryan Scrivens, Garth Davies, and Richard Frank. 2021. <span>“Upvoting Extremism: <span>Collective</span> Identity Formation and the Extreme Right on <span>Reddit</span>.”</span> <em>New Media &amp; Society</em> 23 (12): 3491–3508. <a href="https://doi.org/10.1177/1461444820958123">https://doi.org/10.1177/1461444820958123</a>.
+</div>
+<div class="csl-entry">
+Gavras, Konstantin. 2022. <span>“The Conditions and Nature of Europeanized Public Discourse ? A Multi-Lingual QTA Analysis of Public Discourses in Europe Using the Internet Archive, 2016-2019.”</span> PhD thesis, Mannheim. <a href="https://madoc.bib.uni-mannheim.de/62270/">https://madoc.bib.uni-mannheim.de/62270/</a>.
+</div>
+<div class="csl-entry">
+Gavras, Konstantin, Jan Karem Höhne, Annelies G Blom, and Harald Schoen. 2022. <span>“Innovating the Collection of Open-Ended Answers: The Linguistic and Content Characteristics of Written and Oral Answers to Political Attitude Questions.”</span> <em>J. R. Stat. Soc. Ser. A Stat. Soc.</em> tba (tba): 1–19.
+</div>
+<div class="csl-entry">
+Gavras, Konstantin, and Lukas Isermann. 2022. <em>archiveRetriever: Retrieve Archived Web Pages from the ’Internet Archive’</em>. <a href="https://CRAN.R-project.org/package=archiveRetriever">https://CRAN.R-project.org/package=archiveRetriever</a>.
+</div>
+<div class="csl-entry">
+Gozzi, Nicolò, Michele Tizzani, Michele Starnini, Fabio Ciulla, Daniela Paolotti, André Panisson, and Nicola Perra. 2020. <span>“Collective Response to Media Coverage of the COVID-19 Pandemic on Reddit and Wikipedia: Mixed-Methods Analysis.”</span> <em>Journal of Medical Internet Research</em> 22 (10): e21597.
+</div>
+<div class="csl-entry">
+Grimmer, Justin, and Brandon M Stewart. 2013. <span>“Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.”</span> <em>Polit. Anal.</em> 21 (3): 267–97.
+</div>
+<div class="csl-entry">
+Haim, Mario, Andreas Graefe, and Hans-Bernd Brosius. 2018. <span>“Burst of the Filter Bubble?”</span> <em>Digital Journalism</em> 6 (3): 330–43. <a href="https://doi.org/10.1080/21670811.2017.1338145">https://doi.org/10.1080/21670811.2017.1338145</a>.
+</div>
+<div class="csl-entry">
+Hale, Scott A., Grant Blank, and Victoria D. Alexander. 2017. <span>“Live Versus Archive: <span>Comparing</span> a Web Archive to a Population of Web Pages.”</span> In <em>The <span>Web</span> as <span>History</span>: <span>Using Web Archives</span> to <span>Understand</span> the <span>Past</span> and the <span>Present</span></em>, edited by Niels Brügger and Ralph Schroeder. <span>UCL Press</span>. <a href="https://doi.org/10.2307/j.ctt1mtz55k">https://doi.org/10.2307/j.ctt1mtz55k</a>.
+</div>
+<div class="csl-entry">
+Hale, Scott A., Taha Yasseri, Josh Cowls, Eric T. Meyer, Ralph Schroeder, and Helen Margetts. 2014. <span>“Mapping the <span>UK</span> Webspace: Fifteen Years of British Universities on the Web.”</span> In <em>Proceedings of the 2014 <span>ACM</span> Conference on <span>Web</span> Science - <span>WebSci</span> ’14</em>, 62–70. <span>Bloomington, Indiana, USA</span>: <span>ACM Press</span>. <a href="https://doi.org/10.1145/2615569.2615691">https://doi.org/10.1145/2615569.2615691</a>.
+</div>
+<div class="csl-entry">
+Haßler, Jörg, Anna-Katharina Wurst, Marc Jungblut, and Katharina Schlosser. 2021. <span>“Influence of the Pandemic Lockdown on Fridays for Future’s Hashtag Activism.”</span> <em>New Media &amp; Society</em>, 14614448211026575. https://doi.org/<a href="https://doi.org/10.1177/14614448211026575">https://doi.org/10.1177/14614448211026575</a>.
+</div>
+<div class="csl-entry">
+Hintze, P, and T. Lakes. 2009. <span>“Geographically Referenced Data for Social Science.”</span> Working {Paper} No. 125. German Council for Social; Economic Data (RatSWD). <a href="http://ssrn.com/abstract=1498449">http://ssrn.com/abstract=1498449</a>.
+</div>
+<div class="csl-entry">
+Hipp, Lena, and Markus Konrad. 2021. <span>“Has <span>Covid</span>-19 Increased Gender Inequalities in Professional Advancement? <span>Cross</span>-Country Evidence on Productivity Differences Between Male and Female Software Developers.”</span> <em>Journal of Family Research</em>, September. <a href="https://doi.org/10.20377/jfr-697">https://doi.org/10.20377/jfr-697</a>.
+</div>
+<div class="csl-entry">
+Holman, Luke, Devi Stuart-Fox, and Cindy E. Hauser. 2018. <span>“The Gender Gap in Science: <span>How</span> Long Until Women Are Equally Represented?”</span> <em>PLOS Biology</em> 16 (4): e2004956. <a href="https://doi.org/10.1371/journal.pbio.2004956">https://doi.org/10.1371/journal.pbio.2004956</a>.
+</div>
+<div class="csl-entry">
+Hosseinmardi, Homa, Sabrina Arredondo Mattson, Rahat Ibn Rafiq, Richard Han, Qin Lv, and Shivakant Mishr. 2015. <span>“Prediction of Cyberbullying Incidents on the Instagram Social Network,”</span> August. <a href="https://arxiv.org/abs/1508.06257">https://arxiv.org/abs/1508.06257</a>.
+</div>
+<div class="csl-entry">
+Hu, Yuheng, L Manikonda, and S Kambhampati. 2014. <span>“What We Instagram: A First Analysis of Instagram Photo Content and User Types.”</span> <em>ICWSM</em>.
+</div>
+<div class="csl-entry">
+Huckins, Jeremy F, Alex W daSilva, Weichen Wang, Elin Hedlund, Courtney Rogers, Subigya K Nepal, Jialing Wu, et al. 2020. <span>“Mental Health and Behavior of College Students During the Early Phases of the COVID-19 Pandemic: Longitudinal Smartphone and Ecological Momentary Assessment Study.”</span> <em>Journal of Medical Internet Research</em> 22 (6): e20185. <a href="https://doi.org/10.2196/20185">https://doi.org/10.2196/20185</a>.
+</div>
+<div class="csl-entry">
+Instagram. 2021. <span>“Instagram Developer Documentation.”</span> <a href="https://www.instagram.com/developer/" class="uri">https://www.instagram.com/developer/</a>.
+</div>
+<div class="csl-entry">
+Internet Archive. 2016. <em>Wayback CDX Server API - BETA</em>. <a href="https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server#readme">https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server#readme</a>.
+</div>
+<div class="csl-entry">
+———. 2022. <span>“About the Internet Archive.”</span> 2022. <a href="https://archive.org/about/">https://archive.org/about/</a>.
+</div>
+<div class="csl-entry">
+Kearney, Michael. 2019. <span>“Rtweet: Collecting and Analyzing Twitter Data.”</span> <em>Journal of Open Source Software</em> 4 (42): 1829. <a href="https://doi.org/10.21105/joss.01829">https://doi.org/10.21105/joss.01829</a>.
+</div>
+<div class="csl-entry">
+Konrad, Markus. 2020. <span>“Using Google Places Data to Analyze Changes in Mobility During the <span>COVID-19</span> Pandemic.”</span> <a href="https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/" class="uri">https://datascience.blog.wzb.eu/2020/05/11/using-google-places-data-to-analyze-changes-in-mobility-during-the-covid-19-pandemic/</a>.
+</div>
+<div class="csl-entry">
+Lacognata, Anthony, and Jennifer Poole. 2021. <span>“The Melodies of Politics: Assessing a Correlation Between Music Taste and Political Views with Spotify.”</span> <em>Journal of Student Research</em> 10 (November). <a href="https://doi.org/10.47611/jsrhs.v10i3.1898">https://doi.org/10.47611/jsrhs.v10i3.1898</a>.
+</div>
+<div class="csl-entry">
+Larsson, Anders Olof. 2020. <span>“Right-Wingers on the Rise Online: Insights from the 2018 Swedish Elections.”</span> <em>New Media &amp; Society</em> 22 (12): 2108–27.
+</div>
+<div class="csl-entry">
+Lima, Antonio, Luca Rossi, and Mirco Musolesi. 2014. <span>“Coding Together at Scale: GitHub as a Collaborative Social Network.”</span> In <em>Eighth International AAAI Conference on Weblogs and Social Media</em>.
+</div>
+<div class="csl-entry">
+Littman, Justin, Daniel Chudnov, Daniel Kerchner, Christie Peterson, Yecheng Tan, Rachel Trent, Rajat Vij, and Laura Wrubel. 2018. <span>“<span class="nocase">API-based</span> Social Media Collecting as a Form of Web Archiving.”</span> <em>International Journal on Digital Libraries</em> 19 (1): 21–38. <a href="https://doi.org/10.1007/s00799-016-0201-7">https://doi.org/10.1007/s00799-016-0201-7</a>.
+</div>
+<div class="csl-entry">
+Liu, Liu, C. 2018. <span>“Open Government Data: The German Government Is Moving.”</span> <em>Asia-Pacific Social Science and Modern Education Conference (SSME 2018)</em>.
+</div>
+<div class="csl-entry">
+MacTaggart, Andrew. 2018. <span>“Pop Music and Politics: Tracking Political Trends Through the Hot 100 Chart, 1959-2016 - ProQuest.”</span> Harvard University. <a href="https://www.proquest.com/docview/2487180443?fromopenview=true&amp;pq-origsite=gscholar&amp;parentSessionId=PiWLVy66xd%2FXPi84svQkAEg0ze49z52W1qhA3%2BBQlVs%3D">https://www.proquest.com/docview/2487180443?fromopenview=true&amp;pq-origsite=gscholar&amp;parentSessionId=PiWLVy66xd%2FXPi84svQkAEg0ze49z52W1qhA3%2BBQlVs%3D</a>.
+</div>
+<div class="csl-entry">
+Margolin, Drew B, Sasha Goodman, Brian Keegan, Yu-Ru Lin, and David Lazer. 2016. <span>“Wiki-Worthy: Collective Judgment of Candidate Notability.”</span> <em>Information, Communication &amp; Society</em> 19 (8): 1029–45.
+</div>
+<div class="csl-entry">
+Marienfeld, Schieferdecker, F. 2013. <span>“Metadata Aggregation at GovData.de: An Experience Report.”</span> <em>Proceedings of the 9th International Symposium on Open Collaboration</em>.
+</div>
+<div class="csl-entry">
+Matamoros-Fernández, Ariadna, and Johan Farkas. 2021. <span>“Racism, Hate Speech, and Social Media: A Systematic Review and Critique.”</span> <em>Television &amp; New Media</em> 22 (2): 205–24. https://doi.org/<a href="http://dx.doi.org/10.1177/1527476420982230">http://dx.doi.org/10.1177/1527476420982230</a>.
+</div>
+<div class="csl-entry">
+Mavragani, Tsagarakis, A. 2019. <span>“Predicting Referendum Results in the Big Data Era.”</span> <em>J Big Data</em>.
+</div>
+<div class="csl-entry">
+Milligan, Ian, Nick Ruest, and Jimmy Lin. 2016. <span>“Content <span>Selection</span> and <span>Curation</span> for <span>Web Archiving</span>: <span>The Gatekeepers</span> Vs. The <span>Masses</span>.”</span> In <em>Proceedings of the 16th <span>ACM</span>/<span>IEEE-CS</span> on <span>Joint Conference</span> on <span>Digital Libraries</span></em>, 107–10. <span>Newark New Jersey USA</span>: <span>ACM</span>. https://doi.org/<a href="http://dx.doi.org/10.1145/2910896.2910913">http://dx.doi.org/10.1145/2910896.2910913</a>.
+</div>
+<div class="csl-entry">
+Newman, Nic, Richard Fletcher, Anne Schulz, Simge Andi, Craig T Robertson, and Rasmus Kleis Nielsen. 2021. <span>“<span class="nocase">Reuters Institute digital news report 2021</span>.”</span>
+</div>
+<div class="csl-entry">
+Obadimu, Mead, A. 2019. <span>“Identifying Toxicity Within Youtube Video Comment.”</span> <em>In International Conference on Social Computing, Behavioral-Cultural Modeling and Prediction and Behavior Representation in Modeling and Simulation</em>.
+</div>
+<div class="csl-entry">
+Ostermann, K., Eppelsheimer, J., Gläser, N., Haller, P., and Oertel, M. 2022. <span>“Geodata in Labor Market Research: <span>Trends</span>, Potentials, and Perspectives”</span> 1 (115).
+</div>
+<div class="csl-entry">
+<span>“Overpass API.”</span> 2022. <a href="https://wiki.openstreetmap.org/wiki/Overpass_API">https://wiki.openstreetmap.org/wiki/Overpass_API</a>.
+</div>
+<div class="csl-entry">
+<span>“Overpass API/Applications.”</span> 2022. <a href="https://wiki.openstreetmap.org/wiki/Overpass_API/Applications">https://wiki.openstreetmap.org/wiki/Overpass_API/Applications</a>.
+</div>
+<div class="csl-entry">
+Prado-Román C, Orden-Cruz C., Gómez-Martínez R. 2021. <span>“Google Trends as a Predictor of Presidential Elections: The United States Versus Canada.”</span> <em>American Behavioral Scientist</em>.
+</div>
+<div class="csl-entry">
+Prates, Marcelo O R, Pedro H C Avelar, and Luis Lamb. 2018. <span>“Assessing Gender Bias in Machine Translation – a Case Study with Google Translate,”</span> September. <a href="https://arxiv.org/abs/1809.02208">https://arxiv.org/abs/1809.02208</a>.
+</div>
+<div class="csl-entry">
+Proferes, Nicholas, Naiyan Jones, Sarah Gilbert, Casey Fiesler, and Michael Zimmer. 2021. <span>“Studying <span>Reddit</span>: <span>A</span> <span>Systematic</span> <span>Overview</span> of <span>Disciplines</span>, <span>Approaches</span>, <span>Methods</span>, and <span>Ethics</span>.”</span> <em>Social Media + Society</em> 7 (2): 205630512110190. <a href="https://doi.org/10.1177/20563051211019004">https://doi.org/10.1177/20563051211019004</a>.
+</div>
+<div class="csl-entry">
+Proksch, Sven-Oliver, Christopher Wratil, and Jens Wäckerle. 2019. <span>“Testing the Validity of Automatic Speech Recognition for Political Text Analysis.”</span> <em>Polit. Anal.</em> 27 (3): 339–59.
+</div>
+<div class="csl-entry">
+Puschmann, Cornelius, and Mario Haim. 2021. <span>“useNews.”</span> <a href="https://doi.org/10.17605/OSF.IO/UZCA3">https://doi.org/10.17605/OSF.IO/UZCA3</a>.
+</div>
+<div class="csl-entry">
+Quarati, Alfonso, and Monica De Martino. 2019. <span>“Open Government Data Usage: A Brief Overview.”</span> In <em><span>IDEAS</span> 2019, 23rd International Database Engineering &amp; Applications Symposium</em>. unknown.
+</div>
+<div class="csl-entry">
+Rauchfleisch, Adrian, Dario Siegen, and Daniel Vogler. 2021. <span>“How COVID-19 Displaced Climate Change: Mediated Climate Change Activism and Issue Attention in the Swiss Media and Online Sphere.”</span> <em>Environmental Communication</em>, November, 1–9. <a href="https://doi.org/10.1080/17524032.2021.1990978">https://doi.org/10.1080/17524032.2021.1990978</a>.
+</div>
+<div class="csl-entry">
+Revilla, Melanie, and Mick P Couper. 2021. <span>“Improving the Use of Voice Recording in a Smartphone Survey.”</span> <em>Soc. Sci. Comput. Rev.</em> 39 (6): 1159–78.
+</div>
+<div class="csl-entry">
+Rieder, Matamoros-Fernández, B. 2018. <span>“From Ranking Algorithms to <span>‘Ranking Cultures’</span>: Investigating the Modulation of Visibility in YouTube Search Results.”</span> <em>Convergence</em>.
+</div>
+<div class="csl-entry">
+Rivera, Ivan. 2022. <span>“RedditExtractoR: Reddit Data Extraction Toolkit.”</span> <a href="https://CRAN.R-project.org/package=RedditExtractoR">https://CRAN.R-project.org/package=RedditExtractoR</a>.
+</div>
+<div class="csl-entry">
+Roberts, Hal, Rahul Bhargava, Linas Valiukas, Dennis Jen, Momin M Malik, Cindy Bishop, Emily Ndulue, et al. 2021. <span>“<span class="nocase">Media Cloud: Massive Open Source Collection of Global News on the Open Web</span>.”</span> <em>arXiv Preprint arXiv:2104.03702</em>.
+</div>
+<div class="csl-entry">
+Royé, Dominic. 2018. <span>“Accessing <span>OpenStreetMap</span> Data with <span>R</span>.”</span> <a href="https://www.r-bloggers.com/2018/11/accessing-openstreetmap-data-with-r/">https://www.r-bloggers.com/2018/11/accessing-openstreetmap-data-with-r/</a>.
+</div>
+<div class="csl-entry">
+Rudnytskyi, Iegor. 2023. <em>Openai: R Wrapper for OpenAI API</em>. <a href="https://github.com/irudnyts/openai">https://github.com/irudnyts/openai</a>.
+</div>
+<div class="csl-entry">
+Salem, Hamza, and Fabian Stephany. 2021. <span>“Wikipedia: A Challenger’s Best Friend? Utilizing Information-Seeking Behaviour Patterns to Predict US Congressional Elections.”</span> <em>Information, Communication &amp; Society</em>, 1–27.
+</div>
+<div class="csl-entry">
+Schmøkel, Rasmus, and Michael Bossetta. 2021. <span>“<span>FBAdLibrarian</span> and <span>Pykognition</span>: Open Science Tools for the Collection and Emotion Detection of Images in <span>Facebook</span> Political Ads with Computer Vision.”</span> <em>Journal of Information Technology &amp; Politics</em> 0 (0): 1–11. <a href="https://doi.org/10.1080/19331681.2021.1928579">https://doi.org/10.1080/19331681.2021.1928579</a>.
+</div>
+<div class="csl-entry">
+Schober, Michael F, Frederick G Conrad, Christopher Antoun, Patrick Ehlen, Stefanie Fail, Andrew L Hupp, Michael Johnston, Lucas Vickers, H Yanna Yan, and Chan Zhang. 2015. <span>“Precision and Disclosure in Text and Voice Interviews on Smartphones.”</span> <em>PLoS One</em> 10 (6): e0128337.
+</div>
+<div class="csl-entry">
+Shen, Yiqin Alicia, Jason M. Webster, Yuichi Shoda, and Ione Fine. 2018. <span>“Persistent <span>Underrepresentation</span> of <span>Women</span>’s <span>Science</span> in <span>High</span> <span>Profile</span> <span>Journals</span>.”</span> <a href="https://doi.org/10.1101/275362">https://doi.org/10.1101/275362</a>.
+</div>
+<div class="csl-entry">
+Silge, Julia, and David Robinson. 2016. <span>“<span class="nocase">tidytext: Text Mining and Analysis Using Tidy Data Principles in R</span>.”</span> <em>Journal of Open Source Software</em> 1 (3). <a href="https://doi.org/10.21105/joss.00037">https://doi.org/10.21105/joss.00037</a>.
+</div>
+<div class="csl-entry">
+Song, Hemmi, Jon Chun, and Katherine Elkins. 2021. <span>“Tracking the Emotion of Music Across the Covid-19 Pandemic.”</span> In. <a href="https://doi.org/10.3109/10673229.2011.549769">https://doi.org/10.3109/10673229.2011.549769</a>.
+</div>
+<div class="csl-entry">
+Steinberg, S. J., and S. L. Steinberg. 2006. <em><span>GIS</span>: <span>Geographic</span> <span>Information</span> <span>Systems</span> for the <span>Social</span> <span>Sciences</span>: <span>Investigating</span> <span>Space</span> and <span>Place</span>.</em> Thousand Oaks, London, New Delhi: SAGE Publications.
+</div>
+<div class="csl-entry">
+Sun, Seungjong, Eungu Lee, Dongyan Nan, Xiangying Zhao, Wonbyung Lee, Bernard J. Jansen, and Jang Hyun Kim. 2024. <span>“Random Silicon Sampling: Simulating Human Sub-Population Opinion Using a Large Language Model Based on Group-Level Demographic Information.”</span> <a href="https://arxiv.org/abs/2402.18144">https://arxiv.org/abs/2402.18144</a>.
+</div>
+<div class="csl-entry">
+Tankovska, H. n.d. <span>“Topic: Instagram.”</span> <a href="https://www.statista.com/topics/1882/instagram/" class="uri">https://www.statista.com/topics/1882/instagram/</a>.
+</div>
+<div class="csl-entry">
+Wais, Kamil. 2016. <span>“Gender <span>Prediction</span> <span>Methods</span> <span>Based</span> on <span>First</span> <span>Names</span> with <span class="nocase">genderizeR</span>.”</span> <em>The R Journal</em> 8 (1): 17. <a href="https://doi.org/10.32614/RJ-2016-002">https://doi.org/10.32614/RJ-2016-002</a>.
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="youtube-api.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

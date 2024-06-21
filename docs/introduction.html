@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Introduction |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Introduction |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Introduction |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="best-practices.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This project <em>APIs for Social Scientists: A collaborative Review</em> is an outcome of the seminar <em>Computational Social Science</em> (CSS) taught at the University of Mannheim in 2021. While teaching the seminar, we had trouble finding short reviews of APIs with quick R-code examples. Fortunately, almost everyone participating in the seminar was motivated enough to write a quick API review. Hopefully, our resource will help future students to start diving into different APIs.</p>
+<p>Below we review different data- and service-APIs that may be useful to social scientists. The chapters always include a simple R code example as well as references to social science research that has relied on them. The idea is to provide short reviews of max. 10 pages for the corresponding API with code to get you started. Each chapter follows a systematic set of questions:</p>
+<ul>
+<li>What data/service is provided by the API? (+ who provides it?)</li>
+<li>What are the prerequisites to access the API (e.g., authentication)?</li>
+<li>What does a simple API call look like?</li>
+<li>How can we access the API from R (httr + other packages)?</li>
+<li>Are there social science research examples using the API?</li>
+</ul>
+<div id="prerequisites-authentication" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Prerequisites: Authentication<a href="introduction.html#prerequisites-authentication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A lot of the APIs require that you authenticate with the API provider. The underlying script of this review is written in such a way that it contains R chunks for authentication, however they will not be visible in the examples below (we only show placeholders for you to recognize at which step you will need to authenticate). These chunks in most cases make use of so-called keys in JSON format (e.g., service account key for Google APIs). However cloning the corresponding <a href="%22https://github.com/paulcbauer/apis_for_social_scientists_a_review%22">repository</a> of this review will not result in giving you the keys, hence in order to replicate our API calls, you will have to generate and use your own individual keys.</p>
+<!--As a consequence we can not make the corresponding [github repository public](https://github.com/paulcbauer/apis_for_social_scientists_a_review).-->
+</div>
+<div id="prerequisites-software-packages" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Prerequisites: Software &amp; packages<a href="introduction.html#prerequisites-software-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The code examples rely on R and different packages thereof. It is probably easiest if you install all of them in one go using the code below. The <code>p_load()</code> function (<code>pacman</code> package) checks whether packages are installed. If not, they are installed and loaded.</p>
+<!-- add all used packages -->
+<pre><code>## # install.packages(&#39;pacman&#39;)
+## library(pacman)
+## p_load(&#39;checkpoint&#39;, &#39;httr&#39;,
+## &#39;memoise&#39;, &#39;googleway&#39;, &#39;httr&#39;, &#39;tidyverse&#39;, &#39;ckanr&#39;, &#39;jsonlite&#39;, &#39;readxl&#39;,
+## &#39;curl&#39;, &#39;httr&#39;, &#39;devtools&#39;, &#39;RCrowdTangle&#39;, &#39;dplyr&#39;, &#39;jsonlite&#39;, &#39;httr&#39;,
+## &#39;remotes&#39;, &#39;dplyr&#39;, &#39;ggplot2&#39;, &#39;tidyr&#39;, &#39;Radlibrary&#39;, &#39;dplyr&#39;, &#39;tidyr&#39;, &#39;DT&#39;,
+## &#39;DemografixeR&#39;, &#39;jsonlite&#39;, &#39;httr&#39;, &#39;httr&#39;, &#39;dplyr&#39;, &#39;httr&#39;, &#39;googleLanguageR&#39;,
+## &#39;tidyverse&#39;, &#39;tm&#39;, &#39;ggwordcloud&#39;, &#39;httr&#39;, &#39;googleway&#39;, &#39;ggplot2&#39;, &#39;tidyverse&#39;,
+## &#39;mapsapi&#39;, &#39;stars&#39;, &#39;tidyverse&#39;, &#39;googleLanguageR&#39;, &#39;googleLanguageR&#39;, &#39;httr&#39;,
+## &#39;gtrendsR&#39;, &#39;ggplot2&#39;, &#39;dplyr&#39;, &#39;httr&#39;, &#39;httr&#39;, &#39;httr&#39;, &#39;jsonlite&#39;, &#39;tibble&#39;,
+## &#39;archiveRetriever&#39;, &#39;httr&#39;, &#39;jsonlite&#39;, &#39;stringr&#39;, &#39;openai&#39;, &#39;httr&#39;, &#39;stringr&#39;,
+## &#39;mediacloud&#39;, &#39;tidytext&#39;, &#39;quanteda&#39;, &#39;quanteda&#39;, &#39;tidyverse&#39;, &#39;osmdata&#39;, &#39;sf&#39;,
+## &#39;ggmap&#39;, &#39;osmdata&#39;, &#39;osmdata&#39;, &#39;osmdata&#39;, &#39;ggmap&#39;, &#39;kableExtra&#39;, &#39;spotifyr&#39;,
+## &#39;tidyverse&#39;, &#39;lubridate&#39;, &#39;httr&#39;, &#39;academictwitteR&#39;, &#39;tidyverse&#39;, &#39;lubridate&#39;,
+## &#39;tidyverse&#39;, &#39;lubridate&#39;, &#39;dplyr&#39;, &#39;rtweet&#39;, &#39;WikipediR&#39;, &#39;rvest&#39;, &#39;xml2&#39;,
+## &#39;httr&#39;, &#39;jsonlite&#39;, &#39;here&#39;, &#39;dplyr&#39;, &#39;ggplot2&#39;, &#39;tuber&#39;, &#39;tidyverse&#39;, &#39;purrr&#39;)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction.html#cb2-1" tabindex="-1"></a><span class="fu">p_load_gh</span>(<span class="st">&quot;quanteda/quanteda.corpora&quot;</span>)</span>
+<span id="cb2-2"><a href="introduction.html#cb2-2" tabindex="-1"></a><span class="fu">p_load_gh</span>(<span class="st">&quot;cbpuschmann/RCrowdTangle&quot;</span>)</span>
+<span id="cb2-3"><a href="introduction.html#cb2-3" tabindex="-1"></a><span class="fu">p_load_gh</span>(<span class="st">&quot;joon-e/mediacloud&quot;</span>)</span>
+<span id="cb2-4"><a href="introduction.html#cb2-4" tabindex="-1"></a><span class="fu">p_load_gh</span>(<span class="st">&quot;facebookresearch/Radlibrary&quot;</span>)</span></code></pre></div>
+</div>
+<div id="replication" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Replication<a href="introduction.html#replication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A lot of the R packages that you have installed and loaded above regularly get updated, which often comes with slight changes in functionality. Also, new versions of the R programming environment itself are constantly developed. While we rely on an automatized way to regularly check whether all code that is presented in the subsequent chapters replicates without errors, it might be that you are executing code just before we find out about conflicts that come with newer versions of R or used packages. If you would like to ensure that all of the presented code runs smoothly, you can execute the following commands before proceeding.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction.html#cb3-1" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">&#39;checkpoint&#39;</span>)</span>
+<span id="cb3-2"><a href="introduction.html#cb3-2" tabindex="-1"></a><span class="fu">checkpoint</span>(<span class="st">&quot;2022-08-03&quot;</span>)</span></code></pre></div>
+<p>The <code>checkpoint</code> package from the <a href="https://cran.r-project.org/web/packages/checkpoint/vignettes/checkpoint.html">Reproducible R Toolkit (RRT)</a> makes use of the daily snapshots of CRAN which are mirrored by the RRT-team on a separate server. Once you execute the command above, R will install all packages that you have loaded with the <code>p_load()</code> function in the same version as we used them on the date at which we last worked on the code. You may choose to only take this route if you would like to replicate the code presented in a particular chapter but run into an error message. To reset your session to the state it was before using <code>checkpoint</code>, call <code>uncheckpoint()</code> or simply restart R.</p>
+<!--
+* Data vs. machine learning APIS
+* Problem of replicability for ML APIs
+-->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="best-practices.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

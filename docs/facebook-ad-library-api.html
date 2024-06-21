@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Facebook Ad Library API |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Facebook Ad Library API |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Facebook Ad Library API |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="crowdtangle-api.html"/>
+<link rel="next" href="genderize.io-api.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="facebook-ad-library-api" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Facebook Ad Library API<a href="facebook-ad-library-api.html#facebook-ad-library-api" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><chauthors>Ondřej Pekáček</chauthors> <br><br></p>
+<p>You will need to install the following packages for this chapter (run the code):</p>
+<pre><code># install.packages(&#39;pacman&#39;)
+library(pacman)
+p_load(&#39;httr&#39;, &#39;remotes&#39;, &#39;dplyr&#39;,
+&#39;ggplot2&#39;, &#39;tidyr&#39;, &#39;Radlibrary&#39;, &#39;dplyr&#39;, &#39;tidyr&#39;, &#39;DT&#39;)</code></pre>
+<div id="provided-servicesdata-2" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Provided services/data<a href="facebook-ad-library-api.html#provided-servicesdata-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>The <a href="https://www.facebook.com/ads/library/api/">Faceboook Ad Library API</a> is provided by Facebook and forms an extended part of its <a href="https://developers.facebook.com/docs/graph-api/">Graph API</a> ecosystem.</p>
+<p>As of December 2021, it provides limited access to the <a href="https://www.facebook.com/ads/library/">Facebook Ad Library</a>. While the web version enables the user to search multiple types of paid advertising on Facebook platforms (including Instagram and WhatsApp), the API offers programmatic access to political/social issues ads. Facebook currently imposes a storage limit of 7 years for paid advertising on its platforms.</p>
+<p>Facebook also offers summarized information (on a per-country basis) about paid political ads in its <a href="https://www.facebook.com/ads/library/report">Ads Library Report</a>. However, this website only offers information on selected countries and displays information regarding the sum spent by the advertisers, neglecting the information on demographic and regional targeting.</p>
+<p>The API enables its users to get information on every paid political ad, regardless of whether it is still active.</p>
+<p>Researchers are currently able to obtain the following data (among others) for each individual paid ad:</p>
+<ol style="list-style-type: decimal">
+<li>Full text, date, unique link, and other metadata</li>
+<li>Information on financial spending</li>
+<li>Reach and impressions metrics</li>
+<li>Gender and age category demographics</li>
+<li>Country/region targeting information</li>
+</ol>
+<p>Please note that some key figures are not precise, such as spending, impressions, and reach. Instead, they are provided as min-max range estimates (such as <code>spend_lower</code> and <code>spend_upper</code> variables). Also, we should keep in mind that the API enforces a <a href="https://developers.facebook.com/docs/graph-api/overview/rate-limiting/">rate limit</a> of 200 calls per hour.</p>
+</div>
+<div id="prerequisites-2" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Prerequisites<a href="facebook-ad-library-api.html#prerequisites-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)?</em></li>
+</ul>
+<p>As a first step, you need to <a href="https://www.facebook.com/ID">confirm</a> their identity and location, which should take up to 48 hours.</p>
+<p>Secondly, proceed to the <a href="https://developers.facebook.com/">Facebook Developers</a> and create an account there.</p>
+<p>Finally, you also need to create a <a href="https://developers.facebook.com/apps/create">Facebook App</a> to use the API.</p>
+<p>You might also want to take note of the <em>App ID</em> and <em>App Secret</em>, which are found in the <em>Settings-&gt;Basic</em> section of the App.</p>
+<p>Unlike some other APIs, such as Twitter, Facebook does not provide us with a “permanent” access token.</p>
+<p>After the login, we get a short-lived (max. 2 hours) access token. It can be retrieved from the <a href="https://developers.facebook.com/tools/explorer/">Graph API Explorer</a>. Fortunately, we could easily extend the token to about two months with the <a href="https://developers.facebook.com/tools/debug/accesstoken/">Access Token Debugger tool</a>. We only need to paste the token, click <em>Debug</em>, and click the <em>Extend Access Token</em> button below the information panel and enter our Facebook password into the prompt. In the future, this process can also be done programmatically by calling the API with the short-lived access token, App ID, and App Secret (more information <a href="https://developers.facebook.com/docs/facebook-login/access-tokens/refreshing/">here</a>.</p>
+<p>As recommended in <a href="best-practices.html#best-practices">Chapter 2</a>, be careful not to include the token explicitly in your script for security purposes. In this chapter, we will set the token as the environment variable <code>FB_TOKEN</code> using <code>.Renviron</code> file and restart R for the changes to take effect. Running the <code>Sys.getenv("FB_TOKEN")</code> should provide us with a correct token.</p>
+</div>
+<div id="simple-api-call-2" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Simple API call<a href="facebook-ad-library-api.html#simple-api-call-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>Firstly, it might be helpful to get familiar with the API parameters that we can request by reading the official <a href="https://www.facebook.com/ads/library/api">documentation</a>.</p>
+<p>We will follow the sample example on the API documentation page and replicate the simple call. However, we will use R’s interface instead of cURL in a command line in our case.</p>
+<p>To this end, we need to first load the required packages in this script.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="facebook-ad-library-api.html#cb23-1" tabindex="-1"></a><span class="co">#loading packages</span></span>
+<span id="cb23-2"><a href="facebook-ad-library-api.html#cb23-2" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb23-3"><a href="facebook-ad-library-api.html#cb23-3" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
+<span id="cb23-4"><a href="facebook-ad-library-api.html#cb23-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-5"><a href="facebook-ad-library-api.html#cb23-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-6"><a href="facebook-ad-library-api.html#cb23-6" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
+<p>We are using the <code>httr</code> package to make the API call - it has already been loaded in the previous step.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="facebook-ad-library-api.html#cb24-1" tabindex="-1"></a><span class="co"># We will be using the ads_archive endpoint of the 12th version of the Graph.</span></span>
+<span id="cb24-2"><a href="facebook-ad-library-api.html#cb24-2" tabindex="-1"></a>endpoint_url <span class="ot">&lt;-</span> <span class="st">&quot;https://graph.facebook.com/v12.0/ads_archive&quot;</span></span>
+<span id="cb24-3"><a href="facebook-ad-library-api.html#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="facebook-ad-library-api.html#cb24-4" tabindex="-1"></a><span class="co"># Specify the query parameters to mirror the one in official documentation.</span></span>
+<span id="cb24-5"><a href="facebook-ad-library-api.html#cb24-5" tabindex="-1"></a>my_query <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb24-6"><a href="facebook-ad-library-api.html#cb24-6" tabindex="-1"></a>  <span class="at">search_terms =</span> <span class="st">&quot;california&quot;</span>,</span>
+<span id="cb24-7"><a href="facebook-ad-library-api.html#cb24-7" tabindex="-1"></a>  <span class="at">ad_type =</span> <span class="st">&quot;POLITICAL_AND_ISSUE_ADS&quot;</span>,</span>
+<span id="cb24-8"><a href="facebook-ad-library-api.html#cb24-8" tabindex="-1"></a>  <span class="at">ad_reached_countries =</span> <span class="st">&quot;US&quot;</span>,</span>
+<span id="cb24-9"><a href="facebook-ad-library-api.html#cb24-9" tabindex="-1"></a>  <span class="at">access_token =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;FB_TOKEN&quot;</span>)</span>
+<span id="cb24-10"><a href="facebook-ad-library-api.html#cb24-10" tabindex="-1"></a>)</span>
+<span id="cb24-11"><a href="facebook-ad-library-api.html#cb24-11" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="facebook-ad-library-api.html#cb24-12" tabindex="-1"></a><span class="co"># Using the URL endpoint and the list of our queries, we make the API call.</span></span>
+<span id="cb24-13"><a href="facebook-ad-library-api.html#cb24-13" tabindex="-1"></a>raw_response <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(</span>
+<span id="cb24-14"><a href="facebook-ad-library-api.html#cb24-14" tabindex="-1"></a>  <span class="at">url =</span> endpoint_url,</span>
+<span id="cb24-15"><a href="facebook-ad-library-api.html#cb24-15" tabindex="-1"></a>  <span class="co"># Using this header is not necessary here, but it is usually a good practice</span></span>
+<span id="cb24-16"><a href="facebook-ad-library-api.html#cb24-16" tabindex="-1"></a>  <span class="co"># to specify we want a JSON back (some APIs might send us XML by default).</span></span>
+<span id="cb24-17"><a href="facebook-ad-library-api.html#cb24-17" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">add_headers</span>(<span class="at">Accept =</span> <span class="st">&quot;application/json&quot;</span>),</span>
+<span id="cb24-18"><a href="facebook-ad-library-api.html#cb24-18" tabindex="-1"></a>  <span class="at">query =</span> my_query</span>
+<span id="cb24-19"><a href="facebook-ad-library-api.html#cb24-19" tabindex="-1"></a>)</span>
+<span id="cb24-20"><a href="facebook-ad-library-api.html#cb24-20" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="facebook-ad-library-api.html#cb24-21" tabindex="-1"></a><span class="co"># Check the status of the response. If everything is OK, it should be 200.</span></span>
+<span id="cb24-22"><a href="facebook-ad-library-api.html#cb24-22" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Our status message is: </span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb24-23"><a href="facebook-ad-library-api.html#cb24-23" tabindex="-1"></a>httr<span class="sc">::</span><span class="fu">http_status</span>(raw_response)</span>
+<span id="cb24-24"><a href="facebook-ad-library-api.html#cb24-24" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="facebook-ad-library-api.html#cb24-25" tabindex="-1"></a><span class="co"># Finally, we inspect the content of the response. R sees list of lists,</span></span>
+<span id="cb24-26"><a href="facebook-ad-library-api.html#cb24-26" tabindex="-1"></a><span class="co"># which could be converted to other formats, such as a data frame.</span></span>
+<span id="cb24-27"><a href="facebook-ad-library-api.html#cb24-27" tabindex="-1"></a><span class="co"># We will select the second sub-list named &quot;data&quot;.</span></span>
+<span id="cb24-28"><a href="facebook-ad-library-api.html#cb24-28" tabindex="-1"></a>parsed_response <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">content</span>(raw_response, <span class="at">as =</span> <span class="st">&quot;parsed&quot;</span>)[[<span class="st">&quot;data&quot;</span>]]</span>
+<span id="cb24-29"><a href="facebook-ad-library-api.html#cb24-29" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;The first ad in our response is: </span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb24-30"><a href="facebook-ad-library-api.html#cb24-30" tabindex="-1"></a>parsed_response[[<span class="dv">1</span>]]</span></code></pre></div>
+<p>We could use additional parameters under the query list specified in the documentation. However, this approach can be relatively more complex for more focused use. For instance, each API response also returns a link to the next page (pagination), which means one would need to write quite a long script that takes this into account. Another complication is that part of the URL in the response, which links to the following page or to the individual ad itself, contains your full access token. You must thus make sure to remove it when sharing the data further.</p>
+<p>Fortunately, we do not need to deal with these issues directly for most use cases. Instead, we will use the <a href="https://github.com/facebookresearch/Radlibrary">Radlibrary package</a> for R, which significantly simplifies the API calls by providing an easy-to-understand functions. This package can handle the pagination automatically and reliably removes the access token from any downloaded data.</p>
+</div>
+<div id="api-access-in-r-2" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> API access in R<a href="facebook-ad-library-api.html#api-access-in-r-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Aside from writing our API functions using the <code>httr</code> package, we could use the <code>Radlibrary</code>, an open-source package written for R. As of December 2021, <code>Radlibrary</code> is not yet available at R’s primary CRAN repository. Hence its installation is (slightly) more complicated since it needs to be installed directly from its GitHub repository instead. For this process, we will use the <code>install_github()</code> function, for which you either need to have <code>devtools</code> or <code>remotes</code> (a more lightweight package used here) installed.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="facebook-ad-library-api.html#cb25-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;facebookresearch/Radlibrary&quot;</span>)</span>
+<span id="cb25-2"><a href="facebook-ad-library-api.html#cb25-2" tabindex="-1"></a><span class="fu">library</span>(Radlibrary)</span></code></pre></div>
+<p><code>Radlibrary</code> can also simplify the long-term access token retrieval discussed above. Run the function following functions. If you already have an <code>FB_TOKEN</code> environment variable set up from the previous step, <strong>you can skip</strong> this part. However, most APIs will not be doing the same for us, so it is a valuable skill to do this manually.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="facebook-ad-library-api.html#cb26-1" tabindex="-1"></a><span class="co"># User-friendly setup that asks you for app ID and secret.</span></span>
+<span id="cb26-2"><a href="facebook-ad-library-api.html#cb26-2" tabindex="-1"></a><span class="fu">adlib_setup</span>()</span>
+<span id="cb26-3"><a href="facebook-ad-library-api.html#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="facebook-ad-library-api.html#cb26-4" tabindex="-1"></a><span class="co"># This exchanges the short term token for the long term one.</span></span>
+<span id="cb26-5"><a href="facebook-ad-library-api.html#cb26-5" tabindex="-1"></a><span class="fu">adlib_set_longterm_token</span>()</span>
+<span id="cb26-6"><a href="facebook-ad-library-api.html#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="facebook-ad-library-api.html#cb26-7" tabindex="-1"></a><span class="co"># You can verify that the token has been set correctly.</span></span>
+<span id="cb26-8"><a href="facebook-ad-library-api.html#cb26-8" tabindex="-1"></a><span class="fu">token_get</span>()</span></code></pre></div>
+<p><strong>Our first query with <code>Radlibrary</code></strong></p>
+<p>Once the package is installed, we can construct a more complicated query with just a few lines. We will focus on the issue of housing in the UK in November 2021.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="facebook-ad-library-api.html#cb27-1" tabindex="-1"></a>detailed_query <span class="ot">&lt;-</span> <span class="fu">adlib_build_query</span>(</span>
+<span id="cb27-2"><a href="facebook-ad-library-api.html#cb27-2" tabindex="-1"></a>  <span class="co"># Let&#39;s select only United Kingdom.</span></span>
+<span id="cb27-3"><a href="facebook-ad-library-api.html#cb27-3" tabindex="-1"></a>  <span class="at">ad_reached_countries =</span> <span class="st">&quot;GB&quot;</span>,</span>
+<span id="cb27-4"><a href="facebook-ad-library-api.html#cb27-4" tabindex="-1"></a>  <span class="co"># We want to get both active and inactive ads.</span></span>
+<span id="cb27-5"><a href="facebook-ad-library-api.html#cb27-5" tabindex="-1"></a>  <span class="at">ad_active_status =</span> <span class="st">&quot;ALL&quot;</span>,</span>
+<span id="cb27-6"><a href="facebook-ad-library-api.html#cb27-6" tabindex="-1"></a>  <span class="at">search_terms =</span> <span class="st">&quot;Housing&quot;</span>,</span>
+<span id="cb27-7"><a href="facebook-ad-library-api.html#cb27-7" tabindex="-1"></a>  <span class="co"># Because of the amount of ads, we will extract only one week.</span></span>
+<span id="cb27-8"><a href="facebook-ad-library-api.html#cb27-8" tabindex="-1"></a>  <span class="at">ad_delivery_date_min =</span> <span class="st">&quot;2021-11-01&quot;</span>,</span>
+<span id="cb27-9"><a href="facebook-ad-library-api.html#cb27-9" tabindex="-1"></a>  <span class="at">ad_delivery_date_max =</span> <span class="st">&quot;2021-11-07&quot;</span>,</span>
+<span id="cb27-10"><a href="facebook-ad-library-api.html#cb27-10" tabindex="-1"></a>  <span class="co"># We can only access Political/Social Issues ads using the API.</span></span>
+<span id="cb27-11"><a href="facebook-ad-library-api.html#cb27-11" tabindex="-1"></a>  <span class="at">ad_type =</span> <span class="st">&quot;POLITICAL_AND_ISSUE_ADS&quot;</span>,</span>
+<span id="cb27-12"><a href="facebook-ad-library-api.html#cb27-12" tabindex="-1"></a>  <span class="co"># We want the adds for these platforms owned by Facebook/Meta.</span></span>
+<span id="cb27-13"><a href="facebook-ad-library-api.html#cb27-13" tabindex="-1"></a>  <span class="at">publisher_platform =</span> <span class="fu">c</span>(</span>
+<span id="cb27-14"><a href="facebook-ad-library-api.html#cb27-14" tabindex="-1"></a>    <span class="st">&quot;FACEBOOK&quot;</span>,</span>
+<span id="cb27-15"><a href="facebook-ad-library-api.html#cb27-15" tabindex="-1"></a>    <span class="st">&quot;INSTAGRAM&quot;</span>,</span>
+<span id="cb27-16"><a href="facebook-ad-library-api.html#cb27-16" tabindex="-1"></a>    <span class="st">&quot;MESSENGER&quot;</span>,</span>
+<span id="cb27-17"><a href="facebook-ad-library-api.html#cb27-17" tabindex="-1"></a>    <span class="st">&quot;WHATSAPP&quot;</span></span>
+<span id="cb27-18"><a href="facebook-ad-library-api.html#cb27-18" tabindex="-1"></a>  ),</span>
+<span id="cb27-19"><a href="facebook-ad-library-api.html#cb27-19" tabindex="-1"></a>  <span class="co"># This is the default limit for the API response.</span></span>
+<span id="cb27-20"><a href="facebook-ad-library-api.html#cb27-20" tabindex="-1"></a>  <span class="co"># Since we use pagination, we can keep it as it is.</span></span>
+<span id="cb27-21"><a href="facebook-ad-library-api.html#cb27-21" tabindex="-1"></a>  <span class="at">limit =</span> <span class="dv">1000</span>,</span>
+<span id="cb27-22"><a href="facebook-ad-library-api.html#cb27-22" tabindex="-1"></a>  <span class="co"># What will be included in the returned data? Can also be</span></span>
+<span id="cb27-23"><a href="facebook-ad-library-api.html#cb27-23" tabindex="-1"></a>  <span class="co"># &quot;demographic_data&quot; or &quot;region_data&quot;, among others.</span></span>
+<span id="cb27-24"><a href="facebook-ad-library-api.html#cb27-24" tabindex="-1"></a>  <span class="at">fields =</span> <span class="st">&quot;ad_data&quot;</span></span>
+<span id="cb27-25"><a href="facebook-ad-library-api.html#cb27-25" tabindex="-1"></a>)</span></code></pre></div>
+<p>The query is “lazy.” Our API call will not be executed unless we specifically ask for it.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="facebook-ad-library-api.html#cb28-1" tabindex="-1"></a><span class="co"># The function adlib_get_paginated is a version of adlib_get, suitable for</span></span>
+<span id="cb28-2"><a href="facebook-ad-library-api.html#cb28-2" tabindex="-1"></a><span class="co"># larger requests. If you got token using the adlib_setup() function, you do</span></span>
+<span id="cb28-3"><a href="facebook-ad-library-api.html#cb28-3" tabindex="-1"></a><span class="co"># not have to specify this argument. However, we will be using the</span></span>
+<span id="cb28-4"><a href="facebook-ad-library-api.html#cb28-4" tabindex="-1"></a><span class="co"># environment variable set in the previous part of the chapter.</span></span>
+<span id="cb28-5"><a href="facebook-ad-library-api.html#cb28-5" tabindex="-1"></a>ads_list <span class="ot">&lt;-</span> <span class="fu">adlib_get_paginated</span>(detailed_query, <span class="at">token =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;FB_TOKEN&quot;</span>))</span></code></pre></div>
+<p>We can convert the list to a standard dataset using the <code>as_tibble()</code> function, because the <code>ads_list</code> is a particular type of class called <code>paginated_adlib_data_response</code>. This means we can specify other arguments to the <code>as_tibble()</code> function, such as the type of the table we require and whether we wish to censor our access token from the data.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="facebook-ad-library-api.html#cb29-1" tabindex="-1"></a><span class="co"># The &quot;type&quot; argument must correspond to the &quot;fields&quot; argument in the</span></span>
+<span id="cb29-2"><a href="facebook-ad-library-api.html#cb29-2" tabindex="-1"></a><span class="co"># adlib_build_query like this:</span></span>
+<span id="cb29-3"><a href="facebook-ad-library-api.html#cb29-3" tabindex="-1"></a><span class="co"># &quot;ad_data&quot; = &quot;ad&quot;, &quot;region_data&quot; = &quot;region&quot;, &quot;demographic_data&quot; = &quot;demographic&quot;.</span></span>
+<span id="cb29-4"><a href="facebook-ad-library-api.html#cb29-4" tabindex="-1"></a>ads_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(ads_list, <span class="at">type =</span> <span class="st">&quot;ad&quot;</span>, <span class="at">censor_access_token =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><strong>Practical case study: Housing in the UK through the prism of political advertising on Facebook’s platforms and its audience</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="facebook-ad-library-api.html#cb30-1" tabindex="-1"></a><span class="co"># First, save all of the data types that we will ask the API to extract.</span></span>
+<span id="cb30-2"><a href="facebook-ad-library-api.html#cb30-2" tabindex="-1"></a>fields_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ad_data&quot;</span>, <span class="st">&quot;region_data&quot;</span>, <span class="st">&quot;demographic_data&quot;</span>)</span>
+<span id="cb30-3"><a href="facebook-ad-library-api.html#cb30-3" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="facebook-ad-library-api.html#cb30-4" tabindex="-1"></a><span class="co"># Correspondingly, save all of the table types.</span></span>
+<span id="cb30-5"><a href="facebook-ad-library-api.html#cb30-5" tabindex="-1"></a>table_type_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ad&quot;</span>, <span class="st">&quot;region&quot;</span>, <span class="st">&quot;demographic&quot;</span>)</span>
+<span id="cb30-6"><a href="facebook-ad-library-api.html#cb30-6" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="facebook-ad-library-api.html#cb30-7" tabindex="-1"></a><span class="co"># Initiate an empty list to which we will append the extracted API data.</span></span>
+<span id="cb30-8"><a href="facebook-ad-library-api.html#cb30-8" tabindex="-1"></a><span class="co"># The list could be initiated simply by using list(); however, especially for</span></span>
+<span id="cb30-9"><a href="facebook-ad-library-api.html#cb30-9" tabindex="-1"></a><span class="co"># larger data sets, specifying the length of a list in R in advance speeds up</span></span>
+<span id="cb30-10"><a href="facebook-ad-library-api.html#cb30-10" tabindex="-1"></a><span class="co"># the processing. The length of the list equals our 3 data types.</span></span>
+<span id="cb30-11"><a href="facebook-ad-library-api.html#cb30-11" tabindex="-1"></a>fb_ad_list <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="at">length =</span> <span class="fu">length</span>(fields_vector))</span>
+<span id="cb30-12"><a href="facebook-ad-library-api.html#cb30-12" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="facebook-ad-library-api.html#cb30-13" tabindex="-1"></a><span class="co"># We will also name its three items with values from table_type_vector so we can</span></span>
+<span id="cb30-14"><a href="facebook-ad-library-api.html#cb30-14" tabindex="-1"></a><span class="co"># refer to them further</span></span>
+<span id="cb30-15"><a href="facebook-ad-library-api.html#cb30-15" tabindex="-1"></a><span class="fu">names</span>(fb_ad_list) <span class="ot">&lt;-</span> table_type_vector</span></code></pre></div>
+<p>We are using a for loop this time, where the API call in each iteration is the same, with the difference in the asked data type. Unlike in the first example, we are interested in the ads themselves and their audience.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="facebook-ad-library-api.html#cb31-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(fields_vector)) {</span>
+<span id="cb31-2"><a href="facebook-ad-library-api.html#cb31-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Extracting the&quot;</span>, fields_vector[i]))</span>
+<span id="cb31-3"><a href="facebook-ad-library-api.html#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="facebook-ad-library-api.html#cb31-4" tabindex="-1"></a>  query <span class="ot">&lt;-</span> <span class="fu">adlib_build_query</span>(</span>
+<span id="cb31-5"><a href="facebook-ad-library-api.html#cb31-5" tabindex="-1"></a>    <span class="at">ad_reached_countries =</span> <span class="st">&quot;GB&quot;</span>,</span>
+<span id="cb31-6"><a href="facebook-ad-library-api.html#cb31-6" tabindex="-1"></a>    <span class="at">ad_active_status =</span> <span class="st">&quot;ALL&quot;</span>,</span>
+<span id="cb31-7"><a href="facebook-ad-library-api.html#cb31-7" tabindex="-1"></a>    <span class="at">search_terms =</span> <span class="st">&quot;Housing&quot;</span>,</span>
+<span id="cb31-8"><a href="facebook-ad-library-api.html#cb31-8" tabindex="-1"></a>    <span class="at">ad_delivery_date_min =</span> <span class="st">&quot;2021-11-05&quot;</span>,</span>
+<span id="cb31-9"><a href="facebook-ad-library-api.html#cb31-9" tabindex="-1"></a>    <span class="at">ad_delivery_date_max =</span> <span class="st">&quot;2021-11-07&quot;</span>,</span>
+<span id="cb31-10"><a href="facebook-ad-library-api.html#cb31-10" tabindex="-1"></a>    <span class="at">ad_type =</span> <span class="st">&quot;POLITICAL_AND_ISSUE_ADS&quot;</span>,</span>
+<span id="cb31-11"><a href="facebook-ad-library-api.html#cb31-11" tabindex="-1"></a>    <span class="at">publisher_platform =</span> <span class="fu">c</span>(<span class="st">&quot;FACEBOOK&quot;</span>, <span class="st">&quot;INSTAGRAM&quot;</span>),</span>
+<span id="cb31-12"><a href="facebook-ad-library-api.html#cb31-12" tabindex="-1"></a>    <span class="at">fields =</span> fields_vector[i]</span>
+<span id="cb31-13"><a href="facebook-ad-library-api.html#cb31-13" tabindex="-1"></a>  )</span>
+<span id="cb31-14"><a href="facebook-ad-library-api.html#cb31-14" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="facebook-ad-library-api.html#cb31-15" tabindex="-1"></a>  <span class="co"># The call is limited to 1000 results but pagination of overcomes it.</span></span>
+<span id="cb31-16"><a href="facebook-ad-library-api.html#cb31-16" tabindex="-1"></a>  <span class="co"># We pipe the output of the paginated call to the as_tibble function.</span></span>
+<span id="cb31-17"><a href="facebook-ad-library-api.html#cb31-17" tabindex="-1"></a>  fb_ad_list[[table_type_vector[i]]] <span class="ot">&lt;-</span> <span class="fu">adlib_get_paginated</span>(query,</span>
+<span id="cb31-18"><a href="facebook-ad-library-api.html#cb31-18" tabindex="-1"></a>    <span class="at">token =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;FB_TOKEN&quot;</span>)</span>
+<span id="cb31-19"><a href="facebook-ad-library-api.html#cb31-19" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-20"><a href="facebook-ad-library-api.html#cb31-20" tabindex="-1"></a>    <span class="fu">as_tibble</span>(</span>
+<span id="cb31-21"><a href="facebook-ad-library-api.html#cb31-21" tabindex="-1"></a>      <span class="at">type =</span> table_type_vector[i],</span>
+<span id="cb31-22"><a href="facebook-ad-library-api.html#cb31-22" tabindex="-1"></a>      <span class="at">censor_access_token =</span> <span class="cn">TRUE</span></span>
+<span id="cb31-23"><a href="facebook-ad-library-api.html#cb31-23" tabindex="-1"></a>    )</span>
+<span id="cb31-24"><a href="facebook-ad-library-api.html#cb31-24" tabindex="-1"></a>}</span></code></pre></div>
+<p>After extraction using the for loop, we have three data frames in one list. However, these datasets are in a different format and with a different number of rows. The only information that unites them is the unique ID of each ad, which we will use when merging them.</p>
+<!-- A cached version of fb_ad_list is available in "data/facebook_ads_uk_housing.RDS" -->
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="facebook-ad-library-api.html#cb32-1" tabindex="-1"></a><span class="co"># The demographic &amp; region datasets are in the &quot;long&quot; format (multiple</span></span>
+<span id="cb32-2"><a href="facebook-ad-library-api.html#cb32-2" tabindex="-1"></a><span class="co"># rows of information for each ad), and we need a transformation to a &quot;wide&quot; </span></span>
+<span id="cb32-3"><a href="facebook-ad-library-api.html#cb32-3" tabindex="-1"></a><span class="co"># format (single row per ad) of the ad dataset using the tidyr package.</span></span>
+<span id="cb32-4"><a href="facebook-ad-library-api.html#cb32-4" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="facebook-ad-library-api.html#cb32-5" tabindex="-1"></a>fb_ad_list[[<span class="st">&quot;demographic&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(fb_ad_list[[<span class="st">&quot;demographic&quot;</span>]],</span>
+<span id="cb32-6"><a href="facebook-ad-library-api.html#cb32-6" tabindex="-1"></a>  <span class="at">id_cols =</span> adlib_id,</span>
+<span id="cb32-7"><a href="facebook-ad-library-api.html#cb32-7" tabindex="-1"></a>  <span class="at">names_from =</span> <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;age&quot;</span>),</span>
+<span id="cb32-8"><a href="facebook-ad-library-api.html#cb32-8" tabindex="-1"></a>  <span class="at">names_sort =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-9"><a href="facebook-ad-library-api.html#cb32-9" tabindex="-1"></a>  <span class="at">values_from =</span> percentage</span>
+<span id="cb32-10"><a href="facebook-ad-library-api.html#cb32-10" tabindex="-1"></a>)</span>
+<span id="cb32-11"><a href="facebook-ad-library-api.html#cb32-11" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="facebook-ad-library-api.html#cb32-12" tabindex="-1"></a>fb_ad_list[[<span class="st">&quot;region&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(fb_ad_list[[<span class="st">&quot;region&quot;</span>]],</span>
+<span id="cb32-13"><a href="facebook-ad-library-api.html#cb32-13" tabindex="-1"></a>  <span class="at">id_cols =</span> adlib_id,</span>
+<span id="cb32-14"><a href="facebook-ad-library-api.html#cb32-14" tabindex="-1"></a>  <span class="at">names_from =</span> region,</span>
+<span id="cb32-15"><a href="facebook-ad-library-api.html#cb32-15" tabindex="-1"></a>  <span class="at">names_sort =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-16"><a href="facebook-ad-library-api.html#cb32-16" tabindex="-1"></a>  <span class="at">values_from =</span> percentage</span>
+<span id="cb32-17"><a href="facebook-ad-library-api.html#cb32-17" tabindex="-1"></a>)</span>
+<span id="cb32-18"><a href="facebook-ad-library-api.html#cb32-18" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="facebook-ad-library-api.html#cb32-19" tabindex="-1"></a><span class="co"># Performing a left join on the common id column across the 3 datasets, remove</span></span>
+<span id="cb32-20"><a href="facebook-ad-library-api.html#cb32-20" tabindex="-1"></a><span class="co"># full duplicates and arrange by date.</span></span>
+<span id="cb32-21"><a href="facebook-ad-library-api.html#cb32-21" tabindex="-1"></a>merged_dataset <span class="ot">&lt;-</span> fb_ad_list[[<span class="st">&quot;ad&quot;</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb32-22"><a href="facebook-ad-library-api.html#cb32-22" tabindex="-1"></a>  <span class="fu">left_join</span>(fb_ad_list[[<span class="st">&quot;demographic&quot;</span>]], <span class="at">by =</span> <span class="st">&quot;adlib_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-23"><a href="facebook-ad-library-api.html#cb32-23" tabindex="-1"></a>  <span class="fu">left_join</span>(fb_ad_list[[<span class="st">&quot;region&quot;</span>]], <span class="at">by =</span> <span class="st">&quot;adlib_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-24"><a href="facebook-ad-library-api.html#cb32-24" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-25"><a href="facebook-ad-library-api.html#cb32-25" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ad_creation_time))</span></code></pre></div>
+<p>We end up with a “tidy” dataset, in which each row is one observation (ads) and columns are variables such as spending, reach, age group and region, making it amenable to quick summarisation and exploratory visualizations. Please note that you only need one ad that displays internationally in your dataset and you will end up with many extra region columns that are NAs for most ads.</p>
+<p>For instance, in our case, we get UK regions columns and all of the US states together with some other EU regions as well! In reality, only two ads targeted both UK and other international regions in our small sample. As a result, it means that the extraction of the region data could take quite a bit longer than that of the other data. Practically, we would probably need to consider careful data cleaning after closely inspecting the dataset.</p>
+<p>As a final part of this exploration, let’s create some summary statistics on UK housing ads from the first week of November 2021, using a few selected variables in our sample.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="facebook-ad-library-api.html#cb33-1" tabindex="-1"></a><span class="co"># Using the dataset containing combined ads, demographic and region data, we </span></span>
+<span id="cb33-2"><a href="facebook-ad-library-api.html#cb33-2" tabindex="-1"></a><span class="co"># select only ads from the first week of November 2021, group by Facebook pages,</span></span>
+<span id="cb33-3"><a href="facebook-ad-library-api.html#cb33-3" tabindex="-1"></a><span class="co"># which paid for more than one add during this period. For these observations,</span></span>
+<span id="cb33-4"><a href="facebook-ad-library-api.html#cb33-4" tabindex="-1"></a><span class="co"># we create summary statistics on selected variables. </span></span>
+<span id="cb33-5"><a href="facebook-ad-library-api.html#cb33-5" tabindex="-1"></a>merged_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="facebook-ad-library-api.html#cb33-6" tabindex="-1"></a>  <span class="fu">filter</span>(ad_delivery_start_time <span class="sc">&gt;=</span> <span class="st">&quot;2021-11-01&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb33-7"><a href="facebook-ad-library-api.html#cb33-7" tabindex="-1"></a>    ad_delivery_start_time <span class="sc">&lt;=</span> <span class="st">&quot;2021-11-07&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="facebook-ad-library-api.html#cb33-8" tabindex="-1"></a>  <span class="fu">group_by</span>(page_name) <span class="sc">%&gt;%</span></span>
+<span id="cb33-9"><a href="facebook-ad-library-api.html#cb33-9" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb33-10"><a href="facebook-ad-library-api.html#cb33-10" tabindex="-1"></a>    <span class="at">nr_ads =</span> <span class="fu">n</span>(),</span>
+<span id="cb33-11"><a href="facebook-ad-library-api.html#cb33-11" tabindex="-1"></a>    <span class="at">spend_upper_avg =</span> <span class="fu">mean</span>(spend_upper, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-12"><a href="facebook-ad-library-api.html#cb33-12" tabindex="-1"></a>    <span class="at">impressions_upper_avg =</span> <span class="fu">mean</span>(impressions_upper, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-13"><a href="facebook-ad-library-api.html#cb33-13" tabindex="-1"></a>    <span class="at">avg_prop_England =</span> <span class="fu">mean</span>(England, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-14"><a href="facebook-ad-library-api.html#cb33-14" tabindex="-1"></a>    <span class="at">avg_prop_female_25_34 =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">female_25-34</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-15"><a href="facebook-ad-library-api.html#cb33-15" tabindex="-1"></a>    <span class="at">avg_prop_male_25_34 =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">male_25-34</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-16"><a href="facebook-ad-library-api.html#cb33-16" tabindex="-1"></a>    <span class="at">avg_prop_female_65_plus =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">female_65+</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-17"><a href="facebook-ad-library-api.html#cb33-17" tabindex="-1"></a>    <span class="at">avg_prop_male_65_plus =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">male_65+</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-18"><a href="facebook-ad-library-api.html#cb33-18" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-19"><a href="facebook-ad-library-api.html#cb33-19" tabindex="-1"></a>  <span class="fu">filter</span>(nr_ads <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-20"><a href="facebook-ad-library-api.html#cb33-20" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nr_ads)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-21"><a href="facebook-ad-library-api.html#cb33-21" tabindex="-1"></a>  <span class="co"># To visualize the information, we use DataTables package, which allows for</span></span>
+<span id="cb33-22"><a href="facebook-ad-library-api.html#cb33-22" tabindex="-1"></a>  <span class="co"># interactivity (such as sorting and horizontal scrolling).</span></span>
+<span id="cb33-23"><a href="facebook-ad-library-api.html#cb33-23" tabindex="-1"></a>  <span class="fu">datatable</span>(</span>
+<span id="cb33-24"><a href="facebook-ad-library-api.html#cb33-24" tabindex="-1"></a>    <span class="at">extensions =</span> <span class="st">&quot;FixedColumns&quot;</span>,</span>
+<span id="cb33-25"><a href="facebook-ad-library-api.html#cb33-25" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb33-26"><a href="facebook-ad-library-api.html#cb33-26" tabindex="-1"></a>      <span class="at">scrollX =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-27"><a href="facebook-ad-library-api.html#cb33-27" tabindex="-1"></a>      <span class="at">fixedColumns =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-28"><a href="facebook-ad-library-api.html#cb33-28" tabindex="-1"></a>      <span class="at">dom =</span> <span class="st">&quot;t&quot;</span>,</span>
+<span id="cb33-29"><a href="facebook-ad-library-api.html#cb33-29" tabindex="-1"></a>      <span class="co"># DataTables does not display NAs, however, we can use a small JavaScript</span></span>
+<span id="cb33-30"><a href="facebook-ad-library-api.html#cb33-30" tabindex="-1"></a>      <span class="co"># snippet to fill in the missing values in the table (optional).</span></span>
+<span id="cb33-31"><a href="facebook-ad-library-api.html#cb33-31" tabindex="-1"></a>      <span class="at">rowCallback =</span> <span class="fu">JS</span>(<span class="fu">c</span>(</span>
+<span id="cb33-32"><a href="facebook-ad-library-api.html#cb33-32" tabindex="-1"></a>        <span class="st">&quot;function(row, data){&quot;</span>,</span>
+<span id="cb33-33"><a href="facebook-ad-library-api.html#cb33-33" tabindex="-1"></a>        <span class="st">&quot;  for(var i=0; i&lt;data.length; i++){&quot;</span>,</span>
+<span id="cb33-34"><a href="facebook-ad-library-api.html#cb33-34" tabindex="-1"></a>        <span class="st">&quot;    if(data[i] === null){&quot;</span>,</span>
+<span id="cb33-35"><a href="facebook-ad-library-api.html#cb33-35" tabindex="-1"></a>        <span class="st">&quot;      $(&#39;td:eq(&#39;+i+&#39;)&#39;, row).html(&#39;NA&#39;)&quot;</span>,</span>
+<span id="cb33-36"><a href="facebook-ad-library-api.html#cb33-36" tabindex="-1"></a>        <span class="st">&quot;        .css({&#39;color&#39;: &#39;rgb(151,151,151)&#39;, &#39;font-style&#39;: &#39;italic&#39;});&quot;</span>,</span>
+<span id="cb33-37"><a href="facebook-ad-library-api.html#cb33-37" tabindex="-1"></a>        <span class="st">&quot;    }&quot;</span>,</span>
+<span id="cb33-38"><a href="facebook-ad-library-api.html#cb33-38" tabindex="-1"></a>        <span class="st">&quot;  }&quot;</span>,</span>
+<span id="cb33-39"><a href="facebook-ad-library-api.html#cb33-39" tabindex="-1"></a>        <span class="st">&quot;}&quot;</span></span>
+<span id="cb33-40"><a href="facebook-ad-library-api.html#cb33-40" tabindex="-1"></a>      ))</span>
+<span id="cb33-41"><a href="facebook-ad-library-api.html#cb33-41" tabindex="-1"></a>    )</span>
+<span id="cb33-42"><a href="facebook-ad-library-api.html#cb33-42" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-43"><a href="facebook-ad-library-api.html#cb33-43" tabindex="-1"></a>  <span class="co"># DataTables enable us to format the data directly in the visual table, we do</span></span>
+<span id="cb33-44"><a href="facebook-ad-library-api.html#cb33-44" tabindex="-1"></a>  <span class="co"># not necessarily need to make these changes to the original dataset.</span></span>
+<span id="cb33-45"><a href="facebook-ad-library-api.html#cb33-45" tabindex="-1"></a>  <span class="fu">formatCurrency</span>(<span class="dv">3</span>, <span class="st">&quot;\U00A3&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-46"><a href="facebook-ad-library-api.html#cb33-46" tabindex="-1"></a>  <span class="fu">formatPercentage</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-47"><a href="facebook-ad-library-api.html#cb33-47" tabindex="-1"></a>  <span class="fu">formatRound</span>(<span class="dv">4</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ac09793dc5231ea27f1d" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ac09793dc5231ea27f1d">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns"],"data":[["1","2","3","4","5"],["Shelter","Scope","AGS Support","EarthBits","South Ribble Labour"],[48,7,2,2,2],[261.5,370.4285714285714,149,99,99],[39519.83333333334,29713.28571428571,5499,1499,5499],[0.8821973181818182,0.7846262857142857,0.8559405,0.820652,1],[0.1297406896551724,null,0.0282045,0.122928,0.06625300000000001],[0.04457806896551724,null,0.035838,0.013812,0.095732],[0.1799233513513513,0.2489554285714286,0.084702,0.09392300000000001,0.06924050000000001],[0.05390416216216216,0.3152027142857143,0.130879,0.015193,0.058604]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>page_name<\/th>\n      <th>nr_ads<\/th>\n      <th>spend_upper_avg<\/th>\n      <th>impressions_upper_avg<\/th>\n      <th>avg_prop_England<\/th>\n      <th>avg_prop_female_25_34<\/th>\n      <th>avg_prop_male_25_34<\/th>\n      <th>avg_prop_female_65_plus<\/th>\n      <th>avg_prop_male_65_plus<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"dom":"t","rowCallback":"function(row, data){\n  for(var i=0; i<data.length; i++){\n    if(data[i] === null){\n      $('td:eq('+i+')', row).html('NA')\n        .css({'color': 'rgb(151,151,151)', 'font-style': 'italic'});\n    }\n  }\n}","columnDefs":[{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 0, 3, \",\", \".\", null);\n  }"},{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatPercentage(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":6,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatPercentage(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":7,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatPercentage(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":8,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatPercentage(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":9,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatPercentage(data, 2, 3, \",\", \".\", null);\n  }"},{"targets":3,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatCurrency(data, \"£\", 2, 3, \",\", \".\", true, null);\n  }"},{"className":"dt-right","targets":[2,3,4,5,6,7,8,9]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"page_name","targets":1},{"name":"nr_ads","targets":2},{"name":"spend_upper_avg","targets":3},{"name":"impressions_upper_avg","targets":4},{"name":"avg_prop_England","targets":5},{"name":"avg_prop_female_25_34","targets":6},{"name":"avg_prop_male_25_34","targets":7},{"name":"avg_prop_female_65_plus","targets":8},{"name":"avg_prop_male_65_plus","targets":9}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.rowCallback","options.columnDefs.0.render","options.columnDefs.1.render","options.columnDefs.2.render","options.columnDefs.3.render","options.columnDefs.4.render","options.columnDefs.5.render","options.columnDefs.6.render"],"jsHooks":[]}</script>
+</div>
+<div id="social-science-examples-2" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Social science examples<a href="facebook-ad-library-api.html#social-science-examples-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>Since its launch in late 2018, the Facebook Ads library has attracted interdisciplinary research attention.</p>
+<p>Among the peer-reviewed research findings, we find the theoretical overview of the situation of the scholarly social media API access in the aftermath of Cambridge Analytica by <span class="citation">Bruns (<a href="#ref-bruns2019">2019</a>)</span>, mentioning the newly opened, “bespoke” Facebook Ad Library, but pointing out its lack of “comprehensive search functionality” and “limited international coverage.”</p>
+<p>Focusing on the US context during the 2018 mid-term elections, <span class="citation">Fowler et al. (<a href="#ref-fowler2021">2021</a>)</span> compared TV advertising with Facebook advertising, concluding that the latter tends to occur earlier in the campaign, is less hostile and issue-focused. A study by <span class="citation">Schmøkel and Bossetta (<a href="#ref-schmokel2021">2021</a>)</span> presents a quantitative analysis of images from the Ad Library using clustering and visual emotion classification during the 2020 primary elections. Perhaps surprisingly, their results indicate that most of the images communicated happiness and calm, but the repertoire of the “core” images was minimal (434 out of over 80,000 images across eight candidates); hence most of the photos were merely repeated with a different text overlay.</p>
+<p>A recent example of a cross-country study is <span class="citation">Bene and Kruschinski (<a href="#ref-bene2021">2021</a>)</span>, whose chapter uses the API to analyze the political advertisement of parties in 12 EU countries in the run-up to the 2019 European Parliament elections, finding that advertisements seem to form the majority of parties’ activities on Facebook but, also, a considerable divergence in cross-country usage patterns.</p>
+<p>There is literature focused on the weaknesses of the data provided by the Facebook Ad library. For instance, in the case of Spain, <span class="citation">Cano-Orón et al. (<a href="#ref-cano2021">2021</a>)</span> focuses on the issue of disinformation during the 2019 Spanish general elections in the corpus of Facebook political ads, and <span class="citation">Calvo, Cano-Orón, and Baviera (<a href="#ref-calvo2021">2021</a>)</span> uses the same corpus and period to conduct an exploratory analysis of the political communication on Facebook. However, the authors note that due to the limitations for 2019 data using the API, they had to resort to web crawling of the Ad Library instead. It is also important to note that some NGOs, such as Transparency International, are involved in the <a href="https://www.transparency.cz/wp-content/uploads/2020/11/Why-Facebooks-Ad-Library-tool-falls-short-and-what-it-can-do-to-fix-it-2020.pdf">advocacy</a> for a more transparent and comprehensive reporting in the Facebook Ad Library.</p>
+<p>Finally, there is a body of preliminary research using the Facebook Ad Library API - publications currently in the form of pre-prints or conference proceedings. For example, <span class="citation">Edelson, Lauinger, and McCoy (<a href="#ref-edelson2020">2020</a>)</span> investigates the security weaknesses of the Facebook advertising ecosystem, enabling malicious advertisers to conduct undeclared coordinated activities and construct inauthentic communities. The Italian political discourse regarding migration is at the center of exploration by <span class="citation">Capozzi et al. (<a href="#ref-capozzi2021">2021</a>)</span>.</p>
+<p>To conclude, there are still significant gaps in the academic knowledge regarding the Facebook paid political advertising. More research attention paid to cross-country comparison, visual information, or ethical considerations would be beneficial to understand better the functioning of this ecosystem and its societal implications. Given the recently expanded transparency of Google regarding political advertisement on its platform, upcoming research should also consider using the <a href="https://transparencyreport.google.com/political-ads/home">Google Political Ads dataset</a> in tandem with Facebook’s Ad Library API.</p>
+
+</div>
+</div>
+<h3> References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-bene2021" class="csl-entry">
+Bene, Márton, and Simon Kruschinski. 2021. <span>“Political <span>Advertising</span> on <span>Facebook</span>.”</span> In <em>Campaigning on <span>Facebook</span> in the 2019 <span>European Parliament Election</span>: <span>Informing</span>, <span>Interacting</span> with, and <span>Mobilising Voters</span></em>, edited by Jörg Haßler, Melanie Magin, Uta Russmann, and Vicente Fenoll, 283–99. Political <span>Campaigning</span> and <span>Communication</span>. <span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-030-73851-8_18">https://doi.org/10.1007/978-3-030-73851-8_18</a>.
+</div>
+<div id="ref-bruns2019" class="csl-entry">
+Bruns, Axel. 2019. <span>“After the <span>APIcalypse</span>: Social Media Platforms and Their Fight Against Critical Scholarly Research.”</span> <em>Information, Communication &amp; Society</em> 22 (11): 1544–66. <a href="https://doi.org/10.1080/1369118X.2019.1637447">https://doi.org/10.1080/1369118X.2019.1637447</a>.
+</div>
+<div id="ref-calvo2021" class="csl-entry">
+Calvo, Dafne, Lorena Cano-Orón, and Tomás Baviera. 2021. <span>“Global <span>Spaces</span> for <span>Local Politics</span>: <span>An Exploratory Analysis</span> of <span>Facebook Ads</span> in <span>Spanish Election Campaigns</span>.”</span> <em>Social Sciences</em> 10 (7): 271. <a href="https://doi.org/10.3390/socsci10070271">https://doi.org/10.3390/socsci10070271</a>.
+</div>
+<div id="ref-cano2021" class="csl-entry">
+Cano-Orón, Lorena, Dafne Calvo, Guillermo López García, and Tomás Baviera. 2021. <span>“Disinformation in <span>Facebook Ads</span> in the 2019 <span>Spanish General Election Campaigns</span>.”</span> <em>Media and Communication</em> 9 (1): 217–28. <a href="https://doi.org/10.17645/mac.v9i1.3335">https://doi.org/10.17645/mac.v9i1.3335</a>.
+</div>
+<div id="ref-capozzi2021" class="csl-entry">
+Capozzi, Arthur, Gianmarco De Francisci Morales, Yelena Mejova, Corrado Monti, André Panisson, and Daniela Paolotti. 2021. <span>“Clandestino or <span>Rifugiato</span>? <span class="nocase">Anti-immigration Facebook Ad Targeting</span> in <span>Italy</span>.”</span> In <em>Proceedings of the 2021 <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em>, 1–15. <span>Yokohama Japan</span>: <span>ACM</span>. <a href="https://doi.org/10.1145/3411764.3445082">https://doi.org/10.1145/3411764.3445082</a>.
+</div>
+<div id="ref-edelson2020" class="csl-entry">
+Edelson, Laura, Tobias Lauinger, and Damon McCoy. 2020. <span>“A <span>Security Analysis</span> of the <span>Facebook Ad Library</span>.”</span> In <em>2020 <span>IEEE Symposium</span> on <span>Security</span> and <span>Privacy</span> (<span>SP</span>)</em>, 661–78. <span>San Francisco, CA, USA</span>: <span>IEEE</span>. <a href="https://doi.org/10.1109/SP40000.2020.00084">https://doi.org/10.1109/SP40000.2020.00084</a>.
+</div>
+<div id="ref-fowler2021" class="csl-entry">
+Fowler, Erika Franklin, Michael M. Franz, Gregory J. Martin, Zachary Peskowitz, and Travis N. Ridout. 2021. <span>“Political <span>Advertising Online</span> and <span>Offline</span>.”</span> <em>American Political Science Review</em> 115 (1): 130–49. <a href="https://doi.org/10.1017/S0003055420000696">https://doi.org/10.1017/S0003055420000696</a>.
+</div>
+<div id="ref-schmokel2021" class="csl-entry">
+Schmøkel, Rasmus, and Michael Bossetta. 2021. <span>“<span>FBAdLibrarian</span> and <span>Pykognition</span>: Open Science Tools for the Collection and Emotion Detection of Images in <span>Facebook</span> Political Ads with Computer Vision.”</span> <em>Journal of Information Technology &amp; Politics</em> 0 (0): 1–11. <a href="https://doi.org/10.1080/19331681.2021.1928579">https://doi.org/10.1080/19331681.2021.1928579</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="crowdtangle-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="genderize.io-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

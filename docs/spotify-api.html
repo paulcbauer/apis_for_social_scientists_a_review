@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 21 Spotify API |  APIs for social scientists: A collaborative review </title>
+  <meta name="description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 21 Spotify API |  APIs for social scientists: A collaborative review " />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 21 Spotify API |  APIs for social scientists: A collaborative review " />
+  
+  <meta name="twitter:description" content="This book provides an introduction to different APIs that may be useful to social scientists." />
+  
+
+<meta name="author" content="  Current editors: Paul C. Bauer, Camille Landesvatter, Lion Behrens  Authors &amp; contributors: Paul C. Bauer, Jan Behnert, Lion Behrens, Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter, Madleen Meier-Barthold, Grace Olzinski, Nina Osenbrügge, Ondrej Pekacek, Felix Rusche, Pirmin Stöckle, Malte Söhren, Domantas Undzėnas  " />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="reddit-api.html"/>
+<link rel="next" href="twitter-api.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-fixedcolumns-1.13.6/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-fixedcolumns-1.13.6/js/dataTables.fixedColumns.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGBJ5WP9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BQGBJ5WP9H');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://bookdown.org/paul/apis_for_social_scientists/">APIs for Social Scientists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#prerequisites-authentication"><i class="fa fa-check"></i><b>1.1</b> Prerequisites: Authentication</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#prerequisites-software-packages"><i class="fa fa-check"></i><b>1.2</b> Prerequisites: Software &amp; packages</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="best-practices.html"><a href="best-practices.html"><i class="fa fa-check"></i><b>2</b> Best Practices</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="best-practices.html"><a href="best-practices.html#read-the-developer-agreement-policy-and-api-documentation"><i class="fa fa-check"></i><b>2.1</b> Read the Developer Agreement, Policy and API Documentation</a></li>
+<li class="chapter" data-level="2.2" data-path="best-practices.html"><a href="best-practices.html#dont-hardcode-authentication-information-into-your-r-code"><i class="fa fa-check"></i><b>2.2</b> Don’t Hardcode Authentication Information into your R Code</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="best-practices.html"><a href="best-practices.html#alternative-use-environment-variables"><i class="fa fa-check"></i><b>2.2.1</b> Alternative: Use Environment Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="best-practices.html"><a href="best-practices.html#memoise-your-api-calls"><i class="fa fa-check"></i><b>2.3</b> Memoise your API Calls</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="best-practices.html"><a href="best-practices.html#implementation-of-memoisation-in-r"><i class="fa fa-check"></i><b>2.3.1</b> Implementation of memoisation in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ckan-api.html"><a href="ckan-api.html"><i class="fa fa-check"></i><b>3</b> CKAN API</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ckan-api.html"><a href="ckan-api.html#provided-servicesdata"><i class="fa fa-check"></i><b>3.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="3.2" data-path="ckan-api.html"><a href="ckan-api.html#prerequisites"><i class="fa fa-check"></i><b>3.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="3.3" data-path="ckan-api.html"><a href="ckan-api.html#simple-api-call"><i class="fa fa-check"></i><b>3.3</b> Simple API call</a></li>
+<li class="chapter" data-level="3.4" data-path="ckan-api.html"><a href="ckan-api.html#api-access-in-r"><i class="fa fa-check"></i><b>3.4</b> API access in R</a></li>
+<li class="chapter" data-level="3.5" data-path="ckan-api.html"><a href="ckan-api.html#social-science-examples"><i class="fa fa-check"></i><b>3.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html"><i class="fa fa-check"></i><b>4</b> CrowdTangle API</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#provided-servicesdata-1"><i class="fa fa-check"></i><b>4.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="4.2" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#prerequisites-1"><i class="fa fa-check"></i><b>4.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="4.3" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#simple-api-call-1"><i class="fa fa-check"></i><b>4.3</b> Simple API call</a></li>
+<li class="chapter" data-level="4.4" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#api-access-in-r-1"><i class="fa fa-check"></i><b>4.4</b> API access in R</a></li>
+<li class="chapter" data-level="4.5" data-path="crowdtangle-api.html"><a href="crowdtangle-api.html#social-science-examples-1"><i class="fa fa-check"></i><b>4.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html"><i class="fa fa-check"></i><b>5</b> Facebook Ad Library API</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#provided-servicesdata-2"><i class="fa fa-check"></i><b>5.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="5.2" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#prerequisites-2"><i class="fa fa-check"></i><b>5.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="5.3" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#simple-api-call-2"><i class="fa fa-check"></i><b>5.3</b> Simple API call</a></li>
+<li class="chapter" data-level="5.4" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#api-access-in-r-2"><i class="fa fa-check"></i><b>5.4</b> API access in R</a></li>
+<li class="chapter" data-level="5.5" data-path="facebook-ad-library-api.html"><a href="facebook-ad-library-api.html#social-science-examples-2"><i class="fa fa-check"></i><b>5.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="genderize.io-api.html"><a href="genderize.io-api.html"><i class="fa fa-check"></i><b>6</b> Genderize.io API</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provided-servicesdata-3"><i class="fa fa-check"></i><b>6.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="6.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#prerequisites-3"><i class="fa fa-check"></i><b>6.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="6.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#simple-api-call-3"><i class="fa fa-check"></i><b>6.3</b> Simple API call</a></li>
+<li class="chapter" data-level="6.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#api-access-in-r-3"><i class="fa fa-check"></i><b>6.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="genderize.io-api.html"><a href="genderize.io-api.html#load-package"><i class="fa fa-check"></i><b>6.4.1</b> Load package</a></li>
+<li class="chapter" data-level="6.4.2" data-path="genderize.io-api.html"><a href="genderize.io-api.html#the-genderize-function-and-its-arguments"><i class="fa fa-check"></i><b>6.4.2</b> The <code>genderize</code> function and its arguments</a></li>
+<li class="chapter" data-level="6.4.3" data-path="genderize.io-api.html"><a href="genderize.io-api.html#provide-api-key"><i class="fa fa-check"></i><b>6.4.3</b> Provide API key</a></li>
+<li class="chapter" data-level="6.4.4" data-path="genderize.io-api.html"><a href="genderize.io-api.html#functions-for-access-to-other-apis"><i class="fa fa-check"></i><b>6.4.4</b> Functions for access to other APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="genderize.io-api.html"><a href="genderize.io-api.html#social-science-examples-3"><i class="fa fa-check"></i><b>6.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="github.com-api.html"><a href="github.com-api.html"><i class="fa fa-check"></i><b>7</b> GitHub.com API</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="github.com-api.html"><a href="github.com-api.html#provided-servicesdata-4"><i class="fa fa-check"></i><b>7.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="7.2" data-path="github.com-api.html"><a href="github.com-api.html#prerequisites-4"><i class="fa fa-check"></i><b>7.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="7.3" data-path="github.com-api.html"><a href="github.com-api.html#simple-api-call-4"><i class="fa fa-check"></i><b>7.3</b> Simple API call</a></li>
+<li class="chapter" data-level="7.4" data-path="github.com-api.html"><a href="github.com-api.html#api-access-in-r-4"><i class="fa fa-check"></i><b>7.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="github.com-api.html"><a href="github.com-api.html#provide-api-key-1"><i class="fa fa-check"></i><b>7.4.1</b> Provide API key</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="github.com-api.html"><a href="github.com-api.html#social-science-examples-4"><i class="fa fa-check"></i><b>7.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="google-news-api.html"><a href="google-news-api.html"><i class="fa fa-check"></i><b>8</b> Google News API</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="google-news-api.html"><a href="google-news-api.html#prerequisites-5"><i class="fa fa-check"></i><b>8.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="8.2" data-path="google-news-api.html"><a href="google-news-api.html#simple-api-call-5"><i class="fa fa-check"></i><b>8.2</b> Simple API call</a></li>
+<li class="chapter" data-level="8.3" data-path="google-news-api.html"><a href="google-news-api.html#api-access-in-r-5"><i class="fa fa-check"></i><b>8.3</b> API access in R</a></li>
+<li class="chapter" data-level="8.4" data-path="google-news-api.html"><a href="google-news-api.html#social-science-examples-5"><i class="fa fa-check"></i><b>8.4</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html"><i class="fa fa-check"></i><b>9</b> Google Natural Language API</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#provided-servicesdata-5"><i class="fa fa-check"></i><b>9.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="9.2" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#prerequisites-6"><i class="fa fa-check"></i><b>9.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="9.3" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#simple-api-call-6"><i class="fa fa-check"></i><b>9.3</b> Simple API call</a></li>
+<li class="chapter" data-level="9.4" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#api-access-in-r-6"><i class="fa fa-check"></i><b>9.4</b> API access in R</a></li>
+<li class="chapter" data-level="9.5" data-path="google-natural-language-api.html"><a href="google-natural-language-api.html#social-science-examples-6"><i class="fa fa-check"></i><b>9.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="google-places-api.html"><a href="google-places-api.html"><i class="fa fa-check"></i><b>10</b> Google Places API</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="google-places-api.html"><a href="google-places-api.html#provided-servicesdata-6"><i class="fa fa-check"></i><b>10.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="10.2" data-path="google-places-api.html"><a href="google-places-api.html#prerequisites-7"><i class="fa fa-check"></i><b>10.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="10.3" data-path="google-places-api.html"><a href="google-places-api.html#simple-api-call-7"><i class="fa fa-check"></i><b>10.3</b> Simple API call</a></li>
+<li class="chapter" data-level="10.4" data-path="google-places-api.html"><a href="google-places-api.html#api-access-in-r-7"><i class="fa fa-check"></i><b>10.4</b> API access in R</a></li>
+<li class="chapter" data-level="10.5" data-path="google-places-api.html"><a href="google-places-api.html#social-science-examples-7"><i class="fa fa-check"></i><b>10.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html"><i class="fa fa-check"></i><b>11</b> Google Speech-to-Text API</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#provided-servicesdata-7"><i class="fa fa-check"></i><b>11.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="11.2" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#prerequisites-8"><i class="fa fa-check"></i><b>11.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="11.3" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#simple-api-call-8"><i class="fa fa-check"></i><b>11.3</b> Simple API call</a></li>
+<li class="chapter" data-level="11.4" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#api-access-in-r-8"><i class="fa fa-check"></i><b>11.4</b> API access in R</a></li>
+<li class="chapter" data-level="11.5" data-path="google-speech-to-text-api.html"><a href="google-speech-to-text-api.html#social-science-examples-8"><i class="fa fa-check"></i><b>11.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="google-translation-api.html"><a href="google-translation-api.html"><i class="fa fa-check"></i><b>12</b> Google Translation API</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="google-translation-api.html"><a href="google-translation-api.html#provided-servicesdata-8"><i class="fa fa-check"></i><b>12.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="12.2" data-path="google-translation-api.html"><a href="google-translation-api.html#prerequisites-9"><i class="fa fa-check"></i><b>12.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="12.3" data-path="google-translation-api.html"><a href="google-translation-api.html#simple-api-call-9"><i class="fa fa-check"></i><b>12.3</b> Simple API call</a></li>
+<li class="chapter" data-level="12.4" data-path="google-translation-api.html"><a href="google-translation-api.html#api-access-in-r-9"><i class="fa fa-check"></i><b>12.4</b> API access in R</a></li>
+<li class="chapter" data-level="12.5" data-path="google-translation-api.html"><a href="google-translation-api.html#social-science-examples-9"><i class="fa fa-check"></i><b>12.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="googletrends-api.html"><a href="googletrends-api.html"><i class="fa fa-check"></i><b>13</b> GoogleTrends API</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="googletrends-api.html"><a href="googletrends-api.html#provided-servicesdata-9"><i class="fa fa-check"></i><b>13.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="13.2" data-path="googletrends-api.html"><a href="googletrends-api.html#prerequisites-10"><i class="fa fa-check"></i><b>13.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="13.3" data-path="googletrends-api.html"><a href="googletrends-api.html#simple-api-call-10"><i class="fa fa-check"></i><b>13.3</b> Simple API call</a></li>
+<li class="chapter" data-level="13.4" data-path="googletrends-api.html"><a href="googletrends-api.html#api-access-in-r-10"><i class="fa fa-check"></i><b>13.4</b> API access in R</a></li>
+<li class="chapter" data-level="13.5" data-path="googletrends-api.html"><a href="googletrends-api.html#social-science-examples-10"><i class="fa fa-check"></i><b>13.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html"><i class="fa fa-check"></i><b>14</b> Instagram Basic Display API</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#provided-servicesdata-10"><i class="fa fa-check"></i><b>14.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="14.2" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#prerequisites-11"><i class="fa fa-check"></i><b>14.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="14.3" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#simple-api-call-11"><i class="fa fa-check"></i><b>14.3</b> Simple API call</a></li>
+<li class="chapter" data-level="14.4" data-path="instagram-basic-display-api.html"><a href="instagram-basic-display-api.html#api-access-in-r-11"><i class="fa fa-check"></i><b>14.4</b> API access in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html"><i class="fa fa-check"></i><b>15</b> Instagram Graph API</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#provided-servicesdata-11"><i class="fa fa-check"></i><b>15.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="15.2" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#prerequisites-12"><i class="fa fa-check"></i><b>15.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="15.3" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#simple-api-call-12"><i class="fa fa-check"></i><b>15.3</b> Simple API call</a></li>
+<li class="chapter" data-level="15.4" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#api-access-in-r-12"><i class="fa fa-check"></i><b>15.4</b> API access in R</a></li>
+<li class="chapter" data-level="15.5" data-path="instagram-graph-api.html"><a href="instagram-graph-api.html#social-science-examples-11"><i class="fa fa-check"></i><b>15.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="internet-archive-api.html"><a href="internet-archive-api.html"><i class="fa fa-check"></i><b>16</b> Internet Archive API</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="internet-archive-api.html"><a href="internet-archive-api.html#provided-servicesdata-12"><i class="fa fa-check"></i><b>16.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="16.2" data-path="internet-archive-api.html"><a href="internet-archive-api.html#prerequesites"><i class="fa fa-check"></i><b>16.2</b> Prerequesites</a></li>
+<li class="chapter" data-level="16.3" data-path="internet-archive-api.html"><a href="internet-archive-api.html#simple-api-call-13"><i class="fa fa-check"></i><b>16.3</b> Simple API call</a></li>
+<li class="chapter" data-level="16.4" data-path="internet-archive-api.html"><a href="internet-archive-api.html#api-access"><i class="fa fa-check"></i><b>16.4</b> API access</a>
+<ul>
+<li class="chapter" data-level="" data-path="internet-archive-api.html"><a href="internet-archive-api.html#using-the-archiveretriever"><i class="fa fa-check"></i>Using the archiveRetriever</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="internet-archive-api.html"><a href="internet-archive-api.html#social-science-examples-12"><i class="fa fa-check"></i><b>16.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html"><i class="fa fa-check"></i><b>17</b> Large Language Model APIs</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#prerequisites-13"><i class="fa fa-check"></i><b>17.1</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#software-and-registration"><i class="fa fa-check"></i><b>17.1.1</b> Software and Registration</a></li>
+<li class="chapter" data-level="17.1.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#choosing-a-model"><i class="fa fa-check"></i><b>17.1.2</b> Choosing a Model</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#simple-api-call-in-r"><i class="fa fa-check"></i><b>17.2</b> Simple API Call in R</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#openai-chatgpt-4o"><i class="fa fa-check"></i><b>17.2.1</b> OpenAI: ChatGPT-4o</a></li>
+<li class="chapter" data-level="17.2.2" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#ollama-llama3"><i class="fa fa-check"></i><b>17.2.2</b> Ollama: Llama3</a></li>
+<li class="chapter" data-level="17.2.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#some-parameter-choices-and-settings"><i class="fa fa-check"></i><b>17.2.3</b> Some Parameter Choices and Settings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="large-language-model-apis.html"><a href="large-language-model-apis.html#social-science-examples-13"><i class="fa fa-check"></i><b>17.3</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="media-cloud-api.html"><a href="media-cloud-api.html"><i class="fa fa-check"></i><b>18</b> Media Cloud API</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#provided-servicesdata-13"><i class="fa fa-check"></i><b>18.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="18.2" data-path="media-cloud-api.html"><a href="media-cloud-api.html#prerequisites-14"><i class="fa fa-check"></i><b>18.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="18.3" data-path="media-cloud-api.html"><a href="media-cloud-api.html#simple-api-call-14"><i class="fa fa-check"></i><b>18.3</b> Simple API call</a></li>
+<li class="chapter" data-level="18.4" data-path="media-cloud-api.html"><a href="media-cloud-api.html#api-access-in-r-13"><i class="fa fa-check"></i><b>18.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="18.4.1" data-path="media-cloud-api.html"><a href="media-cloud-api.html#media-keywords-of-universität-mannheim"><i class="fa fa-check"></i><b>18.4.1</b> Media keywords of “Universität Mannheim”</a></li>
+</ul></li>
+<li class="chapter" data-level="18.5" data-path="media-cloud-api.html"><a href="media-cloud-api.html#social-science-examples-14"><i class="fa fa-check"></i><b>18.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="overpass-api.html"><a href="overpass-api.html"><i class="fa fa-check"></i><b>19</b> Overpass API</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="overpass-api.html"><a href="overpass-api.html#provided-servicesdata-14"><i class="fa fa-check"></i><b>19.1</b> Provided Services/Data</a></li>
+<li class="chapter" data-level="19.2" data-path="overpass-api.html"><a href="overpass-api.html#prerequisites-15"><i class="fa fa-check"></i><b>19.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="19.3" data-path="overpass-api.html"><a href="overpass-api.html#simple-api-call-15"><i class="fa fa-check"></i><b>19.3</b> Simple API Call</a></li>
+<li class="chapter" data-level="19.4" data-path="overpass-api.html"><a href="overpass-api.html#api-access-in-r-14"><i class="fa fa-check"></i><b>19.4</b> API Access in R</a></li>
+<li class="chapter" data-level="19.5" data-path="overpass-api.html"><a href="overpass-api.html#social-science-examples-15"><i class="fa fa-check"></i><b>19.5</b> Social Science Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="reddit-api.html"><a href="reddit-api.html"><i class="fa fa-check"></i><b>20</b> Reddit API</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="reddit-api.html"><a href="reddit-api.html#provided-servicesdata-15"><i class="fa fa-check"></i><b>20.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="20.2" data-path="reddit-api.html"><a href="reddit-api.html#prerequisites-16"><i class="fa fa-check"></i><b>20.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="20.3" data-path="reddit-api.html"><a href="reddit-api.html#simple-api-call-16"><i class="fa fa-check"></i><b>20.3</b> Simple API call</a></li>
+<li class="chapter" data-level="20.4" data-path="reddit-api.html"><a href="reddit-api.html#api-access-in-r-15"><i class="fa fa-check"></i><b>20.4</b> API access in R</a></li>
+<li class="chapter" data-level="20.5" data-path="reddit-api.html"><a href="reddit-api.html#social-science-examples-16"><i class="fa fa-check"></i><b>20.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="spotify-api.html"><a href="spotify-api.html"><i class="fa fa-check"></i><b>21</b> Spotify API</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="spotify-api.html"><a href="spotify-api.html#provided-servicesdata-16"><i class="fa fa-check"></i><b>21.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="21.2" data-path="spotify-api.html"><a href="spotify-api.html#prerequisites-17"><i class="fa fa-check"></i><b>21.2</b> Prerequisites</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="spotify-api.html"><a href="spotify-api.html#authentication"><i class="fa fa-check"></i><b>21.2.1</b> Authentication</a></li>
+<li class="chapter" data-level="21.2.2" data-path="spotify-api.html"><a href="spotify-api.html#authorization-code-flow"><i class="fa fa-check"></i><b>21.2.2</b> Authorization code flow</a></li>
+<li class="chapter" data-level="21.2.3" data-path="spotify-api.html"><a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment"><i class="fa fa-check"></i><b>21.2.3</b> Savely storing your credentials in the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="spotify-api.html"><a href="spotify-api.html#simple-api-call-17"><i class="fa fa-check"></i><b>21.3</b> Simple API call</a></li>
+<li class="chapter" data-level="21.4" data-path="spotify-api.html"><a href="spotify-api.html#api-access-in-r-16"><i class="fa fa-check"></i><b>21.4</b> API access in R</a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="spotify-api.html"><a href="spotify-api.html#playlist-features"><i class="fa fa-check"></i><b>21.4.1</b> Playlist features</a></li>
+<li class="chapter" data-level="21.4.2" data-path="spotify-api.html"><a href="spotify-api.html#your-spotify-data"><i class="fa fa-check"></i><b>21.4.2</b> Your Spotify data</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="spotify-api.html"><a href="spotify-api.html#social-science-examples-17"><i class="fa fa-check"></i><b>21.5</b> Social science examples</a></li>
+<li class="chapter" data-level="21.6" data-path="spotify-api.html"><a href="spotify-api.html#references"><i class="fa fa-check"></i><b>21.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="twitter-api.html"><a href="twitter-api.html"><i class="fa fa-check"></i><b>22</b> Twitter API</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="twitter-api.html"><a href="twitter-api.html#provided-servicesdata-17"><i class="fa fa-check"></i><b>22.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="22.2" data-path="twitter-api.html"><a href="twitter-api.html#prerequisites-18"><i class="fa fa-check"></i><b>22.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="22.3" data-path="twitter-api.html"><a href="twitter-api.html#simple-api-call-18"><i class="fa fa-check"></i><b>22.3</b> Simple API call</a></li>
+<li class="chapter" data-level="22.4" data-path="twitter-api.html"><a href="twitter-api.html#api-access-in-r-17"><i class="fa fa-check"></i><b>22.4</b> API access in R</a></li>
+<li class="chapter" data-level="22.5" data-path="twitter-api.html"><a href="twitter-api.html#social-science-examples-18"><i class="fa fa-check"></i><b>22.5</b> Social science examples</a></li>
+<li class="chapter" data-level="22.6" data-path="twitter-api.html"><a href="twitter-api.html#addendum-twitter-v1.1"><i class="fa fa-check"></i><b>22.6</b> Addendum: Twitter v1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html"><i class="fa fa-check"></i><b>23</b> MediaWiki Action API</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#provided-servicesdata-18"><i class="fa fa-check"></i><b>23.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="23.2" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#prerequisites-19"><i class="fa fa-check"></i><b>23.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="23.3" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#simple-api-call-19"><i class="fa fa-check"></i><b>23.3</b> Simple API call</a></li>
+<li class="chapter" data-level="23.4" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#api-access-in-r-18"><i class="fa fa-check"></i><b>23.4</b> API access in R</a></li>
+<li class="chapter" data-level="23.5" data-path="mediawiki-action-api.html"><a href="mediawiki-action-api.html#social-science-examples-19"><i class="fa fa-check"></i><b>23.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="youtube-api.html"><a href="youtube-api.html"><i class="fa fa-check"></i><b>24</b> Youtube API</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="youtube-api.html"><a href="youtube-api.html#provided-servicesdata-19"><i class="fa fa-check"></i><b>24.1</b> Provided services/data</a></li>
+<li class="chapter" data-level="24.2" data-path="youtube-api.html"><a href="youtube-api.html#prerequisites-20"><i class="fa fa-check"></i><b>24.2</b> Prerequisites</a></li>
+<li class="chapter" data-level="24.3" data-path="youtube-api.html"><a href="youtube-api.html#simple-api-call-20"><i class="fa fa-check"></i><b>24.3</b> Simple API call</a></li>
+<li class="chapter" data-level="24.4" data-path="youtube-api.html"><a href="youtube-api.html#api-access-in-r-19"><i class="fa fa-check"></i><b>24.4</b> API access in R</a></li>
+<li class="chapter" data-level="24.5" data-path="youtube-api.html"><a href="youtube-api.html#social-science-examples-20"><i class="fa fa-check"></i><b>24.5</b> Social science examples</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references-1.html"><a href="references-1.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paulcbauer/apis_for_social_scientists_a_review" target="blank">Github repository</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><center><br />
+APIs for social scientists:<br>A collaborative review<br />
+</center></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="spotify-api" class="section level1 hasAnchor" number="21">
+<h1><span class="header-section-number">Chapter 21</span> Spotify API<a href="spotify-api.html#spotify-api" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><chauthors>Johanna Mehltretter, Marie-Lou Sohnius</chauthors> <br><br></p>
+<p>You will need to install the following packages for this chapter (run the code):</p>
+<pre><code># install.packages(&#39;pacman&#39;)
+library(pacman)
+p_load(&#39;spotifyr&#39;, &#39;tidyverse&#39;,
+&#39;lubridate&#39;)</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="spotify-api.html#cb216-1" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb216-2"><a href="spotify-api.html#cb216-2" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">&#39;spotifyr&#39;</span>,  <span class="co"># To access the API</span></span>
+<span id="cb216-3"><a href="spotify-api.html#cb216-3" tabindex="-1"></a>               <span class="st">&#39;tidyverse&#39;</span>, <span class="co"># Data wrangling and plots</span></span>
+<span id="cb216-4"><a href="spotify-api.html#cb216-4" tabindex="-1"></a>               <span class="st">&#39;plotly&#39;</span>,    <span class="co"># Interactive plots</span></span>
+<span id="cb216-5"><a href="spotify-api.html#cb216-5" tabindex="-1"></a>               <span class="st">&#39;ggimage&#39;</span>,   <span class="co"># Adding album covers to ggplot</span></span>
+<span id="cb216-6"><a href="spotify-api.html#cb216-6" tabindex="-1"></a>               <span class="st">&#39;kableExtra&#39;</span>,<span class="co"># Format tables</span></span>
+<span id="cb216-7"><a href="spotify-api.html#cb216-7" tabindex="-1"></a>               <span class="st">&#39;httpuv&#39;</span>,    <span class="co"># To be able to access the Spotify URL</span></span>
+<span id="cb216-8"><a href="spotify-api.html#cb216-8" tabindex="-1"></a>               <span class="st">&#39;httr&#39;</span>)      <span class="co"># In case you want to access the API w/o</span></span>
+<span id="cb216-9"><a href="spotify-api.html#cb216-9" tabindex="-1"></a>                            <span class="co"># the package</span></span></code></pre></div>
+<div id="provided-servicesdata-16" class="section level2 hasAnchor" number="21.1">
+<h2><span class="header-section-number">21.1</span> Provided services/data<a href="spotify-api.html#provided-servicesdata-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What data/service is provided by the API?</em></li>
+</ul>
+<p>The <code>Spotify</code> Web API allows you to pull data from the platform on listed artists, albums, tracks, and playlists. Possible requests include getting information on track audio features (e.g., danceability, score, or pace) as well as popularity metrics of single tracks and albums. Beyond these general query options, you can also collect data on individual users’ (including your own) listening behavior. Accessing personal information, however, depends on users’ consent.</p>
+</div>
+<div id="prerequisites-17" class="section level2 hasAnchor" number="21.2">
+<h2><span class="header-section-number">21.2</span> Prerequisites<a href="spotify-api.html#prerequisites-17" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What are the prerequisites to access the API (authentication)?</em></li>
+</ul>
+<div id="authentication" class="section level3 hasAnchor" number="21.2.1">
+<h3><span class="header-section-number">21.2.1</span> Authentication<a href="spotify-api.html#authentication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To access the Spotify API, you need to have a Spotify account. Don’t have one yet? Then sign up for free <a href="https://www.spotify.com/signup/">here</a>! It does not matter whether you have a Premium account or not. Once you’re ready to use your Spotify account, you can <a href="https://developer.spotify.com/dashboard/login">set up a developer account</a> to access the Spotify Web API. With the developer access, you can create new integrations and manage your Spotify credentials.</p>
+<p>Once you have a developer account, you will need to create an app on the dashboard page.</p>
+<div class="float">
+<img src="figures/SpotifyrAPP_Dashboard.png" alt="Figure 1: Create the app on the dashboard (Screenshot from the Spotify for Developers page)" />
+<div class="figcaption">Figure 1: Create the app on the dashboard (Screenshot from the <a href="https://developer.spotify.com">Spotify for Developers page</a>)</div>
+</div>
+</div>
+<div id="authorization-code-flow" class="section level3 hasAnchor" number="21.2.2">
+<h3><span class="header-section-number">21.2.2</span> Authorization code flow<a href="spotify-api.html#authorization-code-flow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you want to access information on your own account (e.g. your favorite artists, your playlists), you need to complete one additional step: Go to the app you created in the Spotify API dashboard, go to edit settings and add a Redirect URI. A recommended option for your Redirect URI is <code>http://localhost:1410/</code>. See <a href="https://developer.spotify.com/documentation/web-api/">Spotify’s developer guide</a> for more information.</p>
+<div class="float">
+<img src="figures/SpotifyrAPP_Edit_Settings.png" alt="Figure 2: Open settings of the app (Screenshot from the Spotify for Developers page)" />
+<div class="figcaption">Figure 2: Open settings of the app (Screenshot from the <a href="https://developer.spotify.com">Spotify for Developers page</a>)</div>
+</div>
+<div class="float">
+<img src="figures/SpotifyrAPP_Settings.png" alt="Figure 3: Add the Redirect URI (http://localhost:1410/) to the settings (Screenshot from the Spotify for Developers page)" />
+<div class="figcaption">Figure 3: Add the Redirect URI (<code>http://localhost:1410/</code>) to the settings (Screenshot from the <a href="https://developer.spotify.com">Spotify for Developers page</a>)</div>
+</div>
+</div>
+<div id="savely-storing-your-credentials-in-the-r-environment" class="section level3 hasAnchor" number="21.2.3">
+<h3><span class="header-section-number">21.2.3</span> Savely storing your credentials in the R environment<a href="spotify-api.html#savely-storing-your-credentials-in-the-r-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Via the app you created, you receive your client ID and client secret. You can find them on the app page in your Spotify developer account. Save both credentials in the R environment. For accessing your personal data, also add the redirect URI (the same one you added in your app’s settings!):</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="spotify-api.html#cb217-1" tabindex="-1"></a><span class="co"># Here you can store the credentials as follows:</span></span>
+<span id="cb217-2"><a href="spotify-api.html#cb217-2" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="spotify-api.html#cb217-3" tabindex="-1"></a><span class="co"># Sys.setenv(SPOTIFY_CLIENT_ID=&quot;xxx&quot;) #</span></span>
+<span id="cb217-4"><a href="spotify-api.html#cb217-4" tabindex="-1"></a><span class="co"># Sys.setenv(SPOTIFY_CLIENT_SECRET=&quot;xxx&quot;) #</span></span>
+<span id="cb217-5"><a href="spotify-api.html#cb217-5" tabindex="-1"></a><span class="co"># Sys.setenv(SPOTIFY_REDIRECT_URI=&quot;http://localhost:1410/&quot;) #</span></span>
+<span id="cb217-6"><a href="spotify-api.html#cb217-6" tabindex="-1"></a></span>
+<span id="cb217-7"><a href="spotify-api.html#cb217-7" tabindex="-1"></a><span class="co"># Beware: The credential locals are case-sensitive, thus must be stored</span></span>
+<span id="cb217-8"><a href="spotify-api.html#cb217-8" tabindex="-1"></a><span class="co"># exactly as above to work correctly with the spotifyr package.</span></span>
+<span id="cb217-9"><a href="spotify-api.html#cb217-9" tabindex="-1"></a></span>
+<span id="cb217-10"><a href="spotify-api.html#cb217-10" tabindex="-1"></a> access_token <span class="ot">&lt;-</span> <span class="fu">get_spotify_access_token</span>() <span class="co"># Stores your client ID in a </span></span>
+<span id="cb217-11"><a href="spotify-api.html#cb217-11" tabindex="-1"></a> <span class="co">#local object</span></span></code></pre></div>
+</div>
+</div>
+<div id="simple-api-call-17" class="section level2 hasAnchor" number="21.3">
+<h2><span class="header-section-number">21.3</span> Simple API call<a href="spotify-api.html#simple-api-call-17" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>What does a simple API call look like?</em></li>
+</ul>
+<p>In this chapter, we solely focus on how to make API calls via the corresponding <code>spotifyr</code> package. There also exists the option to access the Spotify API using the more common <code>httr</code> package. The latter option is more complicated than using the customized <code>spotifyr</code> package, though, as the manual authentication process is more difficult to implement. If you are interested in making API calls without the package, have a look at <a href="https://rayheberer.ai/archive/spotifyapi/">this detailed guide by Ray Heberer</a>.</p>
+</div>
+<div id="api-access-in-r-16" class="section level2 hasAnchor" number="21.4">
+<h2><span class="header-section-number">21.4</span> API access in R<a href="spotify-api.html#api-access-in-r-16" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>How can we access the API from R (httr + other packages)?</em></li>
+</ul>
+<p>Instead of typing the API request into our browser or using the <code>httr</code> package, we can use the <code>spotifyr</code> package to easily access the API from R.</p>
+<p><strong>Note:</strong> For information on all possible queries available through the <code>spotifyr</code> wrapper, see the <a href="https://cran.r-project.org/web/packages/spotifyr/spotifyr.pdf">online documentation</a> or <a href="https://www.rcharlie.com/spotifyr/">this detailed introduction to the package</a> which also informed this chapter. You can also check the R built-in help function on the package:</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="spotify-api.html#cb218-1" tabindex="-1"></a><span class="fu">library</span>(spotifyr)</span>
+<span id="cb218-2"><a href="spotify-api.html#cb218-2" tabindex="-1"></a>?spotifyr</span></code></pre></div>
+<div id="playlist-features" class="section level3 hasAnchor" number="21.4.1">
+<h3><span class="header-section-number">21.4.1</span> Playlist features<a href="spotify-api.html#playlist-features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So let’s submit our first query to the API! In this example, we are interested in the features of current global top 50 tracks. To get this information, we first retrieve the Spotify playlist ID by opening the playlist we want to analyze in the browser and then copying the id part from the link. In our example of the Spotify <a href="https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF">global top 50 playlist</a>:</p>
+<p><strong>Playlist link:</strong> <a href="https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF">https://open.spotify.com/playlist/<strong>37i9dQZEVXbMDoHDwVN2tF</strong></a></p>
+<p><strong>Playlist ID:</strong> 37i9dQZEVXbMDoHDwVN2tF</p>
+<p>Now that we have the ID, we can retrieve all information on tracks in the playlist by calling the function <code>get_playlist_audio_features</code>.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="spotify-api.html#cb219-1" tabindex="-1"></a><span class="co"># Store the data in a dataframe</span></span>
+<span id="cb219-2"><a href="spotify-api.html#cb219-2" tabindex="-1"></a>top50 <span class="ot">&lt;-</span> <span class="fu">get_playlist_audio_features</span>(<span class="at">playlist_uris =</span> <span class="st">&#39;37i9dQZEVXbMDoHDwVN2tF&#39;</span>) </span>
+<span id="cb219-3"><a href="spotify-api.html#cb219-3" tabindex="-1"></a><span class="co"># Global Top 50</span></span>
+<span id="cb219-4"><a href="spotify-api.html#cb219-4" tabindex="-1"></a></span>
+<span id="cb219-5"><a href="spotify-api.html#cb219-5" tabindex="-1"></a></span>
+<span id="cb219-6"><a href="spotify-api.html#cb219-6" tabindex="-1"></a><span class="co"># Add the tracks&#39; rank to the dataset:</span></span>
+<span id="cb219-7"><a href="spotify-api.html#cb219-7" tabindex="-1"></a><span class="co"># the data comes sorted as listed in the playlist but does not contain a</span></span>
+<span id="cb219-8"><a href="spotify-api.html#cb219-8" tabindex="-1"></a><span class="co"># specific variable indicating the rank. Therefore, we create a new </span></span>
+<span id="cb219-9"><a href="spotify-api.html#cb219-9" tabindex="-1"></a><span class="co"># variable that contains the rank in ascending order, ranging from 1 to</span></span>
+<span id="cb219-10"><a href="spotify-api.html#cb219-10" tabindex="-1"></a><span class="co"># 50.</span></span>
+<span id="cb219-11"><a href="spotify-api.html#cb219-11" tabindex="-1"></a></span>
+<span id="cb219-12"><a href="spotify-api.html#cb219-12" tabindex="-1"></a>top50<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">seq.int</span>(<span class="fu">nrow</span>(top50)) </span>
+<span id="cb219-13"><a href="spotify-api.html#cb219-13" tabindex="-1"></a></span>
+<span id="cb219-14"><a href="spotify-api.html#cb219-14" tabindex="-1"></a></span>
+<span id="cb219-15"><a href="spotify-api.html#cb219-15" tabindex="-1"></a><span class="co"># So far, so good. Looking at the data, artist names are currently stored</span></span>
+<span id="cb219-16"><a href="spotify-api.html#cb219-16" tabindex="-1"></a><span class="co"># in lists.</span></span>
+<span id="cb219-17"><a href="spotify-api.html#cb219-17" tabindex="-1"></a><span class="co"># The next snippet moves artist names into a new variable for easier</span></span>
+<span id="cb219-18"><a href="spotify-api.html#cb219-18" tabindex="-1"></a><span class="co"># access. Also, we add the album cover link to a new variable image to</span></span>
+<span id="cb219-19"><a href="spotify-api.html#cb219-19" tabindex="-1"></a><span class="co"># plot the covers later.</span></span>
+<span id="cb219-20"><a href="spotify-api.html#cb219-20" tabindex="-1"></a></span>
+<span id="cb219-21"><a href="spotify-api.html#cb219-21" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
+<span id="cb219-22"><a href="spotify-api.html#cb219-22" tabindex="-1"></a>  top50<span class="sc">$</span>artist[i] <span class="ot">&lt;-</span> top50[[<span class="dv">28</span>]][[i]]<span class="sc">$</span>name</span>
+<span id="cb219-23"><a href="spotify-api.html#cb219-23" tabindex="-1"></a>  top50<span class="sc">$</span>image[i] <span class="ot">&lt;-</span> <span class="fu">c</span>(top50[[<span class="dv">49</span>]][[i]]<span class="sc">$</span>url[<span class="dv">2</span>], <span class="at">size=</span><span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb219-24"><a href="spotify-api.html#cb219-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="spotify-api.html#cb220-1" tabindex="-1"></a><span class="co"># Now that we have the data set ready to go, let&#39;s take a look at what</span></span>
+<span id="cb220-2"><a href="spotify-api.html#cb220-2" tabindex="-1"></a><span class="co"># variables are in there.</span></span>
+<span id="cb220-3"><a href="spotify-api.html#cb220-3" tabindex="-1"></a><span class="fu">names</span>(top50) <span class="sc">%&gt;%</span> </span>
+<span id="cb220-4"><a href="spotify-api.html#cb220-4" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb220-5"><a href="spotify-api.html#cb220-5" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;hover&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb220-6"><a href="spotify-api.html#cb220-6" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+playlist_id
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+playlist_name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+playlist_img
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+playlist_owner_name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+playlist_owner_id
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+danceability
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+energy
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+key
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+loudness
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mode
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+speechiness
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+acousticness
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+instrumentalness
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+liveness
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+valence
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tempo
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.id
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+analysis_url
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+time_signature
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_at
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+is_local
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+primary_color
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_by.href
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_by.id
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_by.type
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_by.uri
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+added_by.external_urls.spotify
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.artists
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.available_markets
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.disc_number
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.duration_ms
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.episode
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.explicit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.href
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.is_local
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.popularity
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.preview_url
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.track
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.track_number
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.type
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.uri
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.album_group
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.album_type
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.artists
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.available_markets
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.href
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.id
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.images
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.is_playable
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.release_date
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.release_date_precision
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.total_tracks
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.type
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.uri
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.album.external_urls.spotify
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.external_ids.isrc
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+track.external_urls.spotify
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+video_thumbnail.url
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+key_name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mode_name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+key_mode
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rank
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+artist
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+image
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In the next step, we want to take a closer look at track popularity. That is, how does a track’s rank on the top 50 playlist correlate with Spotify’s popularity measure? Note that the index is calculated by Spotify not solely based on a track’s recent stream count, but also taking other metrics into account. Beyond, we’ll have a look at more fun features such as a track’s danceability and valence (happiness).</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="spotify-api.html#cb221-1" tabindex="-1"></a>top50 <span class="sc">%&gt;%</span> <span class="fu">select</span>(rank, track.name, artist, track.popularity,</span>
+<span id="cb221-2"><a href="spotify-api.html#cb221-2" tabindex="-1"></a>                 danceability, valence) <span class="sc">%&gt;%</span> </span>
+<span id="cb221-3"><a href="spotify-api.html#cb221-3" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb221-4"><a href="spotify-api.html#cb221-4" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;hover&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb221-5"><a href="spotify-api.html#cb221-5" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+rank
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+track.name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+artist
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+track.popularity
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+danceability
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+valence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Die For You - Remix
+</td>
+<td style="text-align:left;">
+The Weeknd
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+0.531
+</td>
+<td style="text-align:right;">
+0.5020
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+TQG
+</td>
+<td style="text-align:left;">
+KAROL G
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+0.720
+</td>
+<td style="text-align:right;">
+0.6070
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Flowers
+</td>
+<td style="text-align:left;">
+Miley Cyrus
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0.707
+</td>
+<td style="text-align:right;">
+0.6460
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Kill Bill
+</td>
+<td style="text-align:left;">
+SZA
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+0.644
+</td>
+<td style="text-align:right;">
+0.4180
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Boy’s a liar Pt. 2
+</td>
+<td style="text-align:left;">
+PinkPantheress
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+0.696
+</td>
+<td style="text-align:right;">
+0.8570
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+As It Was
+</td>
+<td style="text-align:left;">
+Harry Styles
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.520
+</td>
+<td style="text-align:right;">
+0.6620
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Shakira: Bzrp Music Sessions, Vol. 53
+</td>
+<td style="text-align:left;">
+Bizarrap
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+0.778
+</td>
+<td style="text-align:right;">
+0.4980
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Creepin’ (with The Weeknd &amp; 21 Savage)
+</td>
+<td style="text-align:left;">
+Metro Boomin
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+0.715
+</td>
+<td style="text-align:right;">
+0.1720
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Yandel 150
+</td>
+<td style="text-align:left;">
+Yandel
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.783
+</td>
+<td style="text-align:right;">
+0.5800
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Calm Down (with Selena Gomez)
+</td>
+<td style="text-align:left;">
+Rema
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+0.801
+</td>
+<td style="text-align:right;">
+0.8020
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Unholy (feat. Kim Petras)
+</td>
+<td style="text-align:left;">
+Sam Smith
+</td>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+0.712
+</td>
+<td style="text-align:right;">
+0.2060
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Tormenta (feat. Bad Bunny)
+</td>
+<td style="text-align:left;">
+Gorillaz
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.637
+</td>
+<td style="text-align:right;">
+0.2970
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Shorty Party
+</td>
+<td style="text-align:left;">
+Cartel De Santa
+</td>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+0.928
+</td>
+<td style="text-align:right;">
+0.4700
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+La Bachata
+</td>
+<td style="text-align:left;">
+Manuel Turizo
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+0.835
+</td>
+<td style="text-align:right;">
+0.8500
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+I’m Good (Blue)
+</td>
+<td style="text-align:left;">
+David Guetta
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+0.561
+</td>
+<td style="text-align:right;">
+0.3040
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+Die For You
+</td>
+<td style="text-align:left;">
+The Weeknd
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+0.586
+</td>
+<td style="text-align:right;">
+0.5080
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Last Night
+</td>
+<td style="text-align:left;">
+Morgan Wallen
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+0.492
+</td>
+<td style="text-align:right;">
+0.4780
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Anti-Hero
+</td>
+<td style="text-align:left;">
+Taylor Swift
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+0.637
+</td>
+<td style="text-align:right;">
+0.5330
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Escapism.
+</td>
+<td style="text-align:left;">
+RAYE
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+0.538
+</td>
+<td style="text-align:right;">
+0.2500
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+Here With Me
+</td>
+<td style="text-align:left;">
+d4vd
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+0.574
+</td>
+<td style="text-align:right;">
+0.2880
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+OMG
+</td>
+<td style="text-align:left;">
+NewJeans
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+0.804
+</td>
+<td style="text-align:right;">
+0.7390
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+Hey Mor
+</td>
+<td style="text-align:left;">
+Ozuna
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.901
+</td>
+<td style="text-align:right;">
+0.3990
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:left;">
+Until I Found You (with Em Beihold) - Em Beihold Version
+</td>
+<td style="text-align:left;">
+Stephen Sanchez
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+0.551
+</td>
+<td style="text-align:right;">
+0.3420
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+Starboy
+</td>
+<td style="text-align:left;">
+The Weeknd
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.679
+</td>
+<td style="text-align:right;">
+0.4860
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Another Love
+</td>
+<td style="text-align:left;">
+Tom Odell
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+0.442
+</td>
+<td style="text-align:right;">
+0.1390
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+X SI VOLVEMOS
+</td>
+<td style="text-align:left;">
+KAROL G
+</td>
+<td style="text-align:right;">
+81
+</td>
+<td style="text-align:right;">
+0.794
+</td>
+<td style="text-align:right;">
+0.5750
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+golden hour
+</td>
+<td style="text-align:left;">
+JVKE
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+0.515
+</td>
+<td style="text-align:right;">
+0.1530
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+La Jumpa
+</td>
+<td style="text-align:left;">
+Arcángel
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.887
+</td>
+<td style="text-align:right;">
+0.1970
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+Players
+</td>
+<td style="text-align:left;">
+Coi Leray
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.954
+</td>
+<td style="text-align:right;">
+0.6240
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Quevedo: Bzrp Music Sessions, Vol. 52
+</td>
+<td style="text-align:left;">
+Bizarrap
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+0.621
+</td>
+<td style="text-align:right;">
+0.5500
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+I Wanna Be Yours
+</td>
+<td style="text-align:left;">
+Arctic Monkeys
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+0.464
+</td>
+<td style="text-align:right;">
+0.4790
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+I Ain’t Worried
+</td>
+<td style="text-align:left;">
+OneRepublic
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+0.697
+</td>
+<td style="text-align:right;">
+0.8220
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+AMG
+</td>
+<td style="text-align:left;">
+Natanael Cano
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.772
+</td>
+<td style="text-align:right;">
+0.7860
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:left;">
+ceilings
+</td>
+<td style="text-align:left;">
+Lizzy McAlpine
+</td>
+<td style="text-align:right;">
+86
+</td>
+<td style="text-align:right;">
+0.516
+</td>
+<td style="text-align:right;">
+0.2610
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;">
+Snooze
+</td>
+<td style="text-align:left;">
+SZA
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.559
+</td>
+<td style="text-align:right;">
+0.3920
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+Feliz Cumpleaños Ferxxo
+</td>
+<td style="text-align:left;">
+Feid
+</td>
+<td style="text-align:right;">
+86
+</td>
+<td style="text-align:right;">
+0.865
+</td>
+<td style="text-align:right;">
+0.5630
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:left;">
+Sure Thing
+</td>
+<td style="text-align:left;">
+Miguel
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+0.684
+</td>
+<td style="text-align:right;">
+0.4980
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+PRC
+</td>
+<td style="text-align:left;">
+Peso Pluma
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+0.784
+</td>
+<td style="text-align:right;">
+0.8930
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:left;">
+Bones
+</td>
+<td style="text-align:left;">
+Imagine Dragons
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+0.772
+</td>
+<td style="text-align:right;">
+0.5870
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:left;">
+Just Wanna Rock
+</td>
+<td style="text-align:left;">
+Lil Uzi Vert
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.486
+</td>
+<td style="text-align:right;">
+0.0385
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:left;">
+on the street (with J. Cole)
+</td>
+<td style="text-align:left;">
+j-hope
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+0.681
+</td>
+<td style="text-align:right;">
+0.8130
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:left;">
+Ditto
+</td>
+<td style="text-align:left;">
+NewJeans
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.814
+</td>
+<td style="text-align:right;">
+0.1830
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:left;">
+Mockingbird
+</td>
+<td style="text-align:left;">
+Eminem
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.637
+</td>
+<td style="text-align:right;">
+0.2540
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:left;">
+Under The Influence
+</td>
+<td style="text-align:left;">
+Chris Brown
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.733
+</td>
+<td style="text-align:right;">
+0.3100
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:left;">
+Me Porto Bonito
+</td>
+<td style="text-align:left;">
+Bad Bunny
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.911
+</td>
+<td style="text-align:right;">
+0.4250
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:left;">
+Superhero (Heroes &amp; Villains) [with Future &amp; Chris Brown]
+</td>
+<td style="text-align:left;">
+Metro Boomin
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+0.526
+</td>
+<td style="text-align:right;">
+0.4920
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:left;">
+Bebe Dame
+</td>
+<td style="text-align:left;">
+Fuerza Regida
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+0.529
+</td>
+<td style="text-align:right;">
+0.7560
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:left;">
+Blinding Lights
+</td>
+<td style="text-align:left;">
+The Weeknd
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+0.514
+</td>
+<td style="text-align:right;">
+0.3340
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:left;">
+Rich Flex
+</td>
+<td style="text-align:left;">
+Drake
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0.561
+</td>
+<td style="text-align:right;">
+0.4240
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+Watch This - ARIZONATEARS Pluggnb Remix
+</td>
+<td style="text-align:left;">
+Lil Uzi Vert
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+0.686
+</td>
+<td style="text-align:right;">
+0.3550
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Let’s plot this data!</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="spotify-api.html#cb222-1" tabindex="-1"></a>f1 <span class="ot">&lt;-</span></span>
+<span id="cb222-2"><a href="spotify-api.html#cb222-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> top50, <span class="fu">aes</span>(<span class="at">x =</span> track.popularity, <span class="at">y =</span> rank, <span class="at">text =</span> (</span>
+<span id="cb222-3"><a href="spotify-api.html#cb222-3" tabindex="-1"></a>    <span class="fu">paste</span>(</span>
+<span id="cb222-4"><a href="spotify-api.html#cb222-4" tabindex="-1"></a>      <span class="st">&quot;Track:&quot;</span>,</span>
+<span id="cb222-5"><a href="spotify-api.html#cb222-5" tabindex="-1"></a>      track.name,</span>
+<span id="cb222-6"><a href="spotify-api.html#cb222-6" tabindex="-1"></a>      <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb222-7"><a href="spotify-api.html#cb222-7" tabindex="-1"></a>      <span class="st">&quot;Artist:&quot;</span>,</span>
+<span id="cb222-8"><a href="spotify-api.html#cb222-8" tabindex="-1"></a>      artist,</span>
+<span id="cb222-9"><a href="spotify-api.html#cb222-9" tabindex="-1"></a>      <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb222-10"><a href="spotify-api.html#cb222-10" tabindex="-1"></a>      <span class="st">&quot;Release date:&quot;</span>,</span>
+<span id="cb222-11"><a href="spotify-api.html#cb222-11" tabindex="-1"></a>      track.album.release_date</span>
+<span id="cb222-12"><a href="spotify-api.html#cb222-12" tabindex="-1"></a>    )</span>
+<span id="cb222-13"><a href="spotify-api.html#cb222-13" tabindex="-1"></a>  ))) <span class="sc">+</span></span>
+<span id="cb222-14"><a href="spotify-api.html#cb222-14" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb222-15"><a href="spotify-api.html#cb222-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb222-16"><a href="spotify-api.html#cb222-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Playlist rank&quot;</span>) <span class="sc">+</span></span>
+<span id="cb222-17"><a href="spotify-api.html#cb222-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Popularity&quot;</span>) </span>
+<span id="cb222-18"><a href="spotify-api.html#cb222-18" tabindex="-1"></a></span>
+<span id="cb222-19"><a href="spotify-api.html#cb222-19" tabindex="-1"></a><span class="co"># This code snippet creates an interactive version of our plot that allows you to</span></span>
+<span id="cb222-20"><a href="spotify-api.html#cb222-20" tabindex="-1"></a><span class="co"># hover over each data point to receive more information.</span></span>
+<span id="cb222-21"><a href="spotify-api.html#cb222-21" tabindex="-1"></a><span class="fu">ggplotly</span>(f1, <span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">&quot;text&quot;</span>))</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-de1529e85e2fd21818fe" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-de1529e85e2fd21818fe">{"x":{"data":[{"x":[92,92,100,93,94,89,96,94,85,92,84,85,79,93,93,87,77,91,78,91,91,89,90,89,60,81,88,85,89,91,90,45,89,86,89,86,90,88,83,89,83,89,89,89,89,88,80,88,89,85],"y":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"text":["Track: Die For You - Remix <br> Artist: The Weeknd <br> Release date: 2023-02-24","Track: TQG <br> Artist: KAROL G <br> Release date: 2023-02-24","Track: Flowers <br> Artist: Miley Cyrus <br> Release date: 2023-01-13","Track: Kill Bill <br> Artist: SZA <br> Release date: 2022-12-08","Track: Boy's a liar Pt. 2 <br> Artist: PinkPantheress <br> Release date: 2023-02-03","Track: As It Was <br> Artist: Harry Styles <br> Release date: 2022-05-20","Track: Shakira: Bzrp Music Sessions, Vol. 53 <br> Artist: Bizarrap <br> Release date: 2023-01-11","Track: Creepin' (with The Weeknd & 21 Savage) <br> Artist: Metro Boomin <br> Release date: 2022-12-02","Track: Yandel 150 <br> Artist: Yandel <br> Release date: 2023-01-13","Track: Calm Down (with Selena Gomez) <br> Artist: Rema <br> Release date: 2022-08-25","Track: Unholy (feat. Kim Petras) <br> Artist: Sam Smith <br> Release date: 2023-01-27","Track: Tormenta (feat. Bad Bunny) <br> Artist: Gorillaz <br> Release date: 2023-02-24","Track: Shorty Party <br> Artist: Cartel De Santa <br> Release date: 2023-03-04","Track: La Bachata <br> Artist: Manuel Turizo <br> Release date: 2022-05-26","Track: I'm Good (Blue) <br> Artist: David Guetta <br> Release date: 2022-08-26","Track: Die For You <br> Artist: The Weeknd <br> Release date: 2016-11-24","Track: Last Night <br> Artist: Morgan Wallen <br> Release date: 2023-03-03","Track: Anti-Hero <br> Artist: Taylor Swift <br> Release date: 2022-10-21","Track: Escapism. <br> Artist: RAYE <br> Release date: 2023-02-03","Track: Here With Me <br> Artist: d4vd <br> Release date: 2022-09-22","Track: OMG <br> Artist: NewJeans <br> Release date: 2023-01-02","Track: Hey Mor <br> Artist: Ozuna <br> Release date: 2022-10-07","Track: Until I Found You (with Em Beihold) - Em Beihold Version <br> Artist: Stephen Sanchez <br> Release date: 2022-04-22","Track: Starboy <br> Artist: The Weeknd <br> Release date: 2016-11-25","Track: Another Love <br> Artist: Tom Odell <br> Release date: 2013-06-17","Track: X SI VOLVEMOS <br> Artist: KAROL G <br> Release date: 2023-02-24","Track: golden hour <br> Artist: JVKE <br> Release date: 2022-09-23","Track: La Jumpa <br> Artist: Arcángel <br> Release date: 2022-12-01","Track: Players <br> Artist: Coi Leray <br> Release date: 2022-11-30","Track: Quevedo: Bzrp Music Sessions, Vol. 52 <br> Artist: Bizarrap <br> Release date: 2022-07-06","Track: I Wanna Be Yours <br> Artist: Arctic Monkeys <br> Release date: 2013-09-09","Track: I Ain't Worried <br> Artist: OneRepublic <br> Release date: 2023-02-15","Track: AMG <br> Artist: Natanael Cano <br> Release date: 2022-11-24","Track: ceilings <br> Artist: Lizzy McAlpine <br> Release date: 2022-04-08","Track: Snooze <br> Artist: SZA <br> Release date: 2022-12-09","Track: Feliz Cumpleaños Ferxxo <br> Artist: Feid <br> Release date: 2022-09-14","Track: Sure Thing <br> Artist: Miguel <br> Release date: 2010-11-26","Track: PRC <br> Artist: Peso Pluma <br> Release date: 2023-01-23","Track: Bones <br> Artist: Imagine Dragons <br> Release date: 2022-07-01","Track: Just Wanna Rock <br> Artist: Lil Uzi Vert <br> Release date: 2022-10-17","Track: on the street (with J. Cole) <br> Artist: j-hope <br> Release date: 2023-03-03","Track: Ditto <br> Artist: NewJeans <br> Release date: 2022-12-19","Track: Mockingbird <br> Artist: Eminem <br> Release date: 2004-11-12","Track: Under The Influence <br> Artist: Chris Brown <br> Release date: 2019-10-04","Track: Me Porto Bonito <br> Artist: Bad Bunny <br> Release date: 2022-05-06","Track: Superhero (Heroes & Villains) [with Future & Chris Brown] <br> Artist: Metro Boomin <br> Release date: 2022-12-02","Track: Bebe Dame <br> Artist: Fuerza Regida <br> Release date: 2022-12-28","Track: Blinding Lights <br> Artist: The Weeknd <br> Release date: 2020-03-20","Track: Rich Flex <br> Artist: Drake <br> Release date: 2022-11-04","Track: Watch This - ARIZONATEARS Pluggnb Remix <br> Artist: Lil Uzi Vert <br> Release date: 2023-02-05"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283104,"r":7.3059360730593621,"b":40.182648401826491,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[42.25,102.75],"tickmode":"array","ticktext":["60","80","100"],"tickvals":[60,80,100],"categoryorder":"array","categoryarray":["60","80","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Popularity","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.4500000000000002,52.450000000000003],"tickmode":"array","ticktext":["0","10","20","30","40","50"],"tickvals":[0,10,20,30,40,50],"categoryorder":"array","categoryarray":["0","10","20","30","40","50"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Playlist rank","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"228830266136":{"x":{},"y":{},"text":{},"type":"scatter"}},"cur_data":"228830266136","visdat":{"228830266136":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>We can see in the graph above that tracks in the top 50 playlist are definitely rather on the popular side, however, some tracks have a comparably low popularity score. When you look at the interactive plotly graph, you’ll be able to identify the outlier that ranks below 70 on Spotify’s the popularity scale despite being in the charts: <em>Another Love by Tom Odell</em> (2013),</p>
+<p>While the exact estimation of the score is confidential, there exists evidence that <a href="https://lodgecove.com/what-is-the-spotify-popularity-index/">the age of a track factors into its popularity score</a>. That way, two tracks with 100,000 streams can have different popularity scores dependent on when they were released. In the algorithm’s logic, the more recent track gained the same number of streams in a shorter time and is therefore evaluated as more popular.</p>
+<p>Applying this to our outliers, we can see that the age of both tracks likely affects their low popularity score.</p>
+<p>Spotify also provides you with album cover links in varying sizes, so why not use the covers instead of black scatterpoints in a plot? Before we used <code>geom_point</code> for the scatterplot, now we simply need to replace that command with <code>geom_image</code> and specify the variable containing the image link. In the following plot, we explore the correlation between track happiness and danceability.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="spotify-api.html#cb223-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> top50, <span class="fu">aes</span>(<span class="at">x =</span> valence, <span class="at">y =</span> danceability, <span class="at">text =</span> (</span>
+<span id="cb223-2"><a href="spotify-api.html#cb223-2" tabindex="-1"></a>    <span class="fu">paste</span>(</span>
+<span id="cb223-3"><a href="spotify-api.html#cb223-3" tabindex="-1"></a>      <span class="st">&quot;Track:&quot;</span>,</span>
+<span id="cb223-4"><a href="spotify-api.html#cb223-4" tabindex="-1"></a>      track.name,</span>
+<span id="cb223-5"><a href="spotify-api.html#cb223-5" tabindex="-1"></a>      <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb223-6"><a href="spotify-api.html#cb223-6" tabindex="-1"></a>      <span class="st">&quot;Artist:&quot;</span>,</span>
+<span id="cb223-7"><a href="spotify-api.html#cb223-7" tabindex="-1"></a>      artist</span>
+<span id="cb223-8"><a href="spotify-api.html#cb223-8" tabindex="-1"></a>    )</span>
+<span id="cb223-9"><a href="spotify-api.html#cb223-9" tabindex="-1"></a>  ))) <span class="sc">+</span></span>
+<span id="cb223-10"><a href="spotify-api.html#cb223-10" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image=</span>image), <span class="at">asp =</span> <span class="fl">1.7</span>) <span class="sc">+</span></span>
+<span id="cb223-11"><a href="spotify-api.html#cb223-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb223-12"><a href="spotify-api.html#cb223-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Danceability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb223-13"><a href="spotify-api.html#cb223-13" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Happiness&quot;</span>) </span></code></pre></div>
+<p><img src="2021_apis_for_social_scientists_a_collaborative_review_files/figure-html/spotify-10-1.png" width="672" /></p>
+</div>
+<div id="your-spotify-data" class="section level3 hasAnchor" number="21.4.2">
+<h3><span class="header-section-number">21.4.2</span> Your Spotify data<a href="spotify-api.html#your-spotify-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You can also analyze your personal listening behavior with the Spotify API. For example, this snippet using the <code>get_my_top_artists_or_tracks</code> function allows you to explore your favorite artists of all time.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="spotify-api.html#cb224-1" tabindex="-1"></a><span class="do">## Finding all time favorite artists</span></span>
+<span id="cb224-2"><a href="spotify-api.html#cb224-2" tabindex="-1"></a>topartists <span class="ot">&lt;-</span> <span class="fu">get_my_top_artists_or_tracks</span>(<span class="at">type =</span> <span class="st">&#39;artists&#39;</span>,</span>
+<span id="cb224-3"><a href="spotify-api.html#cb224-3" tabindex="-1"></a>  <span class="at">time_range =</span> <span class="st">&#39;long_term&#39;</span>, <span class="at">limit =</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb224-4"><a href="spotify-api.html#cb224-4" tabindex="-1"></a>  <span class="fu">select</span>(name, genres) <span class="sc">%&gt;%</span></span>
+<span id="cb224-5"><a href="spotify-api.html#cb224-5" tabindex="-1"></a>  rowwise <span class="sc">%&gt;%</span></span>
+<span id="cb224-6"><a href="spotify-api.html#cb224-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genres =</span> <span class="fu">paste</span>(genres, <span class="at">collapse =</span> <span class="st">&#39;, &#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb224-7"><a href="spotify-api.html#cb224-7" tabindex="-1"></a>  ungroup</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="spotify-api.html#cb225-1" tabindex="-1"></a>topartists<span class="sc">$</span>rank <span class="ot">&lt;-</span> <span class="fu">seq.int</span>(<span class="fu">nrow</span>(topartists)) <span class="co"># add rank variable</span></span>
+<span id="cb225-2"><a href="spotify-api.html#cb225-2" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="spotify-api.html#cb225-3" tabindex="-1"></a>topartists <span class="sc">%&gt;%</span> </span>
+<span id="cb225-4"><a href="spotify-api.html#cb225-4" tabindex="-1"></a>  <span class="fu">select</span>(rank, name, genres) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-5"><a href="spotify-api.html#cb225-5" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb225-6"><a href="spotify-api.html#cb225-6" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;hover&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-7"><a href="spotify-api.html#cb225-7" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span>)</span></code></pre></div>
+<p>You can retrieve your all-time favourite tracks by still using the <code>get_my_top_artists_or_tracks</code> function but changing <code>type=</code> to <code>tracks</code>.</p>
+<p>As you have seen, the Spotify API opens up many opportunities for data analysis. The functionality of the Spotifyr wrapper goes beyond the simple examples demonstrated here. Now it’s your time to explore the data!</p>
+</div>
+</div>
+<div id="social-science-examples-17" class="section level2 hasAnchor" number="21.5">
+<h2><span class="header-section-number">21.5</span> Social science examples<a href="spotify-api.html#social-science-examples-17" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><em>Are there social science research examples using the API?</em></li>
+</ul>
+<p>So far, not much has been done with the Spotify API and music data from the field of social sciences (this is where you could step in!). Some notable exceptions below:</p>
+<ul>
+<li><p><span class="citation">MacTaggart (<a href="#ref-MacTaggart2018">2018</a>)</span> and <span class="citation">Lacognata and Poole (<a href="#ref-Lacognata2021">2021</a>)</span> both looked at the link between music and politics. At an aggregate level, <span class="citation">MacTaggart (<a href="#ref-MacTaggart2018">2018</a>)</span> examined the association of chart trends within pop music and trends within politics in the US from 1959 to 2016. The author finds that musical trends reflect trends in society and politics.</p></li>
+<li><p><span class="citation">Lacognata and Poole (<a href="#ref-Lacognata2021">2021</a>)</span> investigated a potential correlation of political orientation, personality traits, and music taste. The authors used individual-level survey data and linked these data to respondents’ Spotify accounts. However, they did not find any association between music taste and neither political orientation nor personality traits.</p></li>
+<li><p>In a recent poster presentation, <span class="citation">Song, Chun, and Elkins (<a href="#ref-Songetal2021">2021</a>)</span> examined how the Covid-19 pandemic affected emotion-driven listening behavior with the help of the Spotify AP. The authors used monthly Spotify chart data from December 2019 to December 2021 and extracted measures on the valence, energy, and danceability of the tracks (we already know these measures from our own example on the global top 50 tracks). The authors did not find any correlation of tracks’ energy and danceability with Covid-19 related events. At the same time, Song et al did find that the tracks’ valence reflects the course of the pandemic: When the Covid-19-vaccine got distributed, people listened to happier music, while when the news of the Omicron variant spread, less happy tracks became more popular.</p></li>
+<li><p>For more inspiration, you can also check out <a href="https://developer.spotify.com/community/showcase/">Spotify’s Developer Showcase website</a>!</p></li>
+</ul>
+<p>What will you do with the Spotify API?</p>
+</div>
+<div id="references" class="section level2 hasAnchor" number="21.6">
+<h2><span class="header-section-number">21.6</span> References<a href="spotify-api.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+<h3> References<a href="references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Lacognata2021" class="csl-entry">
+Lacognata, Anthony, and Jennifer Poole. 2021. <span>“The Melodies of Politics: Assessing a Correlation Between Music Taste and Political Views with Spotify.”</span> <em>Journal of Student Research</em> 10 (November). <a href="https://doi.org/10.47611/jsrhs.v10i3.1898">https://doi.org/10.47611/jsrhs.v10i3.1898</a>.
+</div>
+<div id="ref-MacTaggart2018" class="csl-entry">
+MacTaggart, Andrew. 2018. <span>“Pop Music and Politics: Tracking Political Trends Through the Hot 100 Chart, 1959-2016 - ProQuest.”</span> Harvard University. <a href="https://www.proquest.com/docview/2487180443?fromopenview=true&amp;pq-origsite=gscholar&amp;parentSessionId=PiWLVy66xd%2FXPi84svQkAEg0ze49z52W1qhA3%2BBQlVs%3D">https://www.proquest.com/docview/2487180443?fromopenview=true&amp;pq-origsite=gscholar&amp;parentSessionId=PiWLVy66xd%2FXPi84svQkAEg0ze49z52W1qhA3%2BBQlVs%3D</a>.
+</div>
+<div id="ref-Songetal2021" class="csl-entry">
+Song, Hemmi, Jon Chun, and Katherine Elkins. 2021. <span>“Tracking the Emotion of Music Across the Covid-19 Pandemic.”</span> In. <a href="https://doi.org/10.3109/10673229.2011.549769">https://doi.org/10.3109/10673229.2011.549769</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="reddit-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="twitter-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
