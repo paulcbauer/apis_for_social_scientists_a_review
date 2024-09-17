@@ -2,7 +2,7 @@
 This repository contains the code underlying a review of APIs that can be useful to social scientists. Thereby it provides explanations, code examples and research examples.
 
 You can find the document here: [APIs for social scientists:
-A collaborative review](https://bookdown.org/paul/apis_for_social_scientists/). The introduction explains how this project came about.
+A collaborative review](https://paulcbauer.github.io/apis_for_social_scientists_a_review/). The introduction explains how this project came about.
 
 ### Current authors & contributors
 Paul C. Bauer (current Editor), Jan Behnert, Lion Behrens (current Editor), Chung-hong Chan, Bernhard Clemm von Hohenberg, Lukas Isermann, Philipp Kadel, Melike N. Kaplan, Jana Klein, Markus Konrad, Barbara K. Kreis, Dean Lajic, Camille Landesvatter (current Editor), Madleen Meier-Barthold, Ondrej Pekacek, Pirmin Stöckle, Domantas Undzėnas
