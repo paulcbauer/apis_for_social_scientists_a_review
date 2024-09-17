@@ -1,6 +1,6 @@
 # Spotify API
 
-<chauthors>Johanna Mehltretter, Marie-Lou Sohnius</chauthors> <br><br>
+<chauthors>Johanna Hölzl, Marie-Lou Sohnius</chauthors> <br><br>
 
 ```{r spotify-1, include=FALSE}
 knitr::opts_chunk$set(warning = F, message = F, cache = T)
